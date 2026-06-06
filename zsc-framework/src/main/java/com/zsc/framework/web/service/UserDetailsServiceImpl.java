@@ -38,6 +38,15 @@ public class UserDetailsServiceImpl implements UserDetailsService
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
         SysUser user = userService.selectUserByUserName(username);
+        if (StringUtils.isNull(user) && username.matches("^1[3-9]\\d{9}$"))
+        {
+            user = userService.selectUserByPhonenumber(username);
+        }
+        // 如果还是没找到，尝试通过邮箱查找
+        if (StringUtils.isNull(user) && username.matches("^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$"))
+        {
+            user = userService.selectUserByEmail(username);
+        }
         if (StringUtils.isNull(user))
         {
             log.info("登录用户：{} 不存在.", username);

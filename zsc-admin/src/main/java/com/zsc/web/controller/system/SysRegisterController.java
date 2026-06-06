@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import com.zsc.common.constant.Constants;
 import com.zsc.common.core.controller.BaseController;
 import com.zsc.common.core.domain.AjaxResult;
 import com.zsc.common.core.domain.model.RegisterBody;
 import com.zsc.common.utils.StringUtils;
+import com.zsc.framework.web.service.SysLoginService;
 import com.zsc.framework.web.service.SysRegisterService;
 import com.zsc.system.service.ISysConfigService;
 
@@ -25,6 +27,9 @@ public class SysRegisterController extends BaseController
     @Autowired
     private ISysConfigService configService;
 
+    @Autowired
+    private SysLoginService loginService;
+
     @PostMapping("/register")
     public AjaxResult register(@RequestBody RegisterBody user)
     {
@@ -33,6 +38,13 @@ public class SysRegisterController extends BaseController
             return error("当前系统没有开启注册功能！");
         }
         String msg = registerService.register(user);
-        return StringUtils.isEmpty(msg) ? success() : error(msg);
+        if (StringUtils.isNotEmpty(msg))
+        {
+            return error(msg);
+        }
+        AjaxResult ajax = AjaxResult.success();
+        String token = loginService.loginWithoutCaptcha(user.getEmail(), user.getPassword());
+        ajax.put(Constants.TOKEN, token);
+        return ajax;
     }
 }

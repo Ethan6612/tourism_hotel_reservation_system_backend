@@ -8,17 +8,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 /**
- * 评价提交DTO
+ * 用户端评价提交DTO（userId从SecurityContext获取，无需传入）
  *
  * @author zsc
  */
 @Data
-public class CommentDto {
-
-    private Long id;
-
-    @NotNull(message = "用户ID不能为空")
-    private Long userId;
+public class UserCommentSubmitDto {
 
     @NotNull(message = "酒店ID不能为空")
     private Long hotelId;
@@ -41,11 +36,9 @@ public class CommentDto {
     /** 评价图片，JSON数组格式 */
     private String images;
 
+    /** 单张图片URL（兼容） */
+    private String imgUrl;
+
     /** 是否匿名评价（0=否 1=是） */
     private String isAnonymous;
-
-    /**
-     * 兼容旧前端：单张图片URL
-     */
-    private String imgUrl;
 }

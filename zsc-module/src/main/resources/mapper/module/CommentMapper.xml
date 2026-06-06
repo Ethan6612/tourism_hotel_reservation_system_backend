@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zsc.module.mapper.CommentMapper">
+
+    <!-- 结果映射：CommentVo -->
+    <resultMap id="CommentVoResultMap" type="com.zsc.module.domain.vo.CommentVo">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="userName" column="nick_name"/>
+        <result property="userAvatar" column="avatar"/>
+        <result property="hotelId" column="hotel_id"/>
+        <result property="hotelName" column="hotel_name"/>
+        <result property="hotelStar" column="hotel_star"/>
+        <result property="roomId" column="room_id"/>
+        <result property="roomType" column="room_type"/>
+        <result property="orderId" column="order_id"/>
+        <result property="orderNo" column="order_no"/>
+        <result property="score" column="score"/>
+        <result property="content" column="content"/>
+        <result property="images" column="images"/>
+        <result property="imgUrl" column="images"/>
+        <result property="isAnonymous" column="is_anonymous"/>
+        <result property="status" column="status"/>
+        <result property="likeCount" column="like_count"/>
+        <result property="replyContent" column="reply_content"/>
+        <result property="replyTime" column="reply_time"/>
+        <result property="replyBy" column="reply_by"/>
+        <result property="replyByName" column="reply_by_name"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <!-- 结果映射：ScoreStatisticsVo -->
+    <resultMap id="ScoreStatisticsResultMap" type="com.zsc.module.domain.vo.ScoreStatisticsVo">
+        <result property="hotelId" column="hotel_id"/>
+        <result property="roomId" column="room_id"/>
+        <result property="averageScore" column="average_score"/>
+        <result property="totalComments" column="total_comments"/>
+        <result property="fiveStarCount" column="five_star_count"/>
+        <result property="fourStarCount" column="four_star_count"/>
+        <result property="threeStarCount" column="three_star_count"/>
+        <result property="twoStarCount" column="two_star_count"/>
+        <result property="oneStarCount" column="one_star_count"/>
+    </resultMap>
+
+    <!-- 公共SQL片段：评价关联查询 -->
+    <sql id="commentVoColumns">
+        c.id,
+        c.user_id,
+        u.nick_name,
+        u.avatar,
+        c.hotel_id,
+        h.name AS hotel_name,
+        h.star AS hotel_star,
+        c.room_id,
+        r.room_type,
+        c.order_id,
+        o.order_no,
+        c.score,
+        c.content,
+        c.images,
+        c.is_anonymous,
+        c.status,
+        c.like_count,
+        c.reply_content,
+        c.reply_time,
+        c.reply_by,
+        ru.nick_name AS reply_by_name,
+        c.create_by,
+        c.create_time,
+        c.update_time,
+        c.remark
+    </sql>
+
+    <sql id="commentVoJoins">
+        LEFT JOIN sys_user u ON c.user_id = u.user_id
+        LEFT JOIN hotel h ON c.hotel_id = h.id
+        LEFT JOIN room r ON c.room_id = r.id
+        LEFT JOIN orders o ON c.order_id = o.id
+        LEFT JOIN sys_user ru ON c.reply_by = ru.user_id
+    </sql>
+
+    <!-- 动态查询条件 -->
+    <sql id="commentQueryWhere">
+        <where>
+            <if test="query.hotelId != null">
+                AND c.hotel_id = #{query.hotelId}
+            </if>
+            <if test="query.roomId != null">
+                AND c.room_id = #{query.roomId}
+            </if>
+            <if test="query.userId != null">
+                AND c.user_id = #{query.userId}
+            </if>
+            <if test="query.orderId != null">
+                AND c.order_id = #{query.orderId}
+            </if>
+            <if test="query.score != null">
+                AND c.score = #{query.score}
+            </if>
+            <if test="query.minScore != null">
+                AND c.score &gt;= #{query.minScore}
+            </if>
+            <if test="query.maxScore != null">
+                AND c.score &lt;= #{query.maxScore}
+            </if>
+            <if test="query.status != null and query.status != ''">
+                AND c.status = #{query.status}
+            </if>
+            <if test="query.hasReply != null">
+                <if test="query.hasReply == true">
+                    AND c.reply_content IS NOT NULL AND c.reply_content != ''
+                </if>
+                <if test="query.hasReply == false">
+                    AND (c.reply_content IS NULL OR c.reply_content = '')
+                </if>
+            </if>
+            <if test="query.keyword != null and query.keyword != ''">
+                AND c.content LIKE CONCAT('%', #{query.keyword}, '%')
+            </if>
+            <if test="query.beginTime != null and query.beginTime != ''">
+                AND c.create_time &gt;= #{query.beginTime}
+            </if>
+            <if test="query.endTime != null and query.endTime != ''">
+                AND c.create_time &lt;= #{query.endTime}
+            </if>
+            <!-- 默认只查询已发布的评价 -->
+            <if test="query.status == null or query.status == ''">
+                AND c.status = '1'
+            </if>
+        </where>
+    </sql>
+
+    <!-- 排序片段 -->
+    <sql id="commentOrderBy">
+        <choose>
+            <when test="query.orderBy == 'score'">
+                ORDER BY c.score DESC, c.create_time DESC
+            </when>
+            <when test="query.orderBy == 'likeCount'">
+                ORDER BY c.like_count DESC, c.create_time DESC
+            </when>
+            <otherwise>
+                ORDER BY c.create_time DESC
+            </otherwise>
+        </choose>
+    </sql>
+
+    <!-- 分页查询评价列表（带关联信息） -->
+    <select id="selectCommentVoPage" resultMap="CommentVoResultMap">
+        SELECT
+        <include refid="commentVoColumns"/>
+        FROM biz_comment c
+        <include refid="commentVoJoins"/>
+        <include refid="commentQueryWhere"/>
+        <include refid="commentOrderBy"/>
+    </select>
+
+    <!-- 查询评价详情 -->
+    <select id="selectCommentVoById" resultMap="CommentVoResultMap">
+        SELECT
+        <include refid="commentVoColumns"/>
+        FROM biz_comment c
+        <include refid="commentVoJoins"/>
+        WHERE c.id = #{id}
+    </select>
+
+    <!-- 查询我的评价 -->
+    <select id="selectMyComments" resultMap="CommentVoResultMap">
+        SELECT
+        <include refid="commentVoColumns"/>
+        FROM biz_comment c
+        <include refid="commentVoJoins"/>
+        WHERE c.user_id = #{userId}
+        ORDER BY c.create_time DESC
+    </select>
+
+    <!-- 根据订单ID查询评价 -->
+    <select id="selectByOrderId" resultType="com.zsc.module.domain.entity.Comment">
+        SELECT * FROM biz_comment WHERE order_id = #{orderId} LIMIT 1
+    </select>
+
+    <!-- 获取评分统计 -->
+    <select id="selectScoreStatistics" resultMap="ScoreStatisticsResultMap">
+        SELECT
+            c.hotel_id,
+            c.room_id,
+            ROUND(AVG(c.score), 2) AS average_score,
+            COUNT(*) AS total_comments,
+            SUM(CASE WHEN c.score = 5 THEN 1 ELSE 0 END) AS five_star_count,
+            SUM(CASE WHEN c.score = 4 THEN 1 ELSE 0 END) AS four_star_count,
+            SUM(CASE WHEN c.score = 3 THEN 1 ELSE 0 END) AS three_star_count,
+            SUM(CASE WHEN c.score = 2 THEN 1 ELSE 0 END) AS two_star_count,
+            SUM(CASE WHEN c.score = 1 THEN 1 ELSE 0 END) AS one_star_count
+        FROM biz_comment c
+        WHERE c.status = '1'
+        <if test="hotelId != null">
+            AND c.hotel_id = #{hotelId}
+        </if>
+        <if test="roomId != null">
+            AND c.room_id = #{roomId}
+        </if>
+        <if test="beginTime != null and beginTime != ''">
+            AND c.create_time &gt;= #{beginTime}
+        </if>
+        <if test="endTime != null and endTime != ''">
+            AND c.create_time &lt;= #{endTime}
+        </if>
+        GROUP BY c.hotel_id, c.room_id
+    </select>
+
+    <!-- 获取酒店评分分布统计 -->
+    <select id="selectHotelScoreDistribution" resultMap="ScoreStatisticsResultMap">
+        SELECT
+            c.hotel_id,
+            ROUND(AVG(c.score), 2) AS average_score,
+            COUNT(*) AS total_comments,
+            SUM(CASE WHEN c.score = 5 THEN 1 ELSE 0 END) AS five_star_count,
+            SUM(CASE WHEN c.score = 4 THEN 1 ELSE 0 END) AS four_star_count,
+            SUM(CASE WHEN c.score = 3 THEN 1 ELSE 0 END) AS three_star_count,
+            SUM(CASE WHEN c.score = 2 THEN 1 ELSE 0 END) AS two_star_count,
+            SUM(CASE WHEN c.score = 1 THEN 1 ELSE 0 END) AS one_star_count
+        FROM biz_comment c
+        WHERE c.status = '1' AND c.hotel_id = #{hotelId}
+        GROUP BY c.hotel_id
+    </select>
+
+    <!-- 批量查询酒店的平均评分 -->
+    <select id="selectHotelsAverageScore" resultMap="ScoreStatisticsResultMap">
+        SELECT
+            c.hotel_id,
+            ROUND(AVG(c.score), 2) AS average_score,
+            COUNT(*) AS total_comments
+        FROM biz_comment c
+        WHERE c.status = '1'
+        AND c.hotel_id IN
+        <foreach collection="hotelIds" item="hotelId" open="(" separator="," close=")">
+            #{hotelId}
+        </foreach>
+        GROUP BY c.hotel_id
+    </select>
+
+    <!-- 点赞数+1 -->
+    <update id="incrementLikeCount">
+        UPDATE biz_comment SET like_count = like_count + 1 WHERE id = #{id}
+    </update>
+
+    <!-- 点赞数-1 -->
+    <update id="decrementLikeCount">
+        UPDATE biz_comment SET like_count = like_count - 1 WHERE id = #{id} AND like_count > 0
+    </update>
+
+    <!-- 统计评价总数 -->
+    <select id="countComments" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM biz_comment c
+        <include refid="commentQueryWhere"/>
+    </select>
+
+</mapper>

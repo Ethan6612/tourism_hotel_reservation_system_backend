@@ -65,6 +65,23 @@ spring:
     restart:
       # 热部署开关
       enabled: true
+  # 邮箱配置
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: 3035366729@qq.com
+    password: mhcspuzlfgxrdgej
+    protocol: smtp
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+            port: 465
   data:
     # redis 配置
     redis:

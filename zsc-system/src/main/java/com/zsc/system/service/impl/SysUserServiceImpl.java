@@ -119,6 +119,24 @@ public class SysUserServiceImpl implements ISysUserService
     }
 
     /**
+     * 通过手机号查询用户
+     */
+    @Override
+    public SysUser selectUserByPhonenumber(String phonenumber)
+    {
+        return userMapper.selectUserByPhonenumber(phonenumber);
+    }
+
+    /**
+     * 通过邮箱查询用户
+     */
+    @Override
+    public SysUser selectUserByEmail(String email)
+    {
+        return userMapper.selectUserByEmail(email);
+    }
+
+    /**
      * 通过用户ID查询用户
      * 
      * @param userId 用户ID
@@ -278,9 +296,10 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 结果
      */
     @Override
+    @Transactional
     public boolean registerUser(SysUser user)
     {
-        return userMapper.insertUser(user) > 0;
+        return insertUser(user) > 0;
     }
 
     /**
