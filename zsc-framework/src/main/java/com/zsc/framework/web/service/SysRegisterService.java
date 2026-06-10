@@ -188,8 +188,7 @@ public class SysRegisterService
             return false;
         }
         
-        // 验证成功后删除验证码
-        redisCache.deleteObject(verifyKey);
+        // 验证成功，不清除验证码（留给注册步骤兜底使用，由Redis TTL自动过期）
         return true;
     }
 

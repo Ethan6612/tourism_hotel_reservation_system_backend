@@ -3,12 +3,10 @@ package com.zsc.common.utils.http;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.zsc.common.utils.StringUtils;
-import nl.basjes.parse.useragent.UserAgent;
-import nl.basjes.parse.useragent.UserAgentAnalyzer;
 
 /**
- * UserAgent解析工具类
- * 
+ * UserAgent解析工具类（纯正则实现，无外部依赖）
+ *
  * @author zsc
  */
 public class UserAgentUtils
@@ -36,26 +34,12 @@ public class UserAgentUtils
     private static final Pattern LINUX_PATTERN = Pattern.compile("Linux");
     private static final Pattern CHROMEOS_PATTERN = Pattern.compile("CrOS");
 
-    private static final UserAgentAnalyzer userAgentAnalyzer = UserAgentAnalyzer
-            .newBuilder().hideMatcherLoadStats()
-            .withCache(5000)
-            .showMinimalVersion()
-            .withField(UserAgent.AGENT_NAME_VERSION)
-            .withField(UserAgent.OPERATING_SYSTEM_NAME_VERSION)
-            .build();
-
     /**
      * 获取客户端浏览器
      */
     public static String getBrowser(String userAgent)
     {
-        UserAgent.ImmutableUserAgent iua = userAgentAnalyzer.parse(userAgent);
-        String agentNameVersion = iua.get(UserAgent.AGENT_NAME_VERSION).getValue();
-        if (StringUtils.isBlank(agentNameVersion) || agentNameVersion.contains("??"))
-        {
-            return formatBrowser(userAgent);
-        }
-        return agentNameVersion;
+        return formatBrowser(userAgent);
     }
 
     /**
@@ -63,13 +47,7 @@ public class UserAgentUtils
      */
     public static String getOperatingSystem(String userAgent)
     {
-        UserAgent.ImmutableUserAgent iua = userAgentAnalyzer.parse(userAgent);
-        String operatingSystemNameVersion = iua.get(UserAgent.OPERATING_SYSTEM_NAME_VERSION).getValue();
-        if (StringUtils.isBlank(operatingSystemNameVersion) || operatingSystemNameVersion.contains("??"))
-        {
-            return formatOperatingSystem(userAgent);
-        }
-        return operatingSystemNameVersion;
+        return formatOperatingSystem(userAgent);
     }
 
     /**

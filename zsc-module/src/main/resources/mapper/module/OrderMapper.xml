@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zsc.module.mapper.OrderMapper">
+
+    <resultMap id="OrderVoResultMap" type="com.zsc.module.domain.vo.OrderVo">
+        <id property="id" column="id"/>
+        <result property="orderNo" column="order_no"/>
+        <result property="userId" column="user_id"/>
+        <result property="hotelId" column="hotel_id"/>
+        <result property="roomId" column="room_id"/>
+        <result property="startDate" column="start_date"/>
+        <result property="endDate" column="end_date"/>
+        <result property="totalPrice" column="total_price"/>
+        <result property="status" column="status"/>
+        <result property="payTime" column="pay_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="userName" column="user_name"/>
+        <result property="hotelName" column="hotel_name"/>
+        <result property="roomType" column="room_type"/>
+        <result property="payTypeName" column="pay_type_name"/>
+        <result property="transactionId" column="transaction_id"/>
+        <result property="payAmount" column="pay_amount"/>
+    </resultMap>
+
+    <sql id="selectOrderVo">
+        SELECT o.id, o.order_no, o.user_id, o.hotel_id, o.room_id,
+               o.start_date, o.end_date, o.total_price, o.status,
+               o.pay_time, o.create_time, o.update_time,
+               u.nick_name AS user_name,
+               h.name AS hotel_name,
+               r.room_type,
+               CASE p.pay_type
+                   WHEN '1' THEN '微信'
+                   WHEN '2' THEN '支付宝'
+                   WHEN '3' THEN '银行卡'
+                   ELSE '未知'
+               END AS pay_type_name,
+               p.transaction_id,
+               p.pay_amount
+        FROM orders o
+        LEFT JOIN sys_user u ON o.user_id = u.user_id
+        LEFT JOIN hotel h ON o.hotel_id = h.id
+        LEFT JOIN room r ON o.room_id = r.id
+        LEFT JOIN payment p ON o.id = p.order_id
+    </sql>
+
+    <sql id="whereClause">
+        <where>
+            <if test="query.orderNo != null and query.orderNo != ''">
+                AND o.order_no LIKE CONCAT('%', #{query.orderNo}, '%')
+            </if>
+            <if test="query.userId != null">
+                AND o.user_id = #{query.userId}
+            </if>
+            <if test="query.hotelId != null">
+                AND o.hotel_id = #{query.hotelId}
+            </if>
+            <if test="query.roomId != null">
+                AND o.room_id = #{query.roomId}
+            </if>
+            <if test="query.status != null and query.status != ''">
+                AND o.status = #{query.status}
+            </if>
+            <if test="query.beginTime != null and query.beginTime != ''">
+                AND o.create_time &gt;= #{query.beginTime}
+            </if>
+            <if test="query.endTime != null and query.endTime != ''">
+                AND o.create_time &lt;= #{query.endTime}
+            </if>
+            <if test="query.keyword != null and query.keyword != ''">
+                AND (o.order_no LIKE CONCAT('%', #{query.keyword}, '%')
+                     OR u.nick_name LIKE CONCAT('%', #{query.keyword}, '%')
+                     OR h.name LIKE CONCAT('%', #{query.keyword}, '%'))
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectOrderVoPage" resultMap="OrderVoResultMap">
+        <include refid="selectOrderVo"/>
+        <include refid="whereClause"/>
+        <choose>
+            <when test="query.orderBy != null and query.orderBy != ''">
+                ORDER BY ${query.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY o.create_time DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="selectOrderVoById" resultMap="OrderVoResultMap">
+        <include refid="selectOrderVo"/>
+        WHERE o.id = #{id}
+    </select>
+
+    <select id="countOrders" resultType="java.lang.Long">
+        SELECT COUNT(1) FROM orders o
+        LEFT JOIN sys_user u ON o.user_id = u.user_id
+        LEFT JOIN hotel h ON o.hotel_id = h.id
+        <include refid="whereClause"/>
+    </select>
+
+</mapper>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zsc.module.mapper.PaymentMapper">
+
+    <resultMap id="PaymentVoResultMap" type="com.zsc.module.domain.vo.PaymentVo">
+        <id property="id" column="id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="payAmount" column="pay_amount"/>
+        <result property="payType" column="pay_type"/>
+        <result property="payStatus" column="pay_status"/>
+        <result property="transactionId" column="transaction_id"/>
+        <result property="payTime" column="pay_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="orderNo" column="order_no"/>
+        <result property="userName" column="user_name"/>
+        <result property="hotelName" column="hotel_name"/>
+    </resultMap>
+
+    <sql id="selectPaymentVo">
+        SELECT p.id, p.order_id, p.pay_amount, p.pay_type, p.pay_status,
+               p.transaction_id, p.pay_time, p.create_time, p.update_time,
+               o.order_no,
+               u.nick_name AS user_name,
+               h.name AS hotel_name
+        FROM payment p
+        LEFT JOIN orders o ON p.order_id = o.id
+        LEFT JOIN sys_user u ON o.user_id = u.user_id
+        LEFT JOIN hotel h ON o.hotel_id = h.id
+    </sql>
+
+    <sql id="whereClause">
+        <where>
+            <if test="query.orderId != null">
+                AND p.order_id = #{query.orderId}
+            </if>
+            <if test="query.payStatus != null and query.payStatus != ''">
+                AND p.pay_status = #{query.payStatus}
+            </if>
+            <if test="query.payType != null and query.payType != ''">
+                AND p.pay_type = #{query.payType}
+            </if>
+            <if test="query.beginTime != null and query.beginTime != ''">
+                AND p.create_time &gt;= #{query.beginTime}
+            </if>
+            <if test="query.endTime != null and query.endTime != ''">
+                AND p.create_time &lt;= #{query.endTime}
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectPaymentVoPage" resultMap="PaymentVoResultMap">
+        <include refid="selectPaymentVo"/>
+        <include refid="whereClause"/>
+        ORDER BY p.create_time DESC
+    </select>
+
+    <select id="selectPaymentVoById" resultMap="PaymentVoResultMap">
+        <include refid="selectPaymentVo"/>
+        WHERE p.id = #{id}
+    </select>
+
+    <select id="selectByOrderId" resultType="com.zsc.module.domain.entity.Payment">
+        SELECT * FROM payment WHERE order_id = #{orderId} LIMIT 1
+    </select>
+
+</mapper>

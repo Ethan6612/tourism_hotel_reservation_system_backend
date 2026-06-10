@@ -101,8 +101,7 @@ public class EmailController
             return AjaxResult.error("验证码错误");
         }
 
-        // 验证成功后删除验证码，并标记邮箱已验证（10分钟内可完成注册）
-        redisCache.deleteObject(verifyKey);
+        // 验证成功后设置邮箱已验证标记（10分钟内可完成注册），保留验证码以便兜底
         String verifiedKey = CacheConstants.EMAIL_VERIFIED_KEY + email;
         redisCache.setCacheObject(verifiedKey, "1", 10, TimeUnit.MINUTES);
         return AjaxResult.success("验证成功");

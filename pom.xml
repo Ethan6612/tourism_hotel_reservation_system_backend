@@ -19,7 +19,6 @@
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
         <mybatis-plus.version>3.5.9</mybatis-plus.version>
         <druid.version>1.2.27</druid.version>
-        <yauaa.version>7.32.0</yauaa.version>
         <swagger.version>3.0.0</swagger.version>
         <kaptcha.version>2.3.3</kaptcha.version>
         <pagehelper.boot.version>2.1.0</pagehelper.boot.version>
@@ -66,12 +65,6 @@
                 <version>${druid.version}</version>
             </dependency>
 
-            <!-- 解析客户端操作系统、浏览器等 -->
-            <dependency>
-                <groupId>nl.basjes.parse.useragent</groupId>
-                <artifactId>yauaa</artifactId>
-                <version>${yauaa.version}</version>
-            </dependency>
 
 
             <dependency>
