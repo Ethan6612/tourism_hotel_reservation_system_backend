@@ -274,4 +274,60 @@ public class CommentController extends BaseController {
         boolean canComment = commentService.canComment(userId, orderId);
         return success(canComment ? "可以评价" : "不可评价");
     }
+
+    // ==================== 按酒店维度查询 ====================
+
+    /**
+     * 按酒店分组查询评价列表（管理端左侧酒店列表）
+     */
+    @Operation(summary = "按酒店分组查询评价")
+    @GetMapping("/groupByHotel")
+    public AjaxResult groupByHotel(
+            @RequestParam(required = false) String keyword) {
+        CommentQueryDto queryDto = new CommentQueryDto();
+        queryDto.setKeyword(keyword);
+        List<CommentVo> list = commentService.queryCommentGroupByHotel(queryDto);
+        return success(list);
+    }
+
+    /**
+     * 查询指定酒店的所有评价
+     */
+    @Operation(summary = "查询指定酒店的评价列表")
+    @GetMapping("/byHotel/{hotelId}")
+    public AjaxResult listByHotel(
+            @PathVariable Long hotelId,
+            @RequestParam(defaultValue = "1") Integer pageNum,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(required = false) Integer score,
+            @RequestParam(required = false) String status,
+            @RequestParam(required = false) String keyword) {
+        CommentQueryDto queryDto = new CommentQueryDto();
+        queryDto.setHotelId(hotelId);
+        queryDto.setPageNum(pageNum);
+        queryDto.setPageSize(pageSize);
+        queryDto.setScore(score);
+        queryDto.setStatus(status);
+        queryDto.setKeyword(keyword);
+        PageResult<CommentVo> result = commentService.queryCommentsWithUserInfo(queryDto);
+        return success(result);
+    }
+
+    // ==================== 申诉审核接口 ====================
+
+    /**
+     * 审核申诉（管理员）
+     * @param appealStatus 2=申诉通过 3=申诉驳回
+     */
+    @Operation(summary = "审核申诉")
+    @PreAuthorize("@ss.hasPermi('comment:audit')")
+    @Log(title = "申诉审核", businessType = BusinessType.UPDATE)
+    @PutMapping("/{id}/auditAppeal")
+    public AjaxResult auditAppeal(
+            @PathVariable Long id,
+            @RequestParam @jakarta.validation.constraints.Pattern(regexp = "[23]", message = "申诉审核状态只能为2(通过)或3(驳回)") String appealStatus,
+            @RequestParam(required = false) String remark) {
+        commentService.auditAppeal(id, appealStatus, remark);
+        return success(appealStatus.equals("2") ? "申诉通过，评价已保留！" : "申诉驳回，评价已撤销！");
+    }
 }

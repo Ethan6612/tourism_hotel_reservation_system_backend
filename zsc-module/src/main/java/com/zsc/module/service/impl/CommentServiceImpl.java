@@ -44,6 +44,15 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     /** 评价状态：已拒绝 */
     private static final String COMMENT_STATUS_REJECTED = "2";
 
+    /** 申诉状态：无申诉 */
+    private static final String APPEAL_STATUS_NONE = "0";
+    /** 申诉状态：申诉中 */
+    private static final String APPEAL_STATUS_PENDING = "1";
+    /** 申诉状态：申诉通过 */
+    private static final String APPEAL_STATUS_APPROVED = "2";
+    /** 申诉状态：申诉驳回 */
+    private static final String APPEAL_STATUS_REJECTED = "3";
+
     @Autowired
     private CommentMapper commentMapper;
 
@@ -314,6 +323,159 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         }
         // 订单完成状态的校验由调用方负责（Controller层可能会调用Order服务）
         return true;
+    }
+
+    @Override
+    public void updateMyComment(CommentDto commentDto) {
+        Long currentUserId = SecurityUtils.getUserId();
+        Comment comment = this.getById(commentDto.getId());
+        if (comment == null) {
+            throw new ServiceException("评价不存在！");
+        }
+        if (!comment.getUserId().equals(currentUserId)) {
+            throw new ServiceException("只能修改自己的评价！");
+        }
+        comment.setScore(commentDto.getScore());
+        comment.setContent(commentDto.getContent());
+        if (StringUtils.hasText(commentDto.getImages())) {
+            comment.setImages(commentDto.getImages());
+        }
+        if (StringUtils.hasText(commentDto.getIsAnonymous())) {
+            comment.setIsAnonymous(commentDto.getIsAnonymous());
+        }
+        comment.setStatus(COMMENT_STATUS_PUBLISHED);
+        comment.setUpdateTime(new Date());
+        comment.setUpdateBy(SecurityUtils.getUsername());
+        if (!this.updateById(comment)) {
+            throw new ServiceException("系统错误，评价修改失败！");
+        }
+    }
+
+    @Override
+    public void appendComment(Long commentId, String content) {
+        Long currentUserId = SecurityUtils.getUserId();
+        Comment comment = this.getById(commentId);
+        if (comment == null) {
+            throw new ServiceException("评价不存在！");
+        }
+        if (!comment.getUserId().equals(currentUserId)) {
+            throw new ServiceException("只能追加自己的评价！");
+        }
+        if (!StringUtils.hasText(content)) {
+            throw new ServiceException("追加内容不能为空！");
+        }
+        // 在原内容后追加
+        String newContent = (comment.getContent() != null ? comment.getContent() : "")
+                + "\n\n【追加评价】" + new Date() + "\n" + content;
+        comment.setContent(newContent);
+        comment.setUpdateTime(new Date());
+        comment.setUpdateBy(SecurityUtils.getUsername());
+        if (!this.updateById(comment)) {
+            throw new ServiceException("系统错误，评价追加失败！");
+        }
+    }
+
+    @Override
+    public void deleteMyComment(Long commentId) {
+        Long currentUserId = SecurityUtils.getUserId();
+        Comment comment = this.getById(commentId);
+        if (comment == null) {
+            throw new ServiceException("评价不存在！");
+        }
+        if (!comment.getUserId().equals(currentUserId)) {
+            throw new ServiceException("只能删除自己的评价！");
+        }
+        if (!this.removeById(commentId)) {
+            throw new ServiceException("系统错误，评价删除失败！");
+        }
+    }
+
+    @Override
+    public PageResult<CommentVo> queryMerchantComments(CommentQueryDto queryDto) {
+        Long merchantId = SecurityUtils.getUserId();
+        if (queryDto.getPageNum() == null) queryDto.setPageNum(1);
+        if (queryDto.getPageSize() == null) queryDto.setPageSize(10);
+        Page<CommentVo> page = new Page<>(queryDto.getPageNum(), queryDto.getPageSize());
+        Page<CommentVo> resultPage = commentMapper.selectMerchantComments(page, queryDto, merchantId);
+        List<CommentVo> voList = resultPage.getRecords().stream()
+                .map(this::processCommentVo)
+                .collect(Collectors.toList());
+        PageResult<CommentVo> result = new PageResult<>();
+        result.setCurrentPage(resultPage.getCurrent());
+        result.setPageSize(resultPage.getSize());
+        result.setTotal(resultPage.getTotal());
+        result.setRows(voList);
+        return result;
+    }
+
+    @Override
+    public void appealComment(Long commentId, String reason) {
+        if (!StringUtils.hasText(reason)) {
+            throw new ServiceException("申诉理由不能为空！");
+        }
+        Comment comment = this.getById(commentId);
+        if (comment == null) {
+            throw new ServiceException("评价不存在！");
+        }
+        if (!APPEAL_STATUS_NONE.equals(comment.getAppealStatus())
+                && comment.getAppealStatus() != null) {
+            throw new ServiceException("该评价已有申诉记录，不能重复申诉！");
+        }
+        comment.setAppealReason(reason);
+        comment.setAppealTime(new Date());
+        comment.setAppealStatus(APPEAL_STATUS_PENDING);
+        comment.setUpdateTime(new Date());
+        comment.setUpdateBy(SecurityUtils.getUsername());
+        if (!this.updateById(comment)) {
+            throw new ServiceException("系统错误，申诉提交失败！");
+        }
+    }
+
+    @Override
+    public List<CommentVo> queryCommentGroupByHotel(CommentQueryDto queryDto) {
+        List<CommentVo> list = commentMapper.selectCommentGroupByHotel(queryDto);
+        return list != null ? list : new ArrayList<>();
+    }
+
+    @Override
+    public CommentVo getMyCommentStatistics() {
+        Long userId = SecurityUtils.getUserId();
+        return commentMapper.selectMyCommentStatistics(userId);
+    }
+
+    @Override
+    public void auditAppeal(Long commentId, String appealStatus, String remark) {
+        if (!SecurityUtils.isAdmin()) {
+            throw new ServiceException("只有管理员可以审核申诉！");
+        }
+        if (!APPEAL_STATUS_APPROVED.equals(appealStatus)
+                && !APPEAL_STATUS_REJECTED.equals(appealStatus)) {
+            throw new ServiceException("申诉审核状态无效！");
+        }
+        Comment comment = this.getById(commentId);
+        if (comment == null) {
+            throw new ServiceException("评价不存在！");
+        }
+        if (!APPEAL_STATUS_PENDING.equals(comment.getAppealStatus())) {
+            throw new ServiceException("该评价没有待处理的申诉！");
+        }
+        comment.setAppealStatus(appealStatus);
+        if (StringUtils.hasText(remark)) {
+            comment.setRemark(remark);
+        }
+        // 申诉通过：保留评价，状态恢复为已发布
+        if (APPEAL_STATUS_APPROVED.equals(appealStatus)) {
+            comment.setStatus(COMMENT_STATUS_PUBLISHED);
+        }
+        // 申诉驳回：撤销评价
+        if (APPEAL_STATUS_REJECTED.equals(appealStatus)) {
+            comment.setStatus(COMMENT_STATUS_REJECTED);
+        }
+        comment.setUpdateTime(new Date());
+        comment.setUpdateBy(SecurityUtils.getUsername());
+        if (!this.updateById(comment)) {
+            throw new ServiceException("系统错误，申诉审核失败！");
+        }
     }
 
     // ==================== 私有方法 ====================

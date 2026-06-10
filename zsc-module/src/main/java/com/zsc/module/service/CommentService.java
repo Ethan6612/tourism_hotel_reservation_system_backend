@@ -93,4 +93,45 @@ public interface CommentService extends IService<Comment> {
      * @return true=可以评价, false=不可以
      */
     boolean canComment(Long userId, Long orderId);
+
+    /**
+     * 修改评价（用户本人）
+     */
+    void updateMyComment(CommentDto commentDto);
+
+    /**
+     * 追加评价（用户本人）
+     */
+    void appendComment(Long commentId, String content);
+
+    /**
+     * 删除我的评价（用户本人）
+     */
+    void deleteMyComment(Long commentId);
+
+    /**
+     * 商户查看自己酒店的评价列表
+     */
+    PageResult<CommentVo> queryMerchantComments(CommentQueryDto queryDto);
+
+    /**
+     * 商户申诉评价
+     */
+    void appealComment(Long commentId, String reason);
+
+    /**
+     * 按酒店分组查询评价列表（管理端用）
+     */
+    List<CommentVo> queryCommentGroupByHotel(CommentQueryDto queryDto);
+
+    /**
+     * 我的评价统计
+     */
+    CommentVo getMyCommentStatistics();
+
+    /**
+     * 审核申诉（管理员）
+     * @param appealStatus 2=申诉通过 3=申诉驳回
+     */
+    void auditAppeal(Long commentId, String appealStatus, String remark);
 }

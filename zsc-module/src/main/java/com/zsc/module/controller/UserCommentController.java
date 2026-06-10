@@ -69,12 +69,35 @@ public class UserCommentController extends BaseController {
     }
 
     /**
+     * 修改我的评价
+     */
+    @Operation(summary = "修改我的评价")
+    @PutMapping
+    public AjaxResult update(@Valid @RequestBody CommentDto commentDto) {
+        commentDto.setUserId(SecurityUtils.getUserId());
+        commentService.updateMyComment(commentDto);
+        return success("评价修改成功！");
+    }
+
+    /**
+     * 追加评价
+     */
+    @Operation(summary = "追加评价")
+    @PutMapping("/{id}/append")
+    public AjaxResult append(
+            @PathVariable Long id,
+            @RequestParam String content) {
+        commentService.appendComment(id, content);
+        return success("追加评价成功！");
+    }
+
+    /**
      * 删除我的评价
      */
     @Operation(summary = "删除我的评价")
     @DeleteMapping("/{id}")
     public AjaxResult delete(@PathVariable Long id) {
-        commentService.deleteComment(id);
+        commentService.deleteMyComment(id);
         return success("评价已删除！");
     }
 

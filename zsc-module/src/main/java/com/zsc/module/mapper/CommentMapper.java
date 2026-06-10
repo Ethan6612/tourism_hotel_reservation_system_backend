@@ -71,4 +71,19 @@ public interface CommentMapper extends BaseMapper<Comment> {
      * 统计评价总数
      */
     Long countComments(@Param("query") CommentQueryDto query);
+
+    /**
+     * 查询商户下酒店的评价列表
+     */
+    Page<CommentVo> selectMerchantComments(Page<CommentVo> page, @Param("query") CommentQueryDto query, @Param("merchantId") Long merchantId);
+
+    /**
+     * 按酒店分组查询评价（酒店列表 + 评分统计）
+     */
+    List<CommentVo> selectCommentGroupByHotel(@Param("query") CommentQueryDto query);
+
+    /**
+     * 查询用户评价统计
+     */
+    CommentVo selectMyCommentStatistics(@Param("userId") Long userId);
 }

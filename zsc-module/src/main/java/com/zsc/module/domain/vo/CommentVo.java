@@ -99,6 +99,16 @@ public class CommentVo {
     /** 备注 */
     private String remark;
 
+    /** 申诉理由 */
+    private String appealReason;
+
+    /** 申诉时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date appealTime;
+
+    /** 申诉状态（0=无申诉 1=申诉中 2=申诉通过 3=申诉驳回） */
+    private String appealStatus;
+
     /**
      * 获取平均分（用于统计展示，保留一位小数）
      */

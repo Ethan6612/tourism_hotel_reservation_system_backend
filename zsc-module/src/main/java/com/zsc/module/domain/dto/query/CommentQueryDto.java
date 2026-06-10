@@ -46,6 +46,18 @@ public class CommentQueryDto {
     /** 结束时间 */
     private String endTime;
 
+    /** 申诉状态（0=无申诉 1=申诉中 2=申诉通过 3=申诉驳回） */
+    private String appealStatus;
+
+    /** 酒店名称（模糊搜索） */
+    private String hotelName;
+
+    /** 入住开始日期 */
+    private String checkInDate;
+
+    /** 入住结束日期 */
+    private String checkOutDate;
+
     /** 排序方式：createTime=按时间 score=按评分 likeCount=按点赞数 */
     private String orderBy;
 

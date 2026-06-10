@@ -30,6 +30,11 @@
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
         <result property="remark" column="remark"/>
+        <result property="appealReason" column="appeal_reason"/>
+        <result property="appealTime" column="appeal_time"/>
+        <result property="appealStatus" column="appeal_status"/>
+        <result property="averageScore" column="average_score"/>
+        <result property="totalComments" column="total_comments"/>
     </resultMap>
 
     <!-- 结果映射：ScoreStatisticsVo -->
@@ -71,7 +76,10 @@
         c.create_by,
         c.create_time,
         c.update_time,
-        c.remark
+        c.remark,
+        c.appeal_reason,
+        c.appeal_time,
+        c.appeal_status
     </sql>
 
     <sql id="commentVoJoins">
@@ -109,6 +117,9 @@
             <if test="query.status != null and query.status != ''">
                 AND c.status = #{query.status}
             </if>
+            <if test="query.appealStatus != null and query.appealStatus != ''">
+                AND c.appeal_status = #{query.appealStatus}
+            </if>
             <if test="query.hasReply != null">
                 <if test="query.hasReply == true">
                     AND c.reply_content IS NOT NULL AND c.reply_content != ''
@@ -120,14 +131,17 @@
             <if test="query.keyword != null and query.keyword != ''">
                 AND c.content LIKE CONCAT('%', #{query.keyword}, '%')
             </if>
+            <if test="query.hotelName != null and query.hotelName != ''">
+                AND h.name LIKE CONCAT('%', #{query.hotelName}, '%')
+            </if>
             <if test="query.beginTime != null and query.beginTime != ''">
                 AND c.create_time &gt;= #{query.beginTime}
             </if>
             <if test="query.endTime != null and query.endTime != ''">
                 AND c.create_time &lt;= #{query.endTime}
             </if>
-            <!-- 默认只查询已发布的评价 -->
-            <if test="query.status == null or query.status == ''">
+            <!-- 默认只查询已发布的评价（除非明确指定了 status 或 appealStatus） -->
+            <if test="(query.status == null or query.status == '') and (query.appealStatus == null or query.appealStatus == '')">
                 AND c.status = '1'
             </if>
         </where>
@@ -152,7 +166,7 @@
     <select id="selectCommentVoPage" resultMap="CommentVoResultMap">
         SELECT
         <include refid="commentVoColumns"/>
-        FROM biz_comment c
+        FROM `comment` c
         <include refid="commentVoJoins"/>
         <include refid="commentQueryWhere"/>
         <include refid="commentOrderBy"/>
@@ -162,7 +176,7 @@
     <select id="selectCommentVoById" resultMap="CommentVoResultMap">
         SELECT
         <include refid="commentVoColumns"/>
-        FROM biz_comment c
+        FROM `comment` c
         <include refid="commentVoJoins"/>
         WHERE c.id = #{id}
     </select>
@@ -171,15 +185,26 @@
     <select id="selectMyComments" resultMap="CommentVoResultMap">
         SELECT
         <include refid="commentVoColumns"/>
-        FROM biz_comment c
+        FROM `comment` c
         <include refid="commentVoJoins"/>
         WHERE c.user_id = #{userId}
         ORDER BY c.create_time DESC
     </select>
 
+    <!-- 查询我的评价统计 -->
+    <select id="selectMyCommentStatistics" resultMap="CommentVoResultMap">
+        SELECT
+            #{userId} AS id,
+            COUNT(*) AS total_comments,
+            ROUND(AVG(c.score), 1) AS average_score,
+            SUM(c.like_count) AS like_count
+        FROM `comment` c
+        WHERE c.user_id = #{userId} AND c.status = '1'
+    </select>
+
     <!-- 根据订单ID查询评价 -->
     <select id="selectByOrderId" resultType="com.zsc.module.domain.entity.Comment">
-        SELECT * FROM biz_comment WHERE order_id = #{orderId} LIMIT 1
+        SELECT * FROM `comment` WHERE order_id = #{orderId} LIMIT 1
     </select>
 
     <!-- 获取评分统计 -->
@@ -194,7 +219,7 @@
             SUM(CASE WHEN c.score = 3 THEN 1 ELSE 0 END) AS three_star_count,
             SUM(CASE WHEN c.score = 2 THEN 1 ELSE 0 END) AS two_star_count,
             SUM(CASE WHEN c.score = 1 THEN 1 ELSE 0 END) AS one_star_count
-        FROM biz_comment c
+        FROM `comment` c
         WHERE c.status = '1'
         <if test="hotelId != null">
             AND c.hotel_id = #{hotelId}
@@ -222,7 +247,7 @@
             SUM(CASE WHEN c.score = 3 THEN 1 ELSE 0 END) AS three_star_count,
             SUM(CASE WHEN c.score = 2 THEN 1 ELSE 0 END) AS two_star_count,
             SUM(CASE WHEN c.score = 1 THEN 1 ELSE 0 END) AS one_star_count
-        FROM biz_comment c
+        FROM `comment` c
         WHERE c.status = '1' AND c.hotel_id = #{hotelId}
         GROUP BY c.hotel_id
     </select>
@@ -233,7 +258,7 @@
             c.hotel_id,
             ROUND(AVG(c.score), 2) AS average_score,
             COUNT(*) AS total_comments
-        FROM biz_comment c
+        FROM `comment` c
         WHERE c.status = '1'
         AND c.hotel_id IN
         <foreach collection="hotelIds" item="hotelId" open="(" separator="," close=")">
@@ -244,19 +269,56 @@
 
     <!-- 点赞数+1 -->
     <update id="incrementLikeCount">
-        UPDATE biz_comment SET like_count = like_count + 1 WHERE id = #{id}
+        UPDATE `comment` SET like_count = like_count + 1 WHERE id = #{id}
     </update>
 
     <!-- 点赞数-1 -->
     <update id="decrementLikeCount">
-        UPDATE biz_comment SET like_count = like_count - 1 WHERE id = #{id} AND like_count > 0
+        UPDATE `comment` SET like_count = like_count - 1 WHERE id = #{id} AND like_count > 0
     </update>
 
     <!-- 统计评价总数 -->
     <select id="countComments" resultType="java.lang.Long">
         SELECT COUNT(*)
-        FROM biz_comment c
+        FROM `comment` c
         <include refid="commentQueryWhere"/>
+    </select>
+
+    <!-- 商户评价列表查询（通过 hotel.business_id 关联商户） -->
+    <select id="selectMerchantComments" resultMap="CommentVoResultMap">
+        SELECT
+        <include refid="commentVoColumns"/>
+        FROM `comment` c
+        <include refid="commentVoJoins"/>
+        WHERE h.business_id = #{merchantId}
+        <if test="query.hotelId != null">
+            AND c.hotel_id = #{query.hotelId}
+        </if>
+        <if test="query.score != null">
+            AND c.score = #{query.score}
+        </if>
+        <if test="query.status != null and query.status != ''">
+            AND c.status = #{query.status}
+        </if>
+        ORDER BY c.create_time DESC
+    </select>
+
+    <!-- 按酒店分组查询（用于管理端左侧酒店列表） -->
+    <select id="selectCommentGroupByHotel" resultMap="CommentVoResultMap">
+        SELECT
+            c.hotel_id AS id,
+            c.hotel_id,
+            h.name AS hotel_name,
+            ROUND(AVG(c.score), 1) AS average_score,
+            COUNT(*) AS total_comments
+        FROM `comment` c
+        LEFT JOIN hotel h ON c.hotel_id = h.id
+        WHERE c.status = '1'
+        <if test="query.keyword != null and query.keyword != ''">
+            AND h.name LIKE CONCAT('%', #{query.keyword}, '%')
+        </if>
+        GROUP BY c.hotel_id, h.name
+        ORDER BY total_comments DESC
     </select>
 
 </mapper>
