@@ -183,6 +183,25 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     /**
+     * 检查房型是否有未完成订单
+     * 未完成状态：待支付(0)、已支付(1)、退款中(4)
+     */
+    @Override
+    public boolean hasUnfinishedOrder(Long roomId) {
+        if (roomId == null) {
+            return false;
+        }
+        LambdaQueryWrapper<Order> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Order::getRoomId, roomId)
+                .in(Order::getStatus,
+                        Order.STATUS_PENDING,    // 待支付
+                        Order.STATUS_PAID,       // 已支付
+                        Order.STATUS_REFUNDING   // 退款中
+                );
+        return this.count(wrapper) > 0;
+    }
+
+    /**
      * 校验状态流转是否合法
      */
     private boolean isValidStatusTransition(String from, String to) {

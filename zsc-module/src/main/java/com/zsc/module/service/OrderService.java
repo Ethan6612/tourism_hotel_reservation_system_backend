@@ -60,4 +60,13 @@ public interface OrderService extends IService<Order> {
      * 生成订单号
      */
     String generateOrderNo();
+
+    /**
+     * 检查房型是否有未完成订单
+     * 未完成状态：待支付(0)、已支付(1)、退款中(4)
+     *
+     * @param roomId 房型ID
+     * @return true-存在未完成订单，false-不存在
+     */
+    boolean hasUnfinishedOrder(Long roomId);
 }

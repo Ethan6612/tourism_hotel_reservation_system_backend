@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zsc.module.mapper.RoomMapper">
+
+    <resultMap id="RoomVoResultMap" type="com.zsc.module.domain.vo.RoomVo">
+        <id property="id" column="id"/>
+        <result property="hotelId" column="hotel_id"/>
+        <result property="roomType" column="room_type"/>
+        <result property="area" column="area"/>
+        <result property="bedType" column="bed_type"/>
+        <result property="price" column="price"/>
+        <result property="stock" column="stock"/>
+        <result property="status" column="status"/>
+        <result property="imgUrl" column="img_url"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="guestNum" column="guest_num"/>
+        <result property="hasBreakfast" column="has_breakfast"/>
+        <result property="hotelName" column="hotel_name"/>
+    </resultMap>
+
+    <sql id="selectRoomVo">
+        SELECT r.id, r.hotel_id, r.room_type, r.area, r.bed_type, r.price,
+               r.stock, r.status, r.img_url, r.create_time, r.update_time,
+               r.guest_num, r.has_breakfast,
+               h.name AS hotel_name
+        FROM room r
+        LEFT JOIN hotel h ON r.hotel_id = h.id
+        WHERE r.del_flag = '0'
+    </sql>
+
+    <sql id="whereClause">
+        <if test="query.hotelId != null">
+            AND r.hotel_id = #{query.hotelId}
+        </if>
+        <if test="query.roomType != null and query.roomType != ''">
+            AND r.room_type LIKE CONCAT('%', #{query.roomType}, '%')
+        </if>
+        <if test="query.status != null and query.status != ''">
+            AND r.status = #{query.status}
+        </if>
+        <if test="query.minPrice != null">
+            AND r.price &gt;= #{query.minPrice}
+        </if>
+        <if test="query.maxPrice != null">
+            AND r.price &lt;= #{query.maxPrice}
+        </if>
+        <if test="query.keyword != null and query.keyword != ''">
+            AND r.room_type LIKE CONCAT('%', #{query.keyword}, '%')
+        </if>
+    </sql>
+
+    <!-- 分页查询房型列表 -->
+    <select id="selectRoomVoPage" resultMap="RoomVoResultMap">
+        <include refid="selectRoomVo"/>
+        <include refid="whereClause"/>
+        <choose>
+            <when test="query.orderBy != null and query.orderBy != ''">
+                ORDER BY ${query.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY r.create_time DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <!-- 查询房型详情 -->
+    <select id="selectRoomVoById" resultMap="RoomVoResultMap">
+        <include refid="selectRoomVo"/>
+        AND r.id = #{id}
+    </select>
+
+    <!-- 按酒店ID查询房型列表 -->
+    <select id="selectRoomVoByHotelId" resultMap="RoomVoResultMap">
+        <include refid="selectRoomVo"/>
+        AND r.hotel_id = #{hotelId}
+        AND r.status = '0'
+        ORDER BY r.price ASC
+    </select>
+
+    <!-- 统计房型数量 -->
+    <select id="countRooms" resultType="java.lang.Long">
+        SELECT COUNT(1)
+        FROM room r
+        WHERE r.del_flag = '0'
+        <include refid="whereClause"/>
+    </select>
+
+    <!-- 检查酒店下是否有未删除的房型 -->
+    <select id="countActiveRoomsByHotelId" resultType="java.lang.Long">
+        SELECT COUNT(1)
+        FROM room
+        WHERE hotel_id = #{hotelId}
+          AND del_flag = '0'
+    </select>
+
+</mapper>

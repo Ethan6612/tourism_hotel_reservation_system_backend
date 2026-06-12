@@ -2,6 +2,9 @@ package com.zsc.module.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,17 +13,15 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 /**
- * <p>
  * 业务类别表
- * </p>
  *
- * @author author
- * @since 2026-04-15
+ * @author zsc
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@TableName("biz_category")
 public class BizCategory {
 
     /**
@@ -47,11 +48,18 @@ public class BizCategory {
     /**
      * 创建时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     /**
      * 更新时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
+    /**
+     * 删除标志(0正常 2删除)
+     */
+    @TableLogic
+    private String delFlag;
 }

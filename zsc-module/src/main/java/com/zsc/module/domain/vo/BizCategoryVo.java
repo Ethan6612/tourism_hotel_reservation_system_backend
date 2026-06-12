@@ -37,6 +37,11 @@ public class BizCategoryVo {
     private String status;
 
     /**
+     * 状态名称
+     */
+    private String statusName;
+
+    /**
      * 创建时间
      */
     private Date createTime;
