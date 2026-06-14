@@ -24,13 +24,14 @@ public class BasePageReq {
     @Min(value = 1, message = "每页大小不能小于1")
     private int pageSize = DEFAULT_PAGESIZE;
 
-    // 当前页码
+    // 当前页码（兼容pageNum和currentPage两种命名）
     @Min(value = 1, message = "当前页不能小于1")
-    private int currentPage = 1;
+    private int pageNum;
 
-     // 如果当前页小于1，则取值为1
+     // 如果当前页小于1，则取值为1（优先使用pageNum，兼容两种命名）
     public int getCurrent() {
-        return this.currentPage <= 0 ? 1 : this.currentPage;
+        int page = pageNum;
+        return page <= 0 ? 1 : page;
     }
 
     // 返回每页大小

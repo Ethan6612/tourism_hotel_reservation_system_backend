@@ -33,4 +33,9 @@ public class MerchantQueryDto extends BasePageReq {
      * 商户状态（0正常 1冻结 2注销）
      */
     private String status;
+
+    /**
+     * 审核状态（0待审核 1审核通过 2审核驳回）- 用于筛选商户
+     */
+    private String auditStatus;
 }

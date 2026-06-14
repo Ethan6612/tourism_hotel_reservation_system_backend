@@ -82,6 +82,26 @@ public class Merchant {
     private Long userId;
 
     /**
+     * 审核状态（0待审核 1审核通过 2审核驳回）
+     */
+    private String auditStatus;
+
+    /**
+     * 驳回原因（仅当auditStatus=2时有值）
+     */
+    private String rejectReason;
+
+    /**
+     * 提交审核时间
+     */
+    private Date submitTime;
+
+    /**
+     * 审核时间
+     */
+    private Date auditTime;
+
+    /**
      * 创建时间
      */
     private Date createTime;

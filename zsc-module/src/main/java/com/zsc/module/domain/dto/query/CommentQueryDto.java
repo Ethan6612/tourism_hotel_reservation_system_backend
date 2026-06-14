@@ -31,14 +31,14 @@ public class CommentQueryDto {
     /** 最高评分 */
     private Integer maxScore;
 
-    /** 评价状态（0=待审核 1=已发布 2=已拒绝） */
-    private String status;
-
     /** 是否已回复 */
     private Boolean hasReply;
 
     /** 搜索关键词（评价内容模糊匹配） */
     private String keyword;
+
+    /** 评价状态（0=待审核 1=已发布 2=已拒绝） */
+    private String status;
 
     /** 开始时间 */
     private String beginTime;

@@ -75,4 +75,14 @@ public class MerchantAuditVo {
      * 创建时间
      */
     private Date createTime;
+
+    /**
+     * 提交人ID（申请商户的用户ID）
+     */
+    private Long submitUserId;
+
+    /**
+     * 提交人姓名（冗余展示字段，关联sys_user表）
+     */
+    private String submitUserName;
 }

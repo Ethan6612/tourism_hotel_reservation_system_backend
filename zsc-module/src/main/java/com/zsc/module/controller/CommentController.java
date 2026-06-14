@@ -63,7 +63,7 @@ public class CommentController extends BaseController {
         queryDto.setScore(score);
         queryDto.setKeyword(keyword);
         queryDto.setOrderBy(orderBy);
-        PageResult result = commentService.queryComments(queryDto);
+        PageResult<CommentVo> result = commentService.queryCommentsWithUserInfo(queryDto);
         return success(result);
     }
 
@@ -331,3 +331,4 @@ public class CommentController extends BaseController {
         return success(appealStatus.equals("2") ? "申诉通过，评价已保留！" : "申诉驳回，评价已撤销！");
     }
 }
+

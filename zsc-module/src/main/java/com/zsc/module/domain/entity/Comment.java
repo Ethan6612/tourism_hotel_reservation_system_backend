@@ -46,7 +46,7 @@ public class Comment {
     private Long roomId;
 
     /**
-     * 订单ID（关联预订记录，用于校验入住完成）
+     * 订单ID
      */
     private Long orderId;
 
@@ -93,20 +93,15 @@ public class Comment {
     private Date replyTime;
 
     /**
-     * 回复人ID
+     * 创建时间
      */
-    private Long replyBy;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
 
     /**
      * 创建者
      */
     private String createBy;
-
-    /**
-     * 创建时间
-     */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createTime;
 
     /**
      * 更新者

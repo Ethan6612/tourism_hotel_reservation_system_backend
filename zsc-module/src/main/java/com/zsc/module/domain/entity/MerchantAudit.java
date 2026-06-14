@@ -80,4 +80,9 @@ public class MerchantAudit {
      * 更新时间
      */
     private Date updateTime;
+
+    /**
+     * 提交人ID（申请商户的用户ID）
+     */
+    private Long submitUserId;
 }

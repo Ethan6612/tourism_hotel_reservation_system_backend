@@ -113,9 +113,6 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         // 允许追加回复（已有回复时可覆盖）
         comment.setReplyContent(replyContent);
         comment.setReplyTime(new Date());
-        comment.setReplyBy(SecurityUtils.getUserId());
-        comment.setUpdateTime(new Date());
-        comment.setUpdateBy(SecurityUtils.getUsername());
 
         if (!this.updateById(comment)) {
             throw new ServiceException("系统错误，评价回复失败！");

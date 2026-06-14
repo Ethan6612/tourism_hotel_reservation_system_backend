@@ -2,6 +2,7 @@ package com.zsc.module.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zsc.common.core.domain.entity.SysUser;
 import com.zsc.module.common.exception.ServiceException;
 import com.zsc.module.common.pagination.PageResult;
 import com.zsc.module.domain.dto.MerchantAuditDto;
@@ -12,6 +13,7 @@ import com.zsc.module.domain.vo.MerchantAuditVo;
 import com.zsc.module.mapper.MerchantAuditMapper;
 import com.zsc.module.service.MerchantAuditService;
 import com.zsc.module.service.MerchantService;
+import com.zsc.system.mapper.SysUserMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class MerchantAuditServiceImpl extends ServiceImpl<MerchantAuditMapper, M
 
     @Autowired
     private MerchantService merchantService;
+
+    @Autowired
+    private SysUserMapper sysUserMapper;
 
     /**
      * 提交审核申请
@@ -104,6 +109,18 @@ public class MerchantAuditServiceImpl extends ServiceImpl<MerchantAuditMapper, M
             throw new ServiceException("系统错误，审核操作失败！");
         }
 
+        // ✅ 同步更新 merchant 表的审核状态和提交时间
+        Merchant merchant = merchantService.getById(audit.getMerchantId());
+        if (merchant != null) {
+            merchant.setAuditStatus(auditStatus);
+            merchant.setSubmitTime(audit.getSubmitTime());
+            merchant.setUpdateTime(new Date());
+            
+            if (!merchantService.updateById(merchant)) {
+                throw new ServiceException("系统错误，更新商户审核状态失败！");
+            }
+        }
+
         // 如果审核通过且为入驻申请类型，可在此扩展开通商户逻辑
         // 如果审核驳回，可扩展通知商户重新提交逻辑
     }
@@ -152,7 +169,7 @@ public class MerchantAuditServiceImpl extends ServiceImpl<MerchantAuditMapper, M
     // ===== 私有辅助方法 =====
 
     /**
-     * 将审核实体转换为VO，并填充商户名称
+     * 将审核实体转换为VO，并填充商户名称和申请用户信息
      *
      * @param audit 审核实体
      * @return 审核VO
@@ -168,6 +185,15 @@ public class MerchantAuditServiceImpl extends ServiceImpl<MerchantAuditMapper, M
                 vo.setMerchantName(merchant.getMerchantName());
             }
         }
+
+        // 填充申请用户姓名
+        if (audit.getSubmitUserId() != null) {
+            SysUser user = sysUserMapper.selectUserById(audit.getSubmitUserId());
+            if (user != null) {
+                vo.setSubmitUserName(user.getNickName());
+            }
+        }
+
         return vo;
     }
 }

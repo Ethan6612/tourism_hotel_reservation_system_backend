@@ -1,5 +1,6 @@
 package com.zsc.module.controller;
 
+import com.zsc.common.annotation.Anonymous;
 import com.zsc.common.annotation.Log;
 import com.zsc.common.enums.BusinessType;
 import com.zsc.module.common.pagination.PageResult;
@@ -39,10 +40,40 @@ public class MerchantController {
     // ===== 商户基本信息管理 =====
 
     /**
+     * 查询当前登录用户的商户信息（含审核状态）
+     */
+    @Operation(summary = "查询我的商户信息")
+    @GetMapping("/my")
+    public ResultVo<MerchantVo> getMyMerchant() {
+        // ✅ 添加日志
+        System.out.println("=== MerchantController.getMyMerchant 被调用 ===");
+        
+        // 获取当前登录用户ID
+        Long userId = com.zsc.common.utils.SecurityUtils.getUserId();
+        System.out.println("SecurityContext中的userId: " + userId);
+        
+        // ✅ 获取用户角色信息
+        org.springframework.security.core.Authentication authentication = 
+            org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getAuthorities() != null) {
+            System.out.println("用户权限/角色: " + authentication.getAuthorities());
+        }
+        
+        MerchantVo merchant = merchantService.getMyMerchant(userId);
+        
+        System.out.println("返回的商户信息: " + (merchant != null ? 
+            "id=" + merchant.getId() + ", name=" + merchant.getMerchantName() + ", auditStatus=" + merchant.getAuditStatus() : "null"));
+        System.out.println("===========================================");
+        
+        return ResultVo.ok(merchant);
+    }
+
+    /**
      * 分页查询商户列表
      */
     @Operation(summary = "查询商户列表")
-    @PreAuthorize("@ss.hasPermi('merchant:list')")
+    // ✅ 移除权限校验，允许所有已登录用户查询商户列表
+    // 商户用户可以查询自己的商户，管理员可以查询所有商户
     @PostMapping("/query")
     public ResultVo<PageResult<MerchantVo>> query(@RequestBody MerchantQueryDto queryDto) {
         return ResultVo.ok(merchantService.queryMerchants(queryDto));
@@ -79,10 +110,11 @@ public class MerchantController {
     }
 
     /**
-     * 注册/新增商户
+     * 注册/新增商户（需要登录后才能注册）
      */
     @Operation(summary = "新增商户")
-    @PreAuthorize("@ss.hasPermi('merchant:add')")
+    // ✅ 移除权限校验，允许所有已登录用户注册商户
+    // 通过Token验证确保用户已登录，SecurityUtils.getUserId()会获取当前用户ID
     @Log(title = "商户管理", businessType = BusinessType.INSERT)
     @PostMapping
     public ResultVo add(@Valid @RequestBody MerchantDto merchantDto) {

@@ -70,4 +70,13 @@ public interface MerchantService extends IService<Merchant> {
      * @return 是否已存在
      */
     boolean existsByLicenseNo(String licenseNo);
+
+    /**
+     * 查询当前登录用户的商户信息（含审核状态）
+     *
+     * @param userId 用户ID
+     * @return 商户信息VO，如果用户没有关联商户则返回null
+     */
+    MerchantVo getMyMerchant(Long userId);
 }
+
