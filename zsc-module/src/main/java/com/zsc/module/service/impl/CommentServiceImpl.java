@@ -110,8 +110,14 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
             throw new ServiceException("评价不存在！");
         }
 
-        // 允许追加回复（已有回复时可覆盖）
-        comment.setReplyContent(replyContent);
+        // 追加回复（保留历史回复记录）
+        String timestamp = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        String newReply = "【" + timestamp + "】" + replyContent;
+        if (StringUtils.hasText(comment.getReplyContent())) {
+            comment.setReplyContent(comment.getReplyContent() + "\n" + newReply);
+        } else {
+            comment.setReplyContent(newReply);
+        }
         comment.setReplyTime(new Date());
 
         if (!this.updateById(comment)) {
