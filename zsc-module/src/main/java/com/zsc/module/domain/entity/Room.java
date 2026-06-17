@@ -1,8 +1,8 @@
 package com.zsc.module.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -89,18 +89,14 @@ public class Room {
     private Date updateTime;
 
     /**
-     * 可入住人数
+     * 可入住人数（不在数据库中，用于扩展）
      */
+    @TableField(exist = false)
     private Integer guestNum;
 
     /**
-     * 是否含早餐（0无早餐 1含早餐）
+     * 是否含早餐（不在数据库中，用于扩展）
      */
+    @TableField(exist = false)
     private String hasBreakfast;
-
-    /**
-     * 删除标志(0正常 2删除)
-     */
-    @TableLogic
-    private String delFlag;
 }

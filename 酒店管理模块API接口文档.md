@@ -224,10 +224,6 @@
     "merchantName": "希尔顿集团",
     "status": "0",
     "statusName": "营业中",
-    "phone": "010-12345678",
-    "intro": "北京王府井希尔顿酒店位于市中心...",
-    "longitude": 116.4074,
-    "latitude": 39.9042,
     "minPrice": 699.00,
     "roomList": [
       {
@@ -239,10 +235,7 @@
         "price": 699.00,
         "stock": 10,
         "status": "0",
-        "statusName": "上架",
-        "guestNum": 2,
-        "hasBreakfast": "1",
-        "hasBreakfastName": "含早餐"
+        "statusName": "上架"
       }
     ],
     "createTime": "2026-06-10 21:58:33",
@@ -266,10 +259,6 @@
 | facility | String | 否 | 设施（逗号分隔） |
 | businessId | Long | 否 | 商户ID |
 | status | String | 否 | 状态（默认草稿） |
-| phone | String | 否 | 联系电话 |
-| intro | String | 否 | 酒店简介 |
-| longitude | BigDecimal | 否 | 经度 |
-| latitude | BigDecimal | 否 | 纬度 |
 
 - **请求示例**:
 ```json
@@ -277,9 +266,7 @@
   "name": "北京王府井希尔顿酒店",
   "address": "北京市东城区王府井大街88号",
   "star": 5,
-  "facility": "WiFi,游泳池,健身房",
-  "phone": "010-12345678",
-  "intro": "位于市中心的五星级酒店"
+  "facility": "WiFi,游泳池,健身房"
 }
 ```
 
@@ -404,7 +391,6 @@
         "imgUrl": "https://example.com/hotel.jpg",
         "status": "0",
         "statusName": "营业中",
-        "phone": "010-12345678",
         "businessId": 1001,
         "merchantName": "希尔顿集团",
         "roomCount": 5,
@@ -468,7 +454,6 @@
         "imgUrl": "https://example.com/hotel.jpg",
         "status": "0",
         "statusName": "营业中",
-        "phone": "010-12345678",
         "merchantName": "希尔顿集团",
         "roomCount": 5,
         "createTime": "2026-06-10 21:58:33"
@@ -521,9 +506,6 @@
     "status": "0",
     "statusName": "上架",
     "imgUrl": "https://example.com/room.jpg",
-    "guestNum": 2,
-    "hasBreakfast": "1",
-    "hasBreakfastName": "含早餐",
     "createTime": "2026-06-10 21:58:48",
     "updateTime": "2026-06-10 21:58:48"
   }
@@ -546,8 +528,6 @@
 | stock | Integer | 是 | 库存数量 |
 | status | String | 否 | 状态（默认上架） |
 | imgUrl | String | 否 | 图片URL |
-| guestNum | Integer | 否 | 可入住人数 |
-| hasBreakfast | String | 否 | 是否含早餐（0否 1是） |
 
 - **请求示例**:
 ```json
@@ -557,9 +537,7 @@
   "area": "38平米",
   "bedType": "1.8米大床",
   "price": 699.00,
-  "stock": 10,
-  "guestNum": 2,
-  "hasBreakfast": "1"
+  "stock": 10
 }
 ```
 
@@ -774,9 +752,6 @@ GET /api/room/lowStock?threshold=3&hotelId=1
         "stock": 10,
         "status": "0",
         "statusName": "上架",
-        "guestNum": 2,
-        "hasBreakfast": "1",
-        "hasBreakfastName": "含早餐",
         "createTime": "2026-06-10 21:58:48"
       }
     ]
@@ -810,10 +785,7 @@ GET /api/room/lowStock?threshold=3&hotelId=1
       "price": 699.00,
       "stock": 10,
       "status": "0",
-      "statusName": "上架",
-      "guestNum": 2,
-      "hasBreakfast": "1",
-      "hasBreakfastName": "含早餐"
+      "statusName": "上架"
     },
     {
       "id": 2,
@@ -825,10 +797,7 @@ GET /api/room/lowStock?threshold=3&hotelId=1
       "price": 859.00,
       "stock": 8,
       "status": "0",
-      "statusName": "上架",
-      "guestNum": 2,
-      "hasBreakfast": "0",
-      "hasBreakfastName": "不含早餐"
+      "statusName": "上架"
     }
   ]
 }

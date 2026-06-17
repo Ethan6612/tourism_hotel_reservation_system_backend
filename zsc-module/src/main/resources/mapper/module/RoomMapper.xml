@@ -14,19 +14,16 @@
         <result property="imgUrl" column="img_url"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
-        <result property="guestNum" column="guest_num"/>
-        <result property="hasBreakfast" column="has_breakfast"/>
         <result property="hotelName" column="hotel_name"/>
     </resultMap>
 
     <sql id="selectRoomVo">
         SELECT r.id, r.hotel_id, r.room_type, r.area, r.bed_type, r.price,
                r.stock, r.status, r.img_url, r.create_time, r.update_time,
-               r.guest_num, r.has_breakfast,
                h.name AS hotel_name
         FROM room r
         LEFT JOIN hotel h ON r.hotel_id = h.id
-        WHERE r.del_flag = '0'
+        WHERE 1=1
     </sql>
 
     <sql id="whereClause">
@@ -82,16 +79,15 @@
     <select id="countRooms" resultType="java.lang.Long">
         SELECT COUNT(1)
         FROM room r
-        WHERE r.del_flag = '0'
+        WHERE 1=1
         <include refid="whereClause"/>
     </select>
 
-    <!-- 检查酒店下是否有未删除的房型 -->
+    <!-- 检查酒店下是否有房型 -->
     <select id="countActiveRoomsByHotelId" resultType="java.lang.Long">
         SELECT COUNT(1)
         FROM room
         WHERE hotel_id = #{hotelId}
-          AND del_flag = '0'
     </select>
 
 </mapper>

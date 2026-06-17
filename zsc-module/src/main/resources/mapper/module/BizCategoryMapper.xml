@@ -14,7 +14,7 @@
     <sql id="selectCategoryVo">
         SELECT category_id, category_name, sort_order, status, create_time, update_time
         FROM biz_category
-        WHERE del_flag = '0'
+        WHERE 1=1
     </sql>
 
     <sql id="whereClause">

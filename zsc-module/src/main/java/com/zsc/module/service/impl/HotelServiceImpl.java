@@ -58,7 +58,6 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel> implements
         }
         hotel.setCreateTime(new Date());
         hotel.setUpdateTime(new Date());
-        hotel.setDelFlag("0");
 
         if (!this.save(hotel)) {
             throw new ServiceException("新增酒店失败");
@@ -94,7 +93,7 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel> implements
     }
 
     /**
-     * 删除酒店（逻辑删除）
+     * 删除酒店（物理删除）
      */
     @Override
     public void deleteHotel(Long id) {
@@ -107,14 +106,12 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel> implements
             throw new ServiceException("酒店不存在");
         }
 
-        // 检查是否有未删除的房型
+        // 检查是否有房型
         if (roomService.hasActiveRooms(id)) {
             throw new ServiceException("该酒店下存在房型，请先删除房型");
         }
 
-        hotel.setDelFlag("2");
-        hotel.setUpdateTime(new Date());
-        if (!this.updateById(hotel)) {
+        if (!this.removeById(id)) {
             throw new ServiceException("删除酒店失败");
         }
     }

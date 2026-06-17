@@ -50,7 +50,6 @@ public class BizCategoryServiceImpl extends ServiceImpl<BizCategoryMapper, BizCa
         BeanUtils.copyProperties(addDto, category);
 
         // 设置默认字段
-        category.setDelFlag("0");
         category.setCreateTime(new Date());
         category.setUpdateTime(new Date());
 
@@ -90,7 +89,7 @@ public class BizCategoryServiceImpl extends ServiceImpl<BizCategoryMapper, BizCa
     }
 
     /**
-     * 删除业务类别（逻辑删除）
+     * 删除业务类别（物理删除）
      */
     @Override
     public void deleteCategory(Long categoryId) {
@@ -109,9 +108,7 @@ public class BizCategoryServiceImpl extends ServiceImpl<BizCategoryMapper, BizCa
             throw new ServiceException("该分类下存在" + count + "个关联酒店，无法删除");
         }
 
-        category.setDelFlag("2");
-        category.setUpdateTime(new Date());
-        if (!this.updateById(category)) {
+        if (!this.removeById(categoryId)) {
             throw new ServiceException("删除分类失败");
         }
     }
@@ -163,7 +160,6 @@ public class BizCategoryServiceImpl extends ServiceImpl<BizCategoryMapper, BizCa
                 BizCategory::getCategoryName, queryDto.getCategoryName())
                 .eq(StringUtils.isNotBlank(queryDto.getStatus()),
                         BizCategory::getStatus, queryDto.getStatus())
-                .eq(BizCategory::getDelFlag, "0")
                 .orderByAsc(BizCategory::getSortOrder)
                 .orderByDesc(BizCategory::getCreateTime);
 
@@ -189,7 +185,7 @@ public class BizCategoryServiceImpl extends ServiceImpl<BizCategoryMapper, BizCa
         }
 
         BizCategory category = this.getById(categoryId);
-        if (category == null || "2".equals(category.getDelFlag())) {
+        if (category == null) {
             throw new ServiceException("分类不存在");
         }
 
@@ -203,7 +199,6 @@ public class BizCategoryServiceImpl extends ServiceImpl<BizCategoryMapper, BizCa
     public List<BizCategoryVo> listForSelect() {
         LambdaQueryWrapper<BizCategory> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(BizCategory::getStatus, CategoryStatusEnum.NORMAL.getValue())
-                .eq(BizCategory::getDelFlag, "0")
                 .orderByAsc(BizCategory::getSortOrder)
                 .select(BizCategory::getCategoryId, BizCategory::getCategoryName);
 
@@ -225,8 +220,7 @@ public class BizCategoryServiceImpl extends ServiceImpl<BizCategoryMapper, BizCa
      */
     private void checkCategoryNameUnique(String categoryName, Long excludeId) {
         LambdaQueryWrapper<BizCategory> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(BizCategory::getCategoryName, categoryName)
-                .eq(BizCategory::getDelFlag, "0");
+        wrapper.eq(BizCategory::getCategoryName, categoryName);
 
         if (excludeId != null) {
             wrapper.ne(BizCategory::getCategoryId, excludeId);

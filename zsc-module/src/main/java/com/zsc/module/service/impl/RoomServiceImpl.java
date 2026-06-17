@@ -68,7 +68,6 @@ public class RoomServiceImpl extends ServiceImpl<RoomMapper, Room> implements Ro
         }
         room.setCreateTime(new Date());
         room.setUpdateTime(new Date());
-        room.setDelFlag("0");
 
         if (!this.save(room)) {
             throw new ServiceException("新增房型失败");
@@ -112,7 +111,7 @@ public class RoomServiceImpl extends ServiceImpl<RoomMapper, Room> implements Ro
     }
 
     /**
-     * 删除房型（逻辑删除，校验是否有未完成订单）
+     * 删除房型（物理删除，校验是否有未完成订单）
      */
     @Override
     public void deleteRoom(Long id) {
@@ -130,9 +129,7 @@ public class RoomServiceImpl extends ServiceImpl<RoomMapper, Room> implements Ro
             throw new ServiceException("该房型存在未完成订单，无法删除");
         }
 
-        room.setDelFlag("2");
-        room.setUpdateTime(new Date());
-        if (!this.updateById(room)) {
+        if (!this.removeById(id)) {
             throw new ServiceException("删除房型失败");
         }
     }
@@ -330,8 +327,7 @@ public class RoomServiceImpl extends ServiceImpl<RoomMapper, Room> implements Ro
         }
 
         LambdaQueryWrapper<Room> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(Room::getDelFlag, "0")
-                .eq(Room::getStatus, RoomStatusEnum.ONLINE.getValue())
+        wrapper.eq(Room::getStatus, RoomStatusEnum.ONLINE.getValue())
                 .le(Room::getStock, threshold)
                 .orderByAsc(Room::getStock);
 
