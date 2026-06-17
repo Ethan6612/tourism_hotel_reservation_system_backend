@@ -1,8 +1,8 @@
 package com.zsc.module.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -95,28 +95,26 @@ public class Hotel {
     private Date updateTime;
 
     /**
-     * 酒店联系电话
+     * 酒店联系电话（不在数据库中，用于扩展）
      */
+    @TableField(exist = false)
     private String phone;
 
     /**
-     * 酒店简介
+     * 酒店简介（不在数据库中，用于扩展）
      */
+    @TableField(exist = false)
     private String intro;
 
     /**
-     * 经度
+     * 经度（不在数据库中，用于扩展）
      */
+    @TableField(exist = false)
     private BigDecimal longitude;
 
     /**
-     * 纬度
+     * 纬度（不在数据库中，用于扩展）
      */
+    @TableField(exist = false)
     private BigDecimal latitude;
-
-    /**
-     * 删除标志(0正常 2删除)
-     */
-    @TableLogic
-    private String delFlag;
 }

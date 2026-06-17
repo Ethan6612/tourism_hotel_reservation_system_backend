@@ -11,7 +11,6 @@
         <result property="score" column="score"/>
         <result property="imgUrl" column="img_url"/>
         <result property="status" column="status"/>
-        <result property="phone" column="phone"/>
         <result property="businessId" column="business_id"/>
         <result property="merchantName" column="merchant_name"/>
         <result property="roomCount" column="room_count"/>
@@ -30,10 +29,6 @@
         <result property="businessId" column="business_id"/>
         <result property="merchantName" column="merchant_name"/>
         <result property="status" column="status"/>
-        <result property="phone" column="phone"/>
-        <result property="intro" column="intro"/>
-        <result property="longitude" column="longitude"/>
-        <result property="latitude" column="latitude"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
     </resultMap>
@@ -41,12 +36,12 @@
     <!-- 后台查询SQL片段 -->
     <sql id="selectHotelListSql">
         SELECT h.id, h.name, h.address, h.star, h.score, h.img_url,
-               h.status, h.phone, h.business_id, h.create_time,
+               h.status, h.business_id, h.create_time,
                m.merchant_name,
-               (SELECT COUNT(1) FROM room r WHERE r.hotel_id = h.id AND r.del_flag = '0') AS room_count
+               (SELECT COUNT(1) FROM room r WHERE r.hotel_id = h.id) AS room_count
         FROM hotel h
         LEFT JOIN merchant m ON h.business_id = m.id
-        WHERE h.del_flag = '0'
+        WHERE 1=1
     </sql>
 
     <!-- 后台查询条件 -->
@@ -72,14 +67,13 @@
     <!-- 前台搜索SQL片段（只查询营业中的酒店） -->
     <sql id="selectHotelSearchSql">
         SELECT h.id, h.name, h.address, h.star, h.score, h.img_url,
-               h.status, h.phone, h.business_id, h.create_time,
+               h.status, h.business_id, h.create_time,
                m.merchant_name,
-               (SELECT MIN(r.price) FROM room r WHERE r.hotel_id = h.id AND r.del_flag = '0' AND r.status = '0') AS min_price,
-               (SELECT COUNT(1) FROM room r WHERE r.hotel_id = h.id AND r.del_flag = '0') AS room_count
+               (SELECT MIN(r.price) FROM room r WHERE r.hotel_id = h.id AND r.status = '0') AS min_price,
+               (SELECT COUNT(1) FROM room r WHERE r.hotel_id = h.id) AS room_count
         FROM hotel h
         LEFT JOIN merchant m ON h.business_id = m.id
-        WHERE h.del_flag = '0'
-          AND h.status = '0'
+        WHERE h.status = '0'
     </sql>
 
     <!-- 前台搜索条件 -->
@@ -98,10 +92,10 @@
             AND h.score &gt;= #{query.minScore}
         </if>
         <if test="query.minPrice != null">
-            AND (SELECT MIN(r.price) FROM room r WHERE r.hotel_id = h.id AND r.del_flag = '0') &gt;= #{query.minPrice}
+            AND (SELECT MIN(r.price) FROM room r WHERE r.hotel_id = h.id) &gt;= #{query.minPrice}
         </if>
         <if test="query.maxPrice != null">
-            AND (SELECT MIN(r.price) FROM room r WHERE r.hotel_id = h.id AND r.del_flag = '0') &lt;= #{query.maxPrice}
+            AND (SELECT MIN(r.price) FROM room r WHERE r.hotel_id = h.id) &lt;= #{query.maxPrice}
         </if>
         <if test="query.facility != null and query.facility != ''">
             AND h.facility LIKE CONCAT('%', #{query.facility}, '%')
@@ -118,13 +112,12 @@
     <!-- 查询酒店详情 -->
     <select id="selectHotelDetailById" resultMap="HotelDetailVOResultMap">
         SELECT h.id, h.name, h.address, h.star, h.score, h.img_url, h.facility,
-               h.business_id, h.status, h.phone, h.intro, h.longitude, h.latitude,
+               h.business_id, h.status,
                h.create_time, h.update_time,
                m.merchant_name
         FROM hotel h
         LEFT JOIN merchant m ON h.business_id = m.id
         WHERE h.id = #{id}
-          AND h.del_flag = '0'
     </select>
 
     <!-- 多维度搜索酒店（前台用户） -->
@@ -138,7 +131,7 @@
     <select id="countHotels" resultType="java.lang.Long">
         SELECT COUNT(1)
         FROM hotel h
-        WHERE h.del_flag = '0'
+        WHERE 1=1
         <include refid="adminWhereClause"/>
     </select>
 
