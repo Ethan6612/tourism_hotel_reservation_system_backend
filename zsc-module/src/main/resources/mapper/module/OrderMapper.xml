@@ -59,7 +59,13 @@
             <if test="query.roomId != null">
                 AND o.room_id = #{query.roomId}
             </if>
-            <if test="query.status != null and query.status != ''">
+            <if test="query.statusList != null and query.statusList.size() > 0">
+                AND o.status IN
+                <foreach collection="query.statusList" item="s" open="(" separator="," close=")">
+                    #{s}
+                </foreach>
+            </if>
+            <if test="(query.statusList == null or query.statusList.size() == 0) and query.status != null and query.status != ''">
                 AND o.status = #{query.status}
             </if>
             <if test="query.beginTime != null and query.beginTime != ''">
@@ -99,6 +105,32 @@
         LEFT JOIN sys_user u ON o.user_id = u.user_id
         LEFT JOIN hotel h ON o.hotel_id = h.id
         <include refid="whereClause"/>
+    </select>
+
+    <select id="selectUserOrderVoById" resultMap="OrderVoResultMap">
+        <include refid="selectOrderVo"/>
+        WHERE o.id = #{id} AND o.user_id = #{userId}
+    </select>
+
+    <select id="countUserOrdersByStatus" resultType="java.lang.Long">
+        SELECT COUNT(1) FROM orders o
+        WHERE o.user_id = #{userId}
+        <if test="status != null and status != ''">
+            AND o.status = #{status}
+        </if>
+    </select>
+
+    <select id="countUserOrders" resultType="java.lang.Long">
+        SELECT COUNT(1) FROM orders o WHERE o.user_id = #{userId}
+    </select>
+
+    <select id="countUserPendingReviewOrders" resultType="java.lang.Long">
+        SELECT COUNT(1) FROM orders o
+        WHERE o.user_id = #{userId}
+        AND o.status = '3'
+        AND NOT EXISTS (
+            SELECT 1 FROM biz_comment c WHERE c.order_id = o.id AND c.user_id = o.user_id
+        )
     </select>
 
 </mapper>

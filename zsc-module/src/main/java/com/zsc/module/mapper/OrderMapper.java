@@ -30,4 +30,24 @@ public interface OrderMapper extends BaseMapper<Order> {
      * 统计订单数量
      */
     Long countOrders(@Param("query") OrderQueryDto query);
+
+    /**
+     * 查询用户自己的订单详情
+     */
+    OrderVo selectUserOrderVoById(@Param("id") Long id, @Param("userId") Long userId);
+
+    /**
+     * 统计用户某个状态的订单数
+     */
+    Long countUserOrdersByStatus(@Param("userId") Long userId, @Param("status") String status);
+
+    /**
+     * 统计用户所有订单数
+     */
+    Long countUserOrders(@Param("userId") Long userId);
+
+    /**
+     * 统计用户已完成但未评价的订单数
+     */
+    Long countUserPendingReviewOrders(@Param("userId") Long userId);
 }

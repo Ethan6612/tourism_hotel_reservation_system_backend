@@ -1,17 +1,17 @@
 /*
  Navicat Premium Dump SQL
 
- Source Server         : test
+ Source Server         : book_library
  Source Server Type    : MySQL
- Source Server Version : 80404 (8.4.4)
+ Source Server Version : 90100 (9.1.0)
  Source Host           : localhost:3306
  Source Schema         : zsc
 
  Target Server Type    : MySQL
- Target Server Version : 80404 (8.4.4)
+ Target Server Version : 90100 (9.1.0)
  File Encoding         : 65001
 
- Date: 12/06/2026 17:05:00
+ Date: 16/06/2026 16:57:49
 */
 
 SET NAMES utf8mb4;
@@ -35,39 +35,6 @@ CREATE TABLE `biz_category`  (
 -- ----------------------------
 -- Records of biz_category
 -- ----------------------------
-
--- ----------------------------
--- Table structure for biz_comment
--- ----------------------------
-DROP TABLE IF EXISTS `biz_comment`;
-CREATE TABLE `biz_comment`  (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `user_id` bigint NOT NULL,
-  `hotel_id` bigint NOT NULL,
-  `room_id` bigint NULL DEFAULT NULL,
-  `order_id` bigint NULL DEFAULT NULL,
-  `score` int NOT NULL DEFAULT 5,
-  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
-  `images` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
-  `is_anonymous` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0',
-  `like_count` int NULL DEFAULT 0,
-  `reply_content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
-  `reply_time` datetime NULL DEFAULT NULL,
-  `reply_by` bigint NULL DEFAULT NULL,
-  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '',
-  `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '',
-  `update_time` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '评价表' ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of biz_comment
--- ----------------------------
-INSERT INTO `biz_comment` VALUES (1, 100, 1, 1, 1, 5, '非常满意，下次还来！', NULL, '0', '1', 3, NULL, NULL, NULL, 'admin', '2026-06-10 21:59:40', '', '2026-06-10 21:59:40', NULL);
-INSERT INTO `biz_comment` VALUES (2, 2, 2, 3, 3, 4, '环境不错，价格略高', NULL, '0', '1', 1, '感谢反馈', '2026-06-10 21:59:40', 1, 'admin', '2026-06-10 21:59:40', '', '2026-06-10 21:59:40', NULL);
 
 -- ----------------------------
 -- Table structure for comment
@@ -97,13 +64,29 @@ CREATE TABLE `comment`  (
   `appeal_time` datetime NULL DEFAULT NULL,
   `appeal_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '评价表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '评价表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of comment
 -- ----------------------------
 INSERT INTO `comment` VALUES (1, 100, 1, 1, 1, 5, '非常满意，下次还来！', NULL, '0', '1', 3, NULL, NULL, NULL, 'admin', '2026-06-10 22:11:24', '', '2026-06-10 22:11:24', NULL, NULL, NULL, '0');
 INSERT INTO `comment` VALUES (2, 2, 2, 3, 3, 4, '环境不错，价格略高', NULL, '0', '1', 1, '感谢反馈', '2026-06-10 22:11:24', 1, 'admin', '2026-06-10 22:11:24', '', '2026-06-10 22:11:24', NULL, NULL, NULL, '0');
+INSERT INTO `comment` VALUES (3, 103, 3, 4, 9, 5, '在成都出差入住了锦城大酒店，位置太方便了，就在春熙路旁边。大堂气派豪华，设施很新，服务人员非常专业！', '[]', '0', '1', 12, '感谢您的五星好评！期待您的再次光临！', '2026-06-16 16:17:18', 200, 'user3', '2026-06-16 16:17:18', '', '2026-06-16 16:41:24', NULL, NULL, NULL, '0');
+INSERT INTO `comment` VALUES (4, 104, 3, 5, 15, 4, '酒店各方面都不错，位置好服务好。唯一小遗憾是入住时前台人比较多排了一会儿队。不过整体体验还是很满意的，推荐。', '[]', '0', '1', 3, '非常抱歉给您带来了排队的不便！我们已经增加了前台人手。', '2026-06-16 16:17:18', 200, 'user4', '2026-06-16 16:17:18', '', '2026-06-16 16:41:24', NULL, NULL, NULL, '0');
+INSERT INTO `comment` VALUES (5, 105, 3, 1, 18, 2, '预订了豪华套房但是到了说没房了，给换了个普通大床房，没有提前通知，前台态度生硬。', '[]', '1', '1', 6, NULL, NULL, NULL, 'user5', '2026-06-16 16:17:18', '', '2026-06-16 16:41:24', NULL, '客人预订的是普通大床房而非豪华套房', '2026-06-16 16:17:18', '1');
+INSERT INTO `comment` VALUES (6, 101, 1, 1, 8, 5, '来北京出差住了三天，位置绝佳步行五分钟到王府井。豪华大床房的床品很舒服，行政酒廊的下午茶非常精致。礼宾部小王专业又热情！', '[\"https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop\"]', '0', '1', 8, '感谢您的细致好评！我们会把您的表扬转达给礼宾部小王。', '2026-06-16 16:17:18', 100, 'user1', '2026-06-16 16:17:18', '', '2026-06-16 16:17:18', NULL, NULL, NULL, '0');
+INSERT INTO `comment` VALUES (7, 101, 3, 4, 9, 4, '成都的酒店就是舒服！春熙路旁边逛街太方便了。房间设计很现代，设施也很新。稍微隔音差了点，不过整体性价比很高。', '[]', '0', '1', 4, '感谢您的反馈！关于隔音问题我们会安排工程部检查改善。', '2026-06-16 16:17:18', 200, 'user1', '2026-06-16 16:17:18', '', '2026-06-16 16:41:24', NULL, NULL, NULL, '0');
+INSERT INTO `comment` VALUES (8, 102, 2, 3, 10, 5, '华尔道夫果然名不虚传！外滩景观房view一级棒，从房间就能看到陆家嘴三件套。早餐种类多到眼花缭乱。蜜月旅行选华尔道夫太对了！', '[\"https://images.unsplash.com/photo-1551882547-be7b2a60087d?w=400&h=300&fit=crop\"]', '0', '1', 15, '恭喜新婚！很高兴华尔道夫为您的蜜月之旅增添了美好回忆。', '2026-06-16 16:17:18', 2, 'user2', '2026-06-16 16:17:18', '', '2026-06-16 16:17:18', NULL, NULL, NULL, '0');
+INSERT INTO `comment` VALUES (9, 102, 4, 6, 11, 4, '三亚阳光度假酒店很适合亲子游！儿童俱乐部内容丰富，娃玩得不想走。私人沙滩沙质很好。海鲜餐厅的椰子鸡火锅超好吃。水上乐园下午五点就关门有点早。', '[\"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=300&fit=crop\"]', '0', '1', 7, '感谢您的反馈！水上乐园的开放时间我们已记录并会考虑延长。', '2026-06-16 16:17:18', 201, 'user2', '2026-06-16 16:17:18', '', '2026-06-16 16:41:24', NULL, NULL, NULL, '0');
+INSERT INTO `comment` VALUES (10, 103, 1, 2, 12, 3, '北京希尔顿整体水平在线，但这次入住只能说中规中矩。标间面积偏小，两个人住有点拥挤。空调制冷效果一般。不过前台服务很好，位置确实方便。', '[]', '0', '1', 2, '感谢您的诚实反馈！建议您下次选择豪华大床房，空间更宽敞。', '2026-06-16 16:17:18', 100, 'user3', '2026-06-16 16:17:18', '', '2026-06-16 16:17:18', NULL, NULL, NULL, '0');
+INSERT INTO `comment` VALUES (11, 103, 4, 6, 13, 5, '三亚这家度假酒店太棒了！海景套房面积超大，阳台上还有私人泡池，一边泡澡一边看海景太爽了。早餐种类丰富，SPA手法专业，值得一试！', '[\"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=300&fit=crop\"]', '0', '1', 12, '感谢您的详细好评！海景套房是我们的招牌房型，期待您下次再来！', '2026-06-16 16:17:18', 201, 'user3', '2026-06-16 16:17:18', '', '2026-06-16 16:41:24', NULL, NULL, NULL, '0');
+INSERT INTO `comment` VALUES (12, 104, 1, 1, 14, 5, '带家人来北京旅游选了希尔顿果然没错！豪华大床房空间够大，加了一张儿童床也不挤。早餐种类丰富。步行去故宫只要十五分钟。全家满意！', '[\"https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop\"]', '0', '1', 10, '很高兴您和家人在这里度过了愉快的假期！期待您全家的再次光临！', '2026-06-16 16:17:18', 100, 'user4', '2026-06-16 16:17:18', '', '2026-06-16 16:17:18', NULL, NULL, NULL, '0');
+INSERT INTO `comment` VALUES (13, 104, 3, 4, 15, 5, '成都锦城大酒店真是意外之喜！位置绝佳出门就是春熙路。房间新装修设施齐全。三楼川菜馆的水煮鱼和麻婆豆腐超级正宗，不用去外面排队！', '[]', '0', '1', 6, '感谢您对锦城大酒店和川菜馆的认可！我们的大厨都是资深川菜师傅。', '2026-06-16 16:17:18', 200, 'user4', '2026-06-16 16:17:18', '', '2026-06-16 16:41:24', NULL, NULL, NULL, '0');
+INSERT INTO `comment` VALUES (14, 105, 2, 3, 16, 5, '华尔道夫是我们的蜜月酒店太完美了！套房里有香槟和玫瑰花瓣布置非常浪漫。顶楼酒吧的鸡尾酒搭配外滩夜景，此生最难忘的回忆。强烈推荐给所有情侣！', '[\"https://images.unsplash.com/photo-1551882547-be7b2a60087d?w=400&h=300&fit=crop\"]', '0', '1', 22, '祝福你们！华尔道夫很荣幸能见证你们的甜蜜时刻。', '2026-06-16 16:17:18', 2, 'user5', '2026-06-16 16:17:18', '', '2026-06-16 16:17:18', NULL, NULL, NULL, '0');
+INSERT INTO `comment` VALUES (15, 105, 4, 7, 17, 2, '这次三亚之行有些失望。预订的海景套房只给了三楼基本看不到海景。服务人员响应速度很慢，叫客房服务等了快四十分钟。作为五星级酒店完全不合格。', '[]', '0', '1', 9, NULL, NULL, NULL, 'user5', '2026-06-16 16:17:18', '', '2026-06-16 16:41:24', NULL, '客人预订的并非海景套房而是普通园景房', '2026-06-16 16:17:18', '1');
+INSERT INTO `comment` VALUES (16, 100, 4, 6, 18, 4, '阳光度假酒店总体不错，沙滩很美设施齐全。就是暑期人太多了吃饭要排队。不过孩子们玩得很开心，水上乐园是亮点。', '[]', '0', '1', 3, '感谢您的评价！暑期是旺季，建议九月份错峰出行体验会更舒适。', '2026-06-16 16:17:18', 201, 'zhangsan', '2026-06-16 16:17:18', '', '2026-06-16 16:41:24', NULL, NULL, NULL, '0');
+INSERT INTO `comment` VALUES (17, 106, 3, 5, 10, 5, '成都锦城大酒店太赞了！行政套房空间超级大，装修风格现代又有川式元素。最惊喜的是楼下川菜馆，水煮牛肉和担担面简直一绝。春熙路就在旁边逛街超方便。还会再来！', '[\"https://images.unsplash.com/photo-1551882547-be7b2a60087d?w=400&h=300&fit=crop\"]', '0', '1', 8, '感谢onz的好评！很高兴您喜欢我们的川菜馆，期待您再次光临成都！', '2026-06-22 10:30:00', 200, 'onz', '2026-06-22 10:30:00', '', '2026-06-22 10:30:00', NULL, NULL, NULL, '0');
+INSERT INTO `comment` VALUES (18, 106, 1, 2, 12, 4, '北京希尔顿位置很好，行政双床房住着也舒服。就是价格稍微贵了点，不过一分钱一分货吧。早餐种类很多，推荐中式早点。整体满意！', '[]', '0', '1', 5, '感谢您的反馈！我们会继续优化价格策略，期待您再次选择希尔顿。', '2026-06-17 12:00:00', 100, 'onz', '2026-06-17 12:00:00', '', '2026-06-17 12:00:00', NULL, NULL, NULL, '0');
 
 -- ----------------------------
 -- Table structure for gen_table
@@ -194,13 +177,15 @@ CREATE TABLE `hotel`  (
   `latitude` decimal(10, 6) NULL DEFAULT NULL COMMENT '纬度',
   `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '删除标志(0正常 2删除)',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '酒店表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '酒店表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of hotel
 -- ----------------------------
 INSERT INTO `hotel` VALUES (1, '北京王府井希尔顿酒店', '北京市东城区王府井大街88号', 5, 4.80, NULL, 'WiFi,游泳池,健身房,SPA,餐厅', 1001, '0', '2026-06-10 21:58:33', '2026-06-10 21:58:33', NULL, NULL, NULL, NULL, '0');
 INSERT INTO `hotel` VALUES (2, '上海外滩华尔道夫酒店', '上海市黄浦区中山东一路2号', 5, 4.90, NULL, 'WiFi,游泳池,健身房,SPA,餐厅,酒吧', 1002, '0', '2026-06-10 21:58:33', '2026-06-10 21:58:33', NULL, NULL, NULL, NULL, '0');
+INSERT INTO `hotel` VALUES (3, '成都春熙路锦城大酒店', '成都市锦江区春熙路168号', 5, 4.70, NULL, 'WiFi,停车场,游泳池,健身房,SPA,餐厅,会议室', 2001, '0', '2026-06-16 16:10:47', '2026-06-16 16:10:47', '028-88886666', '五星级旗舰店，坐落于春熙路商圈，步行可达太古里、IFS。', 104.072000, 30.659000, '0');
+INSERT INTO `hotel` VALUES (4, '三亚海棠湾阳光度假酒店', '三亚市海棠区海棠北路68号', 5, 4.60, NULL, 'WiFi,私人海滩,游泳池,水上乐园,SPA,海鲜餐厅,儿童俱乐部', 2002, '0', '2026-06-16 16:10:47', '2026-06-16 16:10:47', '0898-88889999', '面朝大海的五星级度假酒店，拥有600米私家沙滩。', 109.736000, 18.316000, '0');
 
 -- ----------------------------
 -- Table structure for merchant
@@ -219,16 +204,22 @@ CREATE TABLE `merchant`  (
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0',
   `user_id` bigint NULL DEFAULT NULL,
+  `audit_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '1' COMMENT '审核状态',
+  `reject_reason` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `submit_time` datetime NULL DEFAULT NULL,
+  `audit_time` datetime NULL DEFAULT NULL,
   `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1003 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商户表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2003 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商户表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of merchant
 -- ----------------------------
-INSERT INTO `merchant` VALUES (1001, '北京王府井酒店管理有限公司', '91110101MA12345678', '张经理', '13800001111', 'bjwj@hotel.com', '北京市东城区', '酒店管理', NULL, NULL, '0', 100, '2026-06-10 21:57:50', '2026-06-10 21:57:50');
-INSERT INTO `merchant` VALUES (1002, '上海外滩奢华酒店集团', '91310115MA87654321', '李总裁', '13800002222', 'shwt@hotel.com', '上海市黄浦区', '酒店管理', NULL, NULL, '0', 2, '2026-06-10 21:57:50', '2026-06-10 21:57:50');
+INSERT INTO `merchant` VALUES (1001, '北京王府井酒店管理有限公司', '91110101MA12345678', '张经理', '13800001111', 'bjwj@hotel.com', '北京市东城区', '酒店管理', NULL, NULL, '0', 100, '1', NULL, NULL, NULL, '2026-06-10 21:57:50', '2026-06-10 21:57:50');
+INSERT INTO `merchant` VALUES (1002, '上海外滩奢华酒店集团', '91310115MA87654321', '李总裁', '13800002222', 'shwt@hotel.com', '上海市黄浦区', '酒店管理', NULL, NULL, '0', 2, '1', NULL, NULL, NULL, '2026-06-10 21:57:50', '2026-06-10 21:57:50');
+INSERT INTO `merchant` VALUES (2001, '成都锦城酒店管理有限公司', '91510100MA87650001', '王老板', '13800009999', 'merchant1@hotel.com', '成都市锦江区红星路', '酒店管理、餐饮服务', NULL, '成都本地知名酒店管理集团', '0', 200, '1', NULL, '2026-06-16 16:32:13', NULL, '2026-06-16 16:32:13', '2026-06-16 16:32:13');
+INSERT INTO `merchant` VALUES (2002, '三亚阳光度假酒店管理有限公司', '91460100MA76543210', '刘总', '13800008888', 'merchant2@hotel.com', '三亚市海棠区海棠北路', '酒店管理、度假村运营', NULL, '三亚知名度假酒店品牌', '0', 201, '1', NULL, '2026-06-16 16:32:13', NULL, '2026-06-16 16:32:13', '2026-06-16 16:32:13');
 
 -- ----------------------------
 -- Table structure for merchant_audit
@@ -275,7 +266,7 @@ CREATE TABLE `orders`  (
   `update_time` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_order_no`(`order_no` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '订单表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '订单表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of orders
@@ -287,6 +278,11 @@ INSERT INTO `orders` VALUES (4, 'ORD202606100004', 1, 1, 1, '2026-07-15', '2026-
 INSERT INTO `orders` VALUES (5, 'ORD202606100005', 2, 2, 3, '2026-08-01', '2026-08-03', 2598.00, '1', '2026-06-10 21:59:07', '2026-06-10 21:59:07', '2026-06-10 21:59:07');
 INSERT INTO `orders` VALUES (6, 'ORD202606100006', 100, 1, 2, '2026-07-20', '2026-07-22', 1718.00, '4', '2026-07-15 10:00:00', '2026-06-10 21:59:07', '2026-06-10 21:59:07');
 INSERT INTO `orders` VALUES (7, 'ORD202606100007', 103, 2, 3, '2026-08-10', '2026-08-15', 6495.00, '1', '2026-06-10 21:59:07', '2026-06-10 21:59:07', '2026-06-10 21:59:07');
+INSERT INTO `orders` VALUES (8, 'ORD202606160001', 106, 1, 1, '2026-07-01', '2026-07-03', 1398.00, '0', NULL, '2026-06-16 17:00:00', '2026-06-16 17:00:00');
+INSERT INTO `orders` VALUES (9, 'ORD202606160002', 106, 2, 3, '2026-07-10', '2026-07-13', 3897.00, '1', '2026-06-16 17:05:00', '2026-06-16 17:00:00', '2026-06-16 17:05:00');
+INSERT INTO `orders` VALUES (10, 'ORD202606160003', 106, 3, 5, '2026-06-20', '2026-06-22', 3360.00, '3', '2026-06-20 10:30:00', '2026-06-16 17:00:00', '2026-06-22 10:30:00');
+INSERT INTO `orders` VALUES (11, 'ORD202606160004', 106, 4, 6, '2026-08-05', '2026-08-09', 5120.00, '2', NULL, '2026-06-16 17:00:00', '2026-06-16 17:00:00');
+INSERT INTO `orders` VALUES (12, 'ORD202606170001', 106, 1, 2, '2026-07-25', '2026-07-28', 2577.00, '1', '2026-06-17 10:00:00', '2026-06-17 10:00:00', '2026-06-17 10:05:00');
 
 -- ----------------------------
 -- Table structure for payment
@@ -303,7 +299,7 @@ CREATE TABLE `payment`  (
   `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '支付表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '支付表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of payment
@@ -313,6 +309,9 @@ INSERT INTO `payment` VALUES (2, 4, 2097.00, '2', '1', '2026-06-10 21:59:21', 'T
 INSERT INTO `payment` VALUES (3, 5, 2598.00, '1', '1', '2026-06-10 21:59:21', 'TXN005', '2026-06-10 21:59:21', '2026-06-10 21:59:21');
 INSERT INTO `payment` VALUES (4, 6, 1718.00, '3', '3', '2026-06-10 21:59:21', 'TXN006', '2026-06-10 21:59:21', '2026-06-10 21:59:21');
 INSERT INTO `payment` VALUES (5, 7, 6495.00, '1', '1', '2026-06-10 21:59:21', 'TXN007', '2026-06-10 21:59:21', '2026-06-10 21:59:21');
+INSERT INTO `payment` VALUES (6, 9, 3897.00, '2', '1', '2026-06-16 17:05:00', 'TXN106002', '2026-06-16 17:00:00', '2026-06-16 17:05:00');
+INSERT INTO `payment` VALUES (7, 10, 3360.00, '1', '1', '2026-06-20 10:30:00', 'TXN106003', '2026-06-16 17:00:00', '2026-06-20 10:30:00');
+INSERT INTO `payment` VALUES (8, 12, 2577.00, '2', '1', '2026-06-17 10:00:00', 'TXN106004', '2026-06-17 10:00:00', '2026-06-17 10:05:00');
 
 -- ----------------------------
 -- Table structure for qrtz_blob_triggers
@@ -551,7 +550,7 @@ CREATE TABLE `room`  (
   `has_breakfast` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '0无早餐 1含早餐',
   `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '删除标志(0正常 2删除)',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '房型表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '房型表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of room
@@ -559,6 +558,10 @@ CREATE TABLE `room`  (
 INSERT INTO `room` VALUES (1, 1, '豪华大床房', '38平米', '1.8米大床', 699.00, 10, '0', NULL, '2026-06-10 21:58:48', '2026-06-10 21:58:48', NULL, '0', '0');
 INSERT INTO `room` VALUES (2, 1, '行政双床房', '42平米', '2张1.2米单人床', 859.00, 8, '0', NULL, '2026-06-10 21:58:49', '2026-06-10 21:58:49', NULL, '0', '0');
 INSERT INTO `room` VALUES (3, 2, '江景大床房', '45平米', '1.8米大床', 1299.00, 5, '0', NULL, '2026-06-10 21:58:49', '2026-06-10 21:58:49', NULL, '0', '0');
+INSERT INTO `room` VALUES (4, 3, '豪华大床房', '42平米', '1.8米大床', 798.00, 12, '0', NULL, '2026-06-16 16:41:13', '2026-06-16 16:41:13', NULL, '0', '0');
+INSERT INTO `room` VALUES (5, 3, '行政套房', '65平米', '2米特大床', 1680.00, 6, '0', NULL, '2026-06-16 16:41:13', '2026-06-16 16:41:13', NULL, '0', '0');
+INSERT INTO `room` VALUES (6, 4, '海景大床房', '48平米', '1.8米大床', 1280.00, 15, '0', NULL, '2026-06-16 16:41:13', '2026-06-16 16:41:13', NULL, '0', '0');
+INSERT INTO `room` VALUES (7, 4, '豪华海景套房', '72平米', '2米特大床', 2280.00, 8, '0', NULL, '2026-06-16 16:41:13', '2026-06-16 16:41:13', NULL, '0', '0');
 
 -- ----------------------------
 -- Table structure for sys_config
@@ -783,7 +786,7 @@ CREATE TABLE `sys_logininfor`  (
   PRIMARY KEY (`info_id`) USING BTREE,
   INDEX `idx_sys_logininfor_s`(`status` ASC) USING BTREE,
   INDEX `idx_sys_logininfor_lt`(`login_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 179 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 196 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -867,6 +870,23 @@ INSERT INTO `sys_logininfor` VALUES (175, 'gez15036734839@163.com', '127.0.0.1',
 INSERT INTO `sys_logininfor` VALUES (176, 'gez15036734839@163.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '1', '验证码错误', '2026-06-10 22:44:05');
 INSERT INTO `sys_logininfor` VALUES (177, 'admin', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '登录成功', '2026-06-12 15:13:50');
 INSERT INTO `sys_logininfor` VALUES (178, 'admin', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '登录成功', '2026-06-12 16:48:30');
+INSERT INTO `sys_logininfor` VALUES (179, 'merchant1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '1', '用户不存在/密码错误', '2026-06-16 16:18:11');
+INSERT INTO `sys_logininfor` VALUES (180, 'merchant1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '1', '用户不存在/密码错误', '2026-06-16 16:18:31');
+INSERT INTO `sys_logininfor` VALUES (181, 'merchant1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '1', '用户不存在/密码错误', '2026-06-16 16:20:08');
+INSERT INTO `sys_logininfor` VALUES (182, 'merchant1@hotel.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '1', '用户不存在/密码错误', '2026-06-16 16:20:39');
+INSERT INTO `sys_logininfor` VALUES (183, 'merchant1@hotel.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '1', '用户不存在/密码错误', '2026-06-16 16:22:37');
+INSERT INTO `sys_logininfor` VALUES (184, 'merchant1@hotel.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '1', '验证码错误', '2026-06-16 16:24:06');
+INSERT INTO `sys_logininfor` VALUES (185, 'merchant1@hotel.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-16 16:24:10');
+INSERT INTO `sys_logininfor` VALUES (186, 'merchant1@hotel.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '1', '验证码错误', '2026-06-16 16:33:23');
+INSERT INTO `sys_logininfor` VALUES (187, 'merchant1@hotel.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-16 16:33:28');
+INSERT INTO `sys_logininfor` VALUES (188, 'merchant1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-16 16:42:30');
+INSERT INTO `sys_logininfor` VALUES (189, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-16 16:42:41');
+INSERT INTO `sys_logininfor` VALUES (190, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-16 16:52:40');
+INSERT INTO `sys_logininfor` VALUES (191, 'merchant1@hotel.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-16 16:53:08');
+INSERT INTO `sys_logininfor` VALUES (192, 'merchant1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-16 16:55:13');
+INSERT INTO `sys_logininfor` VALUES (193, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-16 16:55:25');
+INSERT INTO `sys_logininfor` VALUES (194, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-16 16:55:33');
+INSERT INTO `sys_logininfor` VALUES (195, 'user1@test.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-16 16:55:50');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -1172,6 +1192,7 @@ CREATE TABLE `sys_role`  (
 -- ----------------------------
 INSERT INTO `sys_role` VALUES (1, '超级管理员', 'admin', 1, '1', 1, 1, '0', '0', 'admin', '2026-03-06 01:54:37', '', NULL, '超级管理员');
 INSERT INTO `sys_role` VALUES (2, '普通角色', 'common', 2, '2', 1, 1, '0', '0', 'admin', '2026-03-06 01:54:37', '', NULL, '普通角色');
+INSERT INTO `sys_role` VALUES (3, '商家', 'merchant', 3, '3', 1, 1, '0', '0', 'admin', '2026-06-16 16:10:21', '', NULL, '商户角色');
 
 -- ----------------------------
 -- Table structure for sys_role_dept
@@ -1344,16 +1365,24 @@ CREATE TABLE `sys_user`  (
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
+  `points` int NOT NULL DEFAULT 0 COMMENT '用户积分（1元=1积分）',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 107 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户信息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 202 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 103, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-12 16:48:31', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '管理员');
-INSERT INTO `sys_user` VALUES (2, 105, 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-03-06 01:54:37', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '测试员');
-INSERT INTO `sys_user` VALUES (100, 104, 'zhangsan', '张三', '00', '', '', '0', '', '$2a$10$.k.Lr6u1Two8wqrPRblYaeZH.yP8jGNihMXO1cJQsqi82Wi3h5CBu', '0', '0', '', NULL, NULL, 'admin', '2026-03-10 09:24:30', '', '2026-03-10 09:24:36', NULL);
-INSERT INTO `sys_user` VALUES (106, 100, 'gez15036734839@163.com', 'onz', '00', 'gez15036734839@163.com', '', '2', '', '$2a$10$.TanMViDHhRe.xfPXE00jOzmECqovJjhQ5Fdn0mfEPa1RX3M8Ikm.', '0', '0', '', NULL, '2026-06-10 22:39:09', 'gez15036734839@163.com', '2026-06-10 22:39:09', '', NULL, NULL);
+INSERT INTO `sys_user` VALUES (1, 103, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-16 16:55:26', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '管理员', 0);
+INSERT INTO `sys_user` VALUES (2, 105, 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-03-06 01:54:37', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '测试员', 0);
+INSERT INTO `sys_user` VALUES (100, 104, 'zhangsan', '张三', '00', '', '', '0', '', '$2a$10$.k.Lr6u1Two8wqrPRblYaeZH.yP8jGNihMXO1cJQsqi82Wi3h5CBu', '0', '0', '', NULL, NULL, 'admin', '2026-03-10 09:24:30', '', '2026-03-10 09:24:36', NULL, 0);
+INSERT INTO `sys_user` VALUES (101, 100, 'user1', '旅行达人小李', '00', 'user1@test.com', '13800000001', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-16 16:55:50', NULL, 'admin', '2026-06-16 16:10:32', '', NULL, '', 0);
+INSERT INTO `sys_user` VALUES (102, 100, 'user2', '背包客小王', '00', 'user2@test.com', '13800000002', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-16 16:10:32', '', NULL, '', 0);
+INSERT INTO `sys_user` VALUES (103, 100, 'user3', '商务精英陈总', '00', 'user3@test.com', '13800000003', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-16 16:10:32', '', NULL, '', 0);
+INSERT INTO `sys_user` VALUES (104, 100, 'user4', '家庭游客赵姐', '00', 'user4@test.com', '13800000004', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-16 16:10:32', '', NULL, '', 0);
+INSERT INTO `sys_user` VALUES (105, 100, 'user5', '蜜月旅行周先生', '00', 'user5@test.com', '13800000005', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-16 16:10:32', '', NULL, '', 0);
+INSERT INTO `sys_user` VALUES (106, 100, 'gez15036734839@163.com', 'onz', '00', 'gez15036734839@163.com', '', '2', '', '$2a$10$.TanMViDHhRe.xfPXE00jOzmECqovJjhQ5Fdn0mfEPa1RX3M8Ikm.', '0', '0', '', NULL, '2026-06-10 22:39:09', 'gez15036734839@163.com', '2026-06-10 22:39:09', '', NULL, NULL, 3360);
+INSERT INTO `sys_user` VALUES (200, 100, 'merchant1', '王老板', '00', 'merchant1@hotel.com', '13800009999', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-16 16:53:09', NULL, 'admin', '2026-06-16 16:10:32', '', NULL, '', 0);
+INSERT INTO `sys_user` VALUES (201, 100, 'merchant2', '刘总', '00', 'merchant2@hotel.com', '13800008888', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-16 16:10:32', '', NULL, '', 0);
 
 -- ----------------------------
 -- Table structure for sys_user_post
@@ -1386,13 +1415,15 @@ CREATE TABLE `sys_user_role`  (
 -- Records of sys_user_role
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES (1, 1);
-INSERT INTO `sys_user_role` VALUES (2, 2);
-INSERT INTO `sys_user_role` VALUES (100, 2);
+INSERT INTO `sys_user_role` VALUES (2, 3);
+INSERT INTO `sys_user_role` VALUES (100, 3);
 INSERT INTO `sys_user_role` VALUES (101, 2);
 INSERT INTO `sys_user_role` VALUES (102, 2);
 INSERT INTO `sys_user_role` VALUES (103, 2);
 INSERT INTO `sys_user_role` VALUES (104, 2);
 INSERT INTO `sys_user_role` VALUES (105, 2);
 INSERT INTO `sys_user_role` VALUES (106, 2);
+INSERT INTO `sys_user_role` VALUES (200, 3);
+INSERT INTO `sys_user_role` VALUES (201, 3);
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -163,4 +163,21 @@ public interface SysUserMapper
      * @return 结果
      */
     public SysUser checkEmailUnique(String email);
+
+    /**
+     * 查询用户积分
+     *
+     * @param userId 用户ID
+     * @return 积分
+     */
+    public Integer selectUserPoints(@Param("userId") Long userId);
+
+    /**
+     * 增加用户积分（原子操作）
+     *
+     * @param userId 用户ID
+     * @param points 要增加的积分
+     * @return 结果
+     */
+    public int addUserPoints(@Param("userId") Long userId, @Param("points") int points);
 }

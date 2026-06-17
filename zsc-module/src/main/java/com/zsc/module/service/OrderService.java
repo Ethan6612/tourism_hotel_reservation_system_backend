@@ -5,6 +5,7 @@ import com.zsc.module.common.pagination.PageResult;
 import com.zsc.module.domain.dto.query.OrderQueryDto;
 import com.zsc.module.domain.entity.Order;
 import com.zsc.module.domain.vo.OrderVo;
+import com.zsc.module.domain.vo.UserDashboardStatsVo;
 
 /**
  * 订单服务接口
@@ -14,7 +15,7 @@ import com.zsc.module.domain.vo.OrderVo;
 public interface OrderService extends IService<Order> {
 
     /**
-     * 分页查询订单列表
+     * 分页查询订单列表（管理端）
      */
     PageResult<OrderVo> queryOrders(OrderQueryDto queryDto);
 
@@ -69,4 +70,31 @@ public interface OrderService extends IService<Order> {
      * @return true-存在未完成订单，false-不存在
      */
     boolean hasUnfinishedOrder(Long roomId);
+
+    // ==================== 用户端接口 ====================
+
+    /**
+     * 分页查询当前用户的订单列表
+     */
+    PageResult<OrderVo> queryUserOrders(OrderQueryDto queryDto);
+
+    /**
+     * 获取用户自己的订单详情
+     */
+    OrderVo getUserOrderDetail(Long id, Long userId);
+
+    /**
+     * 用户取消自己的订单
+     */
+    void cancelUserOrder(Long id, Long userId, String reason);
+
+    /**
+     * 用户删除自己的订单
+     */
+    void deleteUserOrder(Long id, Long userId);
+
+    /**
+     * 获取用户首页统计数据（含积分）
+     */
+    UserDashboardStatsVo getUserDashboardStats(Long userId);
 }

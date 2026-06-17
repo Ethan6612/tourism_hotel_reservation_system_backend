@@ -284,22 +284,24 @@
         <include refid="commentQueryWhere"/>
     </select>
 
-    <!-- 商户评价列表查询（通过 hotel.business_id 关联商户） -->
+    <!-- 商户评价列表查询（通过 merchant.user_id 关联，merchantId 实际是 userId） -->
     <select id="selectMerchantComments" resultMap="CommentVoResultMap">
         SELECT
         <include refid="commentVoColumns"/>
         FROM `comment` c
         <include refid="commentVoJoins"/>
-        WHERE h.business_id = #{merchantId}
-        <if test="query.hotelId != null">
-            AND c.hotel_id = #{query.hotelId}
-        </if>
-        <if test="query.score != null">
-            AND c.score = #{query.score}
-        </if>
-        <if test="query.status != null and query.status != ''">
-            AND c.status = #{query.status}
-        </if>
+        INNER JOIN merchant m ON h.business_id = m.id AND m.user_id = #{merchantId}
+        <where>
+            <if test="query.hotelId != null">
+                AND c.hotel_id = #{query.hotelId}
+            </if>
+            <if test="query.score != null">
+                AND c.score = #{query.score}
+            </if>
+            <if test="query.status != null and query.status != ''">
+                AND c.status = #{query.status}
+            </if>
+        </where>
         ORDER BY c.create_time DESC
     </select>
 

@@ -9,13 +9,16 @@ import com.zsc.module.domain.dto.query.OrderQueryDto;
 import com.zsc.module.domain.entity.Order;
 import com.zsc.module.domain.entity.Payment;
 import com.zsc.module.domain.vo.OrderVo;
+import com.zsc.module.domain.vo.UserDashboardStatsVo;
 import com.zsc.module.mapper.OrderMapper;
 import com.zsc.module.mapper.PaymentMapper;
 import com.zsc.module.service.OrderService;
+import com.zsc.system.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -34,6 +37,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Autowired
     private PaymentMapper paymentMapper;
+
+    @Autowired
+    private SysUserMapper sysUserMapper;
 
     @Override
     public PageResult<OrderVo> queryOrders(OrderQueryDto queryDto) {
@@ -115,6 +121,23 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         order.setStatus(Order.STATUS_COMPLETED);
         order.setUpdateTime(new Date());
         updateById(order);
+
+        // 积分奖励：1元=1积分
+        awardPoints(order.getUserId(), order.getTotalPrice());
+    }
+
+    /**
+     * 奖励积分（1元=1积分）
+     */
+    private void awardPoints(Long userId, BigDecimal totalPrice) {
+        if (userId == null || totalPrice == null) {
+            return;
+        }
+        int pointsToAdd = totalPrice.intValue();
+        if (pointsToAdd <= 0) {
+            return;
+        }
+        sysUserMapper.addUserPoints(userId, pointsToAdd);
     }
 
     @Override
@@ -199,6 +222,110 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
                         Order.STATUS_REFUNDING   // 退款中
                 );
         return this.count(wrapper) > 0;
+    }
+
+    // ==================== 用户端接口实现 ====================
+
+    @Override
+    public PageResult<OrderVo> queryUserOrders(OrderQueryDto queryDto) {
+        Page<OrderVo> page = new Page<>(queryDto.getPageNum(), queryDto.getPageSize());
+        Page<OrderVo> result = orderMapper.selectOrderVoPage(page, queryDto);
+        return PageResult.fromPage(result);
+    }
+
+    @Override
+    public OrderVo getUserOrderDetail(Long id, Long userId) {
+        OrderVo vo = orderMapper.selectUserOrderVoById(id, userId);
+        if (vo == null) {
+            throw new ServiceException("订单不存在或无权查看");
+        }
+        return vo;
+    }
+
+    @Override
+    public void cancelUserOrder(Long id, Long userId, String reason) {
+        Order order = getById(id);
+        if (order == null) {
+            throw new ServiceException("订单不存在");
+        }
+        if (!order.getUserId().equals(userId)) {
+            throw new ServiceException("无权操作此订单");
+        }
+        if (!Order.STATUS_PENDING.equals(order.getStatus())) {
+            throw new ServiceException("只有待支付订单才能取消，当前状态: " + getStatusName(order.getStatus()));
+        }
+        order.setStatus(Order.STATUS_CANCELLED);
+        order.setUpdateTime(new Date());
+        updateById(order);
+
+        // 同时取消关联的支付记录
+        Payment payment = paymentMapper.selectByOrderId(id);
+        if (payment != null && Payment.PAY_STATUS_PENDING.equals(payment.getPayStatus())) {
+            payment.setPayStatus(Payment.PAY_STATUS_FAILED);
+            payment.setUpdateTime(new Date());
+            paymentMapper.updateById(payment);
+        }
+    }
+
+    @Override
+    public void deleteUserOrder(Long id, Long userId) {
+        Order order = getById(id);
+        if (order == null) {
+            throw new ServiceException("订单不存在");
+        }
+        if (!order.getUserId().equals(userId)) {
+            throw new ServiceException("无权操作此订单");
+        }
+        // 只允许删除已完成、已取消、已退款的订单
+        if (!Order.STATUS_COMPLETED.equals(order.getStatus())
+                && !Order.STATUS_CANCELLED.equals(order.getStatus())
+                && !Order.STATUS_REFUNDED.equals(order.getStatus())) {
+            throw new ServiceException("只能删除已完成、已取消或已退款的订单");
+        }
+        removeById(id);
+    }
+
+    @Override
+    public UserDashboardStatsVo getUserDashboardStats(Long userId) {
+        // 订单总数
+        Long orderCount = orderMapper.countUserOrders(userId);
+
+        // 进行中订单（待支付 + 已支付 + 退款中）
+        Long pendingCount = orderMapper.countUserOrdersByStatus(userId, Order.STATUS_PENDING);
+        Long paidCount = orderMapper.countUserOrdersByStatus(userId, Order.STATUS_PAID);
+        Long refundingCount = orderMapper.countUserOrdersByStatus(userId, Order.STATUS_REFUNDING);
+        Long activeOrders = (pendingCount != null ? pendingCount : 0)
+                + (paidCount != null ? paidCount : 0)
+                + (refundingCount != null ? refundingCount : 0);
+
+        // 已完成订单数
+        Long completedCount = orderMapper.countUserOrdersByStatus(userId, Order.STATUS_COMPLETED);
+
+        // 已取消/退款订单数
+        Long cancelledCount = orderMapper.countUserOrdersByStatus(userId, Order.STATUS_CANCELLED);
+        Long refundedCount = orderMapper.countUserOrdersByStatus(userId, Order.STATUS_REFUNDED);
+        Long refundRejectedCount = orderMapper.countUserOrdersByStatus(userId, Order.STATUS_REFUND_REJECTED);
+        Long cancelledOrders = (cancelledCount != null ? cancelledCount : 0)
+                + (refundedCount != null ? refundedCount : 0)
+                + (refundRejectedCount != null ? refundRejectedCount : 0);
+
+        // 已完成但未评价的订单数
+        Long pendingReviews = orderMapper.countUserPendingReviewOrders(userId);
+
+        // 用户积分（专用查询，不依赖 sys_user 表结构）
+        Integer points = sysUserMapper.selectUserPoints(userId);
+        if (points == null) points = 0;
+
+        return UserDashboardStatsVo.builder()
+                .orderCount(orderCount != null ? orderCount : 0)
+                .activeOrders(activeOrders)
+                .completedOrders(completedCount != null ? completedCount : 0)
+                .cancelledOrders(cancelledOrders)
+                .reviewCount(0L)  // 由前端调用评价接口获取
+                .pendingReviews(pendingReviews != null ? pendingReviews : 0)
+                .favoriteCount(0L)  // 由前端调用收藏接口获取
+                .points(points)
+                .build();
     }
 
     /**

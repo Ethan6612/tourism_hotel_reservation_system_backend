@@ -2,6 +2,8 @@ package com.zsc.module.domain.dto.query;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * 订单查询 DTO
  *
@@ -25,8 +27,11 @@ public class OrderQueryDto {
     /** 房型ID */
     private Long roomId;
 
-    /** 订单状态 */
+    /** 订单状态（单个） */
     private String status;
+
+    /** 订单状态列表（多个，用于IN查询） */
+    private List<String> statusList;
 
     /** 开始时间 */
     private String beginTime;
