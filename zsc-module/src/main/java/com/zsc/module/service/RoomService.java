@@ -8,6 +8,7 @@ import com.zsc.module.domain.entity.Room;
 import com.zsc.module.domain.vo.RoomVo;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -127,4 +128,19 @@ public interface RoomService extends IService<Room> {
      * @return 是否释放成功
      */
     boolean releaseStock(Long roomId, Integer num);
+
+    /**
+     * 商户端分页查询自己酒店下的房型列表
+     *
+     * @param queryDto 查询条件
+     * @param hotelIds 商户拥有的酒店ID列表
+     */
+    PageResult<RoomVo> queryMerchantRooms(RoomQueryDto queryDto, List<Long> hotelIds);
+
+    /**
+     * 商户端统计自己酒店下的房型总数
+     *
+     * @param hotelIds 商户拥有的酒店ID列表
+     */
+    Long countMerchantRooms(List<Long> hotelIds);
 }

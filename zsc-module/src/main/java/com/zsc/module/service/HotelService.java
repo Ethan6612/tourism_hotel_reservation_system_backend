@@ -60,4 +60,28 @@ public interface HotelService extends IService<Hotel> {
      * 统计酒店数量
      */
     Long countHotels(HotelQueryDto queryDto);
+
+    /**
+     * 商户端分页查询自己的酒店列表
+     *
+     * @param queryDto 查询条件
+     * @param businessId 商户ID（business_id）
+     */
+    PageResult<HotelListVO> queryMerchantHotels(HotelQueryDto queryDto, Long businessId);
+
+    /**
+     * 商户端新增酒店（自动绑定商户）
+     *
+     * @param dto 酒店信息
+     * @param businessId 商户ID
+     */
+    Long addMerchantHotel(HotelDTO dto, Long businessId);
+
+    /**
+     * 商户端编辑酒店（校验所有权）
+     *
+     * @param dto 酒店信息
+     * @param businessId 商户ID
+     */
+    void updateMerchantHotel(HotelDTO dto, Long businessId);
 }

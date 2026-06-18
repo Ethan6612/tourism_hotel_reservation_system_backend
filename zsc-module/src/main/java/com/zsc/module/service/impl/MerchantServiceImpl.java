@@ -11,6 +11,8 @@ import com.zsc.module.domain.entity.MerchantAudit;
 import com.zsc.module.domain.vo.MerchantVo;
 import com.zsc.module.mapper.MerchantAuditMapper;
 import com.zsc.module.mapper.MerchantMapper;
+import com.zsc.module.mapper.HotelMapper;
+import com.zsc.module.mapper.RoomMapper;
 import com.zsc.module.service.MerchantService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -18,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,6 +34,12 @@ public class MerchantServiceImpl extends ServiceImpl<MerchantMapper, Merchant> i
 
     @Autowired
     private MerchantAuditMapper merchantAuditMapper;
+
+    @Autowired
+    private HotelMapper hotelMapper;
+
+    @Autowired
+    private RoomMapper roomMapper;
 
     /**
      * 注册/新增商户
@@ -256,6 +265,79 @@ public class MerchantServiceImpl extends ServiceImpl<MerchantMapper, Merchant> i
 
         System.out.println("======================");
         return vo;
+    }
+
+    /**
+     * 获取当前登录用户的商户ID
+     */
+    @Override
+    public Long getCurrentMerchantId() {
+        Long userId = com.zsc.common.utils.SecurityUtils.getUserId();
+        Merchant merchant = this.lambdaQuery()
+                .eq(Merchant::getUserId, userId)
+                .one();
+        if (merchant == null) {
+            throw new ServiceException("未找到关联的商户信息，请先完成商户注册");
+        }
+        return merchant.getId();
+    }
+
+    /**
+     * 获取当前商户的所有酒店ID列表
+     */
+    @Override
+    public List<Long> getCurrentMerchantHotelIds() {
+        Long merchantId = getCurrentMerchantId();
+        List<com.zsc.module.domain.entity.Hotel> hotels = hotelMapper.selectList(
+                new com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper<com.zsc.module.domain.entity.Hotel>()
+                        .eq(com.zsc.module.domain.entity.Hotel::getBusinessId, merchantId));
+        if (hotels == null || hotels.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return hotels.stream()
+                .map(com.zsc.module.domain.entity.Hotel::getId)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * 校验酒店是否属于当前商户
+     */
+    @Override
+    public void checkHotelOwnership(Long hotelId) {
+        if (hotelId == null) {
+            throw new ServiceException("酒店ID不能为空");
+        }
+        Long merchantId = getCurrentMerchantId();
+        com.zsc.module.domain.entity.Hotel hotel = hotelMapper.selectOne(
+                new com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper<com.zsc.module.domain.entity.Hotel>()
+                        .eq(com.zsc.module.domain.entity.Hotel::getId, hotelId)
+                        .eq(com.zsc.module.domain.entity.Hotel::getBusinessId, merchantId));
+        if (hotel == null) {
+            throw new ServiceException("无权操作该酒店，该酒店不属于您的商户");
+        }
+    }
+
+    /**
+     * 校验房型是否属于当前商户（通过酒店关联链）
+     */
+    @Override
+    public void checkRoomOwnership(Long roomId) {
+        if (roomId == null) {
+            throw new ServiceException("房型ID不能为空");
+        }
+        Long merchantId = getCurrentMerchantId();
+        com.zsc.module.domain.entity.Room room = roomMapper.selectById(roomId);
+        if (room == null) {
+            throw new ServiceException("房型不存在");
+        }
+        // 通过酒店关联链验证：room → hotel → merchant
+        com.zsc.module.domain.entity.Hotel hotel = hotelMapper.selectOne(
+                new com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper<com.zsc.module.domain.entity.Hotel>()
+                        .eq(com.zsc.module.domain.entity.Hotel::getId, room.getHotelId())
+                        .eq(com.zsc.module.domain.entity.Hotel::getBusinessId, merchantId));
+        if (hotel == null) {
+            throw new ServiceException("无权操作该房型，该房型不属于您的酒店");
+        }
     }
 
     /**

@@ -90,4 +90,36 @@
         WHERE hotel_id = #{hotelId}
     </select>
 
+    <!-- 按酒店ID列表分页查询房型（商户端专用） -->
+    <select id="selectRoomVoPageByHotelIds" resultMap="RoomVoResultMap">
+        <include refid="selectRoomVo"/>
+        <if test="hotelIds != null and hotelIds.size() > 0">
+            AND r.hotel_id IN
+            <foreach collection="hotelIds" item="hotelId" open="(" separator="," close=")">
+                #{hotelId}
+            </foreach>
+        </if>
+        <if test="hotelIds == null or hotelIds.size() == 0">
+            AND 1=0
+        </if>
+        <include refid="whereClause"/>
+        ORDER BY r.create_time DESC
+    </select>
+
+    <!-- 统计指定酒店ID列表的房型数 -->
+    <select id="countRoomsByHotelIds" resultType="java.lang.Long">
+        SELECT COUNT(1)
+        FROM room r
+        WHERE 1=1
+        <if test="hotelIds != null and hotelIds.size() > 0">
+            AND r.hotel_id IN
+            <foreach collection="hotelIds" item="hotelId" open="(" separator="," close=")">
+                #{hotelId}
+            </foreach>
+        </if>
+        <if test="hotelIds == null or hotelIds.size() == 0">
+            AND 1=0
+        </if>
+    </select>
+
 </mapper>

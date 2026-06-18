@@ -426,6 +426,40 @@ public class RoomServiceImpl extends ServiceImpl<RoomMapper, Room> implements Ro
         return this.updateById(room);
     }
 
+    /**
+     * 商户端分页查询自己酒店下的房型列表
+     */
+    @Override
+    public PageResult<RoomVo> queryMerchantRooms(RoomQueryDto queryDto, List<Long> hotelIds) {
+        if (hotelIds == null || hotelIds.isEmpty()) {
+            PageResult<RoomVo> emptyResult = new PageResult<>();
+            emptyResult.setTotal(0L);
+            emptyResult.setPageSize((long) queryDto.getPageSize());
+            emptyResult.setCurrentPage((long) queryDto.getCurrent());
+            emptyResult.setRows(List.of());
+            return emptyResult;
+        }
+        Page<RoomVo> page = new Page<>(queryDto.getCurrent(), queryDto.getPageSize());
+        Page<RoomVo> result = baseMapper.selectRoomVoPageByHotelIds(page, queryDto, hotelIds);
+        List<RoomVo> records = result.getRecords();
+        if (records != null) {
+            records.forEach(this::fillStatusName);
+        }
+        return PageResult.fromPage(result);
+    }
+
+    /**
+     * 商户端统计自己酒店下的房型总数
+     */
+    @Override
+    public Long countMerchantRooms(List<Long> hotelIds) {
+        if (hotelIds == null || hotelIds.isEmpty()) {
+            return 0L;
+        }
+        Long count = baseMapper.countRoomsByHotelIds(hotelIds);
+        return count != null ? count : 0L;
+    }
+
     // ==================== 私有方法 ====================
 
     /**

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zsc.module.mapper.MerchantMapper">
+
+    <!-- 分页查询商户列表（根据审核状态过滤） -->
+    <select id="selectMerchantsWithAuditFilter" resultType="com.zsc.module.domain.entity.Merchant">
+        SELECT m.*
+        FROM merchant m
+        INNER JOIN merchant_audit ma ON m.id = ma.merchant_id
+        WHERE 1=1
+        <!-- 审核状态过滤：取该商户最新的审核记录 -->
+        AND ma.audit_status = #{auditStatus}
+        AND ma.id = (
+            SELECT MAX(id)
+            FROM merchant_audit
+            WHERE merchant_id = m.id
+        )
+        <!-- 商户名称模糊查询 -->
+        <if test="merchantName != null and merchantName != ''">
+            AND m.merchant_name LIKE CONCAT('%', #{merchantName}, '%')
+        </if>
+        <!-- 营业执照号精确查询 -->
+        <if test="licenseNo != null and licenseNo != ''">
+            AND m.license_no = #{licenseNo}
+        </if>
+        <!-- 法人姓名模糊查询 -->
+        <if test="legalPerson != null and legalPerson != ''">
+            AND m.legal_person LIKE CONCAT('%', #{legalPerson}, '%')
+        </if>
+        <!-- 联系电话查询 -->
+        <if test="phone != null and phone != ''">
+            AND m.phone = #{phone}
+        </if>
+        <!-- 商户状态查询 -->
+        <if test="status != null and status != ''">
+            AND m.status = #{status}
+        </if>
+        ORDER BY m.create_time DESC
+    </select>
+
+</mapper>

@@ -269,6 +269,37 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel> implements
         return baseMapper.countHotels(queryDto);
     }
 
+    /**
+     * 商户端分页查询自己的酒店列表
+     */
+    @Override
+    public PageResult<HotelListVO> queryMerchantHotels(HotelQueryDto queryDto, Long businessId) {
+        queryDto.setBusinessId(businessId);
+        return queryHotels(queryDto);
+    }
+
+    /**
+     * 商户端新增酒店（自动绑定商户并设为草稿状态）
+     */
+    @Override
+    public Long addMerchantHotel(HotelDTO dto, Long businessId) {
+        dto.setBusinessId(businessId);
+        if (StringUtils.isBlank(dto.getStatus())) {
+            dto.setStatus(HotelStatusEnum.DRAFT.getValue());
+        }
+        return addHotel(dto);
+    }
+
+    /**
+     * 商户端编辑酒店（校验所有权：确保不修改business_id）
+     */
+    @Override
+    public void updateMerchantHotel(HotelDTO dto, Long businessId) {
+        // 强制使用商户的businessId，防止越权
+        dto.setBusinessId(businessId);
+        updateHotel(dto);
+    }
+
     // ==================== 私有方法 ====================
 
     /**

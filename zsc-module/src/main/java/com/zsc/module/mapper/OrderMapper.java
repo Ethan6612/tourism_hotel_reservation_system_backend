@@ -8,6 +8,8 @@ import com.zsc.module.domain.vo.OrderVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * 订单 Mapper 接口
  *
@@ -50,4 +52,29 @@ public interface OrderMapper extends BaseMapper<Order> {
      * 统计用户已完成但未评价的订单数
      */
     Long countUserPendingReviewOrders(@Param("userId") Long userId);
+
+    /**
+     * 统计指定酒店ID列表的订单总数（商户端专用）
+     */
+    Long countOrdersByHotelIds(@Param("hotelIds") List<Long> hotelIds);
+
+    /**
+     * 统计指定酒店ID列表的总收入（已支付+已完成）
+     */
+    java.math.BigDecimal sumRevenueByHotelIds(@Param("hotelIds") List<Long> hotelIds);
+
+    /**
+     * 统计指定酒店ID列表的今日订单数
+     */
+    Long countTodayOrdersByHotelIds(@Param("hotelIds") List<Long> hotelIds);
+
+    /**
+     * 统计指定酒店ID列表的本月收入
+     */
+    java.math.BigDecimal sumMonthRevenueByHotelIds(@Param("hotelIds") List<Long> hotelIds);
+
+    /**
+     * 统计指定酒店ID列表的指定状态订单数
+     */
+    Long countOrdersByStatusAndHotelIds(@Param("hotelIds") List<Long> hotelIds, @Param("status") String status);
 }

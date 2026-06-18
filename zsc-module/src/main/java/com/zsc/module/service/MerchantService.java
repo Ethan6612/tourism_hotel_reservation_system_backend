@@ -7,6 +7,8 @@ import com.zsc.module.domain.dto.query.MerchantQueryDto;
 import com.zsc.module.domain.entity.Merchant;
 import com.zsc.module.domain.vo.MerchantVo;
 
+import java.util.List;
+
 /**
  * 商户管理服务接口
  */
@@ -78,5 +80,34 @@ public interface MerchantService extends IService<Merchant> {
      * @return 商户信息VO，如果用户没有关联商户则返回null
      */
     MerchantVo getMyMerchant(Long userId);
+
+    /**
+     * 获取当前登录用户的商户ID
+     *
+     * @return 商户ID
+     * @throws com.zsc.module.common.exception.ServiceException 如果用户未关联商户
+     */
+    Long getCurrentMerchantId();
+
+    /**
+     * 获取当前商户的所有酒店ID列表
+     *
+     * @return 酒店ID列表
+     */
+    List<Long> getCurrentMerchantHotelIds();
+
+    /**
+     * 校验酒店是否属于当前商户
+     *
+     * @param hotelId 酒店ID
+     */
+    void checkHotelOwnership(Long hotelId);
+
+    /**
+     * 校验房型是否属于当前商户（通过酒店关联链）
+     *
+     * @param roomId 房型ID
+     */
+    void checkRoomOwnership(Long roomId);
 }
 

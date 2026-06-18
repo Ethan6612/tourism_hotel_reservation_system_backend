@@ -8,6 +8,8 @@ import com.zsc.module.domain.vo.RoomVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * 房型表 Mapper 接口
  *
@@ -40,4 +42,14 @@ public interface RoomMapper extends BaseMapper<Room> {
      * 检查酒店下是否有未删除的房型
      */
     Long countActiveRoomsByHotelId(@Param("hotelId") Long hotelId);
+
+    /**
+     * 按酒店ID列表分页查询房型（商户端专用）
+     */
+    Page<RoomVo> selectRoomVoPageByHotelIds(Page<RoomVo> page, @Param("query") RoomQueryDto query, @Param("hotelIds") List<Long> hotelIds);
+
+    /**
+     * 统计指定酒店ID列表的房型数
+     */
+    Long countRoomsByHotelIds(@Param("hotelIds") List<Long> hotelIds);
 }

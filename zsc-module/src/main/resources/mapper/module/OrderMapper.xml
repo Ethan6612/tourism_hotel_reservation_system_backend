@@ -129,8 +129,55 @@
         WHERE o.user_id = #{userId}
         AND o.status = '3'
         AND NOT EXISTS (
-            SELECT 1 FROM biz_comment c WHERE c.order_id = o.id AND c.user_id = o.user_id
+            SELECT 1 FROM comment c WHERE c.order_id = o.id AND c.user_id = o.user_id
         )
+    </select>
+
+    <!-- ===== 商户统计专用SQL ===== -->
+
+    <select id="countOrdersByHotelIds" resultType="java.lang.Long">
+        SELECT COUNT(1) FROM orders o
+        WHERE o.hotel_id IN
+        <foreach collection="hotelIds" item="hotelId" open="(" separator="," close=")">
+            #{hotelId}
+        </foreach>
+    </select>
+
+    <select id="sumRevenueByHotelIds" resultType="java.math.BigDecimal">
+        SELECT COALESCE(SUM(o.total_price), 0) FROM orders o
+        WHERE o.status IN ('1', '3')
+        AND o.hotel_id IN
+        <foreach collection="hotelIds" item="hotelId" open="(" separator="," close=")">
+            #{hotelId}
+        </foreach>
+    </select>
+
+    <select id="countTodayOrdersByHotelIds" resultType="java.lang.Long">
+        SELECT COUNT(1) FROM orders o
+        WHERE o.hotel_id IN
+        <foreach collection="hotelIds" item="hotelId" open="(" separator="," close=")">
+            #{hotelId}
+        </foreach>
+        AND DATE(o.create_time) = CURDATE()
+    </select>
+
+    <select id="sumMonthRevenueByHotelIds" resultType="java.math.BigDecimal">
+        SELECT COALESCE(SUM(o.total_price), 0) FROM orders o
+        WHERE o.status IN ('1', '3')
+        AND o.hotel_id IN
+        <foreach collection="hotelIds" item="hotelId" open="(" separator="," close=")">
+            #{hotelId}
+        </foreach>
+        AND DATE_FORMAT(o.create_time, '%Y-%m') = DATE_FORMAT(CURDATE(), '%Y-%m')
+    </select>
+
+    <select id="countOrdersByStatusAndHotelIds" resultType="java.lang.Long">
+        SELECT COUNT(1) FROM orders o
+        WHERE o.hotel_id IN
+        <foreach collection="hotelIds" item="hotelId" open="(" separator="," close=")">
+            #{hotelId}
+        </foreach>
+        AND o.status = #{status}
     </select>
 
 </mapper>
