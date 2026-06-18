@@ -2,11 +2,13 @@ package com.zsc.module.controller;
 
 import com.zsc.common.annotation.Log;
 import com.zsc.common.enums.BusinessType;
+import com.zsc.common.utils.SecurityUtils;
 import com.zsc.module.common.pagination.PageResult;
 import com.zsc.module.common.response.ResultVo;
 import com.zsc.module.domain.dto.HotelDTO;
 import com.zsc.module.domain.dto.HotelSearchDTO;
 import com.zsc.module.domain.dto.query.HotelQueryDto;
+import com.zsc.module.domain.vo.HotCityVo;
 import com.zsc.module.domain.vo.HotelDetailVO;
 import com.zsc.module.domain.vo.HotelListVO;
 import com.zsc.module.service.HotelService;
@@ -19,6 +21,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * 酒店管理控制器
@@ -33,6 +36,39 @@ public class HotelController {
 
     @Autowired
     private HotelService hotelService;
+
+    // ==================== 前台推荐接口 ====================
+
+    /**
+     * 热门城市（按酒店数量排名）
+     */
+    @Operation(summary = "热门城市")
+    @GetMapping("/hotCities")
+    public ResultVo<List<HotCityVo>> hotCities() {
+        List<HotCityVo> list = hotelService.getHotCities(10);
+        return ResultVo.ok(list);
+    }
+
+    /**
+     * 推荐酒店（高评分 + 高星级）
+     */
+    @Operation(summary = "推荐酒店")
+    @GetMapping("/recommend")
+    public ResultVo<List<HotelListVO>> recommend() {
+        List<HotelListVO> list = hotelService.getRecommendHotels(10);
+        return ResultVo.ok(list);
+    }
+
+    /**
+     * 个性化推荐（根据用户历史偏好）
+     */
+    @Operation(summary = "个性化推荐")
+    @GetMapping("/personalRecommend")
+    public ResultVo<List<HotelListVO>> personalRecommend() {
+        Long userId = SecurityUtils.getUserId();
+        List<HotelListVO> list = hotelService.getPersonalRecommend(userId, 10);
+        return ResultVo.ok(list);
+    }
 
     // ==================== 增删改查接口 ====================
 

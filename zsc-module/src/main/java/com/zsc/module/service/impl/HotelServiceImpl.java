@@ -12,6 +12,7 @@ import com.zsc.module.domain.entity.Hotel;
 import com.zsc.module.domain.enums.HotelStatusEnum;
 import com.zsc.module.domain.vo.HotelDetailVO;
 import com.zsc.module.domain.vo.HotelListVO;
+import com.zsc.module.domain.vo.HotCityVo;
 import com.zsc.module.domain.vo.RoomVo;
 import com.zsc.module.mapper.HotelMapper;
 import com.zsc.module.service.HotelService;
@@ -298,6 +299,45 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel> implements
         // 强制使用商户的businessId，防止越权
         dto.setBusinessId(businessId);
         updateHotel(dto);
+    }
+
+    // ==================== 前台推荐接口 ====================
+
+    /**
+     * 获取热门城市列表
+     */
+    @Override
+    public List<HotCityVo> getHotCities(int limit) {
+        return baseMapper.selectHotCities(limit);
+    }
+
+    /**
+     * 获取推荐酒店（高分高星，仅营业中）
+     */
+    @Override
+    public List<HotelListVO> getRecommendHotels(int limit) {
+        List<HotelListVO> list = baseMapper.selectRecommendHotels(limit);
+        if (list != null) {
+            list.forEach(this::fillStatusName);
+        }
+        return list;
+    }
+
+    /**
+     * 获取个性化推荐酒店（根据用户历史偏好）
+     */
+    @Override
+    public List<HotelListVO> getPersonalRecommend(Long userId, int limit) {
+        if (userId == null) {
+            return getRecommendHotels(limit);
+        }
+        List<HotelListVO> list = baseMapper.selectPersonalRecommend(userId, limit);
+        if (list == null || list.isEmpty()) {
+            // 无历史记录时回退到通用推荐
+            return getRecommendHotels(limit);
+        }
+        list.forEach(this::fillStatusName);
+        return list;
     }
 
     // ==================== 私有方法 ====================

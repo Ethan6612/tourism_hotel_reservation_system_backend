@@ -135,4 +135,54 @@
         <include refid="adminWhereClause"/>
     </select>
 
+    <!-- 热门城市结果映射 -->
+    <resultMap id="HotCityVoResultMap" type="com.zsc.module.domain.vo.HotCityVo">
+        <result property="cityName" column="city_name"/>
+        <result property="hotelCount" column="hotel_count"/>
+    </resultMap>
+
+    <!-- 查询热门城市 -->
+    <select id="selectHotCities" resultMap="HotCityVoResultMap">
+        SELECT
+            TRIM(SUBSTRING_INDEX(h.address, '市', 1)) AS city_name,
+            COUNT(*) AS hotel_count
+        FROM hotel h
+        WHERE h.status = '0' AND h.address LIKE '%市%'
+        GROUP BY city_name
+        ORDER BY hotel_count DESC
+        LIMIT #{limit}
+    </select>
+
+    <!-- 查询推荐酒店（高评分 + 高星级，仅营业中） -->
+    <select id="selectRecommendHotels" resultMap="HotelListVOResultMap">
+        <include refid="selectHotelSearchSql"/>
+        ORDER BY h.score DESC, h.star DESC
+        LIMIT #{limit}
+    </select>
+
+    <!-- 个性化推荐：根据用户历史入住酒店的星级偏好推荐相似酒店 -->
+    <select id="selectPersonalRecommend" resultMap="HotelListVOResultMap">
+        SELECT h.id, h.name, h.address, h.star, h.score, h.img_url,
+               h.status, h.business_id, h.create_time,
+               m.merchant_name,
+               (SELECT MIN(r.price) FROM room r WHERE r.hotel_id = h.id AND r.status = '0') AS min_price,
+               (SELECT COUNT(1) FROM room r WHERE r.hotel_id = h.id) AS room_count
+        FROM hotel h
+        LEFT JOIN merchant m ON h.business_id = m.id
+        INNER JOIN (
+            SELECT DISTINCT h2.star
+            FROM hotel h2
+            INNER JOIN orders o2 ON h2.id = o2.hotel_id
+            WHERE o2.user_id = #{userId}
+            ORDER BY h2.star DESC
+            LIMIT 2
+        ) ps ON h.star = ps.star
+        WHERE h.status = '0'
+          AND h.id NOT IN (
+              SELECT DISTINCT o.hotel_id FROM orders o WHERE o.user_id = #{userId} AND o.hotel_id IS NOT NULL
+          )
+        ORDER BY h.score DESC, h.star DESC
+        LIMIT #{limit}
+    </select>
+
 </mapper>

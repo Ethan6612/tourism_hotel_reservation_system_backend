@@ -6,8 +6,11 @@ import com.zsc.module.domain.dto.HotelDTO;
 import com.zsc.module.domain.dto.HotelSearchDTO;
 import com.zsc.module.domain.dto.query.HotelQueryDto;
 import com.zsc.module.domain.entity.Hotel;
+import com.zsc.module.domain.vo.HotCityVo;
 import com.zsc.module.domain.vo.HotelDetailVO;
 import com.zsc.module.domain.vo.HotelListVO;
+
+import java.util.List;
 
 /**
  * 酒店表 服务类
@@ -84,4 +87,26 @@ public interface HotelService extends IService<Hotel> {
      * @param businessId 商户ID
      */
     void updateMerchantHotel(HotelDTO dto, Long businessId);
+
+    /**
+     * 获取热门城市列表
+     *
+     * @param limit 返回数量
+     */
+    List<HotCityVo> getHotCities(int limit);
+
+    /**
+     * 获取推荐酒店（高分高星）
+     *
+     * @param limit 返回数量
+     */
+    List<HotelListVO> getRecommendHotels(int limit);
+
+    /**
+     * 获取个性化推荐酒店（根据用户历史偏好）
+     *
+     * @param userId 用户ID
+     * @param limit 返回数量
+     */
+    List<HotelListVO> getPersonalRecommend(Long userId, int limit);
 }

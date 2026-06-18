@@ -3,10 +3,10 @@ package com.zsc.web.controller.common;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-import jakarta.annotation.Resource;
 import javax.imageio.ImageIO;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.util.FastByteArrayOutputStream;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,15 +28,16 @@ import com.zsc.system.service.ISysConfigService;
 @RestController
 public class CaptchaController
 {
-    @Resource(name = "captchaProducer")
+    @Autowired(required = false)
     private Producer captchaProducer;
 
-    @Resource(name = "captchaProducerMath")
+    @Autowired(required = false)
+    @Qualifier("captchaProducerMath")
     private Producer captchaProducerMath;
 
-    @Autowired
+    @Autowired(required = false)
     private RedisCache redisCache;
-    
+
     @Autowired
     private ISysConfigService configService;
     /**
@@ -55,6 +56,13 @@ public class CaptchaController
             return ajax;
         }
 
+        // 如果 Redis 不可用，使用内存缓存或直接返回验证码已禁用
+        if (redisCache == null)
+        {
+            ajax.put("captchaEnabled", false);
+            return ajax;
+        }
+
         // 保存验证码信息
         String uuid = IdUtils.simpleUUID();
         String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + uuid;
@@ -62,19 +70,30 @@ public class CaptchaController
         String capStr = null, code = null;
         BufferedImage image = null;
 
+        // 验证码生成器不可用时，禁用验证码
+        if (captchaProducer == null && captchaProducerMath == null) {
+            ajax.put("captchaEnabled", false);
+            return ajax;
+        }
+
         // 生成验证码
         String captchaType = RuoYiConfig.getCaptchaType();
-        if ("math".equals(captchaType))
+        if ("math".equals(captchaType) && captchaProducerMath != null)
         {
             String capText = captchaProducerMath.createText();
             capStr = capText.substring(0, capText.lastIndexOf("@"));
             code = capText.substring(capText.lastIndexOf("@") + 1);
             image = captchaProducerMath.createImage(capStr);
         }
-        else if ("char".equals(captchaType))
+        else if (captchaProducer != null)
         {
             capStr = code = captchaProducer.createText();
             image = captchaProducer.createImage(capStr);
+        }
+        else
+        {
+            ajax.put("captchaEnabled", false);
+            return ajax;
         }
 
         redisCache.setCacheObject(verifyKey, code, Constants.CAPTCHA_EXPIRATION, TimeUnit.MINUTES);

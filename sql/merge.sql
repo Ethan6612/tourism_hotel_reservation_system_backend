@@ -1672,7 +1672,7 @@ CREATE TABLE IF NOT EXISTS `sys_logininfor` (
   PRIMARY KEY (`info_id`) USING BTREE,
   KEY `idx_sys_logininfor_s` (`status`) USING BTREE,
   KEY `idx_sys_logininfor_lt` (`login_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=266 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='系统访问记录';
+) ENGINE=InnoDB AUTO_INCREMENT=271 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='系统访问记录';
 
 -- 正在导出表  zsc.sys_logininfor 的数据：~153 rows (大约)
 INSERT INTO `sys_logininfor` (`info_id`, `user_name`, `ipaddr`, `login_location`, `browser`, `os`, `status`, `msg`, `login_time`) VALUES
@@ -1841,7 +1841,12 @@ INSERT INTO `sys_logininfor` (`info_id`, `user_name`, `ipaddr`, `login_location`
 	(262, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-18 22:23:19'),
 	(263, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-18 23:02:44'),
 	(264, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-18 23:03:04'),
-	(265, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-18 23:52:45');
+	(265, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-18 23:52:45'),
+	(266, 'customer01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-19 01:15:03'),
+	(267, 'customer01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-19 01:22:25'),
+	(268, 'customer01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-19 01:28:23'),
+	(269, 'customer01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-19 01:30:12'),
+	(270, 'customer01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-19 01:30:41');
 
 -- 导出  表 zsc.sys_menu 结构
 CREATE TABLE IF NOT EXISTS `sys_menu` (
@@ -2339,14 +2344,15 @@ CREATE TABLE IF NOT EXISTS `sys_user` (
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '' COMMENT '更新者',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '备注',
+  `points` int DEFAULT '0' COMMENT '用户积分',
   PRIMARY KEY (`user_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='用户信息表';
 
 -- 正在导出表  zsc.sys_user 的数据：~3 rows (大约)
-INSERT INTO `sys_user` (`user_id`, `dept_id`, `user_name`, `nick_name`, `user_type`, `email`, `phonenumber`, `sex`, `avatar`, `password`, `status`, `del_flag`, `login_ip`, `login_date`, `pwd_update_date`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`) VALUES
-	(1, 103, 'admin', '系统管理员', '00', 'admin@hotel.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-18 22:23:19', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '超级管理员账号'),
-	(2, 105, 'customer01', '普通用户', '00', 'customer@test.com', '15666666666', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-08 10:11:53', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '前台普通用户账号'),
-	(100, 104, 'merchant01', '酒店商户', '01', 'merchant@test.com', '13800000001', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-18 23:52:45', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '酒店商家账号');
+INSERT INTO `sys_user` (`user_id`, `dept_id`, `user_name`, `nick_name`, `user_type`, `email`, `phonenumber`, `sex`, `avatar`, `password`, `status`, `del_flag`, `login_ip`, `login_date`, `pwd_update_date`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`, `points`) VALUES
+	(1, 103, 'admin', '系统管理员', '00', 'admin@hotel.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-18 22:23:19', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '超级管理员账号', 0),
+	(2, 105, 'customer01', '普通用户', '00', 'customer@test.com', '15666666666', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-19 01:30:41', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '前台普通用户账号', 0),
+	(100, 104, 'merchant01', '酒店商户', '01', 'merchant@test.com', '13800000001', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-18 23:52:45', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '酒店商家账号', 0);
 
 -- 导出  表 zsc.sys_user_post 结构
 CREATE TABLE IF NOT EXISTS `sys_user_post` (

@@ -5,10 +5,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zsc.module.domain.dto.HotelSearchDTO;
 import com.zsc.module.domain.dto.query.HotelQueryDto;
 import com.zsc.module.domain.entity.Hotel;
+import com.zsc.module.domain.vo.HotCityVo;
 import com.zsc.module.domain.vo.HotelDetailVO;
 import com.zsc.module.domain.vo.HotelListVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 酒店表 Mapper 接口
@@ -37,4 +40,19 @@ public interface HotelMapper extends BaseMapper<Hotel> {
      * 统计酒店数量
      */
     Long countHotels(@Param("query") HotelQueryDto query);
+
+    /**
+     * 查询热门城市（按酒店数量排序）
+     */
+    List<HotCityVo> selectHotCities(@Param("limit") int limit);
+
+    /**
+     * 查询推荐酒店（高分高星）
+     */
+    List<HotelListVO> selectRecommendHotels(@Param("limit") int limit);
+
+    /**
+     * 查询个性化推荐酒店（根据用户历史订单的偏好）
+     */
+    List<HotelListVO> selectPersonalRecommend(@Param("userId") Long userId, @Param("limit") int limit);
 }
