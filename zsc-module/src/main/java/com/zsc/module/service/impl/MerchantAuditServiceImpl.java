@@ -3,6 +3,7 @@ package com.zsc.module.service.impl;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zsc.common.core.domain.entity.SysUser;
+import com.zsc.common.utils.SecurityUtils;
 import com.zsc.module.common.exception.ServiceException;
 import com.zsc.module.common.pagination.PageResult;
 import com.zsc.module.domain.dto.MerchantAuditDto;
@@ -13,7 +14,9 @@ import com.zsc.module.domain.vo.MerchantAuditVo;
 import com.zsc.module.mapper.MerchantAuditMapper;
 import com.zsc.module.service.MerchantAuditService;
 import com.zsc.module.service.MerchantService;
+import com.zsc.system.domain.SysNotice;
 import com.zsc.system.mapper.SysUserMapper;
+import com.zsc.system.service.ISysNoticeService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +40,9 @@ public class MerchantAuditServiceImpl extends ServiceImpl<MerchantAuditMapper, M
 
     @Autowired
     private SysUserMapper sysUserMapper;
+
+    @Autowired
+    private ISysNoticeService sysNoticeService;
 
     /**
      * 提交审核申请
@@ -101,9 +107,8 @@ public class MerchantAuditServiceImpl extends ServiceImpl<MerchantAuditMapper, M
         audit.setAuditOpinion(auditDto.getAuditOpinion());
         audit.setAuditTime(new Date());
         audit.setUpdateTime(new Date());
-        // 审核人信息可通过SecurityUtils获取当前登录用户，此处预留字段
-        // audit.setAuditorId(...);
-        // audit.setAuditorName(...);
+        audit.setAuditorId(com.zsc.common.utils.SecurityUtils.getUserId());
+        audit.setAuditorName(com.zsc.common.utils.SecurityUtils.getUsername());
 
         if (!this.updateById(audit)) {
             throw new ServiceException("系统错误，审核操作失败！");
@@ -115,14 +120,14 @@ public class MerchantAuditServiceImpl extends ServiceImpl<MerchantAuditMapper, M
             merchant.setAuditStatus(auditStatus);
             merchant.setSubmitTime(audit.getSubmitTime());
             merchant.setUpdateTime(new Date());
-            
+
             if (!merchantService.updateById(merchant)) {
                 throw new ServiceException("系统错误，更新商户审核状态失败！");
             }
-        }
 
-        // 如果审核通过且为入驻申请类型，可在此扩展开通商户逻辑
-        // 如果审核驳回，可扩展通知商户重新提交逻辑
+            // 发送审核结果通知给商户
+            sendAuditNotification(merchant, auditStatus, auditDto.getAuditOpinion());
+        }
     }
 
     /**
@@ -195,5 +200,45 @@ public class MerchantAuditServiceImpl extends ServiceImpl<MerchantAuditMapper, M
         }
 
         return vo;
+    }
+
+    /**
+     * 发送审核结果通知给商户
+     *
+     * @param merchant    商户实体
+     * @param auditStatus 审核状态 (1=通过, 2=驳回)
+     * @param opinion     审核意见
+     */
+    private void sendAuditNotification(Merchant merchant, String auditStatus, String opinion) {
+        if (merchant.getUserId() == null) {
+            return;
+        }
+        try {
+            SysUser merchantUser = sysUserMapper.selectUserById(merchant.getUserId());
+            String targetUsername = merchantUser != null ? merchantUser.getUserName() : null;
+            if (targetUsername == null) {
+                return;
+            }
+
+            SysNotice notice = new SysNotice();
+            notice.setNoticeType("1"); // 1=通知（定向推送）
+            notice.setStatus("0");     // 0=正常
+            notice.setCreateBy(targetUsername);
+            notice.setCreateTime(new Date());
+
+            if ("1".equals(auditStatus)) {
+                notice.setNoticeTitle("入驻申请审核通过");
+                notice.setNoticeContent("恭喜！您的入驻申请已审核通过，您现在可以正常使用商户功能，包括添加酒店、管理房型等。");
+            } else if ("2".equals(auditStatus)) {
+                notice.setNoticeTitle("入驻申请审核驳回");
+                String reason = (opinion != null && !opinion.isEmpty()) ? "，原因：" + opinion : "";
+                notice.setNoticeContent("您的入驻申请已被驳回" + reason + "。请根据驳回原因修改后重新提交申请。");
+            }
+
+            sysNoticeService.insertNotice(notice);
+        } catch (Exception e) {
+            // 通知发送失败不阻断审核流程
+            System.err.println("发送审核通知失败: " + e.getMessage());
+        }
     }
 }

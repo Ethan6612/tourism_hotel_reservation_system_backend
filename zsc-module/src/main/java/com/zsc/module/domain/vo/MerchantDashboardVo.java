@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * 商户仪表盘 VO
@@ -44,4 +45,10 @@ public class MerchantDashboardVo {
 
     /** 待处理（待审核酒店数） */
     private Long pendingCount;
+
+    /** 近7天每日收入趋势 */
+    private List<DailyRevenueVo> revenueTrend;
+
+    /** 近7天每日订单数趋势 */
+    private List<DailyRevenueVo> orderCountTrend;
 }

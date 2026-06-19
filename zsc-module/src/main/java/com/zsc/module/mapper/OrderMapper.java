@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zsc.module.domain.dto.query.OrderQueryDto;
 import com.zsc.module.domain.entity.Order;
+import com.zsc.module.domain.vo.DailyRevenueVo;
 import com.zsc.module.domain.vo.OrderVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -77,4 +78,35 @@ public interface OrderMapper extends BaseMapper<Order> {
      * 统计指定酒店ID列表的指定状态订单数
      */
     Long countOrdersByStatusAndHotelIds(@Param("hotelIds") List<Long> hotelIds, @Param("status") String status);
+
+    /**
+     * 按天汇总指定酒店的收入趋势（最近N天，仅已支付+已完成）
+     */
+    List<DailyRevenueVo> selectDailyRevenue(@Param("hotelIds") List<Long> hotelIds, @Param("days") int days);
+
+    /**
+     * 按天汇总指定酒店的订单数量趋势（最近N天，全部状态）
+     */
+    List<DailyRevenueVo> selectDailyOrderCount(@Param("hotelIds") List<Long> hotelIds, @Param("days") int days);
+
+    /**
+     * 按日期范围统计指定酒店的总收入（已支付+已完成）
+     */
+    java.math.BigDecimal sumRevenueByHotelIdsAndDateRange(@Param("hotelIds") List<Long> hotelIds,
+                                                          @Param("beginTime") String beginTime,
+                                                          @Param("endTime") String endTime);
+
+    /**
+     * 按日期范围统计指定酒店的订单总数
+     */
+    Long countOrdersByHotelIdsAndDateRange(@Param("hotelIds") List<Long> hotelIds,
+                                           @Param("beginTime") String beginTime,
+                                           @Param("endTime") String endTime);
+
+    /**
+     * 按日期范围按天汇总指定酒店的收入明细
+     */
+    List<DailyRevenueVo> selectDailyRevenueByDateRange(@Param("hotelIds") List<Long> hotelIds,
+                                                       @Param("beginTime") String beginTime,
+                                                       @Param("endTime") String endTime);
 }

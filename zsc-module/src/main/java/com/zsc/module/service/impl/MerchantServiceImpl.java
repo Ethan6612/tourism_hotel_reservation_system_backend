@@ -2,6 +2,7 @@ package com.zsc.module.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zsc.common.core.domain.entity.SysUser;
 import com.zsc.module.common.exception.ServiceException;
 import com.zsc.module.common.pagination.PageResult;
 import com.zsc.module.domain.dto.MerchantDto;
@@ -14,6 +15,9 @@ import com.zsc.module.mapper.MerchantMapper;
 import com.zsc.module.mapper.HotelMapper;
 import com.zsc.module.mapper.RoomMapper;
 import com.zsc.module.service.MerchantService;
+import com.zsc.system.domain.SysNotice;
+import com.zsc.system.mapper.SysUserMapper;
+import com.zsc.system.service.ISysNoticeService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +44,12 @@ public class MerchantServiceImpl extends ServiceImpl<MerchantMapper, Merchant> i
 
     @Autowired
     private RoomMapper roomMapper;
+
+    @Autowired
+    private ISysNoticeService sysNoticeService;
+
+    @Autowired
+    private SysUserMapper sysUserMapper;
 
     /**
      * 注册/新增商户
@@ -184,7 +194,8 @@ public class MerchantServiceImpl extends ServiceImpl<MerchantMapper, Merchant> i
      */
     @Override
     public void freezeMerchant(Long id) {
-        updateMerchantStatus(id, "1", "商户不存在，冻结失败！");
+        updateMerchantStatusWithNotify(id, "1", "商户不存在，冻结失败！",
+                "商户已冻结", "您的商户已被冻结，如需了解更多信息请联系管理员。");
     }
 
     /**
@@ -192,7 +203,8 @@ public class MerchantServiceImpl extends ServiceImpl<MerchantMapper, Merchant> i
      */
     @Override
     public void deregisterMerchant(Long id) {
-        updateMerchantStatus(id, "2", "商户不存在，注销失败！");
+        updateMerchantStatusWithNotify(id, "2", "商户不存在，注销失败！",
+                "商户已注销", "您的商户已被注销，如需了解更多信息请联系管理员。");
     }
 
     /**
@@ -200,7 +212,8 @@ public class MerchantServiceImpl extends ServiceImpl<MerchantMapper, Merchant> i
      */
     @Override
     public void unfreezeMerchant(Long id) {
-        updateMerchantStatus(id, "0", "商户不存在，恢复失败！");
+        updateMerchantStatusWithNotify(id, "0", "商户不存在，恢复失败！",
+                "商户已恢复正常", "您的商户已恢复正常，您现在可以正常使用商户功能。");
     }
 
     /**
@@ -362,13 +375,16 @@ public class MerchantServiceImpl extends ServiceImpl<MerchantMapper, Merchant> i
     // ===== 私有辅助方法 =====
 
     /**
-     * 更新商户状态的通用方法
+     * 更新商户状态并发送通知
      *
      * @param id            商户ID
      * @param targetStatus  目标状态
      * @param errorMsg      商户不存在时的错误提示
+     * @param noticeTitle   通知标题
+     * @param noticeContent 通知内容
      */
-    private void updateMerchantStatus(Long id, String targetStatus, String errorMsg) {
+    private void updateMerchantStatusWithNotify(Long id, String targetStatus, String errorMsg,
+                                                 String noticeTitle, String noticeContent) {
         Merchant merchant = this.getById(id);
         if (merchant == null) {
             throw new ServiceException(errorMsg);
@@ -379,6 +395,38 @@ public class MerchantServiceImpl extends ServiceImpl<MerchantMapper, Merchant> i
 
         if (!this.updateById(merchant)) {
             throw new ServiceException("系统错误，状态更新失败！");
+        }
+
+        // 发送通知给商户
+        sendStatusNotification(merchant, noticeTitle, noticeContent);
+    }
+
+    /**
+     * 发送商户状态变更通知
+     */
+    private void sendStatusNotification(Merchant merchant, String noticeTitle, String noticeContent) {
+        if (merchant.getUserId() == null) {
+            return;
+        }
+        try {
+            SysUser merchantUser = sysUserMapper.selectUserById(merchant.getUserId());
+            String targetUsername = merchantUser != null ? merchantUser.getUserName() : null;
+            if (targetUsername == null) {
+                return;
+            }
+
+            SysNotice notice = new SysNotice();
+            notice.setNoticeType("1"); // 1=通知（定向推送）
+            notice.setStatus("0");     // 0=正常
+            notice.setCreateBy(targetUsername);
+            notice.setCreateTime(new Date());
+            notice.setNoticeTitle(noticeTitle);
+            notice.setNoticeContent(noticeContent);
+
+            sysNoticeService.insertNotice(notice);
+        } catch (Exception e) {
+            // 通知发送失败不阻断状态变更流程
+            System.err.println("发送状态变更通知失败: " + e.getMessage());
         }
     }
 }

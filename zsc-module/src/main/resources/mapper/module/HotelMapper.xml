@@ -10,6 +10,7 @@
         <result property="star" column="star"/>
         <result property="score" column="score"/>
         <result property="imgUrl" column="img_url"/>
+        <result property="facility" column="facility"/>
         <result property="status" column="status"/>
         <result property="businessId" column="business_id"/>
         <result property="merchantName" column="merchant_name"/>
@@ -35,7 +36,7 @@
 
     <!-- 后台查询SQL片段 -->
     <sql id="selectHotelListSql">
-        SELECT h.id, h.name, h.address, h.star, h.score, h.img_url,
+        SELECT h.id, h.name, h.address, h.star, h.score, h.img_url, h.facility,
                h.status, h.business_id, h.create_time,
                m.merchant_name,
                (SELECT COUNT(1) FROM room r WHERE r.hotel_id = h.id) AS room_count
