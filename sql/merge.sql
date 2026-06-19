@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `score` int NOT NULL COMMENT '评分（1-5星）',
   `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '评价内容',
   `images` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '评价图片JSON数组',
-  `img_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '图片URL',
+  `img_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT '图片URL',
   `is_anonymous` char(1) DEFAULT '0' COMMENT '是否匿名（0=否 1=是）',
   `status` char(1) DEFAULT '1' COMMENT '状态（0=待审核 1=已发布 2=已拒绝）',
   `like_count` int DEFAULT '0' COMMENT '点赞数',
@@ -267,7 +267,7 @@ CREATE TABLE IF NOT EXISTS `hotel` (
   `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '酒店地址',
   `star` int DEFAULT NULL COMMENT '酒店星级',
   `score` decimal(3,2) DEFAULT NULL COMMENT '酒店评分',
-  `img_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '酒店图片URL',
+  `img_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT '酒店图片URL',
   `facility` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT '酒店设施',
   `business_id` bigint DEFAULT NULL COMMENT '商家ID',
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '0' COMMENT '状态（0正常 1停用）',
@@ -352,7 +352,7 @@ INSERT INTO `hotel` (`id`, `name`, `address`, `star`, `score`, `img_url`, `facil
 	(70, '黄山悦榕庄', '黄山市黟县宏村镇', 5, 4.90, 'https://example.com/hotel70.jpg', 'WiFi,停车场,SPA,餐厅,徽派建筑', 1070, '0', '2026-06-02 00:30:57', '2026-06-02 00:30:57'),
 	(71, '厦门艾美酒店', '厦门市湖里区南山冠军路7号', 5, 4.50, 'https://example.com/hotel71.jpg', 'WiFi,停车场,游泳池,健身房,餐厅', 1071, '0', '2026-06-02 00:30:57', '2026-06-02 00:30:57'),
 	(72, '福州仓山凯悦酒店', '福州市仓山区花溪南路46号', 5, 4.40, 'https://example.com/hotel72.jpg', 'WiFi,停车场,游泳池,健身房,餐厅', 1072, '0', '2026-06-02 00:30:57', '2026-06-02 00:30:57'),
-	(73, '泉州泰禾洲际酒店', '泉州市丰泽区丰海路1005号', 5, 4.50, 'https://example.com/hotel73.jpg', 'WiFi,停车场,游泳池,健身房,餐厅', 1073, '0', '2026-06-02 00:30:57', '2026-06-02 00:30:57'),
+	(73, '泉州泰禾洲际酒店', '泉州市丰泽区丰海路1005号', 5, 4.50, 'https://ts4.tc.mm.bing.net/th/id/OIP-C.LSeIPMv4pdxMiwnuVf6RtAHaG2?rs=1&pid=ImgDetMain&o=7&rm=3', 'WiFi,停车场,游泳池,健身房,餐厅', 1073, '0', '2026-06-02 00:30:57', '2026-06-20 00:58:37'),
 	(74, '南昌香格里拉大酒店', '南昌市红谷滩新区翠林路669号', 5, 4.50, 'https://example.com/hotel74.jpg', 'WiFi,停车场,游泳池,健身房,餐厅', 1074, '0', '2026-06-02 00:30:57', '2026-06-02 00:30:57'),
 	(75, '赣州锦江国际酒店', '赣州市章贡区金东北路88号', 4, 4.20, 'https://example.com/hotel75.jpg', 'WiFi,停车场,餐厅', 1075, '0', '2026-06-02 00:30:57', '2026-06-02 00:30:57'),
 	(76, '济南香格里拉大酒店', '济南市历下区泺源大街106号', 5, 4.50, 'https://example.com/hotel76.jpg', 'WiFi,停车场,游泳池,健身房,餐厅', 1076, '0', '2026-06-02 00:30:57', '2026-06-02 00:30:57'),
@@ -506,7 +506,7 @@ CREATE TABLE IF NOT EXISTS `merchant_audit` (
   KEY `idx_auditor_id` (`auditor_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='商户审核表';
 
--- 正在导出表  zsc.merchant_audit 的数据：~70 rows (大约)
+-- 正在导出表  zsc.merchant_audit 的数据：~71 rows (大约)
 INSERT INTO `merchant_audit` (`id`, `merchant_id`, `audit_type`, `audit_status`, `submit_material`, `audit_opinion`, `auditor_id`, `auditor_name`, `submit_time`, `audit_time`, `create_time`, `update_time`, `submit_user_id`) VALUES
 	(1, 1001, '1', '1', '{"license_img":"https://example.com/license1001.jpg","id_card":"https://example.com/id1001.jpg"}', '资质齐全，审核通过', 1, 'admin', '2026-05-07 08:52:15', '2026-05-09 08:52:15', '2026-05-07 08:52:15', '2026-05-09 08:52:15', NULL),
 	(2, 1002, '1', '1', '{"license_img":"https://example.com/license1002.jpg","id_card":"https://example.com/id1002.jpg"}', '资质审核通过', 1, 'admin', '2026-05-09 08:52:15', '2026-05-11 08:52:15', '2026-05-09 08:52:15', '2026-05-11 08:52:15', NULL),
@@ -1064,7 +1064,7 @@ CREATE TABLE IF NOT EXISTS `room` (
   `price` decimal(10,2) NOT NULL COMMENT '价格',
   `stock` int NOT NULL DEFAULT '0' COMMENT '库存数量',
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '0' COMMENT '状态（0正常 1停用）',
-  `img_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '图片URL',
+  `img_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci COMMENT '图片URL',
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
@@ -1350,9 +1350,9 @@ INSERT INTO `room` (`id`, `hotel_id`, `room_type`, `area`, `bed_type`, `price`, 
 	(274, 72, '家庭套房', '65平米', '1.8米大床+1.2米单人床', 1159.00, 10, '0', 'https://example.com/hotel72_room3.jpg', '2026-06-02 00:30:57', '2026-06-02 00:30:57'),
 	(275, 72, '总统套房', '120平米', '2米特大床', 4199.00, 2, '0', 'https://example.com/hotel72_room4.jpg', '2026-06-02 00:30:57', '2026-06-02 00:30:57'),
 	(276, 72, '景观房', '45平米', '1.8米大床', 939.00, 10, '0', 'https://example.com/hotel72_room5.jpg', '2026-06-02 00:30:57', '2026-06-02 00:30:57'),
-	(277, 73, '豪华大床房', '38平米', '1.8米大床', 749.00, 28, '0', 'https://example.com/hotel73_room1.jpg', '2026-06-02 00:30:57', '2026-06-02 00:30:57'),
-	(278, 73, '行政双床房', '42平米', '2张1.2米单人床', 879.00, 25, '0', 'https://example.com/hotel73_room2.jpg', '2026-06-02 00:30:57', '2026-06-02 00:30:57'),
-	(279, 73, '家庭套房', '65平米', '1.8米大床+1.2米单人床', 1239.00, 11, '0', 'https://example.com/hotel73_room3.jpg', '2026-06-02 00:30:57', '2026-06-02 00:30:57'),
+	(277, 73, '豪华大床房', '38平米', '1.8米大床', 749.00, 28, '0', 'https://pavo.elongstatic.com/i/tHotel800_600/IW5g7O5cKk.jpg', '2026-06-02 00:30:57', '2026-06-20 01:35:46'),
+	(278, 73, '行政双床房', '42平米', '2张1.2米单人床', 879.00, 25, '0', 'https://ts3.tc.mm.bing.net/th/id/OIP-C.1Uq_u9irpFlsd3NRbVFrtwHaEH?rs=1&pid=ImgDetMain&o=7&rm=3', '2026-06-02 00:30:57', '2026-06-20 01:36:20'),
+	(279, 73, '家庭套房', '65平米', '1.8米大床+1.2米单人床', 1239.00, 11, '0', 'https://ts3.tc.mm.bing.net/th/id/OIP-C.AgXElXiK98b5ZLm7F7LH1wAAAA?rs=1&pid=ImgDetMain&o=7&rm=3', '2026-06-02 00:30:57', '2026-06-20 01:36:44'),
 	(280, 74, '豪华大床房', '38平米', '1.8米大床', 799.00, 29, '0', 'https://example.com/hotel74_room1.jpg', '2026-06-02 00:30:57', '2026-06-02 00:30:57'),
 	(281, 74, '行政双床房', '42平米', '2张1.2米单人床', 939.00, 26, '0', 'https://example.com/hotel74_room2.jpg', '2026-06-02 00:30:57', '2026-06-02 00:30:57'),
 	(282, 74, '家庭套房', '65平米', '1.8米大床+1.2米单人床', 1319.00, 12, '0', 'https://example.com/hotel74_room3.jpg', '2026-06-02 00:30:57', '2026-06-02 00:30:57'),
@@ -1672,7 +1672,7 @@ CREATE TABLE IF NOT EXISTS `sys_logininfor` (
   PRIMARY KEY (`info_id`) USING BTREE,
   KEY `idx_sys_logininfor_s` (`status`) USING BTREE,
   KEY `idx_sys_logininfor_lt` (`login_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=271 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='系统访问记录';
+) ENGINE=InnoDB AUTO_INCREMENT=293 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='系统访问记录';
 
 -- 正在导出表  zsc.sys_logininfor 的数据：~153 rows (大约)
 INSERT INTO `sys_logininfor` (`info_id`, `user_name`, `ipaddr`, `login_location`, `browser`, `os`, `status`, `msg`, `login_time`) VALUES
@@ -1846,7 +1846,29 @@ INSERT INTO `sys_logininfor` (`info_id`, `user_name`, `ipaddr`, `login_location`
 	(267, 'customer01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-19 01:22:25'),
 	(268, 'customer01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-19 01:28:23'),
 	(269, 'customer01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-19 01:30:12'),
-	(270, 'customer01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-19 01:30:41');
+	(270, 'customer01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-19 01:30:41'),
+	(271, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-19 19:21:09'),
+	(272, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-19 19:58:35'),
+	(273, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-19 19:58:45'),
+	(274, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-19 20:23:05'),
+	(275, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-19 20:23:17'),
+	(276, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-19 20:28:23'),
+	(277, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '1', '验证码错误', '2026-06-19 20:28:33'),
+	(278, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-19 20:28:35'),
+	(279, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-19 20:28:42'),
+	(280, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '1', '验证码错误', '2026-06-19 20:28:48'),
+	(281, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-19 20:28:50'),
+	(282, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-19 20:38:18'),
+	(283, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-19 20:38:25'),
+	(284, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-19 20:38:34'),
+	(285, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-19 20:38:43'),
+	(286, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-19 22:54:45'),
+	(287, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-19 23:00:16'),
+	(288, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-19 23:00:23'),
+	(289, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-19 23:00:28'),
+	(290, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-19 23:00:36'),
+	(291, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-19 23:32:15'),
+	(292, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-20 02:21:49');
 
 -- 导出  表 zsc.sys_menu 结构
 CREATE TABLE IF NOT EXISTS `sys_menu` (
@@ -2015,7 +2037,7 @@ CREATE TABLE IF NOT EXISTS `sys_oper_log` (
   KEY `idx_sys_oper_log_bt` (`business_type`) USING BTREE,
   KEY `idx_sys_oper_log_s` (`status`) USING BTREE,
   KEY `idx_sys_oper_log_ot` (`oper_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=173 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='操作日志记录';
+) ENGINE=InnoDB AUTO_INCREMENT=180 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='操作日志记录';
 
 -- 正在导出表  zsc.sys_oper_log 的数据：~71 rows (大约)
 INSERT INTO `sys_oper_log` (`oper_id`, `title`, `business_type`, `method`, `request_method`, `operator_type`, `oper_name`, `dept_name`, `oper_url`, `oper_ip`, `oper_location`, `oper_param`, `json_result`, `status`, `error_msg`, `oper_time`, `cost_time`) VALUES
@@ -2091,7 +2113,14 @@ INSERT INTO `sys_oper_log` (`oper_id`, `title`, `business_type`, `method`, `requ
 	(169, '菜单管理', 2, 'com.zsc.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{"children":[],"createTime":"2026-03-06 01:54:37","icon":"tool","isCache":"0","isFrame":"1","menuId":3,"menuName":"系统工具","menuType":"M","orderNum":4,"params":{},"parentId":0,"path":"tool","perms":"","query":"","routeName":"","status":"0","updateBy":"admin","visible":"0"} ', '{"msg":"操作成功","code":200}', 0, NULL, '2026-06-17 20:49:11', 30),
 	(170, '商户管理', 1, 'com.zsc.module.controller.MerchantController.add()', 'POST', 1, 'merchant01', '市场部门', '/api/merchant', '127.0.0.1', '内网IP', '{"address":"石岐区学院路一号","businessScope":"123456","description":"","email":"1622633698@qq.com","legalPerson":"aaa","licenseNo":"Y13311008N32EEJ712","logoUrl":"https://ts1.tc.mm.bing.net/th/id/R-C.21b6355339bb8739100e5d38b7916b01?rik=mduC0RML8NRHuQ&riu=http%3a%2f%2fblog.logo123.com%2fwp-content%2fuploads%2f2016%2f11%2f1.jpg&ehk=w8tPvXMUPi8cyftJ%2fmQMm2IbjkVi4SzCM%2bp%2bZB1Lc9U%3d&risl=&pid=ImgRaw&r=0","merchantName":"111","phone":"13316366046","status":"0"} ', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLSyntaxErrorException: Unknown column \'submit_user_id\' in \'field list\'\r\n### The error may exist in com/zsc/module/mapper/MerchantAuditMapper.java (best guess)\r\n### The error may involve com.zsc.module.mapper.MerchantAuditMapper.insert-Inline\r\n### The error occurred while setting parameters\r\n### SQL: INSERT INTO merchant_audit  ( merchant_id, audit_type, audit_status,     submit_time,  create_time, update_time, submit_user_id )  VALUES (  ?, ?, ?,     ?,  ?, ?, ?  )\r\n### Cause: java.sql.SQLSyntaxErrorException: Unknown column \'submit_user_id\' in \'field list\'\n; bad SQL grammar []', '2026-06-18 21:45:04', 286),
 	(171, '商户管理', 1, 'com.zsc.module.controller.MerchantController.add()', 'POST', 1, 'merchant01', '市场部门', '/api/merchant', '127.0.0.1', '内网IP', '{"address":"石岐区学院路一号","businessScope":"123456","description":"","email":"1622633698@qq.com","legalPerson":"aaa","licenseNo":"Y13311008N32EEJ712","logoUrl":"https://ts1.tc.mm.bing.net/th/id/R-C.21b6355339bb8739100e5d38b7916b01?rik=mduC0RML8NRHuQ&riu=http%3a%2f%2fblog.logo123.com%2fwp-content%2fuploads%2f2016%2f11%2f1.jpg&ehk=w8tPvXMUPi8cyftJ%2fmQMm2IbjkVi4SzCM%2bp%2bZB1Lc9U%3d&risl=&pid=ImgRaw&r=0","merchantName":"111","phone":"13316366046","status":"0"} ', '{"code":200,"message":"success"}', 0, NULL, '2026-06-18 21:54:11', 51),
-	(172, '商户审核管理', 2, 'com.zsc.module.controller.MerchantController.processAudit()', 'PUT', 1, 'admin', '研发部门', '/api/merchant/audit', '127.0.0.1', '内网IP', '{"auditOpinion":"111","auditStatus":"1","auditType":"1","id":71,"merchantId":1073} ', '{"code":200,"message":"success"}', 0, NULL, '2026-06-18 22:24:46', 24);
+	(172, '商户审核管理', 2, 'com.zsc.module.controller.MerchantController.processAudit()', 'PUT', 1, 'admin', '研发部门', '/api/merchant/audit', '127.0.0.1', '内网IP', '{"auditOpinion":"111","auditStatus":"1","auditType":"1","id":71,"merchantId":1073} ', '{"code":200,"message":"success"}', 0, NULL, '2026-06-18 22:24:46', 24),
+	(173, '商户酒店管理', 2, 'com.zsc.module.controller.MerchantHotelController.update()', 'PUT', 1, 'merchant01', '市场部门', '/api/merchant/hotel', '127.0.0.1', '内网IP', '{"address":"泉州市丰泽区丰海路1005号","businessId":1073,"facility":"WiFi,停车场,游泳池,健身房,餐厅","id":73,"imgUrl":"https://pic.nximg.cn/file/20151122/21259462_235034561875_2.jpg","name":"泉州泰禾洲际酒店","star":5,"status":"0"} ', '{"code":200,"data":"修改成功","message":"success"}', 0, NULL, '2026-06-20 00:51:27', 60),
+	(174, '商户酒店管理', 2, 'com.zsc.module.controller.MerchantHotelController.update()', 'PUT', 1, 'merchant01', '市场部门', '/api/merchant/hotel', '127.0.0.1', '内网IP', '{"address":"泉州市丰泽区丰海路1005号","businessId":1073,"facility":"WiFi,停车场,游泳池,健身房,餐厅","id":73,"imgUrl":"https://ts4.tc.mm.bing.net/th/id/OIP-C.LSeIPMv4pdxMiwnuVf6RtAHaG2?rs=1&pid=ImgDetMain&o=7&rm=3","name":"泉州泰禾洲际酒店","star":5,"status":"0"} ', '{"code":200,"data":"修改成功","message":"success"}', 0, NULL, '2026-06-20 00:58:37', 36),
+	(175, '商户房型管理', 2, 'com.zsc.module.controller.MerchantRoomController.update()', 'PUT', 1, 'merchant01', '市场部门', '/api/merchant/room', '127.0.0.1', '内网IP', '{"area":"38平米","bedType":"1.8米大床","hotelId":73,"id":277,"imgUrl":"https://cn.bing.com/images/search?view=detailV2&ccid=vbx4iSrZ&id=F1F8E9BE450086D4EBA5A411E759021714060A5F&thid=OIP.vbx4iSrZeVsZ969iymDudwHaE7&mediaurl=https%3a%2f%2fpavo.elongstatic.com%2fi%2ftHotel800_600%2fIW5g7O5cKk.jpg&exph=533&expw=800&q=%e9%85%92%e5%ba%97%e6%88%bf%e5%9e%8b%e5%9b%be%e7%89%87&FORM=IRPRST&ck=F97AA600C2959A6BFAF1000765426D3F&selectedIndex=0&itb=0","price":749,"roomType":"豪华大床房","status":"0","stock":28} ', NULL, 1, '\r\n### Error updating database.  Cause: com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Data too long for column \'img_url\' at row 1\r\n### The error may exist in com/zsc/module/mapper/RoomMapper.java (best guess)\r\n### The error may involve com.zsc.module.mapper.RoomMapper.updateById-Inline\r\n### The error occurred while setting parameters\r\n### SQL: UPDATE room  SET hotel_id=?, room_type=?, area=?, bed_type=?, price=?, stock=?, status=?, img_url=?,  update_time=?  WHERE id=?\r\n### Cause: com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Data too long for column \'img_url\' at row 1\n; Data truncation: Data too long for column \'img_url\' at row 1', '2026-06-20 01:26:48', 236),
+	(176, '商户房型管理', 2, 'com.zsc.module.controller.MerchantRoomController.update()', 'PUT', 1, 'merchant01', '市场部门', '/api/merchant/room', '127.0.0.1', '内网IP', '{"area":"38平米","bedType":"1.8米大床","hotelId":73,"id":277,"imgUrl":"https://cn.bing.com/images/search?view=detailV2&ccid=vbx4iSrZ&id=F1F8E9BE450086D4EBA5A411E759021714060A5F&thid=OIP.vbx4iSrZeVsZ969iymDudwHaE7&mediaurl=https%3a%2f%2fpavo.elongstatic.com%2fi%2ftHotel800_600%2fIW5g7O5cKk.jpg&exph=533&expw=800&q=%e9%85%92%e5%ba%97%e6%88%bf%e5%9e%8b%e5%9b%be%e7%89%87&FORM=IRPRST&ck=F97AA600C2959A6BFAF1000765426D3F&selectedIndex=0&itb=0","price":749,"roomType":"豪华大床房","status":"0","stock":28} ', '{"code":200,"data":"修改成功","message":"success"}', 0, NULL, '2026-06-20 01:28:55', 176),
+	(177, '商户房型管理', 2, 'com.zsc.module.controller.MerchantRoomController.update()', 'PUT', 1, 'merchant01', '市场部门', '/api/merchant/room', '127.0.0.1', '内网IP', '{"area":"38平米","bedType":"1.8米大床","hotelId":73,"id":277,"imgUrl":"https://pavo.elongstatic.com/i/tHotel800_600/IW5g7O5cKk.jpg","price":749,"roomType":"豪华大床房","status":"0","stock":28} ', '{"code":200,"data":"修改成功","message":"success"}', 0, NULL, '2026-06-20 01:35:46', 39),
+	(178, '商户房型管理', 2, 'com.zsc.module.controller.MerchantRoomController.update()', 'PUT', 1, 'merchant01', '市场部门', '/api/merchant/room', '127.0.0.1', '内网IP', '{"area":"42平米","bedType":"2张1.2米单人床","hotelId":73,"id":278,"imgUrl":"https://ts3.tc.mm.bing.net/th/id/OIP-C.1Uq_u9irpFlsd3NRbVFrtwHaEH?rs=1&pid=ImgDetMain&o=7&rm=3","price":879,"roomType":"行政双床房","status":"0","stock":25} ', '{"code":200,"data":"修改成功","message":"success"}', 0, NULL, '2026-06-20 01:36:20', 40),
+	(179, '商户房型管理', 2, 'com.zsc.module.controller.MerchantRoomController.update()', 'PUT', 1, 'merchant01', '市场部门', '/api/merchant/room', '127.0.0.1', '内网IP', '{"area":"65平米","bedType":"1.8米大床+1.2米单人床","hotelId":73,"id":279,"imgUrl":"https://ts3.tc.mm.bing.net/th/id/OIP-C.AgXElXiK98b5ZLm7F7LH1wAAAA?rs=1&pid=ImgDetMain&o=7&rm=3","price":1239,"roomType":"家庭套房","status":"0","stock":11} ', '{"code":200,"data":"修改成功","message":"success"}', 0, NULL, '2026-06-20 01:36:43', 41);
 
 -- 导出  表 zsc.sys_post 结构
 CREATE TABLE IF NOT EXISTS `sys_post` (
@@ -2350,9 +2379,9 @@ CREATE TABLE IF NOT EXISTS `sys_user` (
 
 -- 正在导出表  zsc.sys_user 的数据：~3 rows (大约)
 INSERT INTO `sys_user` (`user_id`, `dept_id`, `user_name`, `nick_name`, `user_type`, `email`, `phonenumber`, `sex`, `avatar`, `password`, `status`, `del_flag`, `login_ip`, `login_date`, `pwd_update_date`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`, `points`) VALUES
-	(1, 103, 'admin', '系统管理员', '00', 'admin@hotel.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-18 22:23:19', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '超级管理员账号', 0),
+	(1, 103, 'admin', '系统管理员', '00', 'admin@hotel.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-19 23:00:23', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '超级管理员账号', 0),
 	(2, 105, 'customer01', '普通用户', '00', 'customer@test.com', '15666666666', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-19 01:30:41', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '前台普通用户账号', 0),
-	(100, 104, 'merchant01', '酒店商户', '01', 'merchant@test.com', '13800000001', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-18 23:52:45', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '酒店商家账号', 0);
+	(100, 104, 'merchant01', '酒店商户', '01', 'merchant@test.com', '13800000001', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-20 02:21:49', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '酒店商家账号', 0);
 
 -- 导出  表 zsc.sys_user_post 结构
 CREATE TABLE IF NOT EXISTS `sys_user_post` (
