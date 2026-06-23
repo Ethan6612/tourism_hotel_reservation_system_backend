@@ -274,21 +274,29 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     }
 
     @Override
-    public void likeComment(Long commentId) {
+    public boolean toggleLikeComment(Long commentId) {
         Comment comment = this.getById(commentId);
         if (comment == null) {
             throw new ServiceException("评价不存在！");
         }
-        commentMapper.incrementLikeCount(commentId);
+        Long userId = SecurityUtils.getUserId();
+        Long exists = commentMapper.selectCommentLikeExists(userId, commentId);
+        if (exists != null && exists > 0) {
+            // 已点赞 → 取消点赞
+            commentMapper.deleteCommentLike(userId, commentId);
+            commentMapper.decrementLikeCount(commentId);
+            return false;
+        } else {
+            // 未点赞 → 点赞
+            commentMapper.insertCommentLike(userId, commentId);
+            commentMapper.incrementLikeCount(commentId);
+            return true;
+        }
     }
 
     @Override
-    public void unlikeComment(Long commentId) {
-        Comment comment = this.getById(commentId);
-        if (comment == null) {
-            throw new ServiceException("评价不存在！");
-        }
-        commentMapper.decrementLikeCount(commentId);
+    public List<CommentVo> getCommentLikes(Long commentId) {
+        return commentMapper.selectCommentLikes(commentId);
     }
 
     @Override

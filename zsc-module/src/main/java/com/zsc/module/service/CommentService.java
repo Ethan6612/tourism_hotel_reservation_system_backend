@@ -74,14 +74,15 @@ public interface CommentService extends IService<Comment> {
     List<ScoreStatisticsVo> getHotelsAverageScore(List<Long> hotelIds);
 
     /**
-     * 点赞评价
+     * 点赞/取消点赞（切换式）
+     * @return true=已点赞 false=已取消
      */
-    void likeComment(Long commentId);
+    boolean toggleLikeComment(Long commentId);
 
     /**
-     * 取消点赞
+     * 查询评价的点赞用户列表
      */
-    void unlikeComment(Long commentId);
+    List<CommentVo> getCommentLikes(Long commentId);
 
     /**
      * 审核评价（管理员：通过/拒绝）

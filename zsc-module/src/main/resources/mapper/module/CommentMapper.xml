@@ -277,6 +277,35 @@
         UPDATE `comment` SET like_count = like_count - 1 WHERE id = #{id} AND like_count > 0
     </update>
 
+    <!-- 插入点赞记录 -->
+    <insert id="insertCommentLike">
+        INSERT IGNORE INTO comment_like (`user_id`, `comment_id`, `create_time`)
+        VALUES (#{userId}, #{commentId}, NOW())
+    </insert>
+
+    <!-- 删除点赞记录 -->
+    <delete id="deleteCommentLike">
+        DELETE FROM comment_like WHERE user_id = #{userId} AND comment_id = #{commentId}
+    </delete>
+
+    <!-- 查询用户是否已点赞 -->
+    <select id="selectCommentLikeExists" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM comment_like WHERE user_id = #{userId} AND comment_id = #{commentId}
+    </select>
+
+    <!-- 查询评价的点赞用户列表 -->
+    <select id="selectCommentLikes" resultType="com.zsc.module.domain.vo.CommentVo">
+        SELECT
+            cl.user_id AS id,
+            u.nick_name AS userName,
+            u.avatar AS userAvatar,
+            cl.create_time AS createTime
+        FROM comment_like cl
+        LEFT JOIN sys_user u ON cl.user_id = u.user_id
+        WHERE cl.comment_id = #{commentId}
+        ORDER BY cl.create_time DESC
+    </select>
+
     <!-- 统计评价总数 -->
     <select id="countComments" resultType="java.lang.Long">
         SELECT COUNT(*)

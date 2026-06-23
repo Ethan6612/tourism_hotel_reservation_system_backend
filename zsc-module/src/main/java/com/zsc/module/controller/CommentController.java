@@ -226,23 +226,23 @@ public class CommentController extends BaseController {
     // ==================== 互动接口 ====================
 
     /**
-     * 点赞评价
+     * 点赞/取消点赞（切换式）
      */
-    @Operation(summary = "点赞评价")
+    @Operation(summary = "点赞/取消点赞")
     @PostMapping("/{id}/like")
-    public AjaxResult like(@PathVariable Long id) {
-        commentService.likeComment(id);
-        return success("点赞成功！");
+    public AjaxResult toggleLike(@PathVariable Long id) {
+        boolean liked = commentService.toggleLikeComment(id);
+        return success(liked ? "点赞成功！" : "已取消点赞！");
     }
 
     /**
-     * 取消点赞
+     * 查询评价的点赞用户列表
      */
-    @Operation(summary = "取消点赞")
-    @PostMapping("/{id}/unlike")
-    public AjaxResult unlike(@PathVariable Long id) {
-        commentService.unlikeComment(id);
-        return success("取消点赞成功！");
+    @Operation(summary = "查询点赞用户列表")
+    @GetMapping("/{id}/likes")
+    public AjaxResult getLikes(@PathVariable Long id) {
+        List<CommentVo> list = commentService.getCommentLikes(id);
+        return success(list);
     }
 
     // ==================== 审核接口 ====================

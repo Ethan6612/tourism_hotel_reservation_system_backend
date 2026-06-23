@@ -68,6 +68,26 @@ public interface CommentMapper extends BaseMapper<Comment> {
     int decrementLikeCount(@Param("id") Long id);
 
     /**
+     * 插入点赞记录
+     */
+    int insertCommentLike(@Param("userId") Long userId, @Param("commentId") Long commentId);
+
+    /**
+     * 删除点赞记录
+     */
+    int deleteCommentLike(@Param("userId") Long userId, @Param("commentId") Long commentId);
+
+    /**
+     * 查询用户是否已点赞
+     */
+    Long selectCommentLikeExists(@Param("userId") Long userId, @Param("commentId") Long commentId);
+
+    /**
+     * 查询评价的点赞用户列表
+     */
+    List<CommentVo> selectCommentLikes(@Param("commentId") Long commentId);
+
+    /**
      * 统计评价总数
      */
     Long countComments(@Param("query") CommentQueryDto query);
