@@ -8,6 +8,7 @@ import com.zsc.module.domain.dto.query.OrderQueryDto;
 import com.zsc.module.domain.vo.OrderVo;
 import com.zsc.module.domain.vo.UserDashboardStatsVo;
 import com.zsc.module.service.OrderService;
+import com.zsc.module.service.PaymentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.Map;
 
 /**
  * 用户端订单控制器
@@ -29,6 +31,9 @@ public class UserOrderController extends BaseController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private PaymentService paymentService;
 
     // ==================== 我的订单 ====================
 
@@ -91,6 +96,30 @@ public class UserOrderController extends BaseController {
         Long userId = SecurityUtils.getUserId();
         orderService.deleteUserOrder(id, userId);
         return success("订单已删除");
+    }
+
+    // ==================== 支付接口 ====================
+
+    /**
+     * 发起微信支付（生成支付参数和二维码）
+     */
+    @Operation(summary = "发起微信支付")
+    @PostMapping("/order/{id}/pay")
+    public AjaxResult payOrder(@PathVariable Long id) {
+        Long userId = SecurityUtils.getUserId();
+        Map<String, Object> payData = paymentService.initiateWechatPay(id, userId);
+        return success(payData);
+    }
+
+    /**
+     * 确认支付（模拟支付成功回调）
+     */
+    @Operation(summary = "确认支付")
+    @PostMapping("/order/{id}/pay-confirm")
+    public AjaxResult confirmPay(@PathVariable Long id) {
+        Long userId = SecurityUtils.getUserId();
+        paymentService.confirmPay(id, userId);
+        return success("支付成功");
     }
 
     // ==================== 用户首页统计 ====================

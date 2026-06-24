@@ -9,6 +9,7 @@ import com.zsc.module.domain.entity.Hotel;
 import com.zsc.module.domain.vo.HotCityVo;
 import com.zsc.module.domain.vo.HotelDetailVO;
 import com.zsc.module.domain.vo.HotelListVO;
+import com.zsc.module.domain.vo.HotelSalesRankVO;
 
 import java.util.List;
 
@@ -109,4 +110,11 @@ public interface HotelService extends IService<Hotel> {
      * @param limit 返回数量
      */
     List<HotelListVO> getPersonalRecommend(Long userId, int limit);
+
+    /**
+     * 获取热销排行（按订单数排序）
+     *
+     * @param limit 返回数量
+     */
+    List<HotelSalesRankVO> getHotSalesRank(int limit);
 }
