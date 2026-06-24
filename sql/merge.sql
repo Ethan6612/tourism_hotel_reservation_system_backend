@@ -632,6 +632,27 @@ INSERT INTO `merchant_audit` VALUES (70, 1070, '1', '1', '{\"license_img\":\"htt
 INSERT INTO `merchant_audit` VALUES (71, 1073, '1', '1', NULL, '111', NULL, NULL, '2026-06-18 21:54:12', '2026-06-18 22:24:47', '2026-06-18 21:54:12', '2026-06-18 22:24:47', 100);
 
 -- ----------------------------
+-- Table structure for hotel_audit
+-- ----------------------------
+DROP TABLE IF EXISTS `hotel_audit`;
+CREATE TABLE `hotel_audit`  (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '审核ID',
+  `hotel_id` bigint NOT NULL COMMENT '酒店ID',
+  `audit_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0' COMMENT '审核状态（0待审核 1审核通过 2审核驳回）',
+  `audit_opinion` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '审核意见',
+  `auditor_id` bigint NULL DEFAULT NULL COMMENT '审核人ID',
+  `auditor_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '审核人姓名',
+  `submit_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '提交时间',
+  `audit_time` datetime NULL DEFAULT NULL COMMENT '审核时间',
+  `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_hotel_id`(`hotel_id` ASC) USING BTREE,
+  INDEX `idx_audit_status`(`audit_status` ASC) USING BTREE,
+  INDEX `idx_auditor_id`(`auditor_id` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '酒店审核表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
 -- Table structure for orders
 -- ----------------------------
 DROP TABLE IF EXISTS `orders`;

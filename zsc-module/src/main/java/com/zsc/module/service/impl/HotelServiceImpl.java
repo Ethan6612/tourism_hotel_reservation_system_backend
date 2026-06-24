@@ -9,11 +9,13 @@ import com.zsc.module.domain.dto.HotelDTO;
 import com.zsc.module.domain.dto.HotelSearchDTO;
 import com.zsc.module.domain.dto.query.HotelQueryDto;
 import com.zsc.module.domain.entity.Hotel;
+import com.zsc.module.domain.entity.HotelAudit;
 import com.zsc.module.domain.enums.HotelStatusEnum;
 import com.zsc.module.domain.vo.HotelDetailVO;
 import com.zsc.module.domain.vo.HotelListVO;
 import com.zsc.module.domain.vo.HotCityVo;
 import com.zsc.module.domain.vo.RoomVo;
+import com.zsc.module.mapper.HotelAuditMapper;
 import com.zsc.module.mapper.HotelMapper;
 import com.zsc.module.service.HotelService;
 import com.zsc.module.service.RoomService;
@@ -41,6 +43,9 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel> implements
     @Lazy
     @Autowired
     private RoomService roomService;
+
+    @Autowired
+    private HotelAuditMapper hotelAuditMapper;
 
     /**
      * 新增酒店
@@ -181,6 +186,28 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel> implements
         hotel.setUpdateTime(new Date());
         if (!this.updateById(hotel)) {
             throw new ServiceException("提交审核失败");
+        }
+
+        // 检查是否已有待审核的记录，避免重复提交
+        boolean hasPending = hotelAuditMapper.selectCount(
+                new LambdaQueryWrapper<HotelAudit>()
+                        .eq(HotelAudit::getHotelId, id)
+                        .eq(HotelAudit::getAuditStatus, "0")
+        ) > 0;
+        if (hasPending) {
+            throw new ServiceException("该酒店已有待审核的申请，请勿重复提交！");
+        }
+
+        // 创建待审核记录
+        HotelAudit audit = HotelAudit.builder()
+                .hotelId(id)
+                .auditStatus("0") // 待审核
+                .submitTime(new Date())
+                .createTime(new Date())
+                .updateTime(new Date())
+                .build();
+        if (hotelAuditMapper.insert(audit) <= 0) {
+            throw new ServiceException("创建审核记录失败，提交审核失败");
         }
     }
 
