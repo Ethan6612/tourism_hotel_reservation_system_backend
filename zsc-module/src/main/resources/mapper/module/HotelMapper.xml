@@ -186,4 +186,22 @@
         LIMIT #{limit}
     </select>
 
+    <!-- 热销排行：按酒店订单数排名，取top N -->
+    <select id="selectHotSalesRank" resultType="com.zsc.module.domain.vo.HotelSalesRankVO">
+        SELECT
+            h.id,
+            h.name,
+            h.star,
+            h.score,
+            h.img_url AS imgUrl,
+            COUNT(o.id) AS salesCount,
+            (SELECT MIN(r.price) FROM room r WHERE r.hotel_id = h.id AND r.status = '0') AS minPrice
+        FROM hotel h
+        LEFT JOIN orders o ON o.hotel_id = h.id AND o.status IN ('1', '3')
+        WHERE h.status = '0'
+        GROUP BY h.id, h.name, h.star, h.score, h.img_url
+        ORDER BY salesCount DESC, h.score DESC
+        LIMIT #{limit}
+    </select>
+
 </mapper>

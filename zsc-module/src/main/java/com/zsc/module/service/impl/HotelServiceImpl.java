@@ -13,6 +13,7 @@ import com.zsc.module.domain.entity.HotelAudit;
 import com.zsc.module.domain.enums.HotelStatusEnum;
 import com.zsc.module.domain.vo.HotelDetailVO;
 import com.zsc.module.domain.vo.HotelListVO;
+import com.zsc.module.domain.vo.HotelSalesRankVO;
 import com.zsc.module.domain.vo.HotCityVo;
 import com.zsc.module.domain.vo.RoomVo;
 import com.zsc.module.mapper.HotelAuditMapper;
@@ -365,6 +366,11 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel> implements
         }
         list.forEach(this::fillStatusName);
         return list;
+    }
+
+    @Override
+    public List<HotelSalesRankVO> getHotSalesRank(int limit) {
+        return baseMapper.selectHotSalesRank(limit);
     }
 
     // ==================== 私有方法 ====================

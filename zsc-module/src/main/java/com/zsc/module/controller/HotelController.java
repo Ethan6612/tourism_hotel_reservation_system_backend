@@ -11,6 +11,7 @@ import com.zsc.module.domain.dto.query.HotelQueryDto;
 import com.zsc.module.domain.vo.HotCityVo;
 import com.zsc.module.domain.vo.HotelDetailVO;
 import com.zsc.module.domain.vo.HotelListVO;
+import com.zsc.module.domain.vo.HotelSalesRankVO;
 import com.zsc.module.service.HotelService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -67,6 +68,16 @@ public class HotelController {
     public ResultVo<List<HotelListVO>> personalRecommend() {
         Long userId = SecurityUtils.getUserId();
         List<HotelListVO> list = hotelService.getPersonalRecommend(userId, 10);
+        return ResultVo.ok(list);
+    }
+
+    /**
+     * 热销排行榜（按订单数排序）
+     */
+    @Operation(summary = "热销排行榜")
+    @GetMapping("/hotSales")
+    public ResultVo<List<HotelSalesRankVO>> hotSales() {
+        List<HotelSalesRankVO> list = hotelService.getHotSalesRank(10);
         return ResultVo.ok(list);
     }
 

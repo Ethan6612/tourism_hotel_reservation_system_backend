@@ -8,6 +8,7 @@ import com.zsc.module.domain.entity.Hotel;
 import com.zsc.module.domain.vo.HotCityVo;
 import com.zsc.module.domain.vo.HotelDetailVO;
 import com.zsc.module.domain.vo.HotelListVO;
+import com.zsc.module.domain.vo.HotelSalesRankVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -55,4 +56,9 @@ public interface HotelMapper extends BaseMapper<Hotel> {
      * 查询个性化推荐酒店（根据用户历史订单的偏好）
      */
     List<HotelListVO> selectPersonalRecommend(@Param("userId") Long userId, @Param("limit") int limit);
+
+    /**
+     * 查询热销排行榜（按订单数排序）
+     */
+    List<HotelSalesRankVO> selectHotSalesRank(@Param("limit") int limit);
 }
