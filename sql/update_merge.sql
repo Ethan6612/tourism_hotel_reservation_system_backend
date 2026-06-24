@@ -11,7 +11,7 @@
  Target Server Version : 80404 (8.4.4)
  File Encoding         : 65001
 
- Date: 24/06/2026 16:40:17
+ Date: 24/06/2026 19:20:31
 */
 
 SET NAMES utf8mb4;
@@ -2065,7 +2065,7 @@ CREATE TABLE `sys_menu`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4025 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单权限表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5008 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单权限表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -2170,6 +2170,7 @@ INSERT INTO `sys_menu` VALUES (4000, '酒店管理', 4, 6, 'hotelManage', '', ''
 INSERT INTO `sys_menu` VALUES (4001, '酒店信息', 4000, 1, 'hotelInfo', 'biz/hotelManage/hotelInfo', '', '', 1, 0, 'C', '0', '0', 'biz:hotelInfo:list', 'component', 'admin', '2026-06-24 15:59:08', '', NULL, '酒店信息菜单');
 INSERT INTO `sys_menu` VALUES (4002, '房源管理', 4000, 2, 'roomManage', 'biz/hotelManage/roomManage', '', '', 1, 0, 'C', '0', '0', 'biz:roomManage:list', 'list', 'admin', '2026-06-24 15:59:08', '', NULL, '房源管理菜单');
 INSERT INTO `sys_menu` VALUES (4003, '酒店分类', 4000, 3, 'category', 'biz/hotelManage/category', '', '', 1, 0, 'C', '0', '0', 'biz:category:list', 'tree', 'admin', '2026-06-24 15:59:08', '', NULL, '酒店分类菜单');
+INSERT INTO `sys_menu` VALUES (4004, '酒店审核', 4, 7, 'hotelAudit', 'biz/hotelManage/hotelAudit', NULL, '', 1, 0, 'C', '0', '0', 'biz:hotelAudit:list', 'checkbox', '', '2026-06-24 18:50:50', 'admin', '2026-06-24 19:10:34', '');
 INSERT INTO `sys_menu` VALUES (4010, '酒店查询', 4001, 1, '', '', '', '', 1, 0, 'F', '0', '0', 'biz:hotelInfo:query', '#', 'admin', '2026-06-24 15:59:08', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (4011, '酒店新增', 4001, 2, '', '', '', '', 1, 0, 'F', '0', '0', 'biz:hotelInfo:add', '#', 'admin', '2026-06-24 15:59:08', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (4012, '酒店修改', 4001, 3, '', '', '', '', 1, 0, 'F', '0', '0', 'biz:hotelInfo:edit', '#', 'admin', '2026-06-24 15:59:08', '', NULL, '');
@@ -2182,6 +2183,13 @@ INSERT INTO `sys_menu` VALUES (4018, '分类查询', 4003, 1, '', '', '', '', 1,
 INSERT INTO `sys_menu` VALUES (4019, '分类新增', 4003, 2, '', '', '', '', 1, 0, 'F', '0', '0', 'biz:category:add', '#', 'admin', '2026-06-24 15:59:08', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (4020, '分类修改', 4003, 3, '', '', '', '', 1, 0, 'F', '0', '0', 'biz:category:edit', '#', 'admin', '2026-06-24 15:59:08', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (4021, '分类删除', 4003, 4, '', '', '', '', 1, 0, 'F', '0', '0', 'biz:category:remove', '#', 'admin', '2026-06-24 15:59:08', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (5001, '商户中心', 4, 0, 'merchant', 'biz/merchant/index', NULL, '', 1, 0, 'C', '0', '0', '', 'home', '', '2026-06-24 17:59:01', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (5002, '酒店管理', 4, 0, 'hotel', 'biz/hotel/index', NULL, '', 1, 0, 'C', '0', '0', '', 'building', '', '2026-06-24 17:59:01', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (5003, '房型管理', 4, 0, 'room', 'biz/room/index', NULL, '', 1, 0, 'C', '0', '0', '', 'component', '', '2026-06-24 17:59:01', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (5004, '评价管理', 4, 0, 'comment', 'biz/merchantComments', NULL, '', 1, 0, 'C', '0', '0', '', 'star', '', '2026-06-24 17:59:01', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (5005, '数据统计', 4, 0, 'statistics', 'biz/statistics/index', NULL, '', 1, 0, 'C', '0', '0', '', 'chart', '', '2026-06-24 17:59:01', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (5006, '通知中心', 4, 0, 'notice', 'biz/notice/index', NULL, '', 1, 0, 'C', '0', '0', '', 'message', '', '2026-06-24 17:59:01', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (5007, '营收报表', 4, 0, 'statistics/report', 'biz/statistics/report', NULL, '', 1, 0, 'C', '0', '0', '', 'documentation', '', '2026-06-24 17:59:01', '', NULL, '');
 
 -- ----------------------------
 -- Table structure for sys_notice
@@ -2454,6 +2462,7 @@ INSERT INTO `sys_role_menu` VALUES (1, 4000);
 INSERT INTO `sys_role_menu` VALUES (1, 4001);
 INSERT INTO `sys_role_menu` VALUES (1, 4002);
 INSERT INTO `sys_role_menu` VALUES (1, 4003);
+INSERT INTO `sys_role_menu` VALUES (1, 4004);
 INSERT INTO `sys_role_menu` VALUES (1, 4010);
 INSERT INTO `sys_role_menu` VALUES (1, 4011);
 INSERT INTO `sys_role_menu` VALUES (1, 4012);
@@ -2466,119 +2475,14 @@ INSERT INTO `sys_role_menu` VALUES (1, 4018);
 INSERT INTO `sys_role_menu` VALUES (1, 4019);
 INSERT INTO `sys_role_menu` VALUES (1, 4020);
 INSERT INTO `sys_role_menu` VALUES (1, 4021);
-INSERT INTO `sys_role_menu` VALUES (2, 1);
-INSERT INTO `sys_role_menu` VALUES (2, 2);
-INSERT INTO `sys_role_menu` VALUES (2, 3);
-INSERT INTO `sys_role_menu` VALUES (2, 100);
-INSERT INTO `sys_role_menu` VALUES (2, 101);
-INSERT INTO `sys_role_menu` VALUES (2, 102);
-INSERT INTO `sys_role_menu` VALUES (2, 103);
-INSERT INTO `sys_role_menu` VALUES (2, 104);
-INSERT INTO `sys_role_menu` VALUES (2, 105);
-INSERT INTO `sys_role_menu` VALUES (2, 106);
-INSERT INTO `sys_role_menu` VALUES (2, 107);
-INSERT INTO `sys_role_menu` VALUES (2, 108);
-INSERT INTO `sys_role_menu` VALUES (2, 109);
-INSERT INTO `sys_role_menu` VALUES (2, 110);
-INSERT INTO `sys_role_menu` VALUES (2, 111);
-INSERT INTO `sys_role_menu` VALUES (2, 112);
-INSERT INTO `sys_role_menu` VALUES (2, 113);
-INSERT INTO `sys_role_menu` VALUES (2, 114);
-INSERT INTO `sys_role_menu` VALUES (2, 115);
-INSERT INTO `sys_role_menu` VALUES (2, 116);
-INSERT INTO `sys_role_menu` VALUES (2, 117);
-INSERT INTO `sys_role_menu` VALUES (2, 500);
-INSERT INTO `sys_role_menu` VALUES (2, 501);
-INSERT INTO `sys_role_menu` VALUES (2, 1000);
-INSERT INTO `sys_role_menu` VALUES (2, 1001);
-INSERT INTO `sys_role_menu` VALUES (2, 1002);
-INSERT INTO `sys_role_menu` VALUES (2, 1003);
-INSERT INTO `sys_role_menu` VALUES (2, 1004);
-INSERT INTO `sys_role_menu` VALUES (2, 1005);
-INSERT INTO `sys_role_menu` VALUES (2, 1006);
-INSERT INTO `sys_role_menu` VALUES (2, 1007);
-INSERT INTO `sys_role_menu` VALUES (2, 1008);
-INSERT INTO `sys_role_menu` VALUES (2, 1009);
-INSERT INTO `sys_role_menu` VALUES (2, 1010);
-INSERT INTO `sys_role_menu` VALUES (2, 1011);
-INSERT INTO `sys_role_menu` VALUES (2, 1012);
-INSERT INTO `sys_role_menu` VALUES (2, 1013);
-INSERT INTO `sys_role_menu` VALUES (2, 1014);
-INSERT INTO `sys_role_menu` VALUES (2, 1015);
-INSERT INTO `sys_role_menu` VALUES (2, 1016);
-INSERT INTO `sys_role_menu` VALUES (2, 1017);
-INSERT INTO `sys_role_menu` VALUES (2, 1018);
-INSERT INTO `sys_role_menu` VALUES (2, 1019);
-INSERT INTO `sys_role_menu` VALUES (2, 1020);
-INSERT INTO `sys_role_menu` VALUES (2, 1021);
-INSERT INTO `sys_role_menu` VALUES (2, 1022);
-INSERT INTO `sys_role_menu` VALUES (2, 1023);
-INSERT INTO `sys_role_menu` VALUES (2, 1024);
-INSERT INTO `sys_role_menu` VALUES (2, 1025);
-INSERT INTO `sys_role_menu` VALUES (2, 1026);
-INSERT INTO `sys_role_menu` VALUES (2, 1027);
-INSERT INTO `sys_role_menu` VALUES (2, 1028);
-INSERT INTO `sys_role_menu` VALUES (2, 1029);
-INSERT INTO `sys_role_menu` VALUES (2, 1030);
-INSERT INTO `sys_role_menu` VALUES (2, 1031);
-INSERT INTO `sys_role_menu` VALUES (2, 1032);
-INSERT INTO `sys_role_menu` VALUES (2, 1033);
-INSERT INTO `sys_role_menu` VALUES (2, 1034);
-INSERT INTO `sys_role_menu` VALUES (2, 1035);
-INSERT INTO `sys_role_menu` VALUES (2, 1036);
-INSERT INTO `sys_role_menu` VALUES (2, 1037);
-INSERT INTO `sys_role_menu` VALUES (2, 1038);
-INSERT INTO `sys_role_menu` VALUES (2, 1039);
-INSERT INTO `sys_role_menu` VALUES (2, 1040);
-INSERT INTO `sys_role_menu` VALUES (2, 1041);
-INSERT INTO `sys_role_menu` VALUES (2, 1042);
-INSERT INTO `sys_role_menu` VALUES (2, 1043);
-INSERT INTO `sys_role_menu` VALUES (2, 1044);
-INSERT INTO `sys_role_menu` VALUES (2, 1045);
-INSERT INTO `sys_role_menu` VALUES (2, 1046);
-INSERT INTO `sys_role_menu` VALUES (2, 1047);
-INSERT INTO `sys_role_menu` VALUES (2, 1048);
-INSERT INTO `sys_role_menu` VALUES (2, 1049);
-INSERT INTO `sys_role_menu` VALUES (2, 1050);
-INSERT INTO `sys_role_menu` VALUES (2, 1051);
-INSERT INTO `sys_role_menu` VALUES (2, 1052);
-INSERT INTO `sys_role_menu` VALUES (2, 1053);
-INSERT INTO `sys_role_menu` VALUES (2, 1054);
-INSERT INTO `sys_role_menu` VALUES (2, 1055);
-INSERT INTO `sys_role_menu` VALUES (2, 1056);
-INSERT INTO `sys_role_menu` VALUES (2, 1057);
-INSERT INTO `sys_role_menu` VALUES (2, 1058);
-INSERT INTO `sys_role_menu` VALUES (2, 1059);
-INSERT INTO `sys_role_menu` VALUES (2, 1060);
-INSERT INTO `sys_role_menu` VALUES (2, 2008);
-INSERT INTO `sys_role_menu` VALUES (2, 2009);
-INSERT INTO `sys_role_menu` VALUES (2, 2010);
-INSERT INTO `sys_role_menu` VALUES (2, 2011);
-INSERT INTO `sys_role_menu` VALUES (2, 2012);
-INSERT INTO `sys_role_menu` VALUES (2, 2013);
-INSERT INTO `sys_role_menu` VALUES (2, 2014);
-INSERT INTO `sys_role_menu` VALUES (2, 2015);
-INSERT INTO `sys_role_menu` VALUES (2, 2016);
-INSERT INTO `sys_role_menu` VALUES (2, 2017);
-INSERT INTO `sys_role_menu` VALUES (2, 2018);
-INSERT INTO `sys_role_menu` VALUES (2, 2019);
-INSERT INTO `sys_role_menu` VALUES (2, 2020);
-INSERT INTO `sys_role_menu` VALUES (2, 2021);
-INSERT INTO `sys_role_menu` VALUES (2, 2022);
-INSERT INTO `sys_role_menu` VALUES (2, 2023);
-INSERT INTO `sys_role_menu` VALUES (2, 2024);
-INSERT INTO `sys_role_menu` VALUES (2, 2025);
-INSERT INTO `sys_role_menu` VALUES (2, 2026);
-INSERT INTO `sys_role_menu` VALUES (2, 2027);
-INSERT INTO `sys_role_menu` VALUES (2, 2028);
-INSERT INTO `sys_role_menu` VALUES (2, 2029);
-INSERT INTO `sys_role_menu` VALUES (2, 2030);
-INSERT INTO `sys_role_menu` VALUES (2, 2031);
-INSERT INTO `sys_role_menu` VALUES (2, 2032);
-INSERT INTO `sys_role_menu` VALUES (2, 2033);
-INSERT INTO `sys_role_menu` VALUES (2, 2034);
-INSERT INTO `sys_role_menu` VALUES (2, 2035);
-INSERT INTO `sys_role_menu` VALUES (2, 2036);
+INSERT INTO `sys_role_menu` VALUES (3, 4);
+INSERT INTO `sys_role_menu` VALUES (3, 5001);
+INSERT INTO `sys_role_menu` VALUES (3, 5002);
+INSERT INTO `sys_role_menu` VALUES (3, 5003);
+INSERT INTO `sys_role_menu` VALUES (3, 5004);
+INSERT INTO `sys_role_menu` VALUES (3, 5005);
+INSERT INTO `sys_role_menu` VALUES (3, 5006);
+INSERT INTO `sys_role_menu` VALUES (3, 5007);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -2612,9 +2516,9 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 103, 'admin', '系统管理员', '00', 'admin@hotel.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-24 16:24:21', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '超级管理员账号', 0);
-INSERT INTO `sys_user` VALUES (2, 105, 'customer01', '普通用户', '00', 'customer@test.com', '15666666666', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-19 01:30:41', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '前台普通用户账号', 0);
-INSERT INTO `sys_user` VALUES (100, 104, 'merchant01', '酒店商户', '01', 'merchant@test.com', '13800000001', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-24 16:23:45', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '酒店商家账号', 0);
+INSERT INTO `sys_user` VALUES (1, 103, 'admin', '系统管理员', '00', 'admin@hotel.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-24 18:46:47', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '超级管理员账号', 0);
+INSERT INTO `sys_user` VALUES (2, 105, 'customer01', '普通用户', '00', 'customer@test.com', '15666666666', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-24 19:14:21', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '前台普通用户账号', 0);
+INSERT INTO `sys_user` VALUES (100, 104, 'merchant01', '酒店商户', '01', 'merchant@test.com', '13800000001', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-24 19:12:20', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '酒店商家账号', 0);
 INSERT INTO `sys_user` VALUES (301, 100, 'merchant_bj', '张经理(北京希尔顿)', '00', 'merchant_bj@hotel.com', '13800138001', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-23 17:06:46', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-北京希尔顿', 0);
 INSERT INTO `sys_user` VALUES (302, 100, 'merchant_sh', '李总(上海华尔道夫)', '00', 'merchant_sh@hotel.com', '13800138002', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-上海华尔道夫', 0);
 INSERT INTO `sys_user` VALUES (303, 100, 'merchant_gz', '王总(广州丽思卡尔顿)', '00', 'merchant_gz@hotel.com', '13800138003', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-广州丽思卡尔顿', 0);
