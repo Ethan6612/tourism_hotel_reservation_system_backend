@@ -52,7 +52,7 @@ spring:
     # 国际化资源文件路径
     basename: i18n/messages
   profiles:
-    active: druid
+    active: druid, local
   # 文件上传
   servlet:
     multipart:
@@ -146,9 +146,9 @@ springdoc:
 
 # 阿里云OSS配置
 oss:
-  endpoint: oss-cn-hangzhou.aliyuncs.com
-  accessKeyId: ${OSS_ACCESS_KEY_ID:your-access-key-id}
-  accessKeySecret: ${OSS_ACCESS_KEY_SECRET:your-access-key-secret}
+  endpoint: oss-cn-shenzhen.aliyuncs.com
+  accessKeyId: ${OSS_ACCESS_KEY_ID:your_OSS_ACCESS_KEY_ID}
+  accessKeySecret: ${OSS_ACCESS_KEY_SECRET:your_OSS_ACCESS_KEY_SECRET}
   bucketName: hotel-booking-system
 
 # 防盗链配置

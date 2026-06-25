@@ -37,6 +37,10 @@ nbdist/
 .nb-gradle/
 
 ######################################################################
+# Secrets (local config)
+application-local.yml
+
+######################################################################
 # Others
 *.log
 *.xml.versionsBackup

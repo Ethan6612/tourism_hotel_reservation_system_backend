@@ -112,6 +112,11 @@ public class HotelDetailVO {
     private BigDecimal minPrice;
 
     /**
+     * 房型数量
+     */
+    private Integer roomCount;
+
+    /**
      * 创建时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
