@@ -4,6 +4,7 @@ import com.zsc.common.core.controller.BaseController;
 import com.zsc.common.core.domain.AjaxResult;
 import com.zsc.common.utils.SecurityUtils;
 import com.zsc.module.common.pagination.PageResult;
+import com.zsc.module.domain.dto.CreateOrderDto;
 import com.zsc.module.domain.dto.query.OrderQueryDto;
 import com.zsc.module.domain.vo.OrderVo;
 import com.zsc.module.domain.vo.UserDashboardStatsVo;
@@ -11,6 +12,7 @@ import com.zsc.module.service.OrderService;
 import com.zsc.module.service.PaymentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +38,17 @@ public class UserOrderController extends BaseController {
     private PaymentService paymentService;
 
     // ==================== 我的订单 ====================
+
+    /**
+     * 创建订单（预订）
+     */
+    @Operation(summary = "创建订单")
+    @PostMapping("/order/create")
+    public AjaxResult createOrder(@Valid @RequestBody CreateOrderDto dto) {
+        Long userId = SecurityUtils.getUserId();
+        OrderVo vo = orderService.createOrder(dto, userId);
+        return success(vo);
+    }
 
     /**
      * 查询当前用户的订单列表

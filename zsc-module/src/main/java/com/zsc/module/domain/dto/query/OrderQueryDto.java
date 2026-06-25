@@ -42,6 +42,9 @@ public class OrderQueryDto {
     /** 关键词搜索 */
     private String keyword;
 
+    /** 酒店ID列表（用于商户筛选自己的酒店订单） */
+    private List<Long> hotelIds;
+
     /** 排序 */
     private String orderBy;
 }

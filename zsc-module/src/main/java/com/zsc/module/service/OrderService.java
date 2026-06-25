@@ -2,6 +2,7 @@ package com.zsc.module.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zsc.module.common.pagination.PageResult;
+import com.zsc.module.domain.dto.CreateOrderDto;
 import com.zsc.module.domain.dto.query.OrderQueryDto;
 import com.zsc.module.domain.entity.Order;
 import com.zsc.module.domain.vo.OrderVo;
@@ -97,4 +98,9 @@ public interface OrderService extends IService<Order> {
      * 获取用户首页统计数据（含积分）
      */
     UserDashboardStatsVo getUserDashboardStats(Long userId);
+
+    /**
+     * 创建订单（用户预订）
+     */
+    OrderVo createOrder(CreateOrderDto dto, Long userId);
 }

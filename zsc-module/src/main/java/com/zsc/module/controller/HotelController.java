@@ -88,7 +88,7 @@ public class HotelController {
      */
     @Operation(summary = "获取酒店详情")
     @PreAuthorize("@ss.hasPermi('biz:hotel:query')")
-    @GetMapping("/{id}")
+    @GetMapping("/{id:\\d+}")
     public ResultVo<HotelDetailVO> get(@PathVariable Long id) {
         HotelDetailVO vo = hotelService.getHotelDetail(id);
         return ResultVo.ok(vo);
