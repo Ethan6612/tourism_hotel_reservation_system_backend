@@ -1,5 +1,6 @@
 package com.zsc.module.controller;
 
+import com.zsc.common.annotation.Anonymous;
 import com.zsc.common.annotation.Log;
 import com.zsc.common.enums.BusinessType;
 import com.zsc.common.utils.SecurityUtils;
@@ -43,6 +44,7 @@ public class HotelController {
     /**
      * 热门城市（按酒店数量排名）
      */
+    @Anonymous
     @Operation(summary = "热门城市")
     @GetMapping("/hotCities")
     public ResultVo<List<HotCityVo>> hotCities() {
@@ -53,6 +55,7 @@ public class HotelController {
     /**
      * 推荐酒店（高评分 + 高星级）
      */
+    @Anonymous
     @Operation(summary = "推荐酒店")
     @GetMapping("/recommend")
     public ResultVo<List<HotelListVO>> recommend() {
@@ -74,6 +77,7 @@ public class HotelController {
     /**
      * 热销排行榜（按订单数排序）
      */
+    @Anonymous
     @Operation(summary = "热销排行榜")
     @GetMapping("/hotSales")
     public ResultVo<List<HotelSalesRankVO>> hotSales() {
@@ -172,6 +176,7 @@ public class HotelController {
     /**
      * 酒店多维度搜索接口（前台用户）
      */
+    @Anonymous
     @Operation(summary = "酒店多维度搜索")
     @PostMapping("/search")
     public ResultVo<PageResult<HotelListVO>> search(@RequestBody HotelSearchDTO searchDTO) {
