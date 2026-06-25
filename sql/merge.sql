@@ -11,7 +11,7 @@
  Target Server Version : 80404 (8.4.4)
  File Encoding         : 65001
 
- Date: 25/06/2026 19:31:42
+ Date: 25/06/2026 20:57:59
 */
 
 SET NAMES utf8mb4;
@@ -2043,7 +2043,7 @@ CREATE TABLE `sys_logininfor`  (
   PRIMARY KEY (`info_id`) USING BTREE,
   INDEX `idx_sys_logininfor_s`(`status` ASC) USING BTREE,
   INDEX `idx_sys_logininfor_lt`(`login_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 396 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 418 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -2344,6 +2344,28 @@ INSERT INTO `sys_logininfor` VALUES (392, 'customer01', '127.0.0.1', '内网IP',
 INSERT INTO `sys_logininfor` VALUES (393, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '登录成功', '2026-06-25 18:01:33');
 INSERT INTO `sys_logininfor` VALUES (394, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '登录成功', '2026-06-25 19:30:53');
 INSERT INTO `sys_logininfor` VALUES (395, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '退出成功', '2026-06-25 19:31:13');
+INSERT INTO `sys_logininfor` VALUES (396, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '登录成功', '2026-06-25 19:39:17');
+INSERT INTO `sys_logininfor` VALUES (397, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '退出成功', '2026-06-25 19:39:21');
+INSERT INTO `sys_logininfor` VALUES (398, 'admin', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '登录成功', '2026-06-25 19:41:42');
+INSERT INTO `sys_logininfor` VALUES (399, 'admin', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '退出成功', '2026-06-25 19:41:47');
+INSERT INTO `sys_logininfor` VALUES (400, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '登录成功', '2026-06-25 19:42:03');
+INSERT INTO `sys_logininfor` VALUES (401, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '退出成功', '2026-06-25 19:42:06');
+INSERT INTO `sys_logininfor` VALUES (402, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '登录成功', '2026-06-25 19:45:32');
+INSERT INTO `sys_logininfor` VALUES (403, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '退出成功', '2026-06-25 19:45:34');
+INSERT INTO `sys_logininfor` VALUES (404, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '登录成功', '2026-06-25 19:45:44');
+INSERT INTO `sys_logininfor` VALUES (405, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '退出成功', '2026-06-25 19:48:26');
+INSERT INTO `sys_logininfor` VALUES (406, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '登录成功', '2026-06-25 19:55:45');
+INSERT INTO `sys_logininfor` VALUES (407, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '退出成功', '2026-06-25 19:59:43');
+INSERT INTO `sys_logininfor` VALUES (408, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '登录成功', '2026-06-25 20:00:06');
+INSERT INTO `sys_logininfor` VALUES (409, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '退出成功', '2026-06-25 20:01:20');
+INSERT INTO `sys_logininfor` VALUES (410, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '登录成功', '2026-06-25 20:02:34');
+INSERT INTO `sys_logininfor` VALUES (411, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '1', '用户不存在/密码错误', '2026-06-25 20:05:58');
+INSERT INTO `sys_logininfor` VALUES (412, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '登录成功', '2026-06-25 20:06:07');
+INSERT INTO `sys_logininfor` VALUES (413, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '退出成功', '2026-06-25 20:09:26');
+INSERT INTO `sys_logininfor` VALUES (414, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '登录成功', '2026-06-25 20:16:33');
+INSERT INTO `sys_logininfor` VALUES (415, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '登录成功', '2026-06-25 20:42:41');
+INSERT INTO `sys_logininfor` VALUES (416, 'admin', '127.0.0.1', '内网IP', '', '', '1', '验证码已失效', '2026-06-25 20:46:19');
+INSERT INTO `sys_logininfor` VALUES (417, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '退出成功', '2026-06-25 20:56:44');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -2847,8 +2869,8 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 103, 'admin', '系统管理员', '00', 'admin@hotel.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-25 16:11:37', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '超级管理员账号', 0);
-INSERT INTO `sys_user` VALUES (2, 105, 'customer01', '普通用户', '00', 'customer@test.com', '15666666666', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-25 19:30:54', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '前台普通用户账号', 1298);
+INSERT INTO `sys_user` VALUES (1, 103, 'admin', '系统管理员', '00', 'admin@hotel.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-25 19:41:43', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '超级管理员账号', 0);
+INSERT INTO `sys_user` VALUES (2, 105, 'customer01', '普通用户', '00', 'customer@test.com', '15666666666', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-25 20:42:41', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '前台普通用户账号', 1298);
 INSERT INTO `sys_user` VALUES (100, 104, 'merchant01', '酒店商户', '01', 'merchant@test.com', '13800000001', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-25 16:08:04', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '酒店商家账号', 0);
 INSERT INTO `sys_user` VALUES (301, 100, 'merchant_bj', '张经理(北京希尔顿)', '00', 'merchant_bj@hotel.com', '13800138001', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-23 17:06:46', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-北京希尔顿', 0);
 INSERT INTO `sys_user` VALUES (302, 100, 'merchant_sh', '李总(上海华尔道夫)', '00', 'merchant_sh@hotel.com', '13800138002', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-上海华尔道夫', 0);

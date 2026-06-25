@@ -101,6 +101,11 @@ public class SecurityConfig
                 permitAllUrl.getUrls().forEach(url -> requests.requestMatchers(url).permitAll());
                 // 对于登录 login 注册 register 验证码 captchaImage 邮箱验证码允许匿名访问
                 requests.requestMatchers("/login", "/register", "/captchaImage", "/sendEmailCode", "/verifyEmailCode").permitAll()
+                    // 酒店公开接口（游客可访问）
+                    .requestMatchers("/api/hotel/hotCities", "/api/hotel/recommend", "/api/hotel/hotSales").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/api/hotel/search").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/hotel/detail/**").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/room/hotel/**").permitAll()
                     // 静态资源，可匿名访问（仅限 GET 请求）
                     .requestMatchers(HttpMethod.GET, "/", "/*.html", "/**.html", "/**.css", "/**.js", "/profile/**").permitAll()
                     .requestMatchers("/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**", "/druid/**").permitAll()

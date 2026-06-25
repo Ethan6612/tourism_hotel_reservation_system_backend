@@ -15,6 +15,7 @@
         <result property="businessId" column="business_id"/>
         <result property="merchantName" column="merchant_name"/>
         <result property="roomCount" column="room_count"/>
+        <result property="minPrice" column="min_price"/>
         <result property="createTime" column="create_time"/>
     </resultMap>
 
@@ -39,6 +40,7 @@
         SELECT h.id, h.name, h.address, h.star, h.score, h.img_url, h.facility,
                h.status, h.business_id, h.create_time,
                m.merchant_name,
+               (SELECT MIN(r.price) FROM room r WHERE r.hotel_id = h.id AND r.status = '0') AS min_price,
                (SELECT COUNT(1) FROM room r WHERE r.hotel_id = h.id) AS room_count
         FROM hotel h
         LEFT JOIN merchant m ON h.business_id = m.id
@@ -68,6 +70,7 @@
     <!-- 前台搜索SQL片段（只查询营业中的酒店） -->
     <sql id="selectHotelSearchSql">
         SELECT h.id, h.name, h.address, h.star, h.score, h.img_url,
+               h.facility,
                h.status, h.business_id, h.create_time,
                m.merchant_name,
                (SELECT MIN(r.price) FROM room r WHERE r.hotel_id = h.id AND r.status = '0') AS min_price,
@@ -164,6 +167,7 @@
     <!-- 个性化推荐：根据用户历史入住酒店的星级偏好推荐相似酒店 -->
     <select id="selectPersonalRecommend" resultMap="HotelListVOResultMap">
         SELECT h.id, h.name, h.address, h.star, h.score, h.img_url,
+               h.facility,
                h.status, h.business_id, h.create_time,
                m.merchant_name,
                (SELECT MIN(r.price) FROM room r WHERE r.hotel_id = h.id AND r.status = '0') AS min_price,

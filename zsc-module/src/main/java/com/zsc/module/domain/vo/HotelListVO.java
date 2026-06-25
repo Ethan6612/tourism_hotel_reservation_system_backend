@@ -56,6 +56,11 @@ public class HotelListVO {
     private String facility;
 
     /**
+     * 最低房型价格
+     */
+    private BigDecimal minPrice;
+
+    /**
      * 酒店状态（0营业中 1草稿 2待审核 3已下架 4已冻结）
      */
     private String status;

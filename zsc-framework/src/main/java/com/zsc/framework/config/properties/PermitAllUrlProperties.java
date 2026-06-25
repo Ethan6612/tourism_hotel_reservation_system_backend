@@ -7,6 +7,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.regex.Pattern;
 import org.apache.commons.lang3.RegExUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
@@ -26,6 +28,7 @@ import com.zsc.common.annotation.Anonymous;
 @Configuration
 public class PermitAllUrlProperties implements InitializingBean, ApplicationContextAware
 {
+    private static final Logger log = LoggerFactory.getLogger(PermitAllUrlProperties.class);
     private static final Pattern PATTERN = Pattern.compile("\\{(.*?)\\}");
 
     private ApplicationContext applicationContext;
@@ -53,6 +56,7 @@ public class PermitAllUrlProperties implements InitializingBean, ApplicationCont
             Optional.ofNullable(controller).ifPresent(anonymous -> Objects.requireNonNull(info.getPathPatternsCondition().getPatternValues())
                     .forEach(url -> urls.add(RegExUtils.replaceAll(url, PATTERN, ASTERISK))));
         });
+        log.info("@Anonymous扫描完成，共发现 {} 个匿名访问URL: {}", urls.size(), urls);
     }
 
     @Override
