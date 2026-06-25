@@ -1,13 +1,19 @@
 package com.zsc.module.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.zsc.common.annotation.Log;
 import com.zsc.common.core.controller.BaseController;
 import com.zsc.common.core.domain.AjaxResult;
 import com.zsc.common.enums.BusinessType;
+import com.zsc.common.utils.SecurityUtils;
 import com.zsc.module.common.pagination.PageResult;
 import com.zsc.module.domain.dto.OrderStatusUpdateDto;
 import com.zsc.module.domain.dto.query.OrderQueryDto;
+import com.zsc.module.domain.entity.Hotel;
+import com.zsc.module.domain.entity.Merchant;
 import com.zsc.module.domain.vo.OrderVo;
+import com.zsc.module.mapper.HotelMapper;
+import com.zsc.module.mapper.MerchantMapper;
 import com.zsc.module.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 订单控制器（管理端）
@@ -34,10 +41,16 @@ public class OrderController extends BaseController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private MerchantMapper merchantMapper;
+
+    @Autowired
+    private HotelMapper hotelMapper;
+
     // ==================== 查询接口 ====================
 
     /**
-     * 查询订单列表
+     * 查询订单列表（管理员看全部，商户只看自己酒店的订单）
      */
     @Operation(summary = "查询订单列表")
     @GetMapping("/list")
@@ -66,6 +79,23 @@ public class OrderController extends BaseController {
         queryDto.setEndTime(endTime);
         queryDto.setKeyword(keyword);
         queryDto.setOrderBy(orderBy);
+
+        // 商户自动过滤：只显示自己酒店的订单
+        Long currentUserId = SecurityUtils.getUserId();
+        Merchant merchant = merchantMapper.selectOne(
+            new LambdaQueryWrapper<Merchant>().eq(Merchant::getUserId, currentUserId)
+        );
+        if (merchant != null) {
+            List<Hotel> myHotels = hotelMapper.selectList(
+                new LambdaQueryWrapper<Hotel>().eq(Hotel::getBusinessId, merchant.getId())
+            );
+            if (myHotels.isEmpty()) {
+                // 商户还没有酒店，返回空列表
+                return success(new PageResult<>());
+            }
+            queryDto.setHotelIds(myHotels.stream().map(Hotel::getId).collect(Collectors.toList()));
+        }
+
         PageResult<OrderVo> result = orderService.queryOrders(queryDto);
         return success(result);
     }

@@ -53,7 +53,13 @@
             <if test="query.userId != null">
                 AND o.user_id = #{query.userId}
             </if>
-            <if test="query.hotelId != null">
+            <if test="query.hotelIds != null and query.hotelIds.size() > 0">
+                AND o.hotel_id IN
+                <foreach collection="query.hotelIds" item="hid" open="(" separator="," close=")">
+                    #{hid}
+                </foreach>
+            </if>
+            <if test="(query.hotelIds == null or query.hotelIds.size() == 0) and query.hotelId != null">
                 AND o.hotel_id = #{query.hotelId}
             </if>
             <if test="query.roomId != null">

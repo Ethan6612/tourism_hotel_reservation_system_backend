@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zsc.module.common.exception.ServiceException;
 import com.zsc.module.common.pagination.PageResult;
+import com.zsc.module.domain.dto.CreateOrderDto;
 import com.zsc.module.domain.dto.query.OrderQueryDto;
 import com.zsc.module.domain.entity.Order;
 import com.zsc.module.domain.entity.Payment;
+import com.zsc.module.domain.entity.Room;
 import com.zsc.module.domain.vo.OrderVo;
 import com.zsc.module.domain.vo.UserDashboardStatsVo;
 import com.zsc.module.mapper.OrderMapper;
@@ -40,6 +42,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Autowired
     private SysUserMapper sysUserMapper;
+
+    @Autowired
+    private com.zsc.module.mapper.RoomMapper roomMapper;
 
     @Override
     public PageResult<OrderVo> queryOrders(OrderQueryDto queryDto) {
@@ -196,6 +201,40 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             payment.setUpdateTime(new Date());
             paymentMapper.updateById(payment);
         }
+    }
+
+    @Override
+    public OrderVo createOrder(CreateOrderDto dto, Long userId) {
+        // 验证房型存在
+        Room room = roomMapper.selectById(dto.getRoomId());
+        if (room == null) {
+            throw new ServiceException("房型不存在");
+        }
+        // 计算天数
+        long diffMs = dto.getEndDate().getTime() - dto.getStartDate().getTime();
+        long nights = diffMs / (1000 * 60 * 60 * 24);
+        if (nights <= 0) {
+            throw new ServiceException("退房日期必须晚于入住日期");
+        }
+        // 计算总价
+        BigDecimal totalPrice = room.getPrice().multiply(BigDecimal.valueOf(nights));
+
+        // 创建订单
+        Order order = Order.builder()
+                .orderNo(generateOrderNo())
+                .userId(userId)
+                .hotelId(dto.getHotelId())
+                .roomId(dto.getRoomId())
+                .startDate(dto.getStartDate())
+                .endDate(dto.getEndDate())
+                .totalPrice(totalPrice)
+                .status(Order.STATUS_PENDING)
+                .createTime(new Date())
+                .updateTime(new Date())
+                .build();
+        save(order);
+
+        return orderMapper.selectOrderVoById(order.getId());
     }
 
     @Override
