@@ -147,7 +147,7 @@ springdoc:
 # 阿里云OSS配置
 oss:
   endpoint: oss-cn-shenzhen.aliyuncs.com
-  accessKeyId: ${OSS_ACCESS_KEY_ID:your_OSS_ACCESS_KEY_ID}
+  accessKeyId: ${OSS_ACCESS_KEY_ID:"your_OSS_ACCESS_KEY_ID"}
   accessKeySecret: ${OSS_ACCESS_KEY_SECRET:your_OSS_ACCESS_KEY_SECRET}
   bucketName: hotel-booking-system
 
