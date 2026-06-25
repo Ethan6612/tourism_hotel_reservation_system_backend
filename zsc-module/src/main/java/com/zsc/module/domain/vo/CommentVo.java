@@ -118,4 +118,7 @@ public class CommentVo {
      * 评价总数（用于统计展示）
      */
     private Long totalComments;
+
+    /** 当前用户是否已点赞 */
+    private Boolean liked;
 }

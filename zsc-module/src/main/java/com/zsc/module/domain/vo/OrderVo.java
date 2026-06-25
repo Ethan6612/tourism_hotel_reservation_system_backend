@@ -49,6 +49,9 @@ public class OrderVo {
     /** 房型名称（关联 room） */
     private String roomType;
 
+    /** 是否已评价 */
+    private Boolean reviewed;
+
     // === 支付关联字段 ===
 
     /** 支付类型名称 */

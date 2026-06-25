@@ -547,6 +547,17 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
      * 处理CommentVo：解析图片列表、匿名处理
      */
     private CommentVo processCommentVo(CommentVo vo) {
+        // 检查当前用户是否已点赞
+        try {
+            Long currentUserId = SecurityUtils.getUserId();
+            if (currentUserId != null && vo.getId() != null) {
+                Long exists = commentMapper.selectCommentLikeExists(currentUserId, vo.getId());
+                vo.setLiked(exists != null && exists > 0);
+            }
+        } catch (Exception e) {
+            vo.setLiked(false);
+        }
+
         // 解析图片JSON数组
         if (StringUtils.hasText(vo.getImages())) {
             try {

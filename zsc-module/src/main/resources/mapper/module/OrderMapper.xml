@@ -21,6 +21,7 @@
         <result property="payTypeName" column="pay_type_name"/>
         <result property="transactionId" column="transaction_id"/>
         <result property="payAmount" column="pay_amount"/>
+        <result property="reviewed" column="reviewed"/>
     </resultMap>
 
     <sql id="selectOrderVo">
@@ -37,7 +38,8 @@
                    ELSE '未知'
                END AS pay_type_name,
                p.transaction_id,
-               p.pay_amount
+               p.pay_amount,
+               (SELECT COUNT(1) FROM `comment` c WHERE c.order_id = o.id) > 0 AS reviewed
         FROM orders o
         LEFT JOIN sys_user u ON o.user_id = u.user_id
         LEFT JOIN hotel h ON o.hotel_id = h.id

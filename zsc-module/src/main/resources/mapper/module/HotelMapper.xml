@@ -31,6 +31,8 @@
         <result property="businessId" column="business_id"/>
         <result property="merchantName" column="merchant_name"/>
         <result property="status" column="status"/>
+        <result property="minPrice" column="min_price"/>
+        <result property="roomCount" column="room_count"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
     </resultMap>
@@ -118,7 +120,9 @@
         SELECT h.id, h.name, h.address, h.star, h.score, h.img_url, h.facility,
                h.business_id, h.status,
                h.create_time, h.update_time,
-               m.merchant_name
+               m.merchant_name,
+               (SELECT MIN(r.price) FROM room r WHERE r.hotel_id = h.id AND r.status = '0') AS min_price,
+               (SELECT COUNT(1) FROM room r WHERE r.hotel_id = h.id) AS room_count
         FROM hotel h
         LEFT JOIN merchant m ON h.business_id = m.id
         WHERE h.id = #{id}

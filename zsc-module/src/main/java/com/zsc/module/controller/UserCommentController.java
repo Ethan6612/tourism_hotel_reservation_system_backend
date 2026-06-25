@@ -73,7 +73,7 @@ public class UserCommentController extends BaseController {
      */
     @Operation(summary = "修改我的评价")
     @PutMapping
-    public AjaxResult update(@Valid @RequestBody CommentDto commentDto) {
+    public AjaxResult update(@RequestBody CommentDto commentDto) {
         commentDto.setUserId(SecurityUtils.getUserId());
         commentService.updateMyComment(commentDto);
         return success("评价修改成功！");
@@ -122,16 +122,18 @@ public class UserCommentController extends BaseController {
     @Operation(summary = "获取我的评价统计")
     @GetMapping("/statistics")
     public AjaxResult myStatistics() {
-        Long userId = SecurityUtils.getUserId();
-        CommentQueryDto queryDto = new CommentQueryDto();
-        queryDto.setUserId(userId);
-        queryDto.setPageNum(1);
-        queryDto.setPageSize(1);
-        PageResult<CommentVo> pageResult = commentService.queryCommentsWithUserInfo(queryDto);
-
+        CommentVo vo = commentService.getMyCommentStatistics();
+        if (vo == null) {
+            Map<String, Object> empty = new HashMap<>();
+            empty.put("total", 0);
+            empty.put("avgScore", 0);
+            empty.put("likedCount", 0);
+            return success(empty);
+        }
         Map<String, Object> stats = new HashMap<>();
-        stats.put("totalComments", pageResult.getTotal());
-        stats.put("userId", userId);
+        stats.put("total", vo.getTotalComments() != null ? vo.getTotalComments() : 0);
+        stats.put("avgScore", vo.getAverageScore() != null ? vo.getAverageScore() : 0);
+        stats.put("likedCount", vo.getLikeCount() != null ? vo.getLikeCount() : 0);
         return success(stats);
     }
 
