@@ -144,6 +144,13 @@ springdoc:
       paths-to-match: '/**'
       packages-to-scan: com.zsc.web.controller.tool
 
+# 阿里云OSS配置
+oss:
+  endpoint: oss-cn-hangzhou.aliyuncs.com
+  accessKeyId: ${OSS_ACCESS_KEY_ID:your-access-key-id}
+  accessKeySecret: ${OSS_ACCESS_KEY_SECRET:your-access-key-secret}
+  bucketName: hotel-booking-system
+
 # 防盗链配置
 referer:
   # 防盗链开关

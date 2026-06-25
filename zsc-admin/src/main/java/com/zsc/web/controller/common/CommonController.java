@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.zsc.common.config.RuoYiConfig;
+import com.zsc.common.config.OssProperties;
 import com.zsc.common.core.domain.AjaxResult;
 import com.zsc.common.utils.StringUtils;
 import com.zsc.common.utils.file.FileUploadUtils;
 import com.zsc.common.utils.file.FileUtils;
+import com.zsc.common.utils.file.OssUploadUtils;
 import com.zsc.framework.config.ServerConfig;
 
 /**
@@ -33,6 +35,9 @@ public class CommonController
 
     @Autowired
     private ServerConfig serverConfig;
+
+    @Autowired
+    private OssProperties ossProperties;
 
     private static final String FILE_DELIMITER = ",";
 
@@ -123,6 +128,29 @@ public class CommonController
             ajax.put("fileNames", StringUtils.join(fileNames, FILE_DELIMITER));
             ajax.put("newFileNames", StringUtils.join(newFileNames, FILE_DELIMITER));
             ajax.put("originalFilenames", StringUtils.join(originalFilenames, FILE_DELIMITER));
+            return ajax;
+        }
+        catch (Exception e)
+        {
+            return AjaxResult.error(e.getMessage());
+        }
+    }
+
+    /**
+     * OSS上传请求（单个图片）
+     */
+    @PostMapping("/upload/oss")
+    public AjaxResult uploadOss(MultipartFile file) throws Exception
+    {
+        try
+        {
+            // 上传到阿里云OSS
+            String url = OssUploadUtils.upload(ossProperties, file);
+            AjaxResult ajax = AjaxResult.success();
+            ajax.put("url", url);
+            ajax.put("fileName", url);
+            ajax.put("newFileName", url.substring(url.lastIndexOf("/") + 1));
+            ajax.put("originalFilename", file.getOriginalFilename());
             return ajax;
         }
         catch (Exception e)
