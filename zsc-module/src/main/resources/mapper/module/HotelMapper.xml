@@ -104,7 +104,9 @@
             AND (SELECT MIN(r.price) FROM room r WHERE r.hotel_id = h.id) &lt;= #{query.maxPrice}
         </if>
         <if test="query.facility != null and query.facility != ''">
-            AND h.facility LIKE CONCAT('%', #{query.facility}, '%')
+            <foreach item="f" collection="query.facility.replace(' ', '').split(',')" open="" separator="" close="">
+                AND h.facility LIKE CONCAT('%', #{f}, '%')
+            </foreach>
         </if>
     </sql>
 

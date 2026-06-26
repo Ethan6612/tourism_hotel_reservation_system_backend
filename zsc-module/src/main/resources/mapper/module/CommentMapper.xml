@@ -40,6 +40,7 @@
     <!-- 结果映射：ScoreStatisticsVo -->
     <resultMap id="ScoreStatisticsResultMap" type="com.zsc.module.domain.vo.ScoreStatisticsVo">
         <result property="hotelId" column="hotel_id"/>
+        <result property="hotelName" column="hotel_name"/>
         <result property="roomId" column="room_id"/>
         <result property="averageScore" column="average_score"/>
         <result property="totalComments" column="total_comments"/>
@@ -256,15 +257,17 @@
     <select id="selectHotelsAverageScore" resultMap="ScoreStatisticsResultMap">
         SELECT
             c.hotel_id,
+            h.name AS hotel_name,
             ROUND(AVG(c.score), 2) AS average_score,
             COUNT(*) AS total_comments
         FROM `comment` c
+        LEFT JOIN hotel h ON c.hotel_id = h.id
         WHERE c.status = '1'
         AND c.hotel_id IN
         <foreach collection="hotelIds" item="hotelId" open="(" separator="," close=")">
             #{hotelId}
         </foreach>
-        GROUP BY c.hotel_id
+        GROUP BY c.hotel_id, h.name
     </select>
 
     <!-- 点赞数+1 -->

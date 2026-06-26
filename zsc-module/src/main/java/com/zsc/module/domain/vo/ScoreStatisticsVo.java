@@ -18,6 +18,8 @@ public class ScoreStatisticsVo {
 
     private Long hotelId;
 
+    private String hotelName;
+
     private Long roomId;
 
     private BigDecimal averageScore;
