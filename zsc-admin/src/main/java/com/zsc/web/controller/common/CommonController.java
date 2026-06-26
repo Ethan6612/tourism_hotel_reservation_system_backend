@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import com.zsc.common.annotation.Anonymous;
 import com.zsc.common.config.RuoYiConfig;
 import com.zsc.common.config.OssProperties;
 import com.zsc.common.core.domain.AjaxResult;
@@ -156,6 +157,36 @@ public class CommonController
         catch (Exception e)
         {
             return AjaxResult.error(e.getMessage());
+        }
+    }
+
+    /**
+     * OSS文件下载（通过签名URL重定向到OSS）
+     * 示例: /common/oss/download?objectKey=reviews/xxx.png
+     */
+    @Anonymous
+    @GetMapping("/oss/download")
+    public void ossDownload(String objectKey, HttpServletResponse response) throws Exception
+    {
+        try
+        {
+            if (objectKey == null || objectKey.isEmpty())
+            {
+                response.setContentType("text/html;charset=UTF-8");
+                response.getWriter().write("缺少参数: objectKey");
+                return;
+            }
+            // 拼接完整OSS URL后生成签名URL
+            String ossUrl = "https://" + ossProperties.getBucketName() + "." + ossProperties.getEndpoint() + "/" + objectKey;
+            String signedUrl = OssUploadUtils.generatePresignedUrl(ossUrl);
+            // 302重定向到签名URL
+            response.sendRedirect(signedUrl);
+        }
+        catch (Exception e)
+        {
+            log.error("OSS下载失败: {}", objectKey, e);
+            response.setContentType("text/html;charset=UTF-8");
+            response.getWriter().write("OSS下载失败: " + e.getMessage());
         }
     }
 
