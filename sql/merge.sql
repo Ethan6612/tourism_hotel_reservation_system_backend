@@ -1,17 +1,17 @@
 /*
- Navicat Premium Dump SQL
+ Navicat Premium Data Transfer
 
- Source Server         : book_library
+ Source Server         : 1
  Source Server Type    : MySQL
- Source Server Version : 90100 (9.1.0)
+ Source Server Version : 80404 (8.4.4)
  Source Host           : localhost:3306
  Source Schema         : zsc
 
  Target Server Type    : MySQL
- Target Server Version : 90100 (9.1.0)
+ Target Server Version : 80404 (8.4.4)
  File Encoding         : 65001
 
- Date: 26/06/2026 20:18:00
+ Date: 26/06/2026 20:58:57
 */
 
 SET NAMES utf8mb4;
@@ -78,25 +78,174 @@ CREATE TABLE `comment`  (
   INDEX `idx_user_id`(`user_id` ASC) USING BTREE,
   INDEX `idx_hotel_id`(`hotel_id` ASC) USING BTREE,
   INDEX `idx_room_id`(`room_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '评价表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 164 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '评价表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of comment
 -- ----------------------------
-INSERT INTO `comment` VALUES (1, 305, 1, 1, 8, 5, '旅游达人小王：麦新格精品酒店离浦东机场很近，转机首选。房间干净整洁，机场接送服务很方便。早上还有早餐供应，性价比很高！', '[]', NULL, '0', '1', 3, '2026-06-26 16:31:06', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价！机场店主打便捷，欢迎下次再来！', '2026-06-26 16:31:06', NULL, NULL);
-INSERT INTO `comment` VALUES (2, 305, 2, 4, 9, 4, '金普顿前滩酒店很时尚，设计感强。房间不大但布局合理。就是周边还在开发中，吃饭选择不多。', '[]', NULL, '0', '1', 1, '2026-06-26 16:31:06', NULL, NULL, NULL, NULL, NULL, '0', '前滩正在快速发展，周边配套会越来越好！', '2026-06-26 16:31:06', NULL, NULL);
-INSERT INTO `comment` VALUES (3, 306, 1, 2, 11, 3, '出差老李：老酒店了设施有点旧，空调声音大。不过位置确实方便，离地铁站近，周边吃饭也方便。价格还算合理。', '[]', NULL, '0', '2', 2, '2026-06-26 16:31:06', 'admin', '2026-06-26 16:35:30', NULL, '后面给他们升级房型了', '2026-06-26 16:35:00', '2', '感谢您的反馈！空调问题已安排排查。', '2026-06-26 16:31:06', NULL, NULL);
-INSERT INTO `comment` VALUES (4, 306, 3, 8, 12, 5, 'CitiGO欢阁酒店性价比超高！静安寺旁边，出门就是商圈。装修风格年轻时尚，房间虽小但一应俱全。前台小哥哥服务热情，推荐了很多美食。', '[\"https://images.unsplash.com/photo-1551882547-be7b2a60087d?w=400&h=300&fit=crop\"]', NULL, '0', '1', 8, '2026-06-26 16:31:06', NULL, NULL, NULL, NULL, NULL, '0', '很高兴您喜欢我们的风格！CitiGO致力于为年轻人打造高性价比的住宿体验。', '2026-06-26 16:31:06', NULL, NULL);
-INSERT INTO `comment` VALUES (5, 307, 2, 5, 13, 2, '度假小红：金普顿真的让人失望。双床房的床垫太软了，睡了一晚腰疼。隔音也不好，走廊说话听得一清二楚。一千多一晚不值。', '[]', NULL, '1', '1', 6, '2026-06-26 16:31:06', NULL, NULL, NULL, '客人未提前沟通床垫问题，客房服务可提供硬床垫选择。', '2026-06-26 16:31:06', '1', NULL, NULL, NULL, NULL);
-INSERT INTO `comment` VALUES (6, 308, 1, 1, 15, 4, '商务张总：麦新格整体不错，简约实用。WiFi速度很快，商务需求都能满足。卫生间稍微小了点，早餐种类可以再丰富些。', '[]', NULL, '0', '1', 1, '2026-06-26 16:31:06', NULL, NULL, NULL, NULL, NULL, '0', '感谢建议！早餐品类我们正在丰富中。', '2026-06-26 16:31:06', NULL, NULL);
-INSERT INTO `comment` VALUES (7, 309, 2, 7, 17, 5, '蜜月小周：金普顿太适合情侣了！景观房看出去夜景很美，房间设计浪漫有情调。前台还帮忙准备了蜜月布置，非常贴心。下次还来！', '[\"https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop\"]', NULL, '0', '1', 11, '2026-06-26 16:31:06', NULL, NULL, NULL, NULL, NULL, '0', '恭喜新婚！很高兴为您制造了浪漫回忆！', '2026-06-26 16:31:06', NULL, NULL);
-INSERT INTO `comment` VALUES (8, 310, 5, 19, 18, 4, '船长五号青年酒店很有特色，航海主题装修很酷。适合年轻人，公共区域社交氛围好。床位干净，价格实惠。就是淋浴间少了点。', '[]', NULL, '0', '1', 2, '2026-06-26 16:31:06', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的喜欢！淋浴间问题已在扩建中。', '2026-06-26 16:31:06', NULL, NULL);
-INSERT INTO `comment` VALUES (9, 310, 3, 9, 23, 2, 'CitiGO的隔音真的差，隔壁讲话我都能听到。房间也很小，行李箱都摊不开。除了位置好真没别的优点了。', '[]', NULL, '0', '1', 5, '2026-06-26 16:31:06', NULL, NULL, NULL, '客人预订的是经济房型，面积已如实标注。', '2026-06-26 16:31:06', '1', NULL, NULL, NULL, NULL);
-INSERT INTO `comment` VALUES (10, 311, 4, 12, 20, 5, 'lyx：香格里拉老牌五星果然靠谱！豪华大床房空间很大，床品舒适。服务专业周到，早餐种类丰富到吃不过来。配套设施齐全，游泳池健身房都很棒。', '[\"https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop\"]', NULL, '0', '1', 7, '2026-06-26 16:31:06', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的认可！香格里拉品质一直在线，欢迎再次光临！', '2026-06-26 16:31:06', NULL, NULL);
-INSERT INTO `comment` VALUES (11, 305, 5, 18, 10, 1, '感觉很一般', '[\"https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/06/26/6b84b04293a04b85aab29141247249db.png?Expires=1783067595&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=0oq3Wuu%2F0sqs34DOv1YqAAdbLY0%3D\"]', NULL, '0', '1', 1, '2026-06-26 16:33:17', NULL, '2026-06-26 16:33:17', NULL, NULL, NULL, '0', NULL, NULL, NULL, 'test_user1');
-INSERT INTO `comment` VALUES (12, 305, 71, 484, 24, 5, '旅游达人小王：赶早班机选了希尔顿惠庭，太方便了！有免费接送机服务，房间干净整洁，早餐4点半就开始供应，赶机完全无压力。五星推荐！', '[]', NULL, '0', '1', 4, '2026-06-26 16:45:04', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的推荐！机场店主打便捷，我们一直在优化早班机旅客的体验。', '2026-06-26 16:45:04', NULL, NULL);
-INSERT INTO `comment` VALUES (13, 306, 71, 485, 25, 4, '出差老李：转机住了一晚，整体满意。房间隔音不错，机场接送准时。就是周边没啥吃的，只能在酒店解决。价格合理。', '[]', NULL, '0', '1', 1, '2026-06-26 16:45:04', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的反馈！酒店餐厅提供全天候餐饮服务。', '2026-06-26 16:45:04', NULL, NULL);
-INSERT INTO `comment` VALUES (14, 307, 71, 486, 26, 5, '度假小红：带娃出行选了家庭套房，空间很大孩子很开心。酒店有儿童游乐区，早餐还有儿童专属区域。接送机司机很热情，帮忙提行李。', '[\"https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop\"]', NULL, '0', '1', 7, '2026-06-26 16:45:04', NULL, NULL, NULL, NULL, NULL, '0', '很高兴小朋友喜欢！我们致力于为家庭旅客提供温馨的住宿体验。', '2026-06-26 16:45:04', NULL, NULL);
+INSERT INTO `comment` VALUES (1, 2485, 86, 131, NULL, 3, '景观很棒，视野开阔。', '[\"https://example.com/comment1.jpg\"]', 'https://example.com/comment1.jpg', '0', '1', 0, '2026-04-27 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (2, 2025, 20, 286, NULL, 4, '非常满意，服务很好！', NULL, NULL, '0', '1', 0, '2026-05-31 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-31 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (3, 2257, 34, 50, NULL, 5, '位置便利，干净卫生，值得推荐。', NULL, NULL, '0', '1', 0, '2026-04-08 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-18 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (4, 2023, 67, 60, NULL, 5, '泳池干净，健身房设备好。', NULL, NULL, '0', '1', 0, '2026-04-16 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-21 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (5, 2263, 35, 42, NULL, 4, '隔音效果不错，很安静。', '[\"https://example.com/comment5.jpg\"]', 'https://example.com/comment5.jpg', '0', '1', 0, '2026-05-25 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (6, 2184, 60, 304, NULL, 4, '性价比高，下次还会来。', NULL, NULL, '0', '1', 0, '2026-04-25 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-24 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (7, 2482, 83, 80, NULL, 5, '酒店很新，装修时尚。', NULL, NULL, '0', '1', 0, '2026-05-06 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-11 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (8, 2151, 28, 158, NULL, 4, '泳池干净，健身房设备好。', '[\"https://example.com/comment8.jpg\"]', 'https://example.com/comment8.jpg', '0', '1', 0, '2026-05-05 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-15 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (9, 2428, 43, 195, NULL, 4, '泳池干净，健身房设备好。', '[\"https://example.com/comment9.jpg\"]', 'https://example.com/comment9.jpg', '0', '1', 0, '2026-05-30 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-19 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (10, 2320, 76, 305, NULL, 3, '儿童设施齐全，适合亲子。', NULL, NULL, '0', '1', 0, '2026-04-10 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-30 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (11, 2364, 33, 158, NULL, 3, '还会再来的！', NULL, NULL, '0', '1', 0, '2026-05-12 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (12, 2056, 91, 64, NULL, 3, '卫生间干净，热水充足。', NULL, NULL, '0', '1', 0, '2026-04-28 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (13, 2055, 48, 19, NULL, 5, '非常满意，服务很好！', NULL, NULL, '0', '1', 0, '2026-04-11 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (14, 2399, 8, 335, NULL, 4, '性价比很高，超出预期。', NULL, NULL, '0', '1', 0, '2026-05-10 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (15, 2407, 85, 273, NULL, 4, '隔音效果不错，很安静。', NULL, NULL, '0', '1', 0, '2026-04-11 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (16, 2090, 72, 4, NULL, 5, '空调给力，温度适宜。', '[\"https://example.com/comment16.jpg\"]', 'https://example.com/comment16.jpg', '0', '1', 0, '2026-05-20 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-05 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (17, 2036, 56, 199, NULL, 3, '位置便利，干净卫生，值得推荐。', NULL, NULL, '0', '1', 0, '2026-04-16 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (18, 2271, 92, 330, NULL, 5, '还会再来的！', '[\"https://example.com/comment18.jpg\"]', 'https://example.com/comment18.jpg', '0', '1', 0, '2026-04-08 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (19, 2394, 90, 44, NULL, 5, '设施齐全，环境优雅。', NULL, NULL, '0', '1', 0, '2026-05-11 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-08 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (20, 2244, 86, 291, NULL, 4, '景观很棒，视野开阔。', NULL, NULL, '0', '1', 0, '2026-04-09 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-24 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (21, 2085, 90, 333, NULL, 3, '空调给力，温度适宜。', NULL, NULL, '0', '1', 0, '2026-05-03 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-27 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (22, 2360, 93, 161, NULL, 4, '设施齐全，环境优雅。', NULL, NULL, '0', '1', 0, '2026-04-07 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (23, 2005, 71, 170, NULL, 3, '位置便利，干净卫生，值得推荐。', NULL, NULL, '0', '1', 0, '2026-05-31 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (24, 2497, 66, 101, NULL, 4, '隔音效果不错，很安静。', NULL, NULL, '0', '1', 0, '2026-04-28 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-04 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (25, 2002, 8, 135, NULL, 5, '前台服务热情，停车方便。', NULL, NULL, '0', '1', 0, '2026-04-09 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-06-01 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (26, 2092, 75, 64, NULL, 4, '儿童设施齐全，适合亲子。', '[\"https://example.com/comment26.jpg\"]', 'https://example.com/comment26.jpg', '0', '1', 0, '2026-05-18 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-10 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (27, 2113, 84, 165, NULL, 5, '早餐种类多，味道不错。', '[\"https://example.com/comment27.jpg\"]', 'https://example.com/comment27.jpg', '0', '1', 0, '2026-05-07 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-09 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (28, 2084, 39, 144, NULL, 5, '前台服务热情，停车方便。', '[\"https://example.com/comment28.jpg\"]', 'https://example.com/comment28.jpg', '0', '1', 0, '2026-04-22 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (29, 2268, 21, 148, NULL, 4, '性价比高，下次还会来。', NULL, NULL, '0', '1', 0, '2026-04-11 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-14 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (30, 2294, 4, 138, NULL, 5, '性价比高，下次还会来。', NULL, NULL, '0', '1', 0, '2026-04-26 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (31, 2264, 53, 6, NULL, 4, '空调给力，温度适宜。', NULL, NULL, '0', '1', 0, '2026-06-01 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-16 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (32, 2302, 26, 158, NULL, 4, '房间宽敞舒适，早餐丰富。', NULL, NULL, '0', '1', 0, '2026-05-17 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-31 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (33, 2230, 5, 291, NULL, 3, '周边购物吃饭都很方便。', NULL, NULL, '0', '1', 0, '2026-05-19 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-27 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (34, 2180, 14, 207, NULL, 4, '还会再来的！', NULL, NULL, '0', '1', 0, '2026-05-18 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (35, 2204, 1, 272, NULL, 5, '位置便利，干净卫生，值得推荐。', '[\"https://example.com/comment35.jpg\"]', 'https://example.com/comment35.jpg', '0', '1', 0, '2026-05-03 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-10 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (36, 2033, 3, 318, NULL, 4, '酒店很新，装修时尚。', '[\"https://example.com/comment36.jpg\"]', 'https://example.com/comment36.jpg', '0', '1', 0, '2026-05-12 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-06 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (37, 2409, 40, 174, NULL, 3, '非常满意，服务很好！', NULL, NULL, '0', '1', 0, '2026-04-09 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (38, 2264, 40, 135, NULL, 5, 'WiFi信号稳定，速度快。', NULL, NULL, '0', '1', 0, '2026-05-24 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-27 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (39, 2221, 56, 153, NULL, 4, '前台服务热情，停车方便。', '[\"https://example.com/comment39.jpg\"]', 'https://example.com/comment39.jpg', '0', '1', 0, '2026-05-10 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-14 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (40, 2127, 35, 330, NULL, 5, '周边购物吃饭都很方便。', '[\"https://example.com/comment40.jpg\"]', 'https://example.com/comment40.jpg', '0', '1', 0, '2026-06-02 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-08 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (41, 2183, 24, 32, NULL, 5, '卫生间干净，热水充足。', '[\"https://example.com/comment41.jpg\"]', 'https://example.com/comment41.jpg', '0', '1', 0, '2026-05-15 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-27 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (42, 2191, 27, 61, NULL, 3, '早餐种类多，味道不错。', NULL, NULL, '0', '1', 0, '2026-04-13 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (43, 2418, 12, 31, NULL, 3, '房间宽敞舒适，早餐丰富。', NULL, NULL, '0', '1', 0, '2026-05-14 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (44, 2295, 1, 94, NULL, 3, '儿童设施齐全，适合亲子。', '[\"https://example.com/comment44.jpg\"]', 'https://example.com/comment44.jpg', '0', '1', 0, '2026-05-09 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-21 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (45, 2352, 24, 27, NULL, 5, '房间宽敞舒适，早餐丰富。', NULL, NULL, '0', '1', 0, '2026-05-13 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (46, 2387, 67, 347, NULL, 5, '泳池干净，健身房设备好。', NULL, NULL, '0', '1', 0, '2026-05-27 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-08 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (47, 2353, 100, 297, NULL, 3, '服务态度很好，有求必应。', '[\"https://example.com/comment47.jpg\"]', 'https://example.com/comment47.jpg', '0', '1', 0, '2026-05-19 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (48, 2447, 11, 299, NULL, 5, '性价比高，下次还会来。', '[\"https://example.com/comment48.jpg\"]', 'https://example.com/comment48.jpg', '0', '1', 0, '2026-05-08 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-30 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (49, 2186, 49, 109, NULL, 3, '空调给力，温度适宜。', NULL, NULL, '0', '1', 0, '2026-05-02 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (50, 2241, 13, 60, NULL, 4, '早餐种类多，味道不错。', '[\"https://example.com/comment50.jpg\"]', 'https://example.com/comment50.jpg', '0', '1', 0, '2026-04-21 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-21 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (51, 2201, 78, 236, NULL, 3, '性价比高，下次还会来。', '[\"https://example.com/comment51.jpg\"]', 'https://example.com/comment51.jpg', '0', '1', 0, '2026-05-31 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (52, 2452, 17, 45, NULL, 3, '前台服务热情，停车方便。', NULL, NULL, '0', '1', 0, '2026-05-12 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (53, 2234, 44, 276, NULL, 4, '儿童设施齐全，适合亲子。', '[\"https://example.com/comment53.jpg\"]', 'https://example.com/comment53.jpg', '0', '1', 0, '2026-05-08 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (54, 2238, 23, 250, NULL, 5, '前台服务热情，停车方便。', NULL, NULL, '0', '1', 0, '2026-04-22 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-29 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (55, 2449, 1, 123, NULL, 5, 'WiFi信号稳定，速度快。', NULL, NULL, '0', '1', 0, '2026-05-14 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (56, 2456, 38, 47, NULL, 4, '床很舒服，睡得很好。', '[\"https://example.com/comment56.jpg\"]', 'https://example.com/comment56.jpg', '0', '1', 0, '2026-04-28 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (57, 2057, 51, 68, NULL, 4, '周边购物吃饭都很方便。', '[\"https://example.com/comment57.jpg\"]', 'https://example.com/comment57.jpg', '0', '1', 0, '2026-05-27 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-26 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (58, 2306, 30, 217, NULL, 3, '设施齐全，环境优雅。', NULL, NULL, '0', '1', 0, '2026-05-10 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-17 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (59, 2006, 46, 90, NULL, 5, '儿童设施齐全，适合亲子。', NULL, NULL, '0', '1', 0, '2026-05-22 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-06 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (60, 2112, 38, 66, NULL, 5, 'WiFi信号稳定，速度快。', NULL, NULL, '0', '1', 0, '2026-04-16 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (61, 2413, 11, 17, NULL, 5, '卫生间干净，热水充足。', NULL, NULL, '0', '1', 0, '2026-04-10 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-23 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (62, 2434, 33, 16, NULL, 3, '非常满意，服务很好！', NULL, NULL, '0', '1', 0, '2026-04-24 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (63, 2286, 40, 88, NULL, 3, 'WiFi信号稳定，速度快。', '[\"https://example.com/comment63.jpg\"]', 'https://example.com/comment63.jpg', '0', '1', 0, '2026-05-29 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-16 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (64, 2058, 84, 289, NULL, 4, '周边购物吃饭都很方便。', NULL, NULL, '0', '1', 0, '2026-05-21 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (65, 2467, 38, 29, NULL, 3, '房间宽敞舒适，早餐丰富。', '[\"https://example.com/comment65.jpg\"]', 'https://example.com/comment65.jpg', '0', '1', 0, '2026-04-25 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (66, 2226, 71, 63, NULL, 5, '前台服务热情，停车方便。', NULL, NULL, '0', '1', 0, '2026-04-05 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-04 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (67, 2261, 66, 253, NULL, 4, '还会再来的！', NULL, NULL, '0', '1', 0, '2026-05-19 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-20 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (68, 2495, 62, 35, NULL, 4, '还会再来的！', '[\"https://example.com/comment68.jpg\"]', 'https://example.com/comment68.jpg', '0', '1', 0, '2026-04-21 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-24 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (69, 2177, 86, 76, NULL, 4, '早餐种类多，味道不错。', '[\"https://example.com/comment69.jpg\"]', 'https://example.com/comment69.jpg', '0', '1', 0, '2026-05-27 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (70, 2228, 98, 172, NULL, 4, '性价比高，下次还会来。', NULL, NULL, '0', '1', 0, '2026-05-20 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-11 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (71, 2490, 67, 143, NULL, 3, '性价比很高，超出预期。', NULL, NULL, '0', '1', 0, '2026-05-05 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-15 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (72, 2114, 26, 205, NULL, 3, '位置便利，干净卫生，值得推荐。', '[\"https://example.com/comment72.jpg\"]', 'https://example.com/comment72.jpg', '0', '1', 0, '2026-04-13 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (73, 2364, 39, 265, NULL, 4, '儿童设施齐全，适合亲子。', NULL, NULL, '0', '1', 0, '2026-05-19 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-29 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (74, 2060, 16, 142, NULL, 4, 'WiFi信号稳定，速度快。', NULL, NULL, '0', '1', 0, '2026-05-04 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (75, 2038, 28, 51, NULL, 5, '非常满意，服务很好！', NULL, NULL, '0', '1', 0, '2026-05-01 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-28 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (76, 2084, 34, 53, NULL, 5, '床很舒服，睡得很好。', NULL, NULL, '0', '1', 0, '2026-04-18 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (77, 2393, 75, 136, NULL, 5, '前台服务热情，停车方便。', NULL, NULL, '0', '1', 0, '2026-05-02 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-09 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (78, 2012, 70, 143, NULL, 5, '空调给力，温度适宜。', '[\"https://example.com/comment78.jpg\"]', 'https://example.com/comment78.jpg', '0', '1', 0, '2026-06-02 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-19 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (79, 2249, 1, 182, NULL, 4, '景观很棒，视野开阔。', NULL, NULL, '0', '1', 0, '2026-05-18 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-28 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (80, 2408, 56, 106, NULL, 5, '床很舒服，睡得很好。', NULL, NULL, '0', '1', 0, '2026-04-14 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-06-02 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (81, 2211, 4, 315, NULL, 4, '前台服务热情，停车方便。', NULL, NULL, '0', '1', 0, '2026-04-13 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-19 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (82, 2343, 96, 257, NULL, 5, '儿童设施齐全，适合亲子。', NULL, NULL, '0', '1', 0, '2026-04-17 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-04 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (83, 2334, 37, 279, NULL, 5, '房间宽敞舒适，早餐丰富。', '[\"https://example.com/comment83.jpg\"]', 'https://example.com/comment83.jpg', '0', '1', 0, '2026-04-04 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-11 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (84, 2271, 42, 165, NULL, 3, '位置便利，干净卫生，值得推荐。', NULL, NULL, '0', '1', 0, '2026-04-13 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (85, 2266, 41, 153, NULL, 5, '隔音效果不错，很安静。', NULL, NULL, '0', '1', 0, '2026-05-13 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (86, 2072, 63, 238, NULL, 4, 'WiFi信号稳定，速度快。', NULL, NULL, '0', '1', 0, '2026-04-04 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (87, 2285, 54, 333, NULL, 3, '性价比很高，超出预期。', NULL, NULL, '0', '1', 0, '2026-04-11 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (88, 2330, 34, 234, NULL, 4, '服务态度很好，有求必应。', NULL, NULL, '0', '1', 0, '2026-05-30 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (89, 2082, 55, 89, NULL, 4, '床很舒服，睡得很好。', '[\"https://example.com/comment89.jpg\"]', 'https://example.com/comment89.jpg', '0', '1', 0, '2026-05-18 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-16 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (90, 2383, 5, 321, NULL, 4, '空调给力，温度适宜。', NULL, NULL, '0', '1', 0, '2026-04-28 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-20 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (91, 2138, 3, 97, NULL, 3, '服务态度很好，有求必应。', '[\"https://example.com/comment91.jpg\"]', 'https://example.com/comment91.jpg', '0', '1', 0, '2026-04-22 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-19 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (92, 2335, 92, 190, NULL, 5, '设施齐全，环境优雅。', NULL, NULL, '0', '1', 0, '2026-04-25 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (93, 2189, 53, 173, NULL, 5, '还会再来的！', NULL, NULL, '0', '1', 0, '2026-05-31 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (94, 2117, 11, 286, NULL, 5, '景观很棒，视野开阔。', NULL, NULL, '0', '1', 0, '2026-04-14 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (95, 2204, 17, 207, NULL, 4, '空调给力，温度适宜。', NULL, NULL, '0', '1', 0, '2026-05-07 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-18 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (96, 2322, 65, 105, NULL, 4, '早餐种类多，味道不错。', '[\"https://example.com/comment96.jpg\"]', 'https://example.com/comment96.jpg', '0', '1', 0, '2026-05-30 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (97, 2201, 68, 51, NULL, 5, '房间宽敞舒适，早餐丰富。', NULL, NULL, '0', '1', 0, '2026-05-21 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-10 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (98, 2165, 33, 213, NULL, 3, 'WiFi信号稳定，速度快。', NULL, NULL, '0', '1', 0, '2026-05-20 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (99, 2248, 16, 94, NULL, 5, '周边购物吃饭都很方便。', NULL, NULL, '0', '1', 0, '2026-04-04 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-05 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (100, 2103, 15, 45, NULL, 3, '空调给力，温度适宜。', NULL, NULL, '0', '1', 0, '2026-04-18 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-29 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (101, 2156, 15, 272, NULL, 4, '早餐种类多，味道不错。', NULL, NULL, '0', '1', 0, '2026-04-04 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-09 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (102, 2494, 54, 252, NULL, 5, '服务态度很好，有求必应。', NULL, NULL, '0', '1', 0, '2026-05-19 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (103, 2483, 57, 317, NULL, 5, '隔音效果不错，很安静。', '[\"https://example.com/comment103.jpg\"]', 'https://example.com/comment103.jpg', '0', '1', 0, '2026-05-19 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (104, 2124, 7, 194, NULL, 4, '设施齐全，环境优雅。', NULL, NULL, '0', '1', 0, '2026-04-28 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (105, 2124, 62, 117, NULL, 5, '位置便利，干净卫生，值得推荐。', '[\"https://example.com/comment105.jpg\"]', 'https://example.com/comment105.jpg', '0', '1', 0, '2026-05-22 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (106, 2046, 45, 329, NULL, 4, '还会再来的！', '[\"https://example.com/comment106.jpg\"]', 'https://example.com/comment106.jpg', '0', '1', 0, '2026-05-27 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (107, 2218, 77, 174, NULL, 3, '隔音效果不错，很安静。', '[\"https://example.com/comment107.jpg\"]', 'https://example.com/comment107.jpg', '0', '1', 0, '2026-04-16 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-25 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (108, 2163, 77, 291, NULL, 5, '泳池干净，健身房设备好。', NULL, NULL, '0', '1', 0, '2026-04-27 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (109, 2376, 59, 242, NULL, 5, '床很舒服，睡得很好。', NULL, NULL, '0', '1', 0, '2026-04-19 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (110, 2323, 2, 42, NULL, 4, '隔音效果不错，很安静。', NULL, NULL, '0', '1', 0, '2026-05-01 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (111, 2384, 48, 33, NULL, 3, '泳池干净，健身房设备好。', NULL, NULL, '0', '1', 0, '2026-04-07 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (112, 2382, 56, 168, NULL, 5, '设施齐全，环境优雅。', '[\"https://example.com/comment112.jpg\"]', 'https://example.com/comment112.jpg', '0', '1', 0, '2026-04-19 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (113, 2100, 79, 112, NULL, 3, '前台服务热情，停车方便。', NULL, NULL, '0', '1', 0, '2026-05-25 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (114, 2086, 31, 6, NULL, 3, '服务态度很好，有求必应。', NULL, NULL, '0', '1', 0, '2026-04-23 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (115, 2445, 57, 50, NULL, 3, '酒店很新，装修时尚。', NULL, NULL, '0', '1', 0, '2026-04-17 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-15 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (116, 2139, 56, 331, NULL, 3, '卫生间干净，热水充足。', '[\"https://example.com/comment116.jpg\"]', 'https://example.com/comment116.jpg', '0', '1', 0, '2026-04-25 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (117, 2395, 4, 286, NULL, 5, '景观很棒，视野开阔。', NULL, NULL, '0', '1', 0, '2026-04-04 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (118, 2112, 3, 162, NULL, 3, '儿童设施齐全，适合亲子。', NULL, NULL, '0', '1', 0, '2026-05-12 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-19 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (119, 2272, 32, 332, NULL, 5, '房间宽敞舒适，早餐丰富。', NULL, NULL, '0', '1', 0, '2026-05-09 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-08 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (120, 2052, 97, 179, NULL, 4, '儿童设施齐全，适合亲子。', '[\"https://example.com/comment120.jpg\"]', 'https://example.com/comment120.jpg', '0', '1', 0, '2026-04-20 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-06-02 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (121, 2112, 12, 312, NULL, 3, '性价比很高，超出预期。', NULL, NULL, '0', '1', 0, '2026-05-28 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-08 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (122, 2478, 21, 48, NULL, 3, '还会再来的！', '[\"https://example.com/comment122.jpg\"]', 'https://example.com/comment122.jpg', '0', '1', 0, '2026-04-26 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-21 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (123, 2246, 26, 271, NULL, 3, '设施齐全，环境优雅。', '[\"https://example.com/comment123.jpg\"]', 'https://example.com/comment123.jpg', '0', '1', 0, '2026-05-13 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (124, 2262, 17, 84, NULL, 5, '泳池干净，健身房设备好。', '[\"https://example.com/comment124.jpg\"]', 'https://example.com/comment124.jpg', '0', '1', 0, '2026-05-17 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (125, 2231, 20, 208, NULL, 4, '房间宽敞舒适，早餐丰富。', NULL, NULL, '0', '1', 0, '2026-04-04 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-29 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (126, 2227, 85, 297, NULL, 5, '还会再来的！', '[\"https://example.com/comment126.jpg\"]', 'https://example.com/comment126.jpg', '0', '1', 0, '2026-06-02 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (127, 2286, 92, 307, NULL, 4, '隔音效果不错，很安静。', NULL, NULL, '0', '1', 0, '2026-04-30 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (128, 2206, 23, 308, NULL, 5, '还会再来的！', '[\"https://example.com/comment128.jpg\"]', 'https://example.com/comment128.jpg', '0', '1', 0, '2026-04-09 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (129, 2425, 39, 130, NULL, 5, '景观很棒，视野开阔。', NULL, NULL, '0', '1', 0, '2026-05-11 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-09 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (130, 2256, 16, 84, NULL, 5, '性价比很高，超出预期。', NULL, NULL, '0', '1', 0, '2026-06-02 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-09 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (131, 2070, 30, 24, NULL, 4, '非常满意，服务很好！', '[\"https://example.com/comment131.jpg\"]', 'https://example.com/comment131.jpg', '0', '1', 0, '2026-04-24 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (132, 2190, 98, 263, NULL, 5, '泳池干净，健身房设备好。', NULL, NULL, '0', '1', 0, '2026-04-16 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-08 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (133, 2408, 58, 149, NULL, 4, '酒店很新，装修时尚。', NULL, NULL, '0', '1', 0, '2026-05-16 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (134, 2245, 64, 240, NULL, 4, 'WiFi信号稳定，速度快。', NULL, NULL, '0', '1', 0, '2026-04-04 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (135, 2260, 32, 1, NULL, 3, '床很舒服，睡得很好。', NULL, NULL, '0', '1', 0, '2026-06-01 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-19 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (136, 2238, 90, 14, NULL, 4, '卫生间干净，热水充足。', NULL, NULL, '0', '1', 0, '2026-04-21 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-18 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (137, 2110, 59, 87, NULL, 4, '服务态度很好，有求必应。', NULL, NULL, '0', '1', 0, '2026-05-11 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-07 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (138, 2164, 95, 258, NULL, 5, '非常满意，服务很好！', NULL, NULL, '0', '1', 0, '2026-04-11 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (139, 2135, 10, 230, NULL, 5, '还会再来的！', NULL, NULL, '0', '1', 0, '2026-05-28 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-08 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (140, 2412, 55, 83, NULL, 4, '位置便利，干净卫生，值得推荐。', NULL, NULL, '0', '1', 0, '2026-05-24 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-29 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (141, 2077, 38, 138, NULL, 5, '位置便利，干净卫生，值得推荐。', '[\"https://example.com/comment141.jpg\"]', 'https://example.com/comment141.jpg', '0', '1', 0, '2026-05-05 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-04 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (142, 2215, 18, 206, NULL, 4, '前台服务热情，停车方便。', NULL, NULL, '0', '1', 0, '2026-04-16 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-07 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (143, 2432, 67, 253, NULL, 4, '性价比很高，超出预期。', '[\"https://example.com/comment143.jpg\"]', 'https://example.com/comment143.jpg', '0', '1', 0, '2026-05-10 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (144, 2346, 47, 89, NULL, 5, 'WiFi信号稳定，速度快。', NULL, NULL, '0', '1', 0, '2026-05-12 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, '2026-05-04 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (145, 2064, 72, 64, NULL, 5, '前台服务热情，停车方便。', NULL, NULL, '0', '1', 0, '2026-04-11 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (146, 2286, 63, 138, NULL, 3, '床很舒服，睡得很好。', NULL, NULL, '0', '1', 0, '2026-04-29 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (147, 2416, 71, 9, NULL, 3, '性价比很高，超出预期。', NULL, NULL, '0', '1', 0, '2026-04-30 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (148, 2175, 39, 300, NULL, 3, '位置便利，干净卫生，值得推荐。', NULL, NULL, '0', '1', 0, '2026-04-14 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (149, 2418, 10, 335, NULL, 4, '酒店很新，装修时尚。', '[\"https://example.com/comment149.jpg\"]', 'https://example.com/comment149.jpg', '0', '1', 0, '2026-04-15 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', '2026-05-20 00:30:58', NULL, NULL);
+INSERT INTO `comment` VALUES (150, 2292, 54, 331, NULL, 3, '酒店很新，装修时尚。', NULL, NULL, '0', '1', 0, '2026-05-21 00:30:58', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的评价，我们会继续努力！', NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (151, 305, 1, 1, 1, 5, '北京希尔顿非常棒！房间宽敞明亮，前台服务专业，早餐种类丰富。特别感谢礼宾部帮我规划了故宫的游玩路线，下次出差还住这里！', '[\"https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop\"]', NULL, '0', '1', 9, '2026-06-23 08:57:53', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的好评！我们会继续努力为每一位宾客提供优质服务，期待您的再次光临！', '2026-06-23 08:57:53', 301, NULL);
+INSERT INTO `comment` VALUES (152, 305, 2, 3, 2, 4, '上海华尔道夫的外滩景观名不虚传，视野无敌。房间装修奢华有质感，就是价格确实高了些。整体体验很不错，推荐给来上海旅游的朋友。', '[\"https://images.unsplash.com/photo-1551882547-be7b2a60087d?w=400&h=300&fit=crop\"]', NULL, '0', '1', 6, '2026-06-23 08:57:53', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的认可！外滩全景客房确实是我们的招牌，期待下次为您提供更完美的入住体验。', '2026-06-23 08:57:53', 302, NULL);
+INSERT INTO `comment` VALUES (153, 306, 3, 5, 3, 3, '广州丽思卡尔顿整体中规中矩，房间设施略显老旧。但是服务人员态度很好，有求必应。早餐的广式点心很正宗，算是加分项。性价比一般。', '[]', NULL, '0', '1', 2, '2026-06-23 08:57:53', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的宝贵意见！关于房间设施的问题我们已经安排逐步翻新，期待您下次来感受全新的入住体验。', '2026-06-23 08:57:53', 303, NULL);
+INSERT INTO `comment` VALUES (154, 306, 5, 8, 4, 5, '杭州西湖国宾馆真的是人间仙境！在湖边吃早餐太享受了，园林设计非常精致。房间古色古香但不失舒适。这次出差特意选了这里，值了！', '[\"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=300&fit=crop\"]', NULL, '0', '1', 12, '2026-06-23 08:57:53', NULL, NULL, NULL, NULL, NULL, '0', '西湖四季皆美，很高兴您能感受到国宾馆的诗意。欢迎您随时回来！', '2026-06-23 08:57:53', 304, NULL);
+INSERT INTO `comment` VALUES (155, 307, 4, 6, 5, 4, '深圳香格里拉位置很好，福田中心区出差很方便。酒店设施齐全，游泳池很干净。就是办理入住时等待时间有点长，希望改善。', '[]', NULL, '0', '1', 3, '2026-06-23 08:57:53', NULL, NULL, NULL, NULL, NULL, '0', '非常抱歉给您带来了等待的不便！我们已经优化了入住流程，期待您再次光临！', '2026-06-23 08:57:53', NULL, NULL);
+INSERT INTO `comment` VALUES (156, 307, 6, 10, 6, 5, '成都太古里尼依格罗太棒了！位置就在太古里旁边，逛街吃饭超方便。酒店设计很有格调，年轻时尚。前台小帅哥推荐的火锅店绝了，下次来成都必住！', '[\"https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?w=400&h=300&fit=crop\",\"https://images.unsplash.com/photo-1551882547-be7b2a60087d?w=400&h=300&fit=crop\"]', NULL, '0', '1', 18, '2026-06-23 08:57:53', NULL, NULL, NULL, NULL, NULL, '0', '成都的美食和美景都让人流连忘返，很高兴您选择了我们！期待您的再次光临！', '2026-06-23 08:57:53', NULL, NULL);
+INSERT INTO `comment` VALUES (157, 308, 1, 2, 7, 5, '北京希尔顿的行政套房太宽敞了！行政酒廊的下午茶和晚间鸡尾酒都很精致。服务人员专业热情，还帮我免费打印了会议资料。五星推荐！', '[\"https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop\"]', NULL, '0', '1', 10, '2026-06-23 08:57:53', NULL, NULL, NULL, NULL, NULL, '0', '很高兴您对行政酒廊的服务感到满意！我们一直致力于为商务旅客提供最便捷的服务，欢迎再次光临！', '2026-06-23 08:57:53', 301, NULL);
+INSERT INTO `comment` VALUES (158, 310, 4, 13, 163, 5, '深圳香格里拉位置超棒！行政双床房空间很大，服务人员热情周到。顶楼游泳池view很棒，能看到整个福田CBD的天际线。性价比很高，强烈推荐！', '[]', NULL, '0', '1', 6, '2026-06-18 14:00:00', NULL, NULL, NULL, NULL, NULL, '0', '感谢您对香格里拉的认可！顶楼泳池确实是我们的招牌设施，欢迎再次入住！', '2026-06-18 16:00:00', NULL, NULL);
+INSERT INTO `comment` VALUES (159, 310, 6, 19, 166, 4, '成都锦城大酒店位置方便，就在太古里旁边。房间装修风格现代简约，设施齐全。早餐种类丰富，担担面很正宗！唯一不足是空调声音稍大。', '[]', NULL, '0', '1', 3, '2026-06-13 10:00:00', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的反馈！关于空调噪音问题我们已安排工程部检修。期待您再次光临！', '2026-06-13 14:00:00', NULL, NULL);
+INSERT INTO `comment` VALUES (160, 310, 3, 8, 162, 5, '广州丽思卡尔顿果然名不虚传！豪华大床房的床品超级舒服，行政酒廊的甜品精致到不忍心吃。窗外就是珠江夜景，太美了！已经推荐给身边的朋友了。', '[\"https://images.unsplash.com/photo-1551882547-be7b2a60087d?w=400&h=300&fit=crop\"]', NULL, '0', '1', 9, '2026-06-25 12:00:00', NULL, NULL, NULL, NULL, NULL, '0', '感谢onz的五星好评！很高兴您喜欢我们的行政酒廊和珠江夜景，期待您的再次光临！', '2026-06-25 15:00:00', 302, NULL);
+INSERT INTO `comment` VALUES (161, 2, 4, 12, 171, 5, '非常棒的入住体验！酒店大堂豪华气派，前台服务热情周到。房间宽敞明亮，床品舒适，窗外能看到深圳CBD的夜景，非常壮观。早餐种类丰富，中西合璧。下次来深圳还会选择这里！', NULL, NULL, '0', '1', 3, '2026-06-15 14:30:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, 'customer01');
+INSERT INTO `comment` VALUES (162, 2, 2, 4, 169, 5, '华尔道夫不愧是顶级奢华酒店，位置绝佳，步行就能到外滩。房间古典优雅，设施一流。管家服务非常贴心，到达时已经准备好了欢迎水果和手写卡片。浴室的备品是菲拉格慕的，细节满分。强烈推荐！', NULL, NULL, '0', '1', 5, '2026-07-09 10:15:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, 'customer01');
+INSERT INTO `comment` VALUES (163, 2, 3, 8, 170, 4, '房间很不错，设施齐全，服务态度也很好。唯一的小遗憾是入住时等了一会儿，不过总体来说是一次愉快的体验。酒店位置很好，交通便利，周边吃的也多。', NULL, NULL, '0', '1', 1, '2026-07-21 09:00:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, 'customer01');
 
 -- ----------------------------
 -- Table structure for comment_like
@@ -110,37 +259,13 @@ CREATE TABLE `comment_like`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_user_comment`(`user_id` ASC, `comment_id` ASC) USING BTREE,
   INDEX `idx_comment_id`(`comment_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 83 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '评价点赞表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '评价点赞表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of comment_like
 -- ----------------------------
-INSERT INTO `comment_like` VALUES (46, 305, 1, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (47, 306, 1, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (48, 307, 1, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (49, 306, 3, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (50, 308, 3, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (51, 307, 4, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (52, 305, 4, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (53, 309, 4, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (54, 310, 4, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (55, 305, 5, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (56, 306, 5, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (57, 308, 5, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (58, 309, 7, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (59, 305, 7, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (60, 306, 7, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (61, 307, 7, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (62, 305, 9, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (63, 306, 9, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (64, 308, 9, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (65, 305, 10, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (66, 306, 10, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (67, 307, 10, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (68, 308, 10, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (69, 309, 10, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (70, 310, 10, '2026-06-26 16:31:06');
-INSERT INTO `comment_like` VALUES (71, 305, 11, '2026-06-26 16:33:32');
+INSERT INTO `comment_like` VALUES (6, 305, 152, '2026-06-23 17:33:09');
+INSERT INTO `comment_like` VALUES (7, 305, 151, '2026-06-23 17:33:17');
 
 -- ----------------------------
 -- Table structure for gen_table
@@ -2582,6 +2707,7 @@ CREATE TABLE `orders`  (
   `end_date` date NOT NULL COMMENT '离店日期',
   `total_price` decimal(10, 2) NOT NULL COMMENT '总价格',
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '订单状态（0待支付 1已支付 2已取消 3已完成 4退款中 5已退款）',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '订单备注',
   `pay_time` datetime NULL DEFAULT NULL COMMENT '支付时间',
   `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
@@ -2591,39 +2717,217 @@ CREATE TABLE `orders`  (
   INDEX `idx_hotel_id`(`hotel_id` ASC) USING BTREE,
   INDEX `idx_room_id`(`room_id` ASC) USING BTREE,
   INDEX `idx_status`(`status` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '订单表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 207 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '订单表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
-INSERT INTO `orders` VALUES (1, 'ORD20260602000001', 2349, 88, 303, '2026-07-21', '2026-07-24', 2398.10, '5', '2026-05-24 00:30:58', '2026-04-14 00:30:58', '2026-06-02 00:30:58');
-INSERT INTO `orders` VALUES (2, 'ORD20260602000002', 2022, 16, 106, '2026-05-29', '2026-06-01', 1745.80, '1', '2026-05-04 00:30:58', '2026-05-10 00:30:58', '2026-06-02 00:30:58');
-INSERT INTO `orders` VALUES (3, 'ORD20260602000003', 2410, 99, 265, '2026-07-15', '2026-07-19', 1360.42, '5', '2026-05-13 00:30:58', '2026-04-12 00:30:58', '2026-06-02 00:30:58');
-INSERT INTO `orders` VALUES (4, 'ORD20260602000004', 2071, 24, 199, '2026-05-01', '2026-05-05', 687.59, '3', '2026-05-19 00:30:58', '2026-04-20 00:30:58', '2026-06-02 00:30:58');
-INSERT INTO `orders` VALUES (5, 'ORD20260602000005', 2213, 25, 12, '2026-05-04', '2026-05-09', 2304.59, '2', NULL, '2026-04-18 00:30:58', '2026-06-02 00:30:58');
-INSERT INTO `orders` VALUES (6, 'ORD20260602000006', 2087, 58, 203, '2026-05-13', '2026-05-14', 2384.60, '4', '2026-05-28 00:30:58', '2026-04-17 00:30:58', '2026-06-02 00:30:58');
-INSERT INTO `orders` VALUES (7, 'ORD20260602000007', 2272, 38, 188, '2026-05-12', '2026-05-17', 2707.33, '3', '2026-05-15 00:30:58', '2026-05-18 00:30:58', '2026-06-02 00:30:58');
-INSERT INTO `orders` VALUES (8, 'ORD20260620008', 305, 1, 1, '2026-06-10', '2026-06-12', 1298.00, '3', '2026-06-26 16:31:06', '2026-06-26 16:31:06', '2026-06-26 16:31:06');
-INSERT INTO `orders` VALUES (9, 'ORD20260620009', 305, 2, 4, '2026-06-15', '2026-06-17', 1398.00, '3', '2026-06-26 16:31:06', '2026-06-26 16:31:06', '2026-06-26 16:31:06');
-INSERT INTO `orders` VALUES (10, 'ORD20260620010', 305, 5, 18, '2026-06-20', '2026-06-22', 2198.00, '3', '2026-06-26 16:31:06', '2026-06-26 16:31:06', '2026-06-26 16:31:06');
-INSERT INTO `orders` VALUES (11, 'ORD20260620011', 306, 1, 2, '2026-06-08', '2026-06-10', 1518.00, '3', '2026-06-26 16:31:06', '2026-06-26 16:31:06', '2026-06-26 16:31:06');
-INSERT INTO `orders` VALUES (12, 'ORD20260620012', 306, 3, 8, '2026-06-12', '2026-06-14', 1498.00, '3', '2026-06-26 16:31:06', '2026-06-26 16:31:06', '2026-06-26 16:31:06');
-INSERT INTO `orders` VALUES (13, 'ORD20260620013', 307, 2, 5, '2026-06-18', '2026-06-20', 1638.00, '3', '2026-06-26 16:31:06', '2026-06-26 16:31:06', '2026-06-26 16:31:06');
-INSERT INTO `orders` VALUES (14, 'ORD20260620014', 307, 8, 28, '2026-06-22', '2026-06-25', 3897.00, '3', '2026-06-26 16:31:06', '2026-06-26 16:31:06', '2026-06-26 16:31:06');
-INSERT INTO `orders` VALUES (15, 'ORD20260620015', 308, 1, 1, '2026-06-05', '2026-06-07', 1298.00, '3', '2026-06-26 16:31:06', '2026-06-26 16:31:06', '2026-06-26 16:31:06');
-INSERT INTO `orders` VALUES (16, 'ORD20260620016', 308, 10, 37, '2026-06-25', '2026-06-28', 2397.00, '3', '2026-06-26 16:31:06', '2026-06-26 16:31:06', '2026-06-26 16:31:06');
-INSERT INTO `orders` VALUES (17, 'ORD20260620017', 309, 2, 7, '2026-07-01', '2026-07-03', 1878.00, '3', '2026-06-26 16:31:06', '2026-06-26 16:31:06', '2026-06-26 16:31:06');
-INSERT INTO `orders` VALUES (18, 'ORD20260620018', 310, 5, 19, '2026-06-15', '2026-06-17', 1798.00, '3', '2026-06-26 16:31:06', '2026-06-26 16:31:06', '2026-06-26 16:31:06');
-INSERT INTO `orders` VALUES (19, 'ORD20260620019', 311, 9, 33, '2026-06-28', '2026-06-30', 2158.00, '0', NULL, '2026-06-26 16:31:06', '2026-06-26 16:31:06');
-INSERT INTO `orders` VALUES (20, 'ORD20260620020', 311, 4, 12, '2026-07-05', '2026-07-07', 1598.00, '1', '2026-06-26 16:31:06', '2026-06-26 16:31:06', '2026-06-26 16:31:06');
-INSERT INTO `orders` VALUES (21, 'ORD20260620021', 306, 9, 34, '2026-07-10', '2026-07-12', 1958.00, '1', '2026-06-26 16:31:06', '2026-06-26 16:31:06', '2026-06-26 16:31:06');
-INSERT INTO `orders` VALUES (22, 'ORD20260620022', 308, 7, 25, '2026-07-15', '2026-07-17', 1358.00, '0', NULL, '2026-06-26 16:31:06', '2026-06-26 16:31:06');
-INSERT INTO `orders` VALUES (23, 'ORD20260620023', 310, 3, 9, '2026-06-25', '2026-06-27', 1758.00, '3', '2026-06-26 16:31:06', '2026-06-26 16:31:06', '2026-06-26 16:31:06');
-INSERT INTO `orders` VALUES (24, 'ORD20260701001', 305, 71, 484, '2026-06-25', '2026-06-26', 499.00, '3', '2026-06-26 16:45:04', '2026-06-26 16:45:04', '2026-06-26 16:45:04');
-INSERT INTO `orders` VALUES (25, 'ORD20260701002', 306, 71, 485, '2026-06-28', '2026-06-30', 1198.00, '3', '2026-06-26 16:45:04', '2026-06-26 16:45:04', '2026-06-26 16:45:04');
-INSERT INTO `orders` VALUES (26, 'ORD20260701003', 307, 71, 486, '2026-07-01', '2026-07-03', 1798.00, '3', '2026-06-26 16:45:04', '2026-06-26 16:45:04', '2026-06-26 16:45:04');
-INSERT INTO `orders` VALUES (27, 'ORD20260701004', 308, 71, 484, '2026-07-05', '2026-07-06', 499.00, '0', NULL, '2026-06-26 16:45:04', '2026-06-26 16:45:04');
-INSERT INTO `orders` VALUES (28, 'ORD20260701005', 310, 71, 485, '2026-07-08', '2026-07-10', 1198.00, '1', '2026-06-26 16:45:04', '2026-06-26 16:45:04', '2026-06-26 16:45:04');
+INSERT INTO `orders` VALUES (1, 'ORD20260602000001', 2349, 88, 303, '2026-07-21', '2026-07-24', 2398.10, '5', NULL, '2026-05-24 00:30:58', '2026-04-14 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (2, 'ORD20260602000002', 2022, 16, 106, '2026-05-29', '2026-06-01', 1745.80, '1', NULL, '2026-05-04 00:30:58', '2026-05-10 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (3, 'ORD20260602000003', 2410, 99, 265, '2026-07-15', '2026-07-19', 1360.42, '5', NULL, '2026-05-13 00:30:58', '2026-04-12 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (4, 'ORD20260602000004', 2071, 24, 199, '2026-05-01', '2026-05-05', 687.59, '3', NULL, '2026-05-19 00:30:58', '2026-04-20 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (5, 'ORD20260602000005', 2213, 25, 12, '2026-05-04', '2026-05-09', 2304.59, '2', NULL, NULL, '2026-04-18 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (6, 'ORD20260602000006', 2087, 58, 203, '2026-05-13', '2026-05-14', 2384.60, '4', NULL, '2026-05-28 00:30:58', '2026-04-17 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (7, 'ORD20260602000007', 2272, 38, 188, '2026-05-12', '2026-05-17', 2707.33, '3', NULL, '2026-05-15 00:30:58', '2026-05-18 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (8, 'ORD20260602000008', 2347, 39, 61, '2026-07-26', '2026-07-30', 3797.54, '3', NULL, '2026-05-19 00:30:58', '2026-04-19 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (9, 'ORD20260602000009', 2195, 30, 90, '2026-05-17', '2026-05-21', 963.60, '2', NULL, NULL, '2026-05-31 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (10, 'ORD20260602000010', 2493, 76, 229, '2026-07-27', '2026-08-01', 2977.69, '0', NULL, NULL, '2026-05-28 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (11, 'ORD20260602000011', 2355, 96, 181, '2026-05-02', '2026-05-07', 3005.26, '0', NULL, NULL, '2026-04-13 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (12, 'ORD20260602000012', 2472, 84, 243, '2026-06-27', '2026-06-29', 4831.67, '4', NULL, '2026-05-17 00:30:58', '2026-04-25 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (13, 'ORD20260602000013', 2348, 61, 37, '2026-05-16', '2026-05-20', 1400.81, '5', NULL, '2026-05-05 00:30:58', '2026-04-07 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (14, 'ORD20260602000014', 2471, 87, 178, '2026-05-18', '2026-05-19', 439.02, '4', NULL, '2026-05-08 00:30:58', '2026-04-09 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (15, 'ORD20260602000015', 2420, 98, 54, '2026-07-06', '2026-07-07', 3793.12, '0', NULL, NULL, '2026-05-08 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (16, 'ORD20260602000016', 2101, 76, 174, '2026-06-17', '2026-06-18', 2980.45, '4', NULL, '2026-05-31 00:30:58', '2026-05-24 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (17, 'ORD20260602000017', 2086, 53, 53, '2026-06-07', '2026-06-10', 3179.89, '2', NULL, NULL, '2026-04-11 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (18, 'ORD20260602000018', 2219, 35, 33, '2026-07-21', '2026-07-23', 2443.83, '3', NULL, '2026-05-19 00:30:58', '2026-04-24 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (19, 'ORD20260602000019', 2195, 88, 142, '2026-07-06', '2026-07-09', 2395.49, '3', NULL, '2026-05-09 00:30:58', '2026-05-26 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (20, 'ORD20260602000020', 2036, 23, 263, '2026-05-11', '2026-05-13', 2254.06, '0', NULL, NULL, '2026-04-11 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (21, 'ORD20260602000021', 2181, 30, 298, '2026-05-24', '2026-05-26', 2305.06, '2', NULL, NULL, '2026-04-21 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (22, 'ORD20260602000022', 2444, 35, 204, '2026-07-03', '2026-07-08', 769.16, '5', NULL, '2026-05-16 00:30:58', '2026-04-06 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (23, 'ORD20260602000023', 2251, 9, 195, '2026-07-16', '2026-07-20', 1362.29, '5', NULL, '2026-05-15 00:30:58', '2026-05-04 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (24, 'ORD20260602000024', 2424, 60, 185, '2026-06-29', '2026-07-03', 3670.47, '2', NULL, NULL, '2026-04-20 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (25, 'ORD20260602000025', 2243, 47, 62, '2026-07-21', '2026-07-22', 3373.94, '0', NULL, NULL, '2026-05-18 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (26, 'ORD20260602000026', 2243, 16, 346, '2026-06-12', '2026-06-17', 302.93, '2', NULL, NULL, '2026-04-16 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (27, 'ORD20260602000027', 2042, 92, 58, '2026-07-23', '2026-07-26', 1436.17, '5', NULL, '2026-05-28 00:30:58', '2026-05-31 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (28, 'ORD20260602000028', 2016, 63, 344, '2026-05-21', '2026-05-22', 2339.22, '0', NULL, NULL, '2026-05-20 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (29, 'ORD20260602000029', 2320, 83, 148, '2026-07-24', '2026-07-28', 607.57, '5', NULL, '2026-05-10 00:30:58', '2026-04-06 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (30, 'ORD20260602000030', 2164, 40, 36, '2026-06-01', '2026-06-05', 3550.41, '1', NULL, '2026-06-02 00:30:58', '2026-05-08 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (31, 'ORD20260602000031', 2154, 8, 38, '2026-05-21', '2026-05-22', 1640.72, '5', NULL, '2026-05-21 00:30:58', '2026-05-06 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (32, 'ORD20260602000032', 2300, 12, 67, '2026-06-09', '2026-06-11', 2942.54, '4', NULL, '2026-05-11 00:30:58', '2026-04-20 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (33, 'ORD20260602000033', 2032, 37, 221, '2026-06-08', '2026-06-13', 2604.75, '3', NULL, '2026-05-20 00:30:58', '2026-05-04 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (34, 'ORD20260602000034', 2070, 12, 34, '2026-06-06', '2026-06-10', 4689.89, '4', NULL, '2026-06-01 00:30:58', '2026-04-08 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (35, 'ORD20260602000035', 2219, 52, 280, '2026-07-11', '2026-07-15', 4383.80, '2', NULL, NULL, '2026-05-11 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (36, 'ORD20260602000036', 2148, 68, 93, '2026-07-01', '2026-07-04', 3205.55, '2', NULL, NULL, '2026-04-28 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (37, 'ORD20260602000037', 2191, 47, 194, '2026-05-23', '2026-05-24', 4350.51, '5', NULL, '2026-05-31 00:30:58', '2026-04-28 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (38, 'ORD20260602000038', 2245, 75, 332, '2026-06-25', '2026-06-29', 1098.15, '0', NULL, NULL, '2026-04-22 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (39, 'ORD20260602000039', 2414, 33, 197, '2026-06-11', '2026-06-16', 3467.89, '5', NULL, '2026-05-13 00:30:58', '2026-04-30 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (40, 'ORD20260602000040', 2053, 75, 25, '2026-05-30', '2026-06-01', 3031.12, '5', NULL, '2026-05-30 00:30:58', '2026-04-27 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (41, 'ORD20260602000041', 2433, 73, 284, '2026-07-21', '2026-07-26', 4658.03, '5', NULL, '2026-05-19 00:30:58', '2026-04-16 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (42, 'ORD20260602000042', 2398, 53, 97, '2026-05-15', '2026-05-18', 2890.52, '3', NULL, '2026-06-01 00:30:58', '2026-04-29 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (43, 'ORD20260602000043', 2098, 77, 35, '2026-07-02', '2026-07-07', 1501.34, '4', NULL, '2026-05-15 00:30:58', '2026-05-27 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (44, 'ORD20260602000044', 2082, 68, 14, '2026-07-04', '2026-07-05', 1240.82, '4', NULL, '2026-05-22 00:30:58', '2026-05-01 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (45, 'ORD20260602000045', 2343, 54, 21, '2026-05-24', '2026-05-26', 2246.49, '2', NULL, NULL, '2026-05-02 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (46, 'ORD20260602000046', 2449, 59, 116, '2026-06-15', '2026-06-20', 3503.89, '5', NULL, '2026-05-22 00:30:58', '2026-05-19 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (47, 'ORD20260602000047', 2020, 8, 229, '2026-05-22', '2026-05-23', 3583.61, '1', NULL, '2026-05-30 00:30:58', '2026-04-16 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (48, 'ORD20260602000048', 2182, 65, 302, '2026-05-23', '2026-05-24', 4694.19, '1', NULL, '2026-05-17 00:30:58', '2026-04-09 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (49, 'ORD20260602000049', 2455, 94, 331, '2026-07-04', '2026-07-09', 867.63, '0', NULL, NULL, '2026-04-13 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (50, 'ORD20260602000050', 2156, 9, 321, '2026-07-13', '2026-07-14', 1418.11, '4', NULL, '2026-05-28 00:30:58', '2026-04-27 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (51, 'ORD20260602000051', 2350, 45, 142, '2026-05-26', '2026-05-28', 4171.90, '0', NULL, NULL, '2026-05-30 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (52, 'ORD20260602000052', 2355, 99, 257, '2026-06-02', '2026-06-06', 1170.18, '5', NULL, '2026-05-24 00:30:58', '2026-04-25 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (53, 'ORD20260602000053', 2480, 26, 120, '2026-07-09', '2026-07-10', 3530.21, '2', NULL, NULL, '2026-05-30 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (54, 'ORD20260602000054', 2404, 4, 344, '2026-05-10', '2026-05-11', 650.12, '0', NULL, NULL, '2026-05-03 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (55, 'ORD20260602000055', 2402, 12, 10, '2026-07-25', '2026-07-27', 3569.92, '3', NULL, '2026-05-12 00:30:58', '2026-04-10 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (56, 'ORD20260602000056', 2482, 34, 349, '2026-07-15', '2026-07-17', 412.93, '1', NULL, '2026-05-07 00:30:58', '2026-04-12 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (57, 'ORD20260602000057', 2326, 62, 175, '2026-07-09', '2026-07-14', 944.64, '0', NULL, NULL, '2026-04-23 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (58, 'ORD20260602000058', 2324, 36, 261, '2026-05-01', '2026-05-02', 2540.99, '0', NULL, NULL, '2026-04-05 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (59, 'ORD20260602000059', 2037, 63, 66, '2026-07-12', '2026-07-17', 3557.52, '5', NULL, '2026-05-07 00:30:58', '2026-05-07 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (60, 'ORD20260602000060', 2172, 55, 138, '2026-06-18', '2026-06-22', 3821.78, '4', NULL, '2026-05-23 00:30:58', '2026-04-25 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (61, 'ORD20260602000061', 2344, 11, 210, '2026-06-28', '2026-06-29', 4792.59, '1', NULL, '2026-05-24 00:30:58', '2026-04-12 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (62, 'ORD20260602000062', 2468, 36, 71, '2026-05-08', '2026-05-12', 4136.31, '1', NULL, '2026-05-11 00:30:58', '2026-04-05 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (63, 'ORD20260602000063', 2192, 69, 171, '2026-06-10', '2026-06-11', 1493.47, '5', NULL, '2026-05-12 00:30:58', '2026-04-07 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (64, 'ORD20260602000064', 2407, 55, 312, '2026-06-06', '2026-06-09', 3572.14, '4', NULL, '2026-05-16 00:30:58', '2026-04-23 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (65, 'ORD20260602000065', 2266, 67, 108, '2026-07-06', '2026-07-07', 1504.66, '5', NULL, '2026-05-27 00:30:58', '2026-05-26 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (66, 'ORD20260602000066', 2234, 98, 168, '2026-07-22', '2026-07-23', 452.85, '4', NULL, '2026-05-21 00:30:58', '2026-04-08 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (67, 'ORD20260602000067', 2349, 45, 142, '2026-05-26', '2026-05-28', 3603.39, '3', NULL, '2026-05-09 00:30:58', '2026-05-11 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (68, 'ORD20260602000068', 2353, 38, 269, '2026-05-22', '2026-05-23', 2951.87, '3', NULL, '2026-05-15 00:30:58', '2026-05-31 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (69, 'ORD20260602000069', 2048, 40, 301, '2026-07-22', '2026-07-24', 3335.80, '2', NULL, NULL, '2026-05-31 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (70, 'ORD20260602000070', 2194, 6, 38, '2026-06-25', '2026-06-30', 4280.76, '2', NULL, NULL, '2026-05-04 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (71, 'ORD20260602000071', 2471, 25, 257, '2026-06-15', '2026-06-19', 676.53, '1', NULL, '2026-05-05 00:30:58', '2026-04-05 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (72, 'ORD20260602000072', 2198, 5, 107, '2026-05-07', '2026-05-08', 3184.78, '3', NULL, '2026-06-02 00:30:58', '2026-05-11 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (73, 'ORD20260602000073', 2151, 82, 333, '2026-06-29', '2026-07-02', 892.91, '2', NULL, NULL, '2026-05-10 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (74, 'ORD20260602000074', 2157, 93, 146, '2026-05-30', '2026-06-03', 2168.93, '5', NULL, '2026-05-14 00:30:58', '2026-05-14 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (75, 'ORD20260602000075', 2362, 72, 201, '2026-07-21', '2026-07-23', 808.84, '2', NULL, NULL, '2026-04-11 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (76, 'ORD20260602000076', 2208, 8, 255, '2026-07-21', '2026-07-23', 3378.82, '2', NULL, NULL, '2026-05-16 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (77, 'ORD20260602000077', 2261, 14, 276, '2026-05-23', '2026-05-27', 3625.14, '2', NULL, NULL, '2026-05-23 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (78, 'ORD20260602000078', 2150, 50, 336, '2026-06-26', '2026-06-28', 1989.41, '0', NULL, NULL, '2026-05-24 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (79, 'ORD20260602000079', 2249, 63, 237, '2026-06-11', '2026-06-16', 3966.58, '2', NULL, NULL, '2026-04-26 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (80, 'ORD20260602000080', 2143, 94, 287, '2026-07-27', '2026-08-01', 590.63, '1', NULL, '2026-05-20 00:30:58', '2026-05-20 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (81, 'ORD20260602000081', 2045, 80, 103, '2026-06-21', '2026-06-24', 1364.40, '2', NULL, NULL, '2026-05-24 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (82, 'ORD20260602000082', 2312, 69, 327, '2026-05-30', '2026-06-03', 4255.59, '5', NULL, '2026-06-01 00:30:58', '2026-05-08 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (83, 'ORD20260602000083', 2437, 7, 5, '2026-05-31', '2026-06-01', 1908.94, '2', NULL, NULL, '2026-05-07 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (84, 'ORD20260602000084', 2441, 76, 151, '2026-05-12', '2026-05-17', 2968.01, '5', NULL, '2026-05-15 00:30:58', '2026-04-30 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (85, 'ORD20260602000085', 2426, 93, 324, '2026-06-14', '2026-06-19', 383.63, '2', NULL, NULL, '2026-04-09 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (86, 'ORD20260602000086', 2375, 39, 64, '2026-05-19', '2026-05-24', 2054.03, '2', NULL, NULL, '2026-05-22 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (87, 'ORD20260602000087', 2121, 61, 144, '2026-07-29', '2026-07-31', 904.66, '5', NULL, '2026-05-17 00:30:58', '2026-04-21 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (88, 'ORD20260602000088', 2424, 99, 266, '2026-07-26', '2026-07-28', 2768.82, '4', NULL, '2026-05-25 00:30:58', '2026-05-27 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (89, 'ORD20260602000089', 2042, 72, 88, '2026-07-01', '2026-07-02', 3677.34, '0', NULL, NULL, '2026-05-03 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (90, 'ORD20260602000090', 2067, 18, 117, '2026-06-30', '2026-07-05', 4157.97, '1', NULL, '2026-05-18 00:30:58', '2026-05-31 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (91, 'ORD20260602000091', 2038, 63, 347, '2026-06-08', '2026-06-13', 977.19, '0', NULL, NULL, '2026-04-08 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (92, 'ORD20260602000092', 2179, 43, 114, '2026-07-13', '2026-07-14', 3489.62, '1', NULL, '2026-05-18 00:30:58', '2026-04-28 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (93, 'ORD20260602000093', 2282, 48, 211, '2026-05-02', '2026-05-05', 4972.84, '4', NULL, '2026-05-12 00:30:58', '2026-05-16 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (94, 'ORD20260602000094', 2474, 39, 7, '2026-07-01', '2026-07-04', 4560.05, '4', NULL, '2026-06-02 00:30:58', '2026-04-11 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (95, 'ORD20260602000095', 2076, 34, 12, '2026-06-30', '2026-07-05', 2311.68, '2', NULL, NULL, '2026-05-27 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (96, 'ORD20260602000096', 2319, 11, 67, '2026-06-26', '2026-06-28', 1053.45, '1', NULL, '2026-05-21 00:30:58', '2026-04-28 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (97, 'ORD20260602000097', 2001, 68, 213, '2026-05-18', '2026-05-23', 1833.85, '4', NULL, '2026-05-21 00:30:58', '2026-06-02 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (98, 'ORD20260602000098', 2355, 81, 10, '2026-06-12', '2026-06-14', 3338.95, '3', NULL, '2026-05-31 00:30:58', '2026-05-01 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (99, 'ORD20260602000099', 2235, 54, 5, '2026-05-28', '2026-05-29', 3992.03, '2', NULL, NULL, '2026-05-26 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (100, 'ORD20260602000100', 2182, 15, 127, '2026-07-06', '2026-07-09', 3519.77, '4', NULL, '2026-05-21 00:30:58', '2026-04-05 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (101, 'ORD20260602000101', 2026, 62, 64, '2026-07-04', '2026-07-07', 406.55, '4', NULL, '2026-05-05 00:30:58', '2026-05-10 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (102, 'ORD20260602000102', 2098, 10, 105, '2026-05-08', '2026-05-13', 4977.43, '2', NULL, NULL, '2026-05-27 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (103, 'ORD20260602000103', 2025, 31, 69, '2026-06-30', '2026-07-02', 587.57, '3', NULL, '2026-05-31 00:30:58', '2026-05-03 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (104, 'ORD20260602000104', 2373, 25, 244, '2026-06-28', '2026-06-29', 964.99, '3', NULL, '2026-05-09 00:30:58', '2026-05-25 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (105, 'ORD20260602000105', 2366, 27, 318, '2026-07-25', '2026-07-28', 4105.04, '2', NULL, NULL, '2026-04-12 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (106, 'ORD20260602000106', 2482, 96, 58, '2026-05-30', '2026-06-03', 4087.95, '4', NULL, '2026-05-23 00:30:58', '2026-05-08 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (107, 'ORD20260602000107', 2178, 13, 122, '2026-07-06', '2026-07-10', 340.97, '0', NULL, NULL, '2026-05-05 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (108, 'ORD20260602000108', 2222, 8, 326, '2026-06-08', '2026-06-13', 3757.76, '1', NULL, '2026-05-30 00:30:58', '2026-04-12 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (109, 'ORD20260602000109', 2007, 91, 332, '2026-05-22', '2026-05-23', 387.57, '3', NULL, '2026-05-27 00:30:58', '2026-05-30 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (110, 'ORD20260602000110', 2286, 71, 119, '2026-07-16', '2026-07-19', 980.01, '0', NULL, NULL, '2026-05-29 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (111, 'ORD20260602000111', 2463, 10, 86, '2026-07-21', '2026-07-25', 4941.05, '4', NULL, '2026-05-15 00:30:58', '2026-04-06 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (112, 'ORD20260602000112', 2040, 94, 272, '2026-05-08', '2026-05-09', 2910.07, '1', NULL, '2026-05-09 00:30:58', '2026-05-19 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (113, 'ORD20260602000113', 2418, 76, 7, '2026-05-12', '2026-05-13', 1619.04, '0', NULL, NULL, '2026-05-23 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (114, 'ORD20260602000114', 2044, 85, 255, '2026-05-25', '2026-05-26', 2993.06, '3', NULL, '2026-05-20 00:30:58', '2026-05-09 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (115, 'ORD20260602000115', 2202, 67, 28, '2026-07-11', '2026-07-15', 1801.61, '2', NULL, NULL, '2026-04-06 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (116, 'ORD20260602000116', 2162, 62, 83, '2026-07-22', '2026-07-25', 1342.00, '1', NULL, '2026-05-04 00:30:58', '2026-04-05 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (117, 'ORD20260602000117', 2001, 90, 188, '2026-06-06', '2026-06-07', 4646.86, '3', NULL, '2026-05-06 00:30:58', '2026-04-09 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (118, 'ORD20260602000118', 2257, 83, 139, '2026-06-04', '2026-06-06', 4092.05, '5', NULL, '2026-05-08 00:30:58', '2026-04-27 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (119, 'ORD20260602000119', 2270, 59, 20, '2026-06-17', '2026-06-18', 3037.39, '4', NULL, '2026-05-25 00:30:58', '2026-06-02 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (120, 'ORD20260602000120', 2293, 17, 286, '2026-06-13', '2026-06-17', 4247.40, '1', NULL, '2026-05-15 00:30:58', '2026-05-13 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (121, 'ORD20260602000121', 2494, 92, 192, '2026-05-28', '2026-05-31', 4136.36, '2', NULL, NULL, '2026-04-16 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (122, 'ORD20260602000122', 2051, 59, 201, '2026-07-11', '2026-07-15', 4863.20, '5', NULL, '2026-05-25 00:30:58', '2026-04-09 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (123, 'ORD20260602000123', 2456, 72, 284, '2026-05-13', '2026-05-18', 2167.40, '0', NULL, NULL, '2026-05-17 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (124, 'ORD20260602000124', 2231, 13, 268, '2026-05-02', '2026-05-06', 2106.50, '5', NULL, '2026-05-28 00:30:58', '2026-05-17 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (125, 'ORD20260602000125', 2109, 84, 120, '2026-05-06', '2026-05-10', 1041.30, '4', NULL, '2026-05-21 00:30:58', '2026-04-20 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (126, 'ORD20260602000126', 2058, 42, 305, '2026-07-27', '2026-07-30', 3128.49, '3', NULL, '2026-05-12 00:30:58', '2026-06-02 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (127, 'ORD20260602000127', 2062, 92, 202, '2026-07-20', '2026-07-21', 4523.46, '0', NULL, NULL, '2026-04-05 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (128, 'ORD20260602000128', 2190, 51, 203, '2026-05-15', '2026-05-19', 4671.77, '3', NULL, '2026-05-28 00:30:58', '2026-05-25 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (129, 'ORD20260602000129', 2298, 12, 67, '2026-06-07', '2026-06-09', 1242.33, '0', NULL, NULL, '2026-05-30 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (130, 'ORD20260602000130', 2472, 91, 116, '2026-07-06', '2026-07-11', 487.22, '3', NULL, '2026-05-30 00:30:58', '2026-04-24 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (131, 'ORD20260602000131', 2122, 92, 209, '2026-06-09', '2026-06-12', 4775.18, '2', NULL, NULL, '2026-05-24 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (132, 'ORD20260602000132', 2462, 56, 112, '2026-06-30', '2026-07-03', 4667.28, '5', NULL, '2026-05-16 00:30:58', '2026-05-12 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (133, 'ORD20260602000133', 2483, 97, 271, '2026-06-16', '2026-06-20', 4606.29, '2', NULL, NULL, '2026-04-19 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (134, 'ORD20260602000134', 2485, 19, 247, '2026-07-07', '2026-07-12', 4596.29, '0', NULL, NULL, '2026-04-26 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (135, 'ORD20260602000135', 2147, 90, 209, '2026-07-02', '2026-07-05', 4287.19, '2', NULL, NULL, '2026-04-12 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (136, 'ORD20260602000136', 2248, 89, 291, '2026-07-28', '2026-07-31', 1637.66, '0', NULL, NULL, '2026-05-02 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (137, 'ORD20260602000137', 2229, 38, 112, '2026-06-01', '2026-06-03', 3875.78, '4', NULL, '2026-05-24 00:30:58', '2026-05-07 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (138, 'ORD20260602000138', 2018, 26, 338, '2026-05-27', '2026-05-29', 4826.84, '4', NULL, '2026-05-15 00:30:58', '2026-05-31 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (139, 'ORD20260602000139', 2493, 36, 213, '2026-05-10', '2026-05-13', 3245.43, '2', NULL, NULL, '2026-04-09 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (140, 'ORD20260602000140', 2459, 49, 236, '2026-06-21', '2026-06-22', 4542.54, '0', NULL, NULL, '2026-04-06 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (141, 'ORD20260602000141', 2250, 41, 51, '2026-05-08', '2026-05-13', 1212.44, '1', NULL, '2026-05-04 00:30:58', '2026-04-05 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (142, 'ORD20260602000142', 2040, 95, 274, '2026-05-06', '2026-05-07', 653.53, '1', NULL, '2026-05-07 00:30:58', '2026-04-14 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (143, 'ORD20260602000143', 2313, 41, 200, '2026-06-08', '2026-06-10', 4723.91, '5', NULL, '2026-06-01 00:30:58', '2026-05-10 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (144, 'ORD20260602000144', 2456, 77, 225, '2026-06-27', '2026-06-30', 2380.31, '4', NULL, '2026-05-15 00:30:58', '2026-04-17 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (145, 'ORD20260602000145', 2197, 95, 158, '2026-06-26', '2026-07-01', 4564.92, '3', NULL, '2026-05-16 00:30:58', '2026-04-08 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (146, 'ORD20260602000146', 2268, 89, 223, '2026-07-09', '2026-07-11', 4706.35, '5', NULL, '2026-05-08 00:30:58', '2026-05-03 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (147, 'ORD20260602000147', 2420, 98, 125, '2026-05-13', '2026-05-14', 2094.36, '2', NULL, NULL, '2026-06-01 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (148, 'ORD20260602000148', 2006, 84, 37, '2026-07-07', '2026-07-11', 1570.28, '1', NULL, '2026-05-22 00:30:58', '2026-05-17 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (149, 'ORD20260602000149', 2186, 16, 339, '2026-07-26', '2026-07-30', 2988.78, '4', NULL, '2026-05-27 00:30:58', '2026-04-23 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (150, 'ORD20260602000150', 2475, 78, 301, '2026-05-16', '2026-05-17', 3332.84, '0', NULL, NULL, '2026-04-24 00:30:58', '2026-06-02 00:30:58');
+INSERT INTO `orders` VALUES (151, 'ORD202606160001', 305, 1, 1, '2026-06-10', '2026-06-12', 1398.00, '3', NULL, '2026-06-10 10:00:00', '2026-06-23 08:57:53', '2026-06-23 08:57:53');
+INSERT INTO `orders` VALUES (152, 'ORD202606160002', 305, 2, 3, '2026-06-15', '2026-06-17', 2598.00, '3', NULL, '2026-06-15 14:00:00', '2026-06-23 08:57:53', '2026-06-23 08:57:53');
+INSERT INTO `orders` VALUES (153, 'ORD202606160003', 306, 3, 5, '2026-06-08', '2026-06-10', 1298.00, '3', NULL, '2026-06-08 09:00:00', '2026-06-23 08:57:53', '2026-06-23 08:57:53');
+INSERT INTO `orders` VALUES (154, 'ORD202606160004', 306, 5, 8, '2026-06-12', '2026-06-14', 2180.00, '3', NULL, '2026-06-12 11:00:00', '2026-06-23 08:57:53', '2026-06-23 08:57:53');
+INSERT INTO `orders` VALUES (155, 'ORD202606160005', 307, 4, 6, '2026-06-18', '2026-06-20', 1780.00, '3', NULL, '2026-06-18 15:00:00', '2026-06-23 08:57:53', '2026-06-23 08:57:53');
+INSERT INTO `orders` VALUES (156, 'ORD202606160006', 307, 6, 10, '2026-06-20', '2026-06-23', 3840.00, '3', NULL, '2026-06-20 12:00:00', '2026-06-23 08:57:53', '2026-06-23 08:57:53');
+INSERT INTO `orders` VALUES (157, 'ORD202606160007', 308, 1, 2, '2026-06-05', '2026-06-07', 1718.00, '3', NULL, '2026-06-05 08:00:00', '2026-06-23 08:57:53', '2026-06-23 08:57:53');
+INSERT INTO `orders` VALUES (158, 'ORD202606160008', 308, 3, 4, '2026-06-22', '2026-06-24', 1960.00, '1', NULL, '2026-06-22 16:00:00', '2026-06-23 08:57:53', '2026-06-23 08:57:53');
+INSERT INTO `orders` VALUES (159, 'ORD202606160009', 309, 2, 3, '2026-06-25', '2026-06-28', 3897.00, '0', NULL, NULL, '2026-06-23 08:57:53', '2026-06-23 08:57:53');
+INSERT INTO `orders` VALUES (160, 'ORD202606160010', 309, 8, 12, '2026-07-01', '2026-07-04', 5940.00, '1', NULL, '2026-06-25 10:00:00', '2026-06-23 08:57:53', '2026-06-23 08:57:53');
+INSERT INTO `orders` VALUES (161, 'ORD202606240001', 310, 2, 4, '2026-07-05', '2026-07-07', 1398.00, '0', NULL, NULL, '2026-06-24 14:00:00', '2026-06-24 14:00:00');
+INSERT INTO `orders` VALUES (162, 'ORD202606240002', 310, 3, 8, '2026-07-10', '2026-07-13', 2247.00, '1', NULL, '2026-06-24 14:05:00', '2026-06-24 14:00:00', '2026-06-24 14:05:00');
+INSERT INTO `orders` VALUES (163, 'ORD202606240003', 310, 4, 13, '2026-06-15', '2026-06-17', 1878.00, '3', NULL, '2026-06-16 10:00:00', '2026-06-15 09:00:00', '2026-06-17 10:00:00');
+INSERT INTO `orders` VALUES (164, 'ORD202606240004', 310, 5, 17, '2026-07-20', '2026-07-24', 3996.00, '1', NULL, '2026-06-24 15:00:00', '2026-06-24 14:00:00', '2026-06-24 15:00:00');
+INSERT INTO `orders` VALUES (165, 'ORD202606240005', 310, 1, 2, '2026-06-20', '2026-06-21', 759.00, '2', NULL, NULL, '2026-06-19 16:00:00', '2026-06-19 16:00:00');
+INSERT INTO `orders` VALUES (166, 'ORD202606240006', 310, 6, 19, '2026-06-10', '2026-06-12', 1798.00, '3', NULL, '2026-06-11 08:00:00', '2026-06-09 10:00:00', '2026-06-12 08:00:00');
+INSERT INTO `orders` VALUES (167, 'ORD202606240007', 310, 1, 3, '2026-08-01', '2026-08-04', 3237.00, '0', NULL, NULL, '2026-06-24 16:00:00', '2026-06-24 16:00:00');
+INSERT INTO `orders` VALUES (168, 'ORD202606240008', 2, 1, 1, '2026-07-01', '2026-07-03', 1298.00, '3', NULL, '2026-07-01 14:00:00', '2026-06-30 10:00:00', '2026-07-03 10:00:00');
+INSERT INTO `orders` VALUES (169, 'ORD202606240009', 2, 2, 4, '2026-07-10', '2026-07-12', 1398.00, '1', NULL, '2026-07-09 16:00:00', '2026-07-08 08:00:00', '2026-07-09 16:00:00');
+INSERT INTO `orders` VALUES (170, 'ORD202606240010', 2, 3, 8, '2026-08-05', '2026-08-08', 2247.00, '1', NULL, '2026-06-26 20:10:51', '2026-07-20 12:00:00', '2026-06-26 20:10:51');
+INSERT INTO `orders` VALUES (171, 'ORD202606240011', 2, 4, 12, '2026-06-15', '2026-06-16', 799.00, '2', NULL, NULL, '2026-06-14 09:00:00', '2026-06-14 09:00:00');
+INSERT INTO `orders` VALUES (172, 'ORD202606240012', 305, 5, 16, '2026-09-01', '2026-09-04', 2547.00, '3', NULL, '2026-09-01 08:00:00', '2026-08-20 10:00:00', '2026-09-04 10:00:00');
+INSERT INTO `orders` VALUES (173, 'ORD202606240013', 305, 6, 19, '2026-07-25', '2026-07-27', 1798.00, '1', NULL, '2026-07-24 20:00:00', '2026-07-22 15:00:00', '2026-07-24 20:00:00');
+INSERT INTO `orders` VALUES (174, 'ORD202606240014', 305, 7, 24, '2026-08-15', '2026-08-19', 3796.00, '0', NULL, NULL, '2026-07-30 18:00:00', '2026-07-30 18:00:00');
+INSERT INTO `orders` VALUES (175, 'ORD202606240015', 306, 1, 2, '2026-06-20', '2026-06-21', 759.00, '3', NULL, '2026-06-20 14:00:00', '2026-06-19 08:00:00', '2026-06-21 10:00:00');
+INSERT INTO `orders` VALUES (176, 'ORD202606240016', 306, 2, 7, '2026-07-05', '2026-07-07', 1878.00, '1', NULL, '2026-07-04 18:00:00', '2026-07-03 10:00:00', '2026-07-04 18:00:00');
+INSERT INTO `orders` VALUES (177, 'ORD202606240017', 306, 8, 27, '2026-07-20', '2026-07-23', 2997.00, '4', NULL, '2026-07-19 10:00:00', '2026-07-15 09:00:00', '2026-07-20 14:00:00');
+INSERT INTO `orders` VALUES (178, 'ORD202606240018', 307, 3, 9, '2026-06-01', '2026-06-05', 3516.00, '3', NULL, '2026-06-01 08:00:00', '2026-05-28 12:00:00', '2026-06-05 12:00:00');
+INSERT INTO `orders` VALUES (179, 'ORD202606240019', 307, 4, 15, '2026-06-25', '2026-06-27', 2158.00, '2', NULL, NULL, '2026-06-20 14:00:00', '2026-06-20 14:00:00');
+INSERT INTO `orders` VALUES (180, 'ORD202606240020', 307, 6, 20, '2026-08-10', '2026-08-13', 3177.00, '1', NULL, '2026-08-09 16:00:00', '2026-08-05 10:00:00', '2026-08-09 16:00:00');
+INSERT INTO `orders` VALUES (181, 'ORD202606240021', 308, 1, 3, '2026-06-10', '2026-06-12', 2158.00, '3', NULL, '2026-06-10 09:00:00', '2026-06-05 14:00:00', '2026-06-12 10:00:00');
+INSERT INTO `orders` VALUES (182, 'ORD202606240022', 308, 5, 18, '2026-07-15', '2026-07-18', 4197.00, '1', NULL, '2026-07-14 20:00:00', '2026-07-10 08:00:00', '2026-07-14 20:00:00');
+INSERT INTO `orders` VALUES (183, 'ORD202606240023', 308, 7, 26, '2026-08-20', '2026-08-22', 3118.00, '0', NULL, NULL, '2026-08-10 16:00:00', '2026-08-10 16:00:00');
+INSERT INTO `orders` VALUES (184, 'ORD202606240024', 309, 2, 5, '2026-06-05', '2026-06-10', 4095.00, '3', NULL, '2026-06-05 10:00:00', '2026-06-01 08:00:00', '2026-06-10 12:00:00');
+INSERT INTO `orders` VALUES (185, 'ORD202606240025', 309, 6, 22, '2026-07-01', '2026-07-03', 7198.00, '1', NULL, '2026-06-30 18:00:00', '2026-06-25 10:00:00', '2026-06-30 18:00:00');
+INSERT INTO `orders` VALUES (186, 'ORD202606240026', 309, 8, 30, '2026-07-20', '2026-07-23', 4077.00, '4', NULL, '2026-07-19 10:00:00', '2026-07-15 09:00:00', '2026-07-22 15:00:00');
+INSERT INTO `orders` VALUES (187, 'ORD20260626001', 2, 1, 1, '2026-06-28', '2026-06-30', 1298.00, '1', NULL, '2026-06-26 10:30:00', '2026-06-26 10:30:00', '2026-06-26 10:30:00');
+INSERT INTO `orders` VALUES (188, 'ORD20260626002', 305, 1, 2, '2026-06-27', '2026-06-29', 1518.00, '1', NULL, '2026-06-26 11:00:00', '2026-06-26 11:00:00', '2026-06-26 11:00:00');
+INSERT INTO `orders` VALUES (189, 'ORD20260626003', 306, 51, 193, '2026-06-29', '2026-07-02', 2277.00, '1', NULL, '2026-06-26 12:00:00', '2026-06-26 12:00:00', '2026-06-26 12:00:00');
+INSERT INTO `orders` VALUES (190, 'ORD20260626004', 307, 1, 3, '2026-07-01', '2026-07-04', 3237.00, '7', NULL, '2026-06-26 13:00:00', '2026-06-26 13:00:00', '2026-06-26 20:06:29');
+INSERT INTO `orders` VALUES (191, 'ORD20260625001', 308, 1, 1, '2026-06-25', '2026-06-28', 1947.00, '7', NULL, '2026-06-25 09:00:00', '2026-06-25 09:00:00', '2026-06-26 08:00:00');
+INSERT INTO `orders` VALUES (192, 'ORD20260625002', 306, 51, 192, '2026-06-24', '2026-06-27', 1947.00, '7', NULL, '2026-06-24 14:00:00', '2026-06-24 14:00:00', '2026-06-25 15:00:00');
+INSERT INTO `orders` VALUES (193, 'ORD20260626005', 307, 1, 1, '2026-07-05', '2026-07-08', 1947.00, '0', NULL, NULL, '2026-06-26 14:00:00', '2026-06-26 14:00:00');
+INSERT INTO `orders` VALUES (194, 'ORD20260626006', 2, 51, 194, '2026-07-10', '2026-07-12', 2158.00, '0', NULL, NULL, '2026-06-26 15:00:00', '2026-06-26 15:00:00');
+INSERT INTO `orders` VALUES (195, 'ORD2026062663640', 310, 1, 1, '2026-06-27', '2026-06-28', 649.00, '0', NULL, NULL, '2026-06-26 20:07:49', '2026-06-26 20:07:49');
+INSERT INTO `orders` VALUES (196, 'ORD2026062617144', 310, 1, 1, '2026-06-27', '2026-06-28', 649.00, '0', NULL, NULL, '2026-06-26 20:07:55', '2026-06-26 20:07:55');
+INSERT INTO `orders` VALUES (197, 'ORD2026062678769', 310, 977, 1, '2026-06-27', '2026-06-28', 649.00, '1', NULL, '2026-06-26 20:24:50', '2026-06-26 20:08:15', '2026-06-26 20:24:50');
+INSERT INTO `orders` VALUES (198, 'ORD2026062657655', 310, 555, 1, '2026-06-27', '2026-06-28', 649.00, '1', NULL, '2026-06-26 20:18:38', '2026-06-26 20:08:26', '2026-06-26 20:18:38');
+INSERT INTO `orders` VALUES (199, 'ORD2026062658944', 310, 555, 1, '2026-06-27', '2026-06-28', 649.00, '1', NULL, '2026-06-26 20:13:31', '2026-06-26 20:08:36', '2026-06-26 20:13:31');
+INSERT INTO `orders` VALUES (200, 'ORD2026062671424', 310, 977, 1, '2026-06-27', '2026-06-28', 649.00, '0', NULL, NULL, '2026-06-26 20:42:31', '2026-06-26 20:42:31');
+INSERT INTO `orders` VALUES (201, 'ORD2026062646286', 310, 977, 1, '2026-06-27', '2026-06-28', 649.00, '0', NULL, NULL, '2026-06-26 20:45:17', '2026-06-26 20:45:17');
+INSERT INTO `orders` VALUES (202, 'ORD2026062616129', 310, 977, 1, '2026-06-27', '2026-06-28', 649.00, '0', NULL, NULL, '2026-06-26 20:45:19', '2026-06-26 20:45:19');
+INSERT INTO `orders` VALUES (203, 'ORD2026062659186', 310, 977, 1, '2026-06-27', '2026-06-28', 649.00, '0', NULL, NULL, '2026-06-26 20:45:21', '2026-06-26 20:45:21');
+INSERT INTO `orders` VALUES (204, 'ORD2026062637288', 310, 977, 1, '2026-06-27', '2026-06-28', 649.00, '0', NULL, NULL, '2026-06-26 20:45:49', '2026-06-26 20:45:49');
+INSERT INTO `orders` VALUES (205, 'ORD2026062615871', 310, 977, 1, '2026-06-27', '2026-06-28', 649.00, '1', NULL, '2026-06-26 20:47:29', '2026-06-26 20:46:06', '2026-06-26 20:47:29');
+INSERT INTO `orders` VALUES (206, 'ORD2026062660927', 310, 51, 192, '2026-06-27', '2026-06-28', 649.00, '3', NULL, '2026-06-26 20:51:28', '2026-06-26 20:49:49', '2026-06-26 20:52:07');
 
 -- ----------------------------
 -- Table structure for payment
@@ -2642,7 +2946,7 @@ CREATE TABLE `payment`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_order_id`(`order_id` ASC) USING BTREE,
   INDEX `idx_pay_status`(`pay_status` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 137 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '支付表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 145 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '支付表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of payment
@@ -2783,6 +3087,14 @@ INSERT INTO `payment` VALUES (133, 182, 4197.00, '2', '1', '2026-07-14 20:00:00'
 INSERT INTO `payment` VALUES (134, 184, 4095.00, '1', '1', '2026-06-05 10:00:00', 'TXN309184', '2026-06-01 08:00:00', '2026-06-05 10:00:00');
 INSERT INTO `payment` VALUES (135, 185, 7198.00, '2', '1', '2026-06-30 18:00:00', 'TXN309185', '2026-06-25 10:00:00', '2026-06-30 18:00:00');
 INSERT INTO `payment` VALUES (136, 186, 4077.00, '3', '3', '2026-07-19 10:00:00', 'TXN309186', '2026-07-15 09:00:00', '2026-07-22 15:00:00');
+INSERT INTO `payment` VALUES (137, 170, 2247.00, '1', '1', '2026-06-26 20:10:51', 'WX202606262010514473', '2026-06-26 20:08:59', '2026-06-26 20:10:51');
+INSERT INTO `payment` VALUES (138, 199, 649.00, '1', '1', '2026-06-26 20:13:31', 'WX202606262013306836', '2026-06-26 20:13:29', '2026-06-26 20:13:31');
+INSERT INTO `payment` VALUES (139, 198, 649.00, '1', '1', '2026-06-26 20:18:38', 'WX202606262018374393', '2026-06-26 20:17:56', '2026-06-26 20:18:38');
+INSERT INTO `payment` VALUES (140, 197, 649.00, '1', '1', '2026-06-26 20:24:50', 'WX202606262024494912', '2026-06-26 20:18:50', '2026-06-26 20:24:50');
+INSERT INTO `payment` VALUES (141, 196, 649.00, '1', '0', NULL, NULL, '2026-06-26 20:28:27', '2026-06-26 20:28:27');
+INSERT INTO `payment` VALUES (142, 204, 649.00, '1', '0', NULL, NULL, '2026-06-26 20:45:52', '2026-06-26 20:45:52');
+INSERT INTO `payment` VALUES (143, 205, 649.00, '1', '1', '2026-06-26 20:47:29', 'WX202606262047285903', '2026-06-26 20:47:27', '2026-06-26 20:47:29');
+INSERT INTO `payment` VALUES (144, 206, 649.00, '1', '1', '2026-06-26 20:51:28', 'WX202606262051275370', '2026-06-26 20:51:25', '2026-06-26 20:51:28');
 
 -- ----------------------------
 -- Table structure for qrtz_blob_triggers
@@ -3020,7 +3332,7 @@ CREATE TABLE `room`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_hotel_id`(`hotel_id` ASC) USING BTREE,
   INDEX `idx_status`(`status` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 488 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '房源/房型表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 485 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '房源/房型表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of room
@@ -3507,9 +3819,6 @@ INSERT INTO `room` VALUES (481, 116, '冰雪主题大床房', '28平米', '1.8�
 INSERT INTO `room` VALUES (482, 116, '中央大街景观房', '30平米', '2张1.2米单人床', 369.00, 10, '0', 'https://example.com/room_comfort14.jpg', '2026-06-25 18:01:18', '2026-06-25 18:01:18');
 INSERT INTO `room` VALUES (483, 117, '海景民宿大床房', '32平米', '1.8米大床', 499.00, 6, '0', 'https://example.com/room_comfort15.jpg', '2026-06-25 18:01:18', '2026-06-25 18:01:18');
 INSERT INTO `room` VALUES (484, 117, '园景家庭房', '45平米', '1.8米大床+1.2米单人床', 699.00, 4, '0', 'https://example.com/room_comfort16.jpg', '2026-06-25 18:01:18', '2026-06-25 18:01:18');
-INSERT INTO `room` VALUES (485, 71, '豪华大床房', '35平米', '1.8米大床', 499.00, 20, '0', NULL, '2026-06-26 16:45:04', '2026-06-26 16:45:04');
-INSERT INTO `room` VALUES (486, 71, '标准双床房', '38平米', '2张1.2米单人床', 599.00, 15, '0', NULL, '2026-06-26 16:45:04', '2026-06-26 16:45:04');
-INSERT INTO `room` VALUES (487, 71, '家庭套房', '55平米', '1.8米大床+1.2米单人床', 899.00, 10, '0', NULL, '2026-06-26 16:45:04', '2026-06-26 16:45:04');
 
 -- ----------------------------
 -- Table structure for sys_config
@@ -3748,7 +4057,7 @@ CREATE TABLE `sys_logininfor`  (
   PRIMARY KEY (`info_id`) USING BTREE,
   INDEX `idx_sys_logininfor_s`(`status` ASC) USING BTREE,
   INDEX `idx_sys_logininfor_lt`(`login_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 442 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 457 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -4071,30 +4380,45 @@ INSERT INTO `sys_logininfor` VALUES (414, 'customer01', '127.0.0.1', '内网IP',
 INSERT INTO `sys_logininfor` VALUES (415, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '登录成功', '2026-06-25 20:42:41');
 INSERT INTO `sys_logininfor` VALUES (416, 'admin', '127.0.0.1', '内网IP', '', '', '1', '验证码已失效', '2026-06-25 20:46:19');
 INSERT INTO `sys_logininfor` VALUES (417, 'customer01', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '退出成功', '2026-06-25 20:56:44');
-INSERT INTO `sys_logininfor` VALUES (418, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 15:58:49');
-INSERT INTO `sys_logininfor` VALUES (419, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 15:58:57');
-INSERT INTO `sys_logininfor` VALUES (420, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 15:59:03');
-INSERT INTO `sys_logininfor` VALUES (421, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 15:59:14');
-INSERT INTO `sys_logininfor` VALUES (422, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 16:32:23');
-INSERT INTO `sys_logininfor` VALUES (423, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 16:32:46');
-INSERT INTO `sys_logininfor` VALUES (424, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 16:34:02');
-INSERT INTO `sys_logininfor` VALUES (425, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 16:34:20');
-INSERT INTO `sys_logininfor` VALUES (426, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 16:35:05');
-INSERT INTO `sys_logininfor` VALUES (427, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 16:35:13');
-INSERT INTO `sys_logininfor` VALUES (428, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 16:35:35');
-INSERT INTO `sys_logininfor` VALUES (429, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 16:35:42');
-INSERT INTO `sys_logininfor` VALUES (430, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 16:36:01');
-INSERT INTO `sys_logininfor` VALUES (431, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 16:36:16');
-INSERT INTO `sys_logininfor` VALUES (432, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 16:37:03');
-INSERT INTO `sys_logininfor` VALUES (433, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 16:37:11');
-INSERT INTO `sys_logininfor` VALUES (434, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 17:56:44');
-INSERT INTO `sys_logininfor` VALUES (435, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 17:57:44');
-INSERT INTO `sys_logininfor` VALUES (436, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '1', '验证码错误', '2026-06-26 17:58:10');
-INSERT INTO `sys_logininfor` VALUES (437, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '1', '验证码错误', '2026-06-26 17:58:17');
-INSERT INTO `sys_logininfor` VALUES (438, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '1', '验证码错误', '2026-06-26 17:58:22');
-INSERT INTO `sys_logininfor` VALUES (439, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 17:58:28');
-INSERT INTO `sys_logininfor` VALUES (440, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 17:59:26');
-INSERT INTO `sys_logininfor` VALUES (441, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 17:59:35');
+INSERT INTO `sys_logininfor` VALUES (418, 'customer01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 15:58:04');
+INSERT INTO `sys_logininfor` VALUES (419, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 15:58:07');
+INSERT INTO `sys_logininfor` VALUES (420, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 16:04:21');
+INSERT INTO `sys_logininfor` VALUES (421, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 17:34:26');
+INSERT INTO `sys_logininfor` VALUES (422, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 17:58:36');
+INSERT INTO `sys_logininfor` VALUES (423, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 17:58:52');
+INSERT INTO `sys_logininfor` VALUES (424, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 18:07:36');
+INSERT INTO `sys_logininfor` VALUES (425, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 18:07:51');
+INSERT INTO `sys_logininfor` VALUES (426, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 20:00:06');
+INSERT INTO `sys_logininfor` VALUES (427, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 20:06:57');
+INSERT INTO `sys_logininfor` VALUES (428, 'gez15036734839@163.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 20:07:30');
+INSERT INTO `sys_logininfor` VALUES (429, 'gez15036734839@163.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 20:08:38');
+INSERT INTO `sys_logininfor` VALUES (430, 'customer01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 20:08:56');
+INSERT INTO `sys_logininfor` VALUES (431, 'customer01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 20:10:25');
+INSERT INTO `sys_logininfor` VALUES (432, 'customer01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 20:10:34');
+INSERT INTO `sys_logininfor` VALUES (433, 'customer01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 20:12:07');
+INSERT INTO `sys_logininfor` VALUES (434, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 20:12:18');
+INSERT INTO `sys_logininfor` VALUES (435, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 20:13:05');
+INSERT INTO `sys_logininfor` VALUES (436, 'gez15036734839@163.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 20:13:22');
+INSERT INTO `sys_logininfor` VALUES (437, 'gez15036734839@163.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 20:24:01');
+INSERT INTO `sys_logininfor` VALUES (438, 'gez15036734839@163.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 20:24:19');
+INSERT INTO `sys_logininfor` VALUES (439, 'gez15036734839@163.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '1', '验证码错误', '2026-06-26 20:30:47');
+INSERT INTO `sys_logininfor` VALUES (440, 'gez15036734839@163.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 20:30:52');
+INSERT INTO `sys_logininfor` VALUES (441, 'gez15036734839@163.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 20:35:54');
+INSERT INTO `sys_logininfor` VALUES (442, 'gez15036734839@163.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 20:46:14');
+INSERT INTO `sys_logininfor` VALUES (443, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '1', '验证码错误', '2026-06-26 20:46:26');
+INSERT INTO `sys_logininfor` VALUES (444, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 20:46:29');
+INSERT INTO `sys_logininfor` VALUES (445, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 20:46:35');
+INSERT INTO `sys_logininfor` VALUES (446, 'gen15036734839@163.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '1', '用户不存在/密码错误', '2026-06-26 20:46:56');
+INSERT INTO `sys_logininfor` VALUES (447, 'gnz15036734839@163.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '1', '用户不存在/密码错误', '2026-06-26 20:47:05');
+INSERT INTO `sys_logininfor` VALUES (448, 'gez15036734839@163.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 20:47:22');
+INSERT INTO `sys_logininfor` VALUES (449, 'gez15036734839@163.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 20:49:52');
+INSERT INTO `sys_logininfor` VALUES (450, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 20:50:05');
+INSERT INTO `sys_logininfor` VALUES (451, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 20:50:58');
+INSERT INTO `sys_logininfor` VALUES (452, 'gez15036734839@163.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 20:51:18');
+INSERT INTO `sys_logininfor` VALUES (453, 'gez15036734839@163.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 20:51:32');
+INSERT INTO `sys_logininfor` VALUES (454, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 20:51:45');
+INSERT INTO `sys_logininfor` VALUES (455, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-26 20:52:18');
+INSERT INTO `sys_logininfor` VALUES (456, 'gez15036734839@163.com', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-26 20:52:33');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -4122,7 +4446,7 @@ CREATE TABLE `sys_menu`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6002 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单权限表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5011 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单权限表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -4249,7 +4573,7 @@ INSERT INTO `sys_menu` VALUES (5006, '通知中心', 4, 0, 'notice', 'biz/notice
 INSERT INTO `sys_menu` VALUES (5007, '营收报表', 4, 0, 'statistics/report', 'biz/statistics/report', NULL, '', 1, 0, 'C', '0', '0', '', 'documentation', '', '2026-06-24 17:59:01', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (5008, '审核查询', 4004, 1, '', '', '', '', 1, 0, 'F', '0', '0', 'biz:hotelAudit:query', '#', 'admin', '2026-06-24 19:52:22', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (5009, '审核修改', 4004, 2, '', '', '', '', 1, 0, 'F', '0', '0', 'biz:hotelAudit:edit', '#', 'admin', '2026-06-24 19:52:22', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (6001, '申诉管理', 4, 7, 'appeal', 'biz/appeal/index', '', '', 1, 0, 'C', '0', '0', 'biz:appeal:list', 'checkbox', 'admin', '2026-06-26 16:04:49', '', NULL, '申诉管理菜单');
+INSERT INTO `sys_menu` VALUES (5010, '订单管理', 4, 3, 'merchant/order', 'biz/merchant/order', NULL, '', 1, 0, 'C', '0', '0', '', 'list', '', '2026-06-26 17:57:13', '', NULL, '商户订单管理菜单');
 
 -- ----------------------------
 -- Table structure for sys_notice
@@ -4302,7 +4626,7 @@ CREATE TABLE `sys_oper_log`  (
   INDEX `idx_sys_oper_log_bt`(`business_type` ASC) USING BTREE,
   INDEX `idx_sys_oper_log_s`(`status` ASC) USING BTREE,
   INDEX `idx_sys_oper_log_ot`(`oper_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 207 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '操作日志记录' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 203 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '操作日志记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -4407,13 +4731,9 @@ INSERT INTO `sys_oper_log` VALUES (196, '酒店审核管理', 2, 'com.zsc.module
 INSERT INTO `sys_oper_log` VALUES (197, '商户管理', 1, 'com.zsc.module.controller.MerchantController.add()', 'POST', 1, 'hero2192039831@163.com', '若依科技', '/api/merchant', '127.0.0.1', '内网IP', '{\"address\":\"zsc\",\"businessScope\":\"酒店\",\"description\":\"123\",\"email\":\"hero2192039831@163.com\",\"legalPerson\":\"lyx\",\"licenseNo\":\"91440101MA5B3C4D2E\",\"logoUrl\":\"欧ku\",\"merchantName\":\"lyx\",\"phone\":\"17359201669\",\"status\":\"0\"} ', '{\"code\":200,\"message\":\"success\"}', 0, NULL, '2026-06-25 15:54:27', 33);
 INSERT INTO `sys_oper_log` VALUES (198, '商户审核管理', 2, 'com.zsc.module.controller.MerchantController.processAudit()', 'PUT', 1, 'admin', '研发部门', '/api/merchant/audit', '127.0.0.1', '内网IP', '{\"auditOpinion\":\"通过\",\"auditStatus\":\"1\",\"auditType\":\"1\",\"id\":72,\"merchantId\":1074} ', '{\"code\":200,\"message\":\"success\"}', 0, NULL, '2026-06-25 15:55:15', 30);
 INSERT INTO `sys_oper_log` VALUES (199, '商户酒店管理', 1, 'com.zsc.module.controller.MerchantHotelController.add()', 'POST', 1, 'merchant01', '市场部门', '/api/merchant/hotel', '127.0.0.1', '内网IP', '{\"address\":\"zsc\",\"businessId\":1073,\"facility\":\"无\",\"imgUrl\":\"https://picsum.photos/400/300\",\"name\":\"豆涛\",\"star\":1,\"status\":\"1\"} ', '{\"code\":200,\"data\":102,\"message\":\"success\"}', 0, NULL, '2026-06-25 16:10:13', 17);
-INSERT INTO `sys_oper_log` VALUES (200, '申诉审核', 2, 'com.zsc.module.controller.CommentController.auditAppeal()', 'PUT', 1, 'admin', '研发部门', '/api/comment/163/auditAppeal', '127.0.0.1', '内网IP', '{\"appealStatus\":\"3\"}', NULL, 1, '该评价没有待处理的申诉！', '2026-06-26 16:14:41', 70);
-INSERT INTO `sys_oper_log` VALUES (201, '申诉审核', 2, 'com.zsc.module.controller.CommentController.auditAppeal()', 'PUT', 1, 'admin', '研发部门', '/api/comment/155/auditAppeal', '127.0.0.1', '内网IP', '{\"appealStatus\":\"3\"}', NULL, 1, '该评价没有待处理的申诉！', '2026-06-26 16:14:55', 10);
-INSERT INTO `sys_oper_log` VALUES (202, '申诉审核', 2, 'com.zsc.module.controller.CommentController.auditAppeal()', 'PUT', 1, 'admin', '研发部门', '/api/comment/155/auditAppeal', '127.0.0.1', '内网IP', '{\"appealStatus\":\"2\"}', NULL, 1, '该评价没有待处理的申诉！', '2026-06-26 16:14:59', 8);
-INSERT INTO `sys_oper_log` VALUES (203, '申诉审核', 2, 'com.zsc.module.controller.CommentController.auditAppeal()', 'PUT', 1, 'admin', '研发部门', '/api/comment/7/auditAppeal', '127.0.0.1', '内网IP', '{\"appealStatus\":\"2\"}', '{\"msg\":\"申诉通过，评价已保留！\",\"code\":200}', 0, NULL, '2026-06-26 16:28:02', 96);
-INSERT INTO `sys_oper_log` VALUES (204, '申诉审核', 2, 'com.zsc.module.controller.CommentController.auditAppeal()', 'PUT', 1, 'admin', '研发部门', '/api/comment/8/auditAppeal', '127.0.0.1', '内网IP', '{\"appealStatus\":\"3\"}', '{\"msg\":\"申诉驳回，评价已撤销！\",\"code\":200}', 0, NULL, '2026-06-26 16:28:07', 25);
-INSERT INTO `sys_oper_log` VALUES (205, '商户评价管理', 2, 'com.zsc.module.controller.MerchantCommentController.appeal()', 'PUT', 1, 'merchant_bj', '若依科技', '/api/merchant/comment/3/appeal', '127.0.0.1', '内网IP', '{\"reason\":\"后面给他们升级房型了\"}', '{\"msg\":\"申诉已提交，等待管理员审核！\",\"code\":200}', 0, NULL, '2026-06-26 16:34:59', 29);
-INSERT INTO `sys_oper_log` VALUES (206, '申诉审核', 2, 'com.zsc.module.controller.CommentController.auditAppeal()', 'PUT', 1, 'admin', '研发部门', '/api/comment/3/auditAppeal', '127.0.0.1', '内网IP', '{\"appealStatus\":\"2\"}', '{\"msg\":\"申诉通过，评价已保留！\",\"code\":200}', 0, NULL, '2026-06-26 16:35:30', 27);
+INSERT INTO `sys_oper_log` VALUES (200, '商户订单管理', 2, 'com.zsc.module.controller.MerchantOrderController.checkin()', 'PUT', 1, 'merchant_bj', '若依科技', '/api/merchant/order/190/checkin', '127.0.0.1', '内网IP', '{\"remark\":\"301\"}', '{\"code\":200,\"data\":\"已办理入住\",\"message\":\"success\"}', 0, NULL, '2026-06-26 20:06:28', 131);
+INSERT INTO `sys_oper_log` VALUES (201, '商户订单管理', 2, 'com.zsc.module.controller.MerchantOrderController.checkin()', 'PUT', 1, 'merchant_bj', '若依科技', '/api/merchant/order/206/checkin', '127.0.0.1', '内网IP', '{\"remark\":\"3002\"}', '{\"code\":200,\"data\":\"已办理入住\",\"message\":\"success\"}', 0, NULL, '2026-06-26 20:52:02', 92);
+INSERT INTO `sys_oper_log` VALUES (202, '商户订单管理', 2, 'com.zsc.module.controller.MerchantOrderController.checkout()', 'PUT', 1, 'merchant_bj', '若依科技', '/api/merchant/order/206/checkout', '127.0.0.1', '内网IP', '{\"remark\":\"\"}', '{\"code\":200,\"data\":\"已办理退房，订单已完成\",\"message\":\"success\"}', 0, NULL, '2026-06-26 20:52:06', 68);
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -4573,6 +4893,7 @@ INSERT INTO `sys_role_menu` VALUES (3, 5004);
 INSERT INTO `sys_role_menu` VALUES (3, 5005);
 INSERT INTO `sys_role_menu` VALUES (3, 5006);
 INSERT INTO `sys_role_menu` VALUES (3, 5007);
+INSERT INTO `sys_role_menu` VALUES (3, 5010);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -4606,19 +4927,19 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 103, 'admin', '系统管理员', '00', 'admin@hotel.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-26 17:59:36', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '超级管理员账号', 0);
-INSERT INTO `sys_user` VALUES (2, 105, 'customer01', '普通用户', '00', 'customer@test.com', '15666666666', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-25 20:42:41', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '前台普通用户账号', 1298);
+INSERT INTO `sys_user` VALUES (1, 103, 'admin', '系统管理员', '00', 'admin@hotel.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-26 20:46:30', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '超级管理员账号', 0);
+INSERT INTO `sys_user` VALUES (2, 105, 'customer01', '普通用户', '00', 'customer@test.com', '15666666666', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-26 20:10:35', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '前台普通用户账号', 1298);
 INSERT INTO `sys_user` VALUES (100, 104, 'merchant01', '酒店商户', '01', 'merchant@test.com', '13800000001', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-25 16:08:04', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '酒店商家账号', 0);
-INSERT INTO `sys_user` VALUES (301, 100, 'merchant_bj', '张经理(北京希尔顿)', '00', 'merchant_bj@hotel.com', '13800138001', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-26 17:58:28', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-北京希尔顿', 0);
+INSERT INTO `sys_user` VALUES (301, 100, 'merchant_bj', '张经理(北京希尔顿)', '00', 'merchant_bj@hotel.com', '13800138001', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-26 20:51:45', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-北京希尔顿', 0);
 INSERT INTO `sys_user` VALUES (302, 100, 'merchant_sh', '李总(上海华尔道夫)', '00', 'merchant_sh@hotel.com', '13800138002', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-上海华尔道夫', 0);
 INSERT INTO `sys_user` VALUES (303, 100, 'merchant_gz', '王总(广州丽思卡尔顿)', '00', 'merchant_gz@hotel.com', '13800138003', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-广州丽思卡尔顿', 0);
 INSERT INTO `sys_user` VALUES (304, 100, 'merchant_hz', '孙总(杭州西湖国宾馆)', '00', 'merchant_hz@hotel.com', '13800138005', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-杭州西湖国宾馆', 0);
-INSERT INTO `sys_user` VALUES (305, 100, 'test_user1', '旅游达人小王', '00', 'test_user1@test.com', '13900000101', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-26 16:37:11', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '普通用户', 2547);
+INSERT INTO `sys_user` VALUES (305, 100, 'test_user1', '旅游达人小王', '00', 'test_user1@test.com', '13900000101', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-23 17:32:52', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '普通用户', 2547);
 INSERT INTO `sys_user` VALUES (306, 100, 'test_user2', '出差老李', '00', 'test_user2@test.com', '13900000102', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '普通用户', 759);
 INSERT INTO `sys_user` VALUES (307, 100, 'test_user3', '度假小红', '00', 'test_user3@test.com', '13900000103', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '普通用户', 3516);
 INSERT INTO `sys_user` VALUES (308, 100, 'test_user4', '商务张总', '00', 'test_user4@test.com', '13900000104', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '普通用户', 2158);
 INSERT INTO `sys_user` VALUES (309, 100, 'test_user5', '蜜月小周', '00', 'test_user5@test.com', '13900000105', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '普通用户', 4095);
-INSERT INTO `sys_user` VALUES (310, 100, 'gez15036734839@163.com', 'onz', '00', 'gez15036734839@163.com', '13800001234', '2', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-24 14:00:00', NULL, 'admin', '2026-06-24 14:00:00', '', NULL, '测试用户onz', 3676);
+INSERT INTO `sys_user` VALUES (310, 100, 'gez15036734839@163.com', 'onz', '00', 'gez15036734839@163.com', '13800001234', '2', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-26 20:52:33', NULL, 'admin', '2026-06-24 14:00:00', '', '2026-06-26 20:52:06', '测试用户onz', 4325);
 INSERT INTO `sys_user` VALUES (311, 100, 'hero2192039831@163.com', 'lyx', '00', 'hero2192039831@163.com', '', '2', '', '$2a$10$Wa6AYLDxugu9nPiGRVb40epo5YjYgnrRylEamuGdUY3fv36iV7QOa', '0', '0', '127.0.0.1', '2026-06-25 16:00:08', '2026-06-25 15:52:44', 'hero2192039831@163.com', '2026-06-25 15:52:44', '', NULL, NULL, 0);
 
 -- ----------------------------

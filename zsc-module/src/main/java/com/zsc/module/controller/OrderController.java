@@ -180,6 +180,48 @@ public class OrderController extends BaseController {
     }
 
     /**
+     * 修改备注
+     */
+    @Operation(summary = "修改订单备注")
+    @PreAuthorize("@ss.hasPermi('order:edit')")
+    @Log(title = "订单管理", businessType = BusinessType.UPDATE)
+    @PutMapping("/{id}/remark")
+    public AjaxResult updateRemark(
+            @PathVariable Long id,
+            @RequestParam(required = false) String remark) {
+        orderService.updateRemark(id, remark);
+        return success("备注已更新");
+    }
+
+    /**
+     * 办理入住（已支付 → 已入住）
+     */
+    @Operation(summary = "办理入住")
+    @PreAuthorize("@ss.hasPermi('order:edit')")
+    @Log(title = "订单管理", businessType = BusinessType.UPDATE)
+    @PutMapping("/{id}/checkin")
+    public AjaxResult checkin(
+            @PathVariable Long id,
+            @RequestParam(required = false) String remark) {
+        orderService.checkinOrder(id, remark);
+        return success("已办理入住");
+    }
+
+    /**
+     * 办理退房（已入住 → 已完成）
+     */
+    @Operation(summary = "办理退房")
+    @PreAuthorize("@ss.hasPermi('order:complete')")
+    @Log(title = "订单管理", businessType = BusinessType.UPDATE)
+    @PutMapping("/{id}/checkout")
+    public AjaxResult checkout(
+            @PathVariable Long id,
+            @RequestParam(required = false) String remark) {
+        orderService.checkoutOrder(id, remark);
+        return success("已办理退房，订单完成");
+    }
+
+    /**
      * 通用状态更新
      */
     @Operation(summary = "更新订单状态")

@@ -59,6 +59,27 @@ public interface OrderService extends IService<Order> {
     void rejectRefund(Long id, String reason);
 
     /**
+     * 办理入住（已支付 → 已入住）
+     * @param id 订单ID
+     * @param remark 备注
+     */
+    void checkinOrder(Long id, String remark);
+
+    /**
+     * 办理退房（已入住 → 已完成）
+     * @param id 订单ID
+     * @param remark 备注
+     */
+    void checkoutOrder(Long id, String remark);
+
+    /**
+     * 修改订单备注
+     * @param id 订单ID
+     * @param remark 备注
+     */
+    void updateRemark(Long id, String remark);
+
+    /**
      * 生成订单号
      */
     String generateOrderNo();

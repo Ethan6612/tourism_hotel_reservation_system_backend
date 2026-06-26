@@ -49,6 +49,9 @@ public class OrderVo {
     /** 房型名称（关联 room） */
     private String roomType;
 
+    /** 订单备注 */
+    private String remark;
+
     /** 是否已评价 */
     private Boolean reviewed;
 
@@ -75,6 +78,7 @@ public class OrderVo {
             case "4": return "退款中";
             case "5": return "已退款";
             case "6": return "退款驳回";
+            case "7": return "已入住";
             default: return "未知";
         }
     }
