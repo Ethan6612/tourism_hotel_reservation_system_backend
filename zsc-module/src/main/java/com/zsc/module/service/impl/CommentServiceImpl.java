@@ -474,13 +474,13 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         if (StringUtils.hasText(remark)) {
             comment.setRemark(remark);
         }
-        // 申诉通过：保留评价，状态恢复为已发布
+        // 申诉通过（认可商家）：隐藏该评价
         if (APPEAL_STATUS_APPROVED.equals(appealStatus)) {
-            comment.setStatus(COMMENT_STATUS_PUBLISHED);
-        }
-        // 申诉驳回：撤销评价
-        if (APPEAL_STATUS_REJECTED.equals(appealStatus)) {
             comment.setStatus(COMMENT_STATUS_REJECTED);
+        }
+        // 申诉驳回（不认可商家）：保留评价
+        if (APPEAL_STATUS_REJECTED.equals(appealStatus)) {
+            comment.setStatus(COMMENT_STATUS_PUBLISHED);
         }
         comment.setUpdateTime(new Date());
         comment.setUpdateBy(SecurityUtils.getUsername());

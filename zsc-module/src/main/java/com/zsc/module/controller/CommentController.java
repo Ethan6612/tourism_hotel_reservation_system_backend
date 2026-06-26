@@ -301,7 +301,8 @@ public class CommentController extends BaseController {
             @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam(required = false) Integer score,
             @RequestParam(required = false) String status,
-            @RequestParam(required = false) String keyword) {
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) String appealStatus) {
         CommentQueryDto queryDto = new CommentQueryDto();
         queryDto.setHotelId(hotelId);
         queryDto.setPageNum(pageNum);
@@ -309,6 +310,7 @@ public class CommentController extends BaseController {
         queryDto.setScore(score);
         queryDto.setStatus(status);
         queryDto.setKeyword(keyword);
+        queryDto.setAppealStatus(appealStatus);
         PageResult<CommentVo> result = commentService.queryCommentsWithUserInfo(queryDto);
         return success(result);
     }
