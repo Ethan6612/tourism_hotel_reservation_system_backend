@@ -135,10 +135,9 @@ public class MerchantController {
     }
 
     /**
-     * 更新商户信息
+     * 更新商户信息（商户可编辑自己的信息，管理员可编辑任意商户）
      */
     @Operation(summary = "修改商户信息")
-    @PreAuthorize("@ss.hasPermi('merchant:edit')")
     @Log(title = "商户管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public ResultVo update(@Valid @RequestBody MerchantDto merchantDto) {

@@ -40,6 +40,7 @@
     <!-- 结果映射：ScoreStatisticsVo -->
     <resultMap id="ScoreStatisticsResultMap" type="com.zsc.module.domain.vo.ScoreStatisticsVo">
         <result property="hotelId" column="hotel_id"/>
+        <result property="hotelName" column="hotel_name"/>
         <result property="roomId" column="room_id"/>
         <result property="averageScore" column="average_score"/>
         <result property="totalComments" column="total_comments"/>
@@ -252,19 +253,27 @@
         GROUP BY c.hotel_id
     </select>
 
-    <!-- 批量查询酒店的平均评分 -->
+    <!-- 批量查询酒店的平均评分（含各星级数量统计） -->
     <select id="selectHotelsAverageScore" resultMap="ScoreStatisticsResultMap">
         SELECT
             c.hotel_id,
+            h.name AS hotel_name,
             ROUND(AVG(c.score), 2) AS average_score,
-            COUNT(*) AS total_comments
+            COUNT(*) AS total_comments,
+            SUM(CASE WHEN c.score = 5 THEN 1 ELSE 0 END) AS five_star_count,
+            SUM(CASE WHEN c.score = 4 THEN 1 ELSE 0 END) AS four_star_count,
+            SUM(CASE WHEN c.score = 3 THEN 1 ELSE 0 END) AS three_star_count,
+            SUM(CASE WHEN c.score = 2 THEN 1 ELSE 0 END) AS two_star_count,
+            SUM(CASE WHEN c.score = 1 THEN 1 ELSE 0 END) AS one_star_count
         FROM `comment` c
+        LEFT JOIN hotel h ON c.hotel_id = h.id
         WHERE c.status = '1'
         AND c.hotel_id IN
         <foreach collection="hotelIds" item="hotelId" open="(" separator="," close=")">
             #{hotelId}
         </foreach>
-        GROUP BY c.hotel_id
+        GROUP BY c.hotel_id, h.name
+        ORDER BY average_score DESC
     </select>
 
     <!-- 点赞数+1 -->

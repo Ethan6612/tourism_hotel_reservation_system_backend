@@ -69,6 +69,17 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel> implements
         if (!this.save(hotel)) {
             throw new ServiceException("新增酒店失败");
         }
+
+        // 创建初始审核记录，确保每个酒店在 hotel_audit 中都有对应数据
+        HotelAudit audit = HotelAudit.builder()
+                .hotelId(hotel.getId())
+                .auditStatus("0") // 待审核
+                .submitTime(new Date())
+                .createTime(new Date())
+                .updateTime(new Date())
+                .build();
+        hotelAuditMapper.insert(audit);
+
         return hotel.getId();
     }
 
@@ -117,6 +128,10 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel> implements
         if (roomService.hasActiveRooms(id)) {
             throw new ServiceException("该酒店下存在房型，请先删除房型");
         }
+
+        // 删除关联的审核记录
+        hotelAuditMapper.delete(new LambdaQueryWrapper<HotelAudit>()
+                .eq(HotelAudit::getHotelId, id));
 
         if (!this.removeById(id)) {
             throw new ServiceException("删除酒店失败");
@@ -167,9 +182,10 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel> implements
             throw new ServiceException("酒店不存在");
         }
 
-        // 只有草稿状态才能提交审核
-        if (!HotelStatusEnum.DRAFT.getValue().equals(hotel.getStatus())) {
-            throw new ServiceException("只有草稿状态的酒店才能提交上架申请");
+        // 只有草稿或已下架状态才能提交审核
+        if (!HotelStatusEnum.DRAFT.getValue().equals(hotel.getStatus())
+                && !HotelStatusEnum.OFFLINE.getValue().equals(hotel.getStatus())) {
+            throw new ServiceException("只有草稿或已下架状态的酒店才能提交上架申请");
         }
 
         // 校验必填字段是否完整
@@ -189,26 +205,32 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel> implements
             throw new ServiceException("提交审核失败");
         }
 
-        // 检查是否已有待审核的记录，避免重复提交
-        boolean hasPending = hotelAuditMapper.selectCount(
+        // 查找是否已有待审核的记录（创建酒店时已生成初始审核记录）
+        HotelAudit existingAudit = hotelAuditMapper.selectOne(
                 new LambdaQueryWrapper<HotelAudit>()
                         .eq(HotelAudit::getHotelId, id)
                         .eq(HotelAudit::getAuditStatus, "0")
-        ) > 0;
-        if (hasPending) {
-            throw new ServiceException("该酒店已有待审核的申请，请勿重复提交！");
-        }
+                        .orderByDesc(HotelAudit::getCreateTime)
+                        .last("LIMIT 1")
+        );
 
-        // 创建待审核记录
-        HotelAudit audit = HotelAudit.builder()
-                .hotelId(id)
-                .auditStatus("0") // 待审核
-                .submitTime(new Date())
-                .createTime(new Date())
-                .updateTime(new Date())
-                .build();
-        if (hotelAuditMapper.insert(audit) <= 0) {
-            throw new ServiceException("创建审核记录失败，提交审核失败");
+        if (existingAudit != null) {
+            // 使用已有的审核记录，更新提交时间
+            existingAudit.setSubmitTime(new Date());
+            existingAudit.setUpdateTime(new Date());
+            hotelAuditMapper.updateById(existingAudit);
+        } else {
+            // 创建待审核记录（兼容旧数据或异常情况）
+            HotelAudit audit = HotelAudit.builder()
+                    .hotelId(id)
+                    .auditStatus("0") // 待审核
+                    .submitTime(new Date())
+                    .createTime(new Date())
+                    .updateTime(new Date())
+                    .build();
+            if (hotelAuditMapper.insert(audit) <= 0) {
+                throw new ServiceException("创建审核记录失败，提交审核失败");
+            }
         }
     }
 

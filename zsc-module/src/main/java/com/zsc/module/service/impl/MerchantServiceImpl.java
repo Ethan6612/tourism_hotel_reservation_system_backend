@@ -107,6 +107,14 @@ public class MerchantServiceImpl extends ServiceImpl<MerchantMapper, Merchant> i
             throw new ServiceException("商户不存在，更新失败！");
         }
 
+        // 非管理员只能编辑自己的商户信息
+        if (!com.zsc.common.utils.SecurityUtils.isAdmin()) {
+            Long currentUserId = com.zsc.common.utils.SecurityUtils.getUserId();
+            if (existing.getUserId() == null || !existing.getUserId().equals(currentUserId)) {
+                throw new ServiceException("无权修改该商户信息！");
+            }
+        }
+
         // 若营业执照号变更，检查是否与其他商户冲突
         if (StringUtils.isNotBlank(merchantDto.getLicenseNo())
                 && !merchantDto.getLicenseNo().equals(existing.getLicenseNo())
