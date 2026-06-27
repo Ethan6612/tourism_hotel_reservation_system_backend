@@ -204,6 +204,38 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
+    public void updateRemark(Long id, String remark) {
+        Order order = getById(id);
+        if (order == null) throw new ServiceException("订单不存在");
+        order.setRemark(remark);
+        order.setUpdateTime(new Date());
+        updateById(order);
+    }
+
+    @Override
+    public void checkinOrder(Long id, String remark) {
+        Order order = getById(id);
+        if (order == null) throw new ServiceException("订单不存在");
+        if (!Order.STATUS_PAID.equals(order.getStatus()))
+            throw new ServiceException("只有已支付的订单才能办理入住，当前状态: " + getStatusName(order.getStatus()));
+        order.setStatus(Order.STATUS_CHECKED_IN);
+        order.setUpdateTime(new Date());
+        updateById(order);
+    }
+
+    @Override
+    public void checkoutOrder(Long id, String remark) {
+        Order order = getById(id);
+        if (order == null) throw new ServiceException("订单不存在");
+        if (!Order.STATUS_CHECKED_IN.equals(order.getStatus()))
+            throw new ServiceException("只有已入住的订单才能办理退房，当前状态: " + getStatusName(order.getStatus()));
+        order.setStatus(Order.STATUS_COMPLETED);
+        order.setUpdateTime(new Date());
+        updateById(order);
+        awardPoints(order.getUserId(), order.getTotalPrice());
+    }
+
+    @Override
     public OrderVo createOrder(CreateOrderDto dto, Long userId) {
         // 验证房型存在
         Room room = roomMapper.selectById(dto.getRoomId());
@@ -256,9 +288,10 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         LambdaQueryWrapper<Order> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Order::getRoomId, roomId)
                 .in(Order::getStatus,
-                        Order.STATUS_PENDING,    // 待支付
-                        Order.STATUS_PAID,       // 已支付
-                        Order.STATUS_REFUNDING   // 退款中
+                        Order.STATUS_PENDING,
+                        Order.STATUS_PAID,
+                        Order.STATUS_CHECKED_IN,
+                        Order.STATUS_REFUNDING
                 );
         return this.count(wrapper) > 0;
     }
@@ -375,11 +408,13 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         if (from.equals(to)) return false;
 
         switch (from) {
-            case Order.STATUS_PENDING:  // 0 待支付
+            case Order.STATUS_PENDING:
                 return Order.STATUS_PAID.equals(to) || Order.STATUS_CANCELLED.equals(to);
-            case Order.STATUS_PAID:     // 1 已支付
+            case Order.STATUS_PAID:
+                return Order.STATUS_COMPLETED.equals(to) || Order.STATUS_REFUNDING.equals(to) || Order.STATUS_CHECKED_IN.equals(to);
+            case Order.STATUS_CHECKED_IN:
                 return Order.STATUS_COMPLETED.equals(to) || Order.STATUS_REFUNDING.equals(to);
-            case Order.STATUS_REFUNDING: // 4 退款中
+            case Order.STATUS_REFUNDING:
                 return Order.STATUS_REFUNDED.equals(to) || Order.STATUS_REFUND_REJECTED.equals(to);
             default:
                 return false;
@@ -395,6 +430,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             case Order.STATUS_COMPLETED: return "已完成";
             case Order.STATUS_REFUNDING: return "退款中";
             case Order.STATUS_REFUNDED: return "已退款";
+            case Order.STATUS_REFUND_REJECTED: return "退款驳回";
+            case Order.STATUS_CHECKED_IN: return "已入住";
             default: return "未知";
         }
     }

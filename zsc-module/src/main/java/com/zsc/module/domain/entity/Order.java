@@ -38,6 +38,7 @@ public class Order {
     public static final String STATUS_REFUNDED = "5";
     /** 订单状态：退款驳回 */
     public static final String STATUS_REFUND_REJECTED = "6";
+    public static final String STATUS_CHECKED_IN = "7";
 
     /** 订单ID */
     @TableId(value = "id", type = IdType.AUTO)
@@ -66,8 +67,10 @@ public class Order {
     /** 总价格 */
     private BigDecimal totalPrice;
 
-    /** 订单状态（0待支付 1已支付 2已取消 3已完成 4退款中 5已退款） */
+    /** 订单状态（0待支付 1已支付 2已取消 3已完成 4退款中 5已退款 6退款驳回 7已入住） */
     private String status;
+
+    private String remark;
 
     /** 支付时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
