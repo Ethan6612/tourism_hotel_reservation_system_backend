@@ -58,6 +58,12 @@ public interface OrderService extends IService<Order> {
      */
     void rejectRefund(Long id, String reason);
 
+    void checkinOrder(Long id, String remark);
+
+    void checkoutOrder(Long id, String remark);
+
+    void updateRemark(Long id, String remark);
+
     /**
      * 生成订单号
      */
