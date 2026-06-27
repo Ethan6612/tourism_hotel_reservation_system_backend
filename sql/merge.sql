@@ -1,17 +1,17 @@
 /*
  Navicat Premium Dump SQL
 
- Source Server         : test
+ Source Server         : MySQL
  Source Server Type    : MySQL
- Source Server Version : 80404 (8.4.4)
+ Source Server Version : 80043 (8.0.43)
  Source Host           : localhost:3306
  Source Schema         : zsc
 
  Target Server Type    : MySQL
- Target Server Version : 80404 (8.4.4)
+ Target Server Version : 80043 (8.0.43)
  File Encoding         : 65001
 
- Date: 26/06/2026 22:03:39
+ Date: 27/06/2026 09:37:52
 */
 
 SET NAMES utf8mb4;
@@ -78,7 +78,7 @@ CREATE TABLE `comment`  (
   INDEX `idx_user_id`(`user_id` ASC) USING BTREE,
   INDEX `idx_hotel_id`(`hotel_id` ASC) USING BTREE,
   INDEX `idx_room_id`(`room_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 45 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '评价表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 57 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '评价表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of comment
@@ -127,6 +127,18 @@ INSERT INTO `comment` VALUES (41, 307, 801, NULL, NULL, 5, '度假小红：住�
 INSERT INTO `comment` VALUES (42, 305, 1001, NULL, NULL, 5, '旅游达人小王：大理最美的全智能酒店！房间全语音控制，科技感十足又不会觉得冰冷。洱海景观无敌，在阳台上喝着咖啡看苍山洱海，感觉时间都慢下来了。', NULL, NULL, '0', '1', 22, '2026-06-08 16:00:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
 INSERT INTO `comment` VALUES (43, 306, 1001, NULL, NULL, 4, '出差老李：来大理出差顺便度假。智能入住很方便，刷脸就能开门。房间的智能窗帘和灯光系统很好用。就是语音助手有时候反应不太灵敏。总体很不错的体验。', NULL, NULL, '0', '1', 6, '2026-06-22 11:00:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
 INSERT INTO `comment` VALUES (44, 309, 1001, NULL, NULL, 5, '蜜月小周：大理之行的惊喜！酒店位置超好，去古城打车十分钟。房间的智能系统很好玩，躺着就能控制一切。最赞的是浴室的大落地窗，泡着澡看洱海，人生享受！', NULL, NULL, '0', '1', 14, '2026-06-19 18:00:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (45, 305, 1051, 4557, 76, 5, '出差达人张先生：云端精品酒店位置很好，就在科技园核心区域。房间装修现代简约，大床很舒适。健身房设备齐全，早餐品种丰富。前台服务热情专业，下次来深圳还会选择这里！', '[]', NULL, '0', '1', 8, '2026-06-22 10:30:00', NULL, NULL, NULL, NULL, NULL, '0', '感谢张先生的高度评价！我们位于南山科技园核心，一直致力于为商务旅客提供最舒适的入住体验，期待您的再次光临！', '2026-06-23 09:15:00', NULL, 'merchant01');
+INSERT INTO `comment` VALUES (46, 306, 1051, 4558, 77, 4, '家庭出游李女士：行政双床房空间宽敞，两张床够用。就是隔壁在装修早上有点吵。整体不错，游泳池加分！', '[]', NULL, '0', '1', 4, '2026-06-23 14:20:00', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的反馈！装修已进入尾声，下周即可完工。游泳池全天开放，欢迎您带着家人再次来玩！\n【2026-06-27 01:11:24】111', '2026-06-27 01:11:25', NULL, 'merchant01');
+INSERT INTO `comment` VALUES (47, 308, 1051, 4560, 65, 5, '商务精英王总：总统套房确实物有所值，88平米超大空间，视野极佳。管家服务非常周到，商务会议安排在酒店会议室非常方便。深圳出差首选！', '[]', NULL, '0', '1', 12, '2026-06-03 15:00:00', NULL, NULL, NULL, NULL, NULL, '0', '感谢王总的认可！总统套房配备专属管家服务，我们很高兴为您提供了满意的商务接待体验！', '2026-06-04 09:30:00', NULL, 'merchant01');
+INSERT INTO `comment` VALUES (48, 2, 1052, 4562, 69, 5, '蜜月旅行的Hannah：花间堂太美了！海景大床房阳台直接看海，日出日落尽收眼底。SPA体验非常棒，餐厅的海鲜自助晚餐新鲜可口。完美的蜜月假期！', '[]', NULL, '0', '1', 15, '2026-06-13 18:00:00', NULL, NULL, NULL, NULL, NULL, '0', '恭喜Hannah新婚快乐！花间堂全体员工祝您和爱人幸福美满，期待周年纪念日再来亚龙湾相聚！', '2026-06-14 10:00:00', NULL, 'merchant01');
+INSERT INTO `comment` VALUES (49, 307, 1052, 4564, 74, 4, '带娃出行奶爸：家庭亲子房设计很贴心，有儿童专用的洗漱用品和小拖鞋。就是儿童游乐区稍小了点。酒店泳池够大，孩子玩得很开心。', '[]', NULL, '0', '1', 6, '2026-06-21 11:45:00', NULL, NULL, NULL, NULL, NULL, '0', '谢谢奶爸的宝贵建议！我们正在规划扩建儿童游乐区，预计下季度完工。欢迎再次带宝贝来玩！', '2026-06-22 08:30:00', NULL, 'merchant01');
+INSERT INTO `comment` VALUES (50, 308, 1052, 4563, 67, 1, '临时取消的用户：临时有事去不了，申请退款被拒了，客服态度也一般。希望改进退款政策。', '[]', NULL, '1', '1', 0, '2026-06-06 08:00:00', NULL, NULL, NULL, '退款政策不合理，我是提前一天取消的', '2026-06-07 14:00:00', '1', '感谢您的反馈。根据平台规则，入住当日取消订单确实无法退款哦。建议下次如有变动请提前联系客服，我们会尽量协调。', '2026-06-07 16:00:00', NULL, 'merchant01');
+INSERT INTO `comment` VALUES (51, 309, 1053, 4569, 72, 3, '广州出差小陈：悦居位置确实好，离珠江新城地铁站步行5分钟。但房间偏小，空调制冷不够强。价格在珠江新城这个地段算合理，性价比还行吧。', '[]', NULL, '0', '1', 2, '2026-06-17 09:30:00', NULL, NULL, NULL, NULL, NULL, '0', '感谢小陈的如实评价！我们已经安排检修所有空调设备。悦居主打经济商务，欢迎下次体验我们的商务套房，空间更大更舒适。', '2026-06-18 10:00:00', NULL, 'merchant01');
+INSERT INTO `comment` VALUES (52, 307, 1053, 4570, 80, 4, '行政出差李经理：行政套房配置不错，独立办公区域很方便。就是楼下在施工白天有噪音。酒店WIFI速度很快，视频会议没问题。', '[]', NULL, '0', '1', 3, '2026-06-26 16:00:00', 'merchant01', '2026-06-27 01:11:18', NULL, '111', '2026-06-27 01:11:18', '1', '感谢李经理的评价！楼下道路施工是市政工程，我们已向相关部门反馈。很高兴WIFI和办公设施能满足您的商务需求。', '2026-06-27 09:00:00', NULL, 'merchant01');
+INSERT INTO `comment` VALUES (53, 2, 1054, 4572, 68, 5, '文艺青年小雨：时光里真的太有feel了！庭院里喝茶晒太阳，太惬意了。老板人很好，推荐了很多本地人吃的美食。位置在宽窄巷子里面，出门就是景区！', '[]', NULL, '0', '1', 10, '2026-06-11 14:00:00', NULL, NULL, NULL, NULL, NULL, '0', '谢谢小雨的喜爱！时光里的初心就是让每一位客人都感受到成都的慢生活。下次来记得提前说，给你留最好的庭院房！', '2026-06-12 10:30:00', NULL, 'merchant01');
+INSERT INTO `comment` VALUES (54, 308, 1054, 4573, 70, 2, '隔音不太好：阁楼双床房很有特色，但是木质结构隔音确实不太好，楼上走路听得很清楚。民宿位置绝佳，如果睡眠浅的话建议选庭院房。', '[]', NULL, '0', '1', 1, '2026-06-15 10:00:00', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的诚恳建议！老房子木质结构隔音确实有待改善，我们已经在加装隔音垫。下次入住时请选择庭院大床房，会更安静。', '2026-06-16 09:00:00', NULL, 'merchant01');
+INSERT INTO `comment` VALUES (55, 306, 1054, 4575, 66, 3, '家庭出游的一家四口：Loft空间够大，两个孩子很喜欢楼梯上下跑。但卫生细节有待加强，床底有点灰尘。总体性价比还不错，毕竟景区里面。', '[]', NULL, '0', '0', 0, '2026-06-06 16:30:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (56, 2, 1055, 4579, 75, 5, '厦门旅游达人阿杰：鼓浪屿最佳海景酒店没有之一！房间正对大海，躺在床上就能看日出。早餐的沙茶面和海蛎煎超正宗。服务无可挑剔，下次纪念日再来！', '[]', NULL, '0', '1', 11, '2026-06-20 08:30:00', NULL, NULL, NULL, NULL, NULL, '0', '感谢阿杰的五星好评！鼓浪屿的日出确实是无价之美。沙茶面是我们的招牌早餐，大厨是地道厦门人。期待您的下一次光临！', '2026-06-21 09:00:00', NULL, 'merchant01');
 
 -- ----------------------------
 -- Table structure for comment_like
@@ -258,7 +270,7 @@ CREATE TABLE `hotel`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_name`(`name` ASC) USING BTREE,
   INDEX `idx_status`(`status` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1051 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '酒店表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1058 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '酒店表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of hotel
@@ -1313,6 +1325,12 @@ INSERT INTO `hotel` VALUES (1047, '璞雅庭·日照金山雪山观景|空中花
 INSERT INTO `hotel` VALUES (1048, '香榭雨林·假日酒店(丽江古城大水车店)', '丽江市中心', 4, 4.60, 'https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/hotel-images/1048_香榭雨林·假日酒店(丽江古城大水车店).jpg', '会议室,行李寄存,餐厅,停车场,游泳池', 1048, '0', '2026-06-02 00:30:57', '2026-06-26 21:30:16');
 INSERT INTO `hotel` VALUES (1049, '仟漫·Vista观雪山全景云端艺术花园美宿（丽江古城大水车店）', '丽江市中心', 5, 4.90, 'https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/hotel-images/1049_仟漫·Vista观雪山全景云端艺术花园美宿（丽江古城大水车店）.jpg', 'SPA,商务中心,行李寄存,接机服务', 1049, '0', '2026-06-02 00:30:57', '2026-06-26 21:30:16');
 INSERT INTO `hotel` VALUES (1050, '古井•侘寂风日照金山美学设计师360度古城雪山屋顶咖啡美宿', '丽江市中心', 5, 4.80, 'https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/hotel-images/1050_古井•侘寂风日照金山美学设计师360度古城雪山屋顶咖啡美宿.jpg', '餐厅,游泳池,商务中心', 1050, '0', '2026-06-02 00:30:57', '2026-06-26 21:30:16');
+INSERT INTO `hotel` VALUES (1051, '云端精品酒店(深圳南山科技园店)', '深圳市南山区科技园南路88号', 5, 4.80, 'https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/06/27/ff6f415f367f42a5b24809326df3747b.jpg?Expires=1783098155&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=xvEWMmj%2FgxAQZet1VGNFuEhpflY%3D', 'WiFi,停车场,健身房,会议室,餐厅,游泳池', 1073, '0', '2026-06-20 10:00:00', '2026-06-27 01:02:35');
+INSERT INTO `hotel` VALUES (1052, '花间堂度假酒店(三亚亚龙湾店)', '三亚市亚龙湾国家旅游度假区', 4, 4.70, 'https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/06/27/a4ca0cdcc7294065a3c59343cdac2403.jpg?Expires=1783098171&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=BtPCcTEkNRMD5rWOZZhQ%2BbQ46QY%3D', 'WiFi,游泳池,SPA,餐厅,接机服务,行李寄存', 1073, '0', '2026-06-20 10:00:00', '2026-06-27 01:02:52');
+INSERT INTO `hotel` VALUES (1053, '悦居商务酒店(广州天河CBD店)', '广州市天河区珠江新城华夏路16号', 3, 4.30, 'https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/06/27/9879eae3f5c347ca913296c249f1587b.jpg?Expires=1783098134&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=IG2F2UTyXtbHtjB4cQE%2FgaSOf4I%3D', 'WiFi,会议室,商务中心,餐厅', 1073, '3', '2026-06-21 10:00:00', '2026-06-27 01:12:07');
+INSERT INTO `hotel` VALUES (1054, '时光里民宿(成都宽窄巷子店)', '成都市青羊区宽窄巷子景区内', 4, 4.60, 'https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/06/27/3aa6b6d95d244033ad0a90ba15d13a30.jpg?Expires=1783098076&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=aQWViy9jtpdhjTnClqj86SI4E30%3D', 'WiFi,行李寄存,接机服务,停车场', 1073, '2', '2026-06-22 10:00:00', '2026-06-27 01:01:16');
+INSERT INTO `hotel` VALUES (1055, '海景假日酒店(厦门鼓浪屿店)', '厦门市思明区鼓浪屿龙头路168号', 5, 4.90, 'https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/06/27/4d6880c0248745f5b9e02d88a337687a.jpg?Expires=1783098045&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=iwsDSWgFHhOAmfD5MPsst8%2BW92A%3D', 'WiFi,海景阳台,餐厅,SPA,健身房,停车场', 1073, '1', '2026-06-23 10:00:00', '2026-06-27 01:00:45');
+INSERT INTO `hotel` VALUES (1057, '1', '2', 3, NULL, 'https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/06/27/96f601f59f504167b3d2e489790c6e4d.jpg?Expires=1783127266&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=19HzOQlTvyWipdbKdBVSY%2B6c3%2F4%3D', '', 1073, '1', '2026-06-27 09:07:47', '2026-06-27 09:07:47');
 
 -- ----------------------------
 -- Table structure for hotel_audit
@@ -1333,7 +1351,7 @@ CREATE TABLE `hotel_audit`  (
   INDEX `idx_hotel_id`(`hotel_id` ASC) USING BTREE,
   INDEX `idx_audit_status`(`audit_status` ASC) USING BTREE,
   INDEX `idx_auditor_id`(`auditor_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1051 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '酒店审核表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1052 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '酒店审核表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of hotel_audit
@@ -2388,6 +2406,7 @@ INSERT INTO `hotel_audit` VALUES (1047, 1047, '1', '审核通过', 2, '审核员
 INSERT INTO `hotel_audit` VALUES (1048, 1048, '2', '酒店名称与营业执照不一致', 1, '系统管理员', '2026-06-25 17:53:21', '2026-06-25 18:00:00', '2026-06-25 17:53:21', '2026-06-25 17:53:21');
 INSERT INTO `hotel_audit` VALUES (1049, 1049, '1', '审核通过', 2, '审核员A', '2026-06-25 17:53:21', '2026-06-25 18:00:00', '2026-06-25 17:53:21', '2026-06-25 17:53:21');
 INSERT INTO `hotel_audit` VALUES (1050, 1050, '1', '审核通过', 2, '审核员A', '2026-06-25 17:53:21', '2026-06-25 18:00:00', '2026-06-25 17:53:21', '2026-06-25 17:53:21');
+INSERT INTO `hotel_audit` VALUES (1051, 1057, '0', NULL, NULL, NULL, '2026-06-27 09:07:47', NULL, '2026-06-27 09:07:47', '2026-06-27 09:07:47');
 
 -- ----------------------------
 -- Table structure for merchant
@@ -2495,7 +2514,7 @@ INSERT INTO `merchant` VALUES (1068, '贵港万达嘉华酒店有限公司', '91
 INSERT INTO `merchant` VALUES (1069, '桂林阳朔悦榕庄度假酒店有限公司', '91450000MA001069XG', '柳七二', '13800138069', 'merchant069@hotel.com', '桂林市阳朔县遇龙河景区', '度假酒店、田园风光', 'https://example.com/merchant1069.png', '阳朔山水田园酒店', '0', '1', '审核通过', '2026-06-06 08:52:15', '2026-06-06 08:52:15', NULL, '2026-06-06 08:52:14', '2026-06-09 17:06:43');
 INSERT INTO `merchant` VALUES (1070, '三亚亚特兰蒂斯酒店有限公司', '91460000MA001070XH', '酆七三', '13800138070', 'merchant070@hotel.com', '三亚市海棠区海棠北路', '度假酒店、水族馆', 'https://example.com/merchant1070.png', '三亚顶级奢华度假酒店', '0', '1', '资质审核通过，准予入驻', '2026-06-06 08:52:15', '2026-06-06 08:52:15', NULL, '2026-06-06 08:52:14', '2026-06-09 17:06:43');
 INSERT INTO `merchant` VALUES (1071, 'AAA皮拽子批发酒店', 'Y9140824CU5EQ5G8EX', '冲击波', '13316366046', '1622633698@qq.com', '石岐区学院路一号', '酒店管理', '', '', '0', '0', NULL, NULL, NULL, NULL, '2026-06-09 16:41:13', '2026-06-09 16:41:13');
-INSERT INTO `merchant` VALUES (1073, '111', 'Y13311008N32EEJ712', 'aaa', '13316366046', '1622633698@qq.com', '石岐区学院路一号', '123456', 'https://ts1.tc.mm.bing.net/th/id/R-C.21b6355339bb8739100e5d38b7916b01?rik=mduC0RML8NRHuQ&riu=http%3a%2f%2fblog.logo123.com%2fwp-content%2fuploads%2f2016%2f11%2f1.jpg&ehk=w8tPvXMUPi8cyftJ%2fmQMm2IbjkVi4SzCM%2bp%2bZB1Lc9U%3d&risl=&pid=ImgRaw&r=0', '', '0', '1', NULL, '2026-06-18 21:54:12', NULL, 100, '2026-06-18 21:54:12', '2026-06-18 22:24:47');
+INSERT INTO `merchant` VALUES (1073, '111', 'Y13311008N32EEJ712', 'aaa', '13316366046', '1622633698@qq.com', '石岐区学院路一号', '123456', 'https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/06/27/85502e43a8e94c1fbea384f600787856.jpeg?Expires=1783098768&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=7MIU6KXiid3Fkgz6RXSLHFXg%2BZY%3D', '0222', '0', '1', NULL, '2026-06-18 21:54:12', NULL, 100, '2026-06-18 21:54:12', '2026-06-27 01:13:03');
 INSERT INTO `merchant` VALUES (1074, 'lyx', '91440101MA5B3C4D2E', 'lyx', '17359201669', 'hero2192039831@163.com', 'zsc', '酒店', '欧ku', '123', '0', '1', NULL, '2026-06-25 15:54:27', NULL, 311, '2026-06-25 15:54:27', '2026-06-25 15:55:16');
 
 -- ----------------------------
@@ -2621,7 +2640,7 @@ CREATE TABLE `orders`  (
   INDEX `idx_hotel_id`(`hotel_id` ASC) USING BTREE,
   INDEX `idx_room_id`(`room_id` ASC) USING BTREE,
   INDEX `idx_status`(`status` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 65 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '订单表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 85 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '订单表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of orders
@@ -2690,6 +2709,26 @@ INSERT INTO `orders` VALUES (61, 'ORD20260626000032', 307, 451, 1931, '2026-06-2
 INSERT INTO `orders` VALUES (62, 'ORD20260626000033', 308, 551, 2355, '2026-05-25', '2026-05-28', 1899.00, '3', '2026-05-24 10:00:00', '2026-05-24 10:00:00', '2026-06-26 21:58:52');
 INSERT INTO `orders` VALUES (63, 'ORD20260626000034', 309, 551, 2356, '2026-06-12', '2026-06-15', 2475.00, '3', '2026-06-11 13:00:00', '2026-06-11 13:00:00', '2026-06-26 21:58:52');
 INSERT INTO `orders` VALUES (64, 'ORD20260626000035', 305, 551, 2357, '2026-06-25', '2026-06-27', 1656.00, '0', NULL, '2026-06-24 20:00:00', '2026-06-26 21:58:52');
+INSERT INTO `orders` VALUES (65, 'ORD20260627000065', 306, 1051, 4560, '2026-06-01', '2026-06-02', 2588.00, '3', '2026-05-30 14:30:00', '2026-05-30 14:30:00', '2026-06-02 12:00:00');
+INSERT INTO `orders` VALUES (66, 'ORD20260627000066', 308, 1054, 4575, '2026-06-03', '2026-06-05', 2576.00, '3', '2026-06-01 09:15:00', '2026-06-01 09:15:00', '2026-06-05 14:00:00');
+INSERT INTO `orders` VALUES (67, 'ORD20260627000067', 308, 1052, 4563, '2026-06-05', '2026-06-06', 688.00, '2', NULL, '2026-06-04 20:00:00', '2026-06-05 08:00:00');
+INSERT INTO `orders` VALUES (68, 'ORD20260627000068', 2, 1054, 4572, '2026-06-08', '2026-06-10', 1176.00, '3', '2026-06-06 11:00:00', '2026-06-06 11:00:00', '2026-06-10 13:00:00');
+INSERT INTO `orders` VALUES (69, 'ORD20260627000069', 2, 1052, 4562, '2026-06-10', '2026-06-12', 1776.00, '3', '2026-06-08 16:45:00', '2026-06-08 16:45:00', '2026-06-12 11:00:00');
+INSERT INTO `orders` VALUES (70, 'ORD20260627000070', 308, 1054, 4573, '2026-06-12', '2026-06-14', 1056.00, '5', '2026-06-10 10:00:00', '2026-06-10 10:00:00', '2026-06-14 16:00:00');
+INSERT INTO `orders` VALUES (71, 'ORD20260627000071', 305, 1051, 4559, '2026-06-15', '2026-06-17', 2376.00, '3', '2026-06-13 08:30:00', '2026-06-13 08:30:00', '2026-06-17 12:00:00');
+INSERT INTO `orders` VALUES (72, 'ORD20260627000072', 309, 1053, 4569, '2026-06-15', '2026-06-16', 468.00, '3', '2026-06-14 21:00:00', '2026-06-14 21:00:00', '2026-06-16 10:00:00');
+INSERT INTO `orders` VALUES (73, 'ORD20260627000073', 309, 1055, 4580, '2026-06-15', '2026-06-17', 2576.00, '3', '2026-06-13 15:20:00', '2026-06-13 15:20:00', '2026-06-17 14:00:00');
+INSERT INTO `orders` VALUES (74, 'ORD20260627000074', 307, 1052, 4564, '2026-06-18', '2026-06-20', 2176.00, '3', '2026-06-16 13:00:00', '2026-06-16 13:00:00', '2026-06-20 11:00:00');
+INSERT INTO `orders` VALUES (75, 'ORD20260627000075', 2, 1055, 4579, '2026-06-18', '2026-06-19', 798.00, '3', '2026-06-17 19:00:00', '2026-06-17 19:00:00', '2026-06-19 12:00:00');
+INSERT INTO `orders` VALUES (76, 'ORD20260627000076', 305, 1051, 4557, '2026-06-20', '2026-06-21', 688.00, '3', '2026-06-18 22:00:00', '2026-06-18 22:00:00', '2026-06-21 10:00:00');
+INSERT INTO `orders` VALUES (77, 'ORD20260627000077', 306, 1051, 4558, '2026-06-20', '2026-06-22', 1576.00, '3', '2026-06-18 09:45:00', '2026-06-18 09:45:00', '2026-06-22 14:00:00');
+INSERT INTO `orders` VALUES (78, 'ORD20260627000078', 307, 1054, 4574, '2026-06-20', '2026-06-22', 1976.00, '3', '2026-06-18 14:00:00', '2026-06-18 14:00:00', '2026-06-22 11:00:00');
+INSERT INTO `orders` VALUES (79, 'ORD20260627000079', 305, 1053, 4567, '2026-06-22', '2026-06-23', 328.00, '1', '2026-06-21 20:30:00', '2026-06-21 20:30:00', '2026-06-21 20:30:00');
+INSERT INTO `orders` VALUES (80, 'ORD20260627000080', 307, 1053, 4570, '2026-06-24', '2026-06-26', 1336.00, '4', '2026-06-22 11:00:00', '2026-06-22 11:00:00', '2026-06-24 10:00:00');
+INSERT INTO `orders` VALUES (81, 'ORD20260627000081', 306, 1053, 4568, '2026-06-25', '2026-06-27', 796.00, '1', '2026-06-24 17:00:00', '2026-06-24 17:00:00', '2026-06-24 17:00:00');
+INSERT INTO `orders` VALUES (82, 'ORD20260627000082', 305, 1055, 4577, '2026-06-25', '2026-06-28', 2994.00, '1', '2026-06-23 10:00:00', '2026-06-23 10:00:00', '2026-06-23 10:00:00');
+INSERT INTO `orders` VALUES (83, 'ORD20260627000083', 2, 1051, 4557, '2026-07-01', '2026-07-03', 1376.00, '1', '2026-06-25 09:00:00', '2026-06-25 09:00:00', '2026-06-25 09:00:00');
+INSERT INTO `orders` VALUES (84, 'ORD20260627000084', 2, 1052, 4565, '2026-07-05', '2026-07-07', 4576.00, '1', '2026-06-26 15:00:00', '2026-06-26 15:00:00', '2026-06-26 15:00:00');
 
 -- ----------------------------
 -- Table structure for payment
@@ -2708,7 +2747,7 @@ CREATE TABLE `payment`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_order_id`(`order_id` ASC) USING BTREE,
   INDEX `idx_pay_status`(`pay_status` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 137 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '支付表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 157 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '支付表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of payment
@@ -2849,6 +2888,26 @@ INSERT INTO `payment` VALUES (133, 182, 4197.00, '2', '1', '2026-07-14 20:00:00'
 INSERT INTO `payment` VALUES (134, 184, 4095.00, '1', '1', '2026-06-05 10:00:00', 'TXN309184', '2026-06-01 08:00:00', '2026-06-05 10:00:00');
 INSERT INTO `payment` VALUES (135, 185, 7198.00, '2', '1', '2026-06-30 18:00:00', 'TXN309185', '2026-06-25 10:00:00', '2026-06-30 18:00:00');
 INSERT INTO `payment` VALUES (136, 186, 4077.00, '3', '3', '2026-07-19 10:00:00', 'TXN309186', '2026-07-15 09:00:00', '2026-07-22 15:00:00');
+INSERT INTO `payment` VALUES (137, 65, 2588.00, '1', '1', '2026-05-30 14:30:10', 'TXN2026053014301000065', '2026-05-30 14:30:10', '2026-06-02 12:00:00');
+INSERT INTO `payment` VALUES (138, 66, 2576.00, '2', '1', '2026-06-01 09:15:22', 'TXN2026060109152200066', '2026-06-01 09:15:22', '2026-06-05 14:00:00');
+INSERT INTO `payment` VALUES (139, 67, 688.00, '1', '2', NULL, NULL, '2026-06-04 20:00:00', '2026-06-05 08:00:00');
+INSERT INTO `payment` VALUES (140, 68, 1176.00, '2', '1', '2026-06-06 11:00:33', 'TXN2026060611003300068', '2026-06-06 11:00:33', '2026-06-10 13:00:00');
+INSERT INTO `payment` VALUES (141, 69, 1776.00, '1', '1', '2026-06-08 16:45:05', 'TXN2026060816450500069', '2026-06-08 16:45:05', '2026-06-12 11:00:00');
+INSERT INTO `payment` VALUES (142, 70, 1056.00, '2', '4', '2026-06-10 10:00:18', 'TXN2026061010001800070', '2026-06-10 10:00:18', '2026-06-14 16:00:00');
+INSERT INTO `payment` VALUES (143, 71, 2376.00, '1', '1', '2026-06-13 08:30:42', 'TXN2026061308304200071', '2026-06-13 08:30:42', '2026-06-17 12:00:00');
+INSERT INTO `payment` VALUES (144, 72, 468.00, '2', '1', '2026-06-14 21:00:11', 'TXN2026061421001100072', '2026-06-14 21:00:11', '2026-06-16 10:00:00');
+INSERT INTO `payment` VALUES (145, 73, 2576.00, '1', '1', '2026-06-13 15:20:55', 'TXN2026061315205500073', '2026-06-13 15:20:55', '2026-06-17 14:00:00');
+INSERT INTO `payment` VALUES (146, 74, 2176.00, '2', '1', '2026-06-16 13:00:28', 'TXN2026061613002800074', '2026-06-16 13:00:28', '2026-06-20 11:00:00');
+INSERT INTO `payment` VALUES (147, 75, 798.00, '1', '1', '2026-06-17 19:00:07', 'TXN2026061719000700075', '2026-06-17 19:00:07', '2026-06-19 12:00:00');
+INSERT INTO `payment` VALUES (148, 76, 688.00, '2', '1', '2026-06-18 22:00:33', 'TXN2026061822003300076', '2026-06-18 22:00:33', '2026-06-21 10:00:00');
+INSERT INTO `payment` VALUES (149, 77, 1576.00, '1', '1', '2026-06-18 09:45:16', 'TXN2026061809451600077', '2026-06-18 09:45:16', '2026-06-22 14:00:00');
+INSERT INTO `payment` VALUES (150, 78, 1976.00, '2', '1', '2026-06-18 14:00:50', 'TXN2026061814005000078', '2026-06-18 14:00:50', '2026-06-22 11:00:00');
+INSERT INTO `payment` VALUES (151, 79, 328.00, '1', '1', '2026-06-21 20:30:21', 'TXN2026062120302100079', '2026-06-21 20:30:21', '2026-06-21 20:30:21');
+INSERT INTO `payment` VALUES (152, 80, 1336.00, '2', '3', '2026-06-22 11:00:44', 'TXN2026062211004400080', '2026-06-22 11:00:44', '2026-06-24 10:00:00');
+INSERT INTO `payment` VALUES (153, 81, 796.00, '1', '1', '2026-06-24 17:00:09', 'TXN2026062417000900081', '2026-06-24 17:00:09', '2026-06-24 17:00:09');
+INSERT INTO `payment` VALUES (154, 82, 2994.00, '2', '1', '2026-06-23 10:00:35', 'TXN2026062310003500082', '2026-06-23 10:00:35', '2026-06-23 10:00:35');
+INSERT INTO `payment` VALUES (155, 83, 1376.00, '1', '1', '2026-06-25 09:00:18', 'TXN2026062509001800083', '2026-06-25 09:00:18', '2026-06-25 09:00:18');
+INSERT INTO `payment` VALUES (156, 84, 4576.00, '2', '1', '2026-06-26 15:00:42', 'TXN2026062615004200084', '2026-06-26 15:00:42', '2026-06-26 15:00:42');
 
 -- ----------------------------
 -- Table structure for qrtz_blob_triggers
@@ -3086,7 +3145,7 @@ CREATE TABLE `room`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_hotel_id`(`hotel_id` ASC) USING BTREE,
   INDEX `idx_status`(`status` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4557 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '房源/房型表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4582 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '房源/房型表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of room
@@ -7645,6 +7704,31 @@ INSERT INTO `room` VALUES (4553, 1050, '行政双床房', '45-52㎡', '双床1.5
 INSERT INTO `room` VALUES (4554, 1050, '家庭套房', '55-68㎡', '大床1.8m+单人床', 1647.00, 17, '0', NULL, '2026-06-26 21:20:01', '2026-06-26 21:20:01');
 INSERT INTO `room` VALUES (4555, 1050, '景观房', '40-50㎡', '大床1.8m', 1281.00, 12, '0', NULL, '2026-06-26 21:20:01', '2026-06-26 21:20:01');
 INSERT INTO `room` VALUES (4556, 1050, '总统套房', '80-120㎡', '大床2.0m', 3885.00, 2, '0', NULL, '2026-06-26 21:20:01', '2026-06-26 21:20:01');
+INSERT INTO `room` VALUES (4557, 1051, '豪华大床房', '35平米', '1.8米大床', 688.00, 15, '0', 'https://example.com/hotel1051_room1.jpg', '2026-06-20 10:00:00', '2026-06-20 10:00:00');
+INSERT INTO `room` VALUES (4558, 1051, '行政双床房', '42平米', '2张1.2米单人床', 788.00, 10, '0', 'https://example.com/hotel1051_room2.jpg', '2026-06-20 10:00:00', '2026-06-20 10:00:00');
+INSERT INTO `room` VALUES (4559, 1051, '商务套房', '55平米', '1.8米大床', 1188.00, 8, '0', 'https://example.com/hotel1051_room3.jpg', '2026-06-20 10:00:00', '2026-06-20 10:00:00');
+INSERT INTO `room` VALUES (4560, 1051, '总统套房', '88平米', '2米大床', 2588.00, 3, '0', 'https://example.com/hotel1051_room4.jpg', '2026-06-20 10:00:00', '2026-06-20 10:00:00');
+INSERT INTO `room` VALUES (4561, 1051, '高级大床房', '30平米', '1.5米大床', 528.00, 20, '1', 'https://example.com/hotel1051_room5.jpg', '2026-06-20 10:00:00', '2026-06-20 10:00:00');
+INSERT INTO `room` VALUES (4562, 1052, '海景大床房', '40平米', '1.8米大床', 888.00, 12, '0', 'https://example.com/hotel1052_room1.jpg', '2026-06-20 10:00:00', '2026-06-20 10:00:00');
+INSERT INTO `room` VALUES (4563, 1052, '园景双床房', '38平米', '2张1.2米单人床', 688.00, 15, '0', 'https://example.com/hotel1052_room2.jpg', '2026-06-20 10:00:00', '2026-06-20 10:00:00');
+INSERT INTO `room` VALUES (4564, 1052, '家庭亲子房', '55平米', '1.8米大床+1.2米单人床', 1088.00, 8, '0', 'https://example.com/hotel1052_room3.jpg', '2026-06-20 10:00:00', '2026-06-20 10:00:00');
+INSERT INTO `room` VALUES (4565, 1052, '泳池别墅', '100平米', '2米大床', 2288.00, 5, '0', 'https://example.com/hotel1052_room4.jpg', '2026-06-20 10:00:00', '2026-06-20 10:00:00');
+INSERT INTO `room` VALUES (4566, 1052, '标准大床房', '28平米', '1.5米大床', 488.00, 20, '0', 'https://example.com/hotel1052_room5.jpg', '2026-06-20 10:00:00', '2026-06-20 10:00:00');
+INSERT INTO `room` VALUES (4567, 1053, '标准大床房', '25平米', '1.5米大床', 328.00, 25, '0', 'https://example.com/hotel1053_room1.jpg', '2026-06-21 10:00:00', '2026-06-21 10:00:00');
+INSERT INTO `room` VALUES (4568, 1053, '商务双床房', '30平米', '2张1.2米单人床', 398.00, 20, '0', 'https://example.com/hotel1053_room2.jpg', '2026-06-21 10:00:00', '2026-06-21 10:00:00');
+INSERT INTO `room` VALUES (4569, 1053, '豪华大床房', '32平米', '1.8米大床', 468.00, 15, '0', 'https://example.com/hotel1053_room3.jpg', '2026-06-21 10:00:00', '2026-06-21 10:00:00');
+INSERT INTO `room` VALUES (4570, 1053, '行政套房', '45平米', '1.8米大床', 668.00, 8, '0', 'https://example.com/hotel1053_room4.jpg', '2026-06-21 10:00:00', '2026-06-21 10:00:00');
+INSERT INTO `room` VALUES (4571, 1053, '特惠单人房', '18平米', '1.2米单人床', 199.00, 10, '1', 'https://example.com/hotel1053_room5.jpg', '2026-06-21 10:00:00', '2026-06-21 10:00:00');
+INSERT INTO `room` VALUES (4572, 1054, '庭院大床房', '35平米', '1.8米大床', 588.00, 10, '0', 'https://example.com/hotel1054_room1.jpg', '2026-06-22 10:00:00', '2026-06-22 10:00:00');
+INSERT INTO `room` VALUES (4573, 1054, '阁楼双床房', '32平米', '2张1.2米单人床', 528.00, 12, '0', 'https://example.com/hotel1054_room2.jpg', '2026-06-22 10:00:00', '2026-06-22 10:00:00');
+INSERT INTO `room` VALUES (4574, 1054, '禅意套房', '50平米', '1.8米大床', 988.00, 6, '0', 'https://example.com/hotel1054_room3.jpg', '2026-06-22 10:00:00', '2026-06-22 10:00:00');
+INSERT INTO `room` VALUES (4575, 1054, '家庭Loft', '60平米', '1.8米大床+1.5米沙发床', 1288.00, 5, '0', 'https://example.com/hotel1054_room4.jpg', '2026-06-22 10:00:00', '2026-06-22 10:00:00');
+INSERT INTO `room` VALUES (4576, 1054, '标准大床房', '26平米', '1.5米大床', 368.00, 15, '0', 'https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/06/27/9e347bd7c88b478586cd1d72cf09cfde.jpg?Expires=1783098566&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=mvyNU1euiaOW1LzXBN2qE5WYflU%3D', '2026-06-22 10:00:00', '2026-06-27 01:09:27');
+INSERT INTO `room` VALUES (4577, 1055, '海景大床房', '42平米', '1.8米大床', 998.00, 10, '0', 'https://example.com/hotel1055_room1.jpg', '2026-06-23 10:00:00', '2026-06-23 10:00:00');
+INSERT INTO `room` VALUES (4578, 1055, '豪华海景套房', '65平米', '2米大床', 1688.00, 5, '0', 'https://example.com/hotel1055_room2.jpg', '2026-06-23 10:00:00', '2026-06-23 10:00:00');
+INSERT INTO `room` VALUES (4579, 1055, '园景双床房', '38平米', '2张1.2米单人床', 798.00, 12, '0', 'https://example.com/hotel1055_room3.jpg', '2026-06-23 10:00:00', '2026-06-23 10:00:00');
+INSERT INTO `room` VALUES (4580, 1055, '行政商务房', '45平米', '1.8米大床', 1288.00, 8, '0', 'https://example.com/hotel1055_room4.jpg', '2026-06-23 10:00:00', '2026-06-23 10:00:00');
+INSERT INTO `room` VALUES (4581, 1055, '标准大床房', '28平米', '1.5米大床', 588.00, 15, '0', 'https://example.com/hotel1055_room5.jpg', '2026-06-23 10:00:00', '2026-06-23 10:00:00');
 
 -- ----------------------------
 -- Table structure for sys_config
@@ -7883,7 +7967,7 @@ CREATE TABLE `sys_logininfor`  (
   PRIMARY KEY (`info_id`) USING BTREE,
   INDEX `idx_sys_logininfor_s`(`status` ASC) USING BTREE,
   INDEX `idx_sys_logininfor_lt`(`login_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 457 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 487 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -8245,6 +8329,36 @@ INSERT INTO `sys_logininfor` VALUES (453, 'test_user01', '127.0.0.1', '内网IP'
 INSERT INTO `sys_logininfor` VALUES (454, 'test_user1', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '登录成功', '2026-06-26 21:27:43');
 INSERT INTO `sys_logininfor` VALUES (455, 'test_user1', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '退出成功', '2026-06-26 21:31:14');
 INSERT INTO `sys_logininfor` VALUES (456, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '登录成功', '2026-06-26 21:31:20');
+INSERT INTO `sys_logininfor` VALUES (457, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-27 00:32:48');
+INSERT INTO `sys_logininfor` VALUES (458, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-27 01:38:04');
+INSERT INTO `sys_logininfor` VALUES (459, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-27 01:38:11');
+INSERT INTO `sys_logininfor` VALUES (460, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-27 01:56:28');
+INSERT INTO `sys_logininfor` VALUES (461, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-27 01:56:41');
+INSERT INTO `sys_logininfor` VALUES (462, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-27 08:44:14');
+INSERT INTO `sys_logininfor` VALUES (463, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-27 08:44:23');
+INSERT INTO `sys_logininfor` VALUES (464, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-27 08:45:17');
+INSERT INTO `sys_logininfor` VALUES (465, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-27 08:46:00');
+INSERT INTO `sys_logininfor` VALUES (466, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-27 08:46:52');
+INSERT INTO `sys_logininfor` VALUES (467, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-27 08:47:32');
+INSERT INTO `sys_logininfor` VALUES (468, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-27 08:47:39');
+INSERT INTO `sys_logininfor` VALUES (469, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-27 08:50:25');
+INSERT INTO `sys_logininfor` VALUES (470, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-27 08:50:32');
+INSERT INTO `sys_logininfor` VALUES (471, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-27 08:50:47');
+INSERT INTO `sys_logininfor` VALUES (472, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-27 08:51:07');
+INSERT INTO `sys_logininfor` VALUES (473, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-27 09:06:01');
+INSERT INTO `sys_logininfor` VALUES (474, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-27 09:07:29');
+INSERT INTO `sys_logininfor` VALUES (475, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-27 09:07:50');
+INSERT INTO `sys_logininfor` VALUES (476, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-27 09:07:58');
+INSERT INTO `sys_logininfor` VALUES (477, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-27 09:10:50');
+INSERT INTO `sys_logininfor` VALUES (478, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-27 09:11:14');
+INSERT INTO `sys_logininfor` VALUES (479, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-27 09:12:33');
+INSERT INTO `sys_logininfor` VALUES (480, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-27 09:12:39');
+INSERT INTO `sys_logininfor` VALUES (481, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-27 09:12:47');
+INSERT INTO `sys_logininfor` VALUES (482, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-27 09:12:51');
+INSERT INTO `sys_logininfor` VALUES (483, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-27 09:29:48');
+INSERT INTO `sys_logininfor` VALUES (484, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-27 09:29:57');
+INSERT INTO `sys_logininfor` VALUES (485, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-27 09:35:05');
+INSERT INTO `sys_logininfor` VALUES (486, 'merchant01', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-27 09:35:15');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -8452,7 +8566,7 @@ CREATE TABLE `sys_oper_log`  (
   INDEX `idx_sys_oper_log_bt`(`business_type` ASC) USING BTREE,
   INDEX `idx_sys_oper_log_s`(`status` ASC) USING BTREE,
   INDEX `idx_sys_oper_log_ot`(`oper_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 207 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '操作日志记录' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 222 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '操作日志记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -8564,6 +8678,21 @@ INSERT INTO `sys_oper_log` VALUES (203, '申诉审核', 2, 'com.zsc.module.contr
 INSERT INTO `sys_oper_log` VALUES (204, '申诉审核', 2, 'com.zsc.module.controller.CommentController.auditAppeal()', 'PUT', 1, 'admin', '研发部门', '/api/comment/8/auditAppeal', '127.0.0.1', '内网IP', '{\"appealStatus\":\"3\"}', '{\"msg\":\"申诉驳回，评价已撤销！\",\"code\":200}', 0, NULL, '2026-06-26 16:28:07', 25);
 INSERT INTO `sys_oper_log` VALUES (205, '商户评价管理', 2, 'com.zsc.module.controller.MerchantCommentController.appeal()', 'PUT', 1, 'merchant_bj', '若依科技', '/api/merchant/comment/3/appeal', '127.0.0.1', '内网IP', '{\"reason\":\"后面给他们升级房型了\"}', '{\"msg\":\"申诉已提交，等待管理员审核！\",\"code\":200}', 0, NULL, '2026-06-26 16:34:59', 29);
 INSERT INTO `sys_oper_log` VALUES (206, '申诉审核', 2, 'com.zsc.module.controller.CommentController.auditAppeal()', 'PUT', 1, 'admin', '研发部门', '/api/comment/3/auditAppeal', '127.0.0.1', '内网IP', '{\"appealStatus\":\"2\"}', '{\"msg\":\"申诉通过，评价已保留！\",\"code\":200}', 0, NULL, '2026-06-26 16:35:30', 27);
+INSERT INTO `sys_oper_log` VALUES (207, '商户管理', 2, 'com.zsc.module.controller.MerchantController.update()', 'PUT', 1, 'merchant01', '市场部门', '/api/merchant', '127.0.0.1', '内网IP', '{\"address\":\"石岐区学院路一号\",\"businessScope\":\"123456\",\"description\":\"\",\"email\":\"1622633698@qq.com\",\"id\":1073,\"legalPerson\":\"aaa\",\"licenseNo\":\"Y13311008N32EEJ712\",\"logoUrl\":\"https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/06/27/85502e43a8e94c1fbea384f600787856.jpeg?Expires=1783096451&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=mFvRWrK%2BfczXNrgoL3kTXEPyhLs%3D\",\"merchantName\":\"111\",\"phone\":\"13316366046\",\"userId\":100} ', '{\"code\":200,\"message\":\"success\"}', 0, NULL, '2026-06-27 00:41:07', 40);
+INSERT INTO `sys_oper_log` VALUES (208, '商户酒店管理', 2, 'com.zsc.module.controller.MerchantHotelController.update()', 'PUT', 1, 'merchant01', '市场部门', '/api/merchant/hotel', '127.0.0.1', '内网IP', '{\"address\":\"厦门市思明区鼓浪屿龙头路168号\",\"businessId\":1073,\"facility\":\"WiFi,海景阳台,餐厅,SPA,健身房,停车场\",\"id\":1055,\"imgUrl\":\"https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/06/27/4d6880c0248745f5b9e02d88a337687a.jpg?Expires=1783098045&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=iwsDSWgFHhOAmfD5MPsst8%2BW92A%3D\",\"name\":\"海景假日酒店(厦门鼓浪屿店)\",\"star\":5,\"status\":\"1\"} ', '{\"code\":200,\"data\":\"修改成功\",\"message\":\"success\"}', 0, NULL, '2026-06-27 01:00:45', 35);
+INSERT INTO `sys_oper_log` VALUES (209, '商户酒店管理', 2, 'com.zsc.module.controller.MerchantHotelController.update()', 'PUT', 1, 'merchant01', '市场部门', '/api/merchant/hotel', '127.0.0.1', '内网IP', '{\"address\":\"成都市青羊区宽窄巷子景区内\",\"businessId\":1073,\"facility\":\"WiFi,行李寄存,接机服务,停车场\",\"id\":1054,\"imgUrl\":\"https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/06/27/3aa6b6d95d244033ad0a90ba15d13a30.jpg?Expires=1783098076&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=aQWViy9jtpdhjTnClqj86SI4E30%3D\",\"name\":\"时光里民宿(成都宽窄巷子店)\",\"star\":4,\"status\":\"2\"} ', '{\"code\":200,\"data\":\"修改成功\",\"message\":\"success\"}', 0, NULL, '2026-06-27 01:01:16', 35);
+INSERT INTO `sys_oper_log` VALUES (210, '商户酒店管理', 2, 'com.zsc.module.controller.MerchantHotelController.update()', 'PUT', 1, 'merchant01', '市场部门', '/api/merchant/hotel', '127.0.0.1', '内网IP', '{\"address\":\"广州市天河区珠江新城华夏路16号\",\"businessId\":1073,\"facility\":\"WiFi,会议室,商务中心,餐厅\",\"id\":1053,\"imgUrl\":\"https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/06/27/9879eae3f5c347ca913296c249f1587b.jpg?Expires=1783098134&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=IG2F2UTyXtbHtjB4cQE%2FgaSOf4I%3D\",\"name\":\"悦居商务酒店(广州天河CBD店)\",\"star\":3,\"status\":\"0\"} ', '{\"code\":200,\"data\":\"修改成功\",\"message\":\"success\"}', 0, NULL, '2026-06-27 01:02:14', 24);
+INSERT INTO `sys_oper_log` VALUES (211, '商户酒店管理', 2, 'com.zsc.module.controller.MerchantHotelController.update()', 'PUT', 1, 'merchant01', '市场部门', '/api/merchant/hotel', '127.0.0.1', '内网IP', '{\"address\":\"深圳市南山区科技园南路88号\",\"businessId\":1073,\"facility\":\"WiFi,停车场,健身房,会议室,餐厅,游泳池\",\"id\":1051,\"imgUrl\":\"https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/06/27/ff6f415f367f42a5b24809326df3747b.jpg?Expires=1783098155&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=xvEWMmj%2FgxAQZet1VGNFuEhpflY%3D\",\"name\":\"云端精品酒店(深圳南山科技园店)\",\"star\":5,\"status\":\"0\"} ', '{\"code\":200,\"data\":\"修改成功\",\"message\":\"success\"}', 0, NULL, '2026-06-27 01:02:35', 27);
+INSERT INTO `sys_oper_log` VALUES (212, '商户酒店管理', 2, 'com.zsc.module.controller.MerchantHotelController.update()', 'PUT', 1, 'merchant01', '市场部门', '/api/merchant/hotel', '127.0.0.1', '内网IP', '{\"address\":\"三亚市亚龙湾国家旅游度假区\",\"businessId\":1073,\"facility\":\"WiFi,游泳池,SPA,餐厅,接机服务,行李寄存\",\"id\":1052,\"imgUrl\":\"https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/06/27/a4ca0cdcc7294065a3c59343cdac2403.jpg?Expires=1783098171&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=BtPCcTEkNRMD5rWOZZhQ%2BbQ46QY%3D\",\"name\":\"花间堂度假酒店(三亚亚龙湾店)\",\"star\":4,\"status\":\"0\"} ', '{\"code\":200,\"data\":\"修改成功\",\"message\":\"success\"}', 0, NULL, '2026-06-27 01:02:51', 30);
+INSERT INTO `sys_oper_log` VALUES (213, '商户房型管理', 2, 'com.zsc.module.controller.MerchantRoomController.update()', 'PUT', 1, 'merchant01', '市场部门', '/api/merchant/room', '127.0.0.1', '内网IP', '{\"area\":\"26平米\",\"bedType\":\"1.5米大床\",\"hotelId\":1054,\"id\":4576,\"imgUrl\":\"https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/06/27/9e347bd7c88b478586cd1d72cf09cfde.jpg?Expires=1783098566&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=mvyNU1euiaOW1LzXBN2qE5WYflU%3D\",\"price\":368,\"roomType\":\"标准大床房\",\"status\":\"0\",\"stock\":15} ', '{\"code\":200,\"data\":\"修改成功\",\"message\":\"success\"}', 0, NULL, '2026-06-27 01:09:27', 53);
+INSERT INTO `sys_oper_log` VALUES (214, '商户评价管理', 2, 'com.zsc.module.controller.MerchantCommentController.appeal()', 'PUT', 1, 'merchant01', '市场部门', '/api/merchant/comment/52/appeal', '127.0.0.1', '内网IP', '{\"reason\":\"111\"}', '{\"msg\":\"申诉已提交，等待管理员审核！\",\"code\":200}', 0, NULL, '2026-06-27 01:11:18', 23);
+INSERT INTO `sys_oper_log` VALUES (215, '商户评价管理', 2, 'com.zsc.module.controller.MerchantCommentController.reply()', 'PUT', 1, 'merchant01', '市场部门', '/api/merchant/comment/46/reply', '127.0.0.1', '内网IP', '{\"replyContent\":\"111\"}', '{\"msg\":\"回复成功！\",\"code\":200}', 0, NULL, '2026-06-27 01:11:24', 11);
+INSERT INTO `sys_oper_log` VALUES (216, '商户酒店管理', 2, 'com.zsc.module.controller.MerchantHotelController.updateStatus()', 'PUT', 1, 'merchant01', '市场部门', '/api/merchant/hotel/1053/status/3', '127.0.0.1', '内网IP', '1053 \"3\" ', '{\"code\":200,\"data\":\"状态修改成功\",\"message\":\"success\"}', 0, NULL, '2026-06-27 01:12:07', 23);
+INSERT INTO `sys_oper_log` VALUES (217, '商户管理', 2, 'com.zsc.module.controller.MerchantController.update()', 'PUT', 1, 'merchant01', '市场部门', '/api/merchant', '127.0.0.1', '内网IP', '{\"address\":\"石岐区学院路一号\",\"businessScope\":\"123456\",\"description\":\"0222\",\"email\":\"1622633698@qq.com\",\"id\":1073,\"legalPerson\":\"aaa\",\"licenseNo\":\"Y13311008N32EEJ712\",\"logoUrl\":\"https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/06/27/85502e43a8e94c1fbea384f600787856.jpeg?Expires=1783098768&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=7MIU6KXiid3Fkgz6RXSLHFXg%2BZY%3D\",\"merchantName\":\"111\",\"phone\":\"13316366046\",\"userId\":100} ', '{\"code\":200,\"message\":\"success\"}', 0, NULL, '2026-06-27 01:13:03', 15);
+INSERT INTO `sys_oper_log` VALUES (218, '商户酒店管理', 1, 'com.zsc.module.controller.MerchantHotelController.add()', 'POST', 1, 'merchant01', '市场部门', '/api/merchant/hotel', '127.0.0.1', '内网IP', '{\"address\":\"111\",\"businessId\":1073,\"facility\":\"\",\"imgUrl\":\"https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/06/27/8c1e6c9e5b7443c3a37b50bcaaf8f8ab.jpg?Expires=1783126045&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=WyRsLqm0m4lWwyhTGGHCZTUSfyI%3D\",\"name\":\"0222\",\"star\":3,\"status\":\"1\"} ', '{\"code\":200,\"data\":1056,\"message\":\"success\"}', 0, NULL, '2026-06-27 08:47:25', 43);
+INSERT INTO `sys_oper_log` VALUES (219, '商户酒店管理', 2, 'com.zsc.module.controller.MerchantHotelController.update()', 'PUT', 1, 'merchant01', '市场部门', '/api/merchant/hotel', '127.0.0.1', '内网IP', '{\"address\":\"111\",\"businessId\":1073,\"facility\":\"\",\"id\":1056,\"imgUrl\":\"https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/06/27/731422f7b4d944c1bb4ec5afb5fddd05.jpg?Expires=1783126511&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=%2FGuP79%2Fsp6YMJn7c8xmq%2BxgAhWs%3D\",\"name\":\"0222\",\"star\":3,\"status\":\"1\"} ', '{\"code\":200,\"data\":\"修改成功\",\"message\":\"success\"}', 0, NULL, '2026-06-27 08:55:11', 35);
+INSERT INTO `sys_oper_log` VALUES (220, '商户酒店管理', 3, 'com.zsc.module.controller.MerchantHotelController.delete()', 'DELETE', 1, 'merchant01', '市场部门', '/api/merchant/hotel/1056', '127.0.0.1', '内网IP', '1056 ', '{\"code\":200,\"data\":\"删除成功\",\"message\":\"success\"}', 0, NULL, '2026-06-27 09:03:44', 35);
+INSERT INTO `sys_oper_log` VALUES (221, '商户酒店管理', 1, 'com.zsc.module.controller.MerchantHotelController.add()', 'POST', 1, 'merchant01', '市场部门', '/api/merchant/hotel', '127.0.0.1', '内网IP', '{\"address\":\"2\",\"businessId\":1073,\"facility\":\"\",\"imgUrl\":\"https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/06/27/96f601f59f504167b3d2e489790c6e4d.jpg?Expires=1783127266&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=19HzOQlTvyWipdbKdBVSY%2B6c3%2F4%3D\",\"name\":\"1\",\"star\":3,\"status\":\"1\"} ', '{\"code\":200,\"data\":1057,\"message\":\"success\"}', 0, NULL, '2026-06-27 09:07:46', 52);
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -8756,9 +8885,9 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 103, 'admin', '系统管理员', '00', 'admin@hotel.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-26 21:18:09', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '超级管理员账号', 0);
+INSERT INTO `sys_user` VALUES (1, 103, 'admin', '系统管理员', '00', 'admin@hotel.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-27 09:29:58', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '超级管理员账号', 0);
 INSERT INTO `sys_user` VALUES (2, 105, 'customer01', '普通用户', '00', 'customer@test.com', '15666666666', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-26 21:24:32', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '前台普通用户账号', 1298);
-INSERT INTO `sys_user` VALUES (100, 104, 'merchant01', '酒店商户', '01', 'merchant@test.com', '13800000001', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-26 21:27:04', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '酒店商家账号', 0);
+INSERT INTO `sys_user` VALUES (100, 104, 'merchant01', '酒店商户', '01', 'merchant@test.com', '13800000001', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-27 09:35:16', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '酒店商家账号', 0);
 INSERT INTO `sys_user` VALUES (301, 100, 'merchant_bj', '张经理(北京希尔顿)', '00', 'merchant_bj@hotel.com', '13800138001', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-26 21:31:21', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-北京希尔顿', 0);
 INSERT INTO `sys_user` VALUES (302, 100, 'merchant_sh', '李总(上海华尔道夫)', '00', 'merchant_sh@hotel.com', '13800138002', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-上海华尔道夫', 0);
 INSERT INTO `sys_user` VALUES (303, 100, 'merchant_gz', '王总(广州丽思卡尔顿)', '00', 'merchant_gz@hotel.com', '13800138003', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-广州丽思卡尔顿', 0);
