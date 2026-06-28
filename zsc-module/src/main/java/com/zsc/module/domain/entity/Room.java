@@ -89,9 +89,8 @@ public class Room {
     private Date updateTime;
 
     /**
-     * 可入住人数（不在数据库中，用于扩展）
+     * 可入住人数
      */
-    @TableField(exist = false)
     private Integer guestNum;
 
     /**

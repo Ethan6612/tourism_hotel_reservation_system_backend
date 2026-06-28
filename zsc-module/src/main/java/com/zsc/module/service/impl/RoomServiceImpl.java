@@ -42,6 +42,7 @@ public class RoomServiceImpl extends ServiceImpl<RoomMapper, Room> implements Ro
     @Autowired
     private HotelService hotelService;
 
+    @Lazy
     @Autowired
     private OrderService orderService;
 
@@ -353,6 +354,13 @@ public class RoomServiceImpl extends ServiceImpl<RoomMapper, Room> implements Ro
                     .createTime(room.getCreateTime())
                     .updateTime(room.getUpdateTime())
                     .build();
+            // 填充酒店名称
+            if (room.getHotelId() != null) {
+                Hotel hotel = hotelService.getById(room.getHotelId());
+                if (hotel != null) {
+                    vo.setHotelName(hotel.getName());
+                }
+            }
             fillStatusName(vo);
             return vo;
         }).collect(java.util.stream.Collectors.toList());

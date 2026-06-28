@@ -116,6 +116,15 @@
         <if test="query.categoryId != null">
             AND h.category_id = #{query.categoryId}
         </if>
+        <if test="query.guests != null and query.guests > 0">
+            AND EXISTS (
+                SELECT 1 FROM room r
+                WHERE r.hotel_id = h.id
+                AND r.status = '0'
+                AND r.guest_num &gt;= #{query.guests}
+                AND r.stock &gt; 0
+            )
+        </if>
     </sql>
 
     <!-- 后台分页查询酒店列表 -->

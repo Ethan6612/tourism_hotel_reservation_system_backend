@@ -70,6 +70,11 @@ public class HotelSearchDTO extends BasePageReq {
     private Long categoryId;
 
     /**
+     * 入住人数（筛选有足够可住人数且有库存的房型的酒店）
+     */
+    private Integer guests;
+
+    /**
      * 设置设施字符串并自动解析为列表
      */
     public void setFacility(String facility) {

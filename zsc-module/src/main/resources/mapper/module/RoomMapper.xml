@@ -8,6 +8,7 @@
         <result property="roomType" column="room_type"/>
         <result property="area" column="area"/>
         <result property="bedType" column="bed_type"/>
+        <result property="guestNum" column="guest_num"/>
         <result property="price" column="price"/>
         <result property="stock" column="stock"/>
         <result property="status" column="status"/>
@@ -18,7 +19,7 @@
     </resultMap>
 
     <sql id="selectRoomVo">
-        SELECT r.id, r.hotel_id, r.room_type, r.area, r.bed_type, r.price,
+        SELECT r.id, r.hotel_id, r.room_type, r.area, r.bed_type, r.guest_num, r.price,
                r.stock, r.status, r.img_url, r.create_time, r.update_time,
                h.name AS hotel_name
         FROM room r

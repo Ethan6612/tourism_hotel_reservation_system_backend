@@ -15,6 +15,7 @@ import com.zsc.module.domain.vo.UserDashboardStatsVo;
 import com.zsc.module.mapper.OrderMapper;
 import com.zsc.module.mapper.PaymentMapper;
 import com.zsc.module.service.OrderService;
+import com.zsc.module.service.RoomService;
 import com.zsc.system.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +46,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Autowired
     private com.zsc.module.mapper.RoomMapper roomMapper;
+
+    @Autowired
+    private RoomService roomService;
 
     @Override
     public PageResult<OrderVo> queryOrders(OrderQueryDto queryDto) {
@@ -83,7 +87,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         // 退款完成时释放库存
         if (Order.STATUS_REFUNDED.equals(newStatus)) {
             updateById(order);
-            // TODO: 释放库存 - 需要对接Room模块
+            // 释放库存
+            roomService.releaseStock(order.getRoomId(), 1);
         } else if (Order.STATUS_PAID.equals(newStatus)) {
             order.setPayTime(new Date());
             updateById(order);
@@ -104,6 +109,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         order.setStatus(Order.STATUS_CANCELLED);
         order.setUpdateTime(new Date());
         updateById(order);
+
+        // 释放库存
+        roomService.releaseStock(order.getRoomId(), 1);
 
         // 同时取消关联的支付记录
         Payment payment = paymentMapper.selectByOrderId(id);
@@ -171,6 +179,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         order.setStatus(Order.STATUS_REFUNDED);
         order.setUpdateTime(new Date());
         updateById(order);
+
+        // 释放库存
+        roomService.releaseStock(order.getRoomId(), 1);
 
         // 更新支付记录状态为已退款
         Payment payment = paymentMapper.selectByOrderId(id);
@@ -266,6 +277,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
                 .build();
         save(order);
 
+        // 锁定库存（下单时扣减）
+        roomService.lockStock(dto.getRoomId(), 1);
+
         return orderMapper.selectOrderVoById(order.getId());
     }
 
@@ -329,6 +343,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         order.setStatus(Order.STATUS_CANCELLED);
         order.setUpdateTime(new Date());
         updateById(order);
+
+        // 释放库存
+        roomService.releaseStock(order.getRoomId(), 1);
 
         // 同时取消关联的支付记录
         Payment payment = paymentMapper.selectByOrderId(id);

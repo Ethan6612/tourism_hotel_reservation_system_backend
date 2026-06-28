@@ -152,4 +152,27 @@ public class MerchantRoomController {
         List<RoomVo> list = roomService.getRoomsByHotelId(hotelId);
         return ResultVo.ok(list);
     }
+
+    /**
+     * 库存预警查询（只查自己酒店下的）
+     */
+    @Operation(summary = "库存预警查询")
+    @GetMapping("/lowStock")
+    public ResultVo<List<RoomVo>> lowStock(
+            @RequestParam(required = false, defaultValue = "5") Integer threshold,
+            @RequestParam(required = false) Long hotelId) {
+        // 如果未指定hotelId，自动使用商户的第一个酒店
+        if (hotelId == null) {
+            List<Long> hotelIds = merchantService.getCurrentMerchantHotelIds();
+            if (hotelIds != null && !hotelIds.isEmpty()) {
+                hotelId = hotelIds.get(0);
+            }
+        }
+        // 校验酒店所有权
+        if (hotelId != null) {
+            merchantService.checkHotelOwnership(hotelId);
+        }
+        List<RoomVo> list = roomService.getLowStockRooms(threshold, hotelId);
+        return ResultVo.ok(list);
+    }
 }
