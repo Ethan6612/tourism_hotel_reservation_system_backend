@@ -28,6 +28,7 @@ public class OrderVo {
 
     private BigDecimal totalPrice;
     private String status;
+    private String hotelImage;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date payTime;

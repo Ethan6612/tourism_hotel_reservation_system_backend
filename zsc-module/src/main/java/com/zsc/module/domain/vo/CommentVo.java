@@ -36,6 +36,9 @@ public class CommentVo {
     /** 酒店星级 */
     private Integer hotelStar;
 
+    /** 酒店图片URL */
+    private String hotelImage;
+
     /** 房型ID */
     private Long roomId;
 

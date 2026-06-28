@@ -17,6 +17,7 @@
         <result property="updateTime" column="update_time"/>
         <result property="userName" column="user_name"/>
         <result property="hotelName" column="hotel_name"/>
+        <result property="hotelImage" column="hotel_image"/>
         <result property="roomType" column="room_type"/>
         <result property="payTypeName" column="pay_type_name"/>
         <result property="transactionId" column="transaction_id"/>
@@ -30,6 +31,7 @@
                o.pay_time, o.create_time, o.update_time,
                u.nick_name AS user_name,
                h.name AS hotel_name,
+               h.img_url AS hotel_image,
                r.room_type,
                CASE p.pay_type
                    WHEN '1' THEN '微信'

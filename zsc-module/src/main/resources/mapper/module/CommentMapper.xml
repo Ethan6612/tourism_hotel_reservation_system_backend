@@ -11,6 +11,7 @@
         <result property="hotelId" column="hotel_id"/>
         <result property="hotelName" column="hotel_name"/>
         <result property="hotelStar" column="hotel_star"/>
+        <result property="hotelImage" column="hotel_image"/>
         <result property="roomId" column="room_id"/>
         <result property="roomType" column="room_type"/>
         <result property="orderId" column="order_id"/>
@@ -60,6 +61,7 @@
         c.hotel_id,
         h.name AS hotel_name,
         h.star AS hotel_star,
+        h.img_url AS hotel_image,
         c.room_id,
         r.room_type,
         c.order_id,
