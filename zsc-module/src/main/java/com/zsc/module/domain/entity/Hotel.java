@@ -73,6 +73,11 @@ public class Hotel {
     private String facility;
 
     /**
+     * 酒店类别ID
+     */
+    private Long categoryId;
+
+    /**
      * 关联商户ID
      */
     private Long businessId;

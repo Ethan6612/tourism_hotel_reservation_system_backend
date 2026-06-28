@@ -93,8 +93,11 @@
         <if test="query.region != null and query.region != ''">
             AND h.address LIKE CONCAT('%', #{query.region}, '%')
         </if>
-        <if test="query.star != null">
-            AND h.star = #{query.star}
+        <if test="query.starValues != null and !query.starValues.isEmpty()">
+            AND h.star IN
+            <foreach item="s" collection="query.starValues" open="(" separator="," close=")">
+                #{s}
+            </foreach>
         </if>
         <if test="query.minScore != null">
             AND h.score &gt;= #{query.minScore}
@@ -105,10 +108,13 @@
         <if test="query.maxPrice != null">
             AND (SELECT MIN(r.price) FROM room r WHERE r.hotel_id = h.id) &lt;= #{query.maxPrice}
         </if>
-        <if test="query.facility != null and query.facility != ''">
-            <foreach item="f" collection="query.facility.replace(' ', '').split(',')" open="" separator="" close="">
-                AND h.facility LIKE CONCAT('%', #{f}, '%')
+        <if test="query.facilityList != null and !query.facilityList.isEmpty()">
+            <foreach item="f" collection="query.facilityList" open="AND (" separator=" AND " close=")">
+                h.facility LIKE CONCAT('%', #{f}, '%')
             </foreach>
+        </if>
+        <if test="query.categoryId != null">
+            AND h.category_id = #{query.categoryId}
         </if>
     </sql>
 
