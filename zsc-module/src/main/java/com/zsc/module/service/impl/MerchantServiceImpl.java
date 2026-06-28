@@ -156,10 +156,7 @@ public class MerchantServiceImpl extends ServiceImpl<MerchantMapper, Merchant> i
      */
     @Override
     public PageResult<MerchantVo> queryMerchants(MerchantQueryDto queryDto) {
-        // 如果前端没有传递auditStatus参数，默认只查询审核通过的商户
-        if (StringUtils.isBlank(queryDto.getAuditStatus())) {
-            queryDto.setAuditStatus("1");
-        }
+        // auditStatus 为空时不做过滤，返回所有状态的商户
         
         // 使用自定义SQL查询，关联审核表进行过滤
         Page<Merchant> page = queryDto.convetToPage();

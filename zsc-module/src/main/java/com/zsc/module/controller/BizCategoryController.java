@@ -1,5 +1,6 @@
 package com.zsc.module.controller;
 
+import com.zsc.common.annotation.Anonymous;
 import com.zsc.common.annotation.Log;
 import com.zsc.common.enums.BusinessType;
 import com.zsc.module.common.pagination.PageResult;
@@ -111,6 +112,7 @@ public class BizCategoryController {
     /**
      * 前端下拉数据源查询（只返回启用状态）
      */
+    @Anonymous
     @Operation(summary = "下拉查询分类列表")
     @GetMapping("/select")
     public ResultVo<List<BizCategoryVo>> select() {

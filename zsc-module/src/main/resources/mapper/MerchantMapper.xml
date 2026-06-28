@@ -8,13 +8,16 @@
         FROM merchant m
         INNER JOIN merchant_audit ma ON m.id = ma.merchant_id
         WHERE 1=1
-        <!-- 审核状态过滤：取该商户最新的审核记录 -->
-        AND ma.audit_status = #{auditStatus}
+        <!-- 取该商户最新的审核记录 -->
         AND ma.id = (
             SELECT MAX(id)
             FROM merchant_audit
             WHERE merchant_id = m.id
         )
+        <!-- 审核状态过滤（可选，为空时不过滤） -->
+        <if test="auditStatus != null and auditStatus != ''">
+            AND ma.audit_status = #{auditStatus}
+        </if>
         <!-- 商户名称模糊查询 -->
         <if test="merchantName != null and merchantName != ''">
             AND m.merchant_name LIKE CONCAT('%', #{merchantName}, '%')

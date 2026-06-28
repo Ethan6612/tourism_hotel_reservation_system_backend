@@ -107,6 +107,7 @@ public class SecurityConfig
                     .requestMatchers(HttpMethod.POST, "/api/hotel/search").permitAll()
                     .requestMatchers(HttpMethod.GET, "/api/hotel/detail/**").permitAll()
                     .requestMatchers(HttpMethod.GET, "/api/room/hotel/**").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/category/select").permitAll()
                     // 静态资源，可匿名访问（仅限 GET 请求）
                     .requestMatchers(HttpMethod.GET, "/", "/*.html", "/**.html", "/**.css", "/**.js", "/profile/**").permitAll()
                     .requestMatchers("/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**", "/druid/**").permitAll()
