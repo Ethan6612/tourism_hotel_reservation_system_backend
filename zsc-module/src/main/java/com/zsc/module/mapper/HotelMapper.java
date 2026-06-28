@@ -48,9 +48,9 @@ public interface HotelMapper extends BaseMapper<Hotel> {
     List<HotCityVo> selectHotCities(@Param("limit") int limit);
 
     /**
-     * 查询推荐酒店（高分高星）
+     * 查询推荐酒店（按类型：recommend / hot / luxury / budget）
      */
-    List<HotelListVO> selectRecommendHotels(@Param("limit") int limit);
+    List<HotelListVO> selectRecommendHotels(@Param("limit") int limit, @Param("type") String type);
 
     /**
      * 查询个性化推荐酒店（根据用户历史订单的偏好）

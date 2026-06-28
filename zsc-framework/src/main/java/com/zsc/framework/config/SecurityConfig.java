@@ -103,6 +103,7 @@ public class SecurityConfig
                 requests.requestMatchers("/login", "/register", "/captchaImage", "/sendEmailCode", "/verifyEmailCode").permitAll()
                     // 酒店公开接口（游客可访问）
                     .requestMatchers("/api/hotel/hotCities", "/api/hotel/recommend", "/api/hotel/hotSales").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/hotel/personalRecommend").permitAll()
                     .requestMatchers(HttpMethod.POST, "/api/hotel/search").permitAll()
                     .requestMatchers(HttpMethod.GET, "/api/hotel/detail/**").permitAll()
                     .requestMatchers(HttpMethod.GET, "/api/room/hotel/**").permitAll()

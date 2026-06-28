@@ -1,5 +1,7 @@
 package com.zsc.common.utils.file;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Arrays;
@@ -113,6 +115,74 @@ public class OssUploadUtils
 
     /** 预签名URL默认过期时间（7天） */
     private static final long PRESIGNED_EXPIRE_SECONDS = 7 * 24 * 3600;
+
+    /**
+     * 上传本地文件到OSS
+     *
+     * @param localFilePath 本地文件路径
+     * @param objectKey OSS对象Key（如 hot-city/北京.jpg）
+     * @return OSS文件完整URL
+     * @throws Exception
+     */
+    public static final String uploadLocalFile(String localFilePath, String objectKey) throws Exception
+    {
+        OssProperties ossProperties = SpringUtils.getBean(OssProperties.class);
+        return uploadLocalFile(ossProperties, localFilePath, objectKey);
+    }
+
+    /**
+     * 上传本地文件到OSS
+     *
+     * @param ossProperties OSS配置
+     * @param localFilePath 本地文件路径
+     * @param objectKey OSS对象Key
+     * @return OSS文件完整URL
+     * @throws Exception
+     */
+    public static final String uploadLocalFile(OssProperties ossProperties, String localFilePath, String objectKey) throws Exception
+    {
+        File localFile = new File(localFilePath);
+        if (!localFile.exists())
+        {
+            throw new Exception("文件不存在: " + localFilePath);
+        }
+
+        // 构建虚拟主机风格的URL
+        String url = "https://" + ossProperties.getBucketName() + "." + ossProperties.getEndpoint() + "/" + objectKey;
+
+        OSS ossClient = null;
+        try (InputStream inputStream = new FileInputStream(localFile))
+        {
+            ClientBuilderConfiguration conf = new ClientBuilderConfiguration();
+            conf.setConnectionTimeout(5000);
+            conf.setSocketTimeout(10000);
+            conf.setMaxErrorRetry(1);
+
+            ossClient = new OSSClientBuilder().build(
+                    "https://" + ossProperties.getEndpoint(),
+                    ossProperties.getAccessKeyId(),
+                    ossProperties.getAccessKeySecret(),
+                    conf);
+
+            ossClient.putObject(ossProperties.getBucketName(), objectKey, inputStream);
+
+            log.info("OSS上传成功(本地文件): {} -> {}", localFilePath, url);
+        }
+        catch (Exception e)
+        {
+            log.error("OSS上传失败(本地文件): {}", localFilePath, e);
+            throw new Exception("OSS上传失败: " + e.getMessage());
+        }
+        finally
+        {
+            if (ossClient != null)
+            {
+                ossClient.shutdown();
+            }
+        }
+
+        return url;
+    }
 
     /**
      * 将OSS URL转为带签名的可访问URL（默认7天有效）

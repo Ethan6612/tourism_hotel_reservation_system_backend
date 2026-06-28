@@ -3,6 +3,8 @@ package com.zsc.module.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zsc.common.constant.CacheConstants;
+import com.zsc.common.core.redis.RedisCache;
 import com.zsc.module.common.exception.ServiceException;
 import com.zsc.module.common.pagination.PageResult;
 import com.zsc.module.domain.dto.HotelDTO;
@@ -47,6 +49,9 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel> implements
 
     @Autowired
     private HotelAuditMapper hotelAuditMapper;
+
+    @Autowired
+    private RedisCache redisCache;
 
     /**
      * 新增酒店
@@ -354,19 +359,54 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel> implements
     // ==================== 前台推荐接口 ====================
 
     /**
-     * 获取热门城市列表
+     * 获取热门城市列表（优先从 Redis 读取）
      */
     @Override
     public List<HotCityVo> getHotCities(int limit) {
+        // 从 Redis 获取热门城市列表
+        List<HotCityVo> hotCities = redisCache.getCacheList(CacheConstants.HOT_CITIES_KEY);
+        if (hotCities != null && !hotCities.isEmpty()) {
+            // 按 limit 截取
+            if (hotCities.size() > limit) {
+                hotCities = hotCities.subList(0, limit);
+            }
+            // 从数据库查询各城市酒店数量并填充
+            fillHotelCount(hotCities);
+            return hotCities;
+        }
+        // Redis 为空时回退到 SQL 动态统计（兼容极端情况）
         return baseMapper.selectHotCities(limit);
     }
 
     /**
-     * 获取推荐酒店（高分高星，仅营业中）
+     * 从数据库查询各城市酒店数量，填充到热门城市列表中
+     */
+    private void fillHotelCount(List<HotCityVo> hotCities) {
+        // 查询所有城市的酒店数量（取较大 limit 覆盖主流城市）
+        List<HotCityVo> dbCities = baseMapper.selectHotCities(200);
+        if (dbCities == null || dbCities.isEmpty()) {
+            return;
+        }
+        // 构建 cityName → hotelCount 映射
+        java.util.Map<String, Long> countMap = new java.util.HashMap<>();
+        for (HotCityVo dbCity : dbCities) {
+            if (dbCity.getCityName() != null) {
+                countMap.put(dbCity.getCityName(), dbCity.getHotelCount());
+            }
+        }
+        // 填充酒店数量
+        for (HotCityVo city : hotCities) {
+            Long count = countMap.getOrDefault(city.getCityName(), 0L);
+            city.setHotelCount(count);
+        }
+    }
+
+    /**
+     * 获取推荐酒店（按类型，仅营业中）
      */
     @Override
-    public List<HotelListVO> getRecommendHotels(int limit) {
-        List<HotelListVO> list = baseMapper.selectRecommendHotels(limit);
+    public List<HotelListVO> getRecommendHotels(int limit, String type) {
+        List<HotelListVO> list = baseMapper.selectRecommendHotels(limit, type);
         if (list != null) {
             list.forEach(this::fillStatusName);
         }
@@ -379,12 +419,12 @@ public class HotelServiceImpl extends ServiceImpl<HotelMapper, Hotel> implements
     @Override
     public List<HotelListVO> getPersonalRecommend(Long userId, int limit) {
         if (userId == null) {
-            return getRecommendHotels(limit);
+            return getRecommendHotels(limit, "recommend");
         }
         List<HotelListVO> list = baseMapper.selectPersonalRecommend(userId, limit);
         if (list == null || list.isEmpty()) {
             // 无历史记录时回退到通用推荐
-            return getRecommendHotels(limit);
+            return getRecommendHotels(limit, "recommend");
         }
         list.forEach(this::fillStatusName);
         return list;

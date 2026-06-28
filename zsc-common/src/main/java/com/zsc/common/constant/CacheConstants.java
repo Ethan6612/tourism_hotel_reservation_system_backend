@@ -61,4 +61,9 @@ public class CacheConstants
      * 邮箱验证通过标记 redis key
      */
     public static final String EMAIL_VERIFIED_KEY = "email_verified:";
+
+    /**
+     * 热门城市 redis key
+     */
+    public static final String HOT_CITIES_KEY = "hot_cities";
 }

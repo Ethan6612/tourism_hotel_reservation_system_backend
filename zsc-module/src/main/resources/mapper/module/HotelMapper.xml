@@ -15,6 +15,7 @@
         <result property="businessId" column="business_id"/>
         <result property="merchantName" column="merchant_name"/>
         <result property="roomCount" column="room_count"/>
+        <result property="commentCount" column="comment_count"/>
         <result property="minPrice" column="min_price"/>
         <result property="createTime" column="create_time"/>
     </resultMap>
@@ -76,7 +77,8 @@
                h.status, h.business_id, h.create_time,
                m.merchant_name,
                (SELECT MIN(r.price) FROM room r WHERE r.hotel_id = h.id AND r.status = '0') AS min_price,
-               (SELECT COUNT(1) FROM room r WHERE r.hotel_id = h.id) AS room_count
+               (SELECT COUNT(1) FROM room r WHERE r.hotel_id = h.id) AS room_count,
+               (SELECT COUNT(1) FROM comment c WHERE c.hotel_id = h.id AND c.status = '1') AS comment_count
         FROM hotel h
         LEFT JOIN merchant m ON h.business_id = m.id
         WHERE h.status = '0'
@@ -163,10 +165,31 @@
         LIMIT #{limit}
     </select>
 
-    <!-- 查询推荐酒店（高评分 + 高星级，仅营业中） -->
+    <!-- 查询推荐酒店（按类型：recommend/hot/luxury/budget，仅营业中） -->
     <select id="selectRecommendHotels" resultMap="HotelListVOResultMap">
         <include refid="selectHotelSearchSql"/>
-        ORDER BY h.score DESC, h.star DESC
+        <!-- 高档：仅4星及以上 -->
+        <if test="type == 'luxury'">
+            AND h.star &gt;= 4
+        </if>
+        <!-- 经济型：价格低于300 -->
+        <if test="type == 'budget'">
+            AND (SELECT MIN(r.price) FROM room r WHERE r.hotel_id = h.id AND r.status = '0') &lt; 300
+        </if>
+        <choose>
+            <when test="type == 'hot'">
+                ORDER BY (SELECT COUNT(1) FROM orders o WHERE o.hotel_id = h.id AND o.status IN ('1','3')) DESC, h.score DESC
+            </when>
+            <when test="type == 'luxury'">
+                ORDER BY h.star DESC, h.score DESC
+            </when>
+            <when test="type == 'budget'">
+                ORDER BY min_price ASC, h.score DESC
+            </when>
+            <otherwise>
+                ORDER BY h.score DESC, h.star DESC
+            </otherwise>
+        </choose>
         LIMIT #{limit}
     </select>
 
@@ -177,7 +200,8 @@
                h.status, h.business_id, h.create_time,
                m.merchant_name,
                (SELECT MIN(r.price) FROM room r WHERE r.hotel_id = h.id AND r.status = '0') AS min_price,
-               (SELECT COUNT(1) FROM room r WHERE r.hotel_id = h.id) AS room_count
+               (SELECT COUNT(1) FROM room r WHERE r.hotel_id = h.id) AS room_count,
+               (SELECT COUNT(1) FROM comment c WHERE c.hotel_id = h.id AND c.status = '1') AS comment_count
         FROM hotel h
         LEFT JOIN merchant m ON h.business_id = m.id
         INNER JOIN (

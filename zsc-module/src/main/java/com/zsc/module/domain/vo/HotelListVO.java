@@ -91,6 +91,11 @@ public class HotelListVO {
     private Integer roomCount;
 
     /**
+     * 点评数量
+     */
+    private Integer commentCount;
+
+    /**
      * 创建时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

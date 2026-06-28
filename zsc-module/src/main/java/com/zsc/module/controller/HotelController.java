@@ -48,18 +48,18 @@ public class HotelController {
     @Operation(summary = "热门城市")
     @GetMapping("/hotCities")
     public ResultVo<List<HotCityVo>> hotCities() {
-        List<HotCityVo> list = hotelService.getHotCities(10);
+        List<HotCityVo> list = hotelService.getHotCities(12);
         return ResultVo.ok(list);
     }
 
     /**
-     * 推荐酒店（高评分 + 高星级）
+     * 推荐酒店（按类型：recommend 推荐 / hot 热门 / luxury 高档 / budget 经济型）
      */
     @Anonymous
     @Operation(summary = "推荐酒店")
     @GetMapping("/recommend")
-    public ResultVo<List<HotelListVO>> recommend() {
-        List<HotelListVO> list = hotelService.getRecommendHotels(10);
+    public ResultVo<List<HotelListVO>> recommend(@RequestParam(defaultValue = "recommend") String type) {
+        List<HotelListVO> list = hotelService.getRecommendHotels(10, type);
         return ResultVo.ok(list);
     }
 
@@ -68,9 +68,13 @@ public class HotelController {
      */
     @Operation(summary = "个性化推荐")
     @GetMapping("/personalRecommend")
-    public ResultVo<List<HotelListVO>> personalRecommend() {
+    public ResultVo<List<HotelListVO>> personalRecommend(@RequestParam(required = false) Long refresh) {
         Long userId = SecurityUtils.getUserId();
         List<HotelListVO> list = hotelService.getPersonalRecommend(userId, 10);
+        // 如果传了 refresh 参数，随机打乱结果
+        if (refresh != null && list != null) {
+            java.util.Collections.shuffle(list);
+        }
         return ResultVo.ok(list);
     }
 

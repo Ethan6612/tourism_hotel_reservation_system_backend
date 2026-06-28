@@ -21,4 +21,7 @@ public class HotCityVo {
 
     /** 酒店数量 */
     private Long hotelCount;
+
+    /** 城市图片URL（OSS） */
+    private String imageUrl;
 }

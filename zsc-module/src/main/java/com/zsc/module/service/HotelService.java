@@ -97,11 +97,12 @@ public interface HotelService extends IService<Hotel> {
     List<HotCityVo> getHotCities(int limit);
 
     /**
-     * 获取推荐酒店（高分高星）
+     * 获取推荐酒店（按类型）
      *
      * @param limit 返回数量
+     * @param type  类型：recommend 推荐 / hot 热门 / luxury 高档 / budget 经济型
      */
-    List<HotelListVO> getRecommendHotels(int limit);
+    List<HotelListVO> getRecommendHotels(int limit, String type);
 
     /**
      * 获取个性化推荐酒店（根据用户历史偏好）
