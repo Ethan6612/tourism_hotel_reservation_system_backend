@@ -34,10 +34,8 @@
                h.img_url AS hotel_image,
                r.room_type,
                CASE p.pay_type
-                   WHEN '1' THEN '微信'
-                   WHEN '2' THEN '支付宝'
-                   WHEN '3' THEN '银行卡'
-                   ELSE '未知'
+                   WHEN '1' THEN '微信支付'
+                   ELSE '其它'
                END AS pay_type_name,
                p.transaction_id,
                p.pay_amount,

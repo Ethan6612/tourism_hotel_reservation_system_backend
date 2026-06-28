@@ -58,10 +58,8 @@ public class PaymentVo {
     public String getPayTypeName() {
         if (payType == null) return "未知";
         switch (payType) {
-            case "1": return "微信";
-            case "2": return "支付宝";
-            case "3": return "银行卡";
-            default: return "未知";
+            case "1": return "微信支付";
+            default: return "其它";
         }
     }
 }
