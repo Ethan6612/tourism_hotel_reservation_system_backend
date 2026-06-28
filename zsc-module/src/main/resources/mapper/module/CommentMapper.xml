@@ -323,6 +323,7 @@
     </select>
 
     <!-- 商户评价列表查询（通过 merchant.user_id 关联，merchantId 实际是 userId） -->
+    <!-- 默认只查询已发布的评价（status='1'），已下架/已拒绝的评论对商家不可见 -->
     <select id="selectMerchantComments" resultMap="CommentVoResultMap">
         SELECT
         <include refid="commentVoColumns"/>
@@ -338,6 +339,9 @@
             </if>
             <if test="query.status != null and query.status != ''">
                 AND c.status = #{query.status}
+            </if>
+            <if test="query.status == null or query.status == ''">
+                AND c.status = '1'
             </if>
         </where>
         ORDER BY c.create_time DESC

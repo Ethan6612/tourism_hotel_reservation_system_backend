@@ -84,9 +84,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         comment.setCreateTime(new Date());
         comment.setUpdateTime(new Date());
         comment.setCreateBy(SecurityUtils.getUsername());
-        if (!StringUtils.hasText(comment.getIsAnonymous())) {
-            comment.setIsAnonymous("0");
-        }
+        comment.setIsAnonymous("0"); // 实名评价
         if (!StringUtils.hasText(comment.getStatus())) {
             comment.setStatus(COMMENT_STATUS_PUBLISHED); // 默认直接发布
         }
@@ -376,8 +374,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
             throw new ServiceException("追加内容不能为空！");
         }
         // 在原内容后追加
+        String timestamp = new java.text.SimpleDateFormat("yyyy年MM月dd日HH时mm分ss秒").format(new Date());
         String newContent = (comment.getContent() != null ? comment.getContent() : "")
-                + "\n\n【追加评价】" + new Date() + "\n" + content;
+                + "\n\n【追加评价】" + timestamp + "\n" + content;
         comment.setContent(newContent);
         comment.setUpdateTime(new Date());
         comment.setUpdateBy(SecurityUtils.getUsername());
@@ -587,12 +586,6 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
                 // 解析失败则使用原始值
                 vo.setImgUrl(vo.getImages());
             }
-        }
-
-        // 匿名处理：如果isAnonymous=1，隐藏用户名
-        if ("1".equals(vo.getIsAnonymous())) {
-            vo.setUserName("匿名用户");
-            vo.setUserAvatar(null);
         }
 
         return vo;
