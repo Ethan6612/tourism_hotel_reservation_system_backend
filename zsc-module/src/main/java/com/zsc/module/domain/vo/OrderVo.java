@@ -52,6 +52,7 @@ public class OrderVo {
 
     private String remark;
     private Boolean reviewed;
+    private Long commentId;
 
     // === 支付关联字段 ===
 

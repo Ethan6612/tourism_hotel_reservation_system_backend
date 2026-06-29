@@ -193,6 +193,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     @Override
     public PageResult<CommentVo> queryMyComments(Integer pageNum, Integer pageSize) {
         Long userId = SecurityUtils.getUserId();
+        //构建器
         Page<CommentVo> page = new Page<>(pageNum, pageSize);
         Page<CommentVo> resultPage = commentMapper.selectMyComments(page, userId);
 
@@ -543,7 +544,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     }
 
     /**
-     * 处理CommentVo：解析图片列表、匿名处理
+     * 处理CommentVo：解析图片列表
      */
     private CommentVo processCommentVo(CommentVo vo) {
         // 检查当前用户是否已点赞
