@@ -52,7 +52,16 @@
         <result property="oneStarCount" column="one_star_count"/>
     </resultMap>
 
-    <!-- 公共SQL片段：评价关联查询 -->
+    <!-- ============================================================
+         公共SQL片段：commentVoColumns
+         查询 comment 表 + 关联 5 张表的字段，用于构造 CommentVo
+         关联关系：
+           c.user_id    → u.user_id      (sys_user 用户表，获取用户名、头像)
+           c.hotel_id   → h.id           (hotel 酒店表，获取酒店名、星级、图片)
+           c.room_id    → r.id           (room 房型表，获取房型名称)
+           c.order_id   → o.id           (orders 订单表，获取订单编号)
+           c.reply_by   → ru.user_id     (sys_user 回复人表，获取回复人姓名)
+         ============================================================ -->
     <sql id="commentVoColumns">
         c.id,
         c.user_id,
@@ -85,6 +94,15 @@
         c.appeal_status
     </sql>
 
+    <!-- ============================================================
+         公共SQL片段：commentVoJoins
+         comment 表 LEFT JOIN 5 张关联表：
+           sys_user u   → 评论用户信息（昵称、头像）
+           hotel h      → 酒店信息（名称、星级、图片）
+           room r       → 房型信息（类型名称）
+           orders o     → 订单信息（订单编号）
+           sys_user ru  → 回复人信息（回复人昵称），c.reply_by 为空时无匹配
+         ============================================================ -->
     <sql id="commentVoJoins">
         LEFT JOIN sys_user u ON c.user_id = u.user_id
         LEFT JOIN hotel h ON c.hotel_id = h.id
@@ -93,7 +111,21 @@
         LEFT JOIN sys_user ru ON c.reply_by = ru.user_id
     </sql>
 
-    <!-- 动态查询条件 -->
+    <!-- ============================================================
+         公共SQL片段：commentQueryWhere
+         动态条件查询，由 Java CommentQueryDto 传入参数：
+         - hotelId/roomId/userId/orderId  : 精确匹配
+         - score                          : 精确匹配评分
+         - minScore/maxScore              : 评分范围
+         - status                         : 评价状态（0待审核/1已发布/2已拒绝）
+         - appealStatus                   : 申诉状态
+         - hasReply                       : 是否有商家回复
+         - keyword                        : 评价内容模糊搜索
+         - hotelName                      : 酒店名称模糊搜索
+         - beginTime/endTime              : 创建时间范围
+
+         默认过滤：未指定 status 和 appealStatus 时，只查已发布(status='1')
+         ============================================================ -->
     <sql id="commentQueryWhere">
         <where>
             <if test="query.hotelId != null">
@@ -150,7 +182,12 @@
         </where>
     </sql>
 
-    <!-- 排序片段 -->
+    <!-- ============================================================
+         排序规则：
+         - orderBy='score'     → 按评分降序、时间降序
+         - orderBy='likeCount' → 按点赞数降序、时间降序
+         - 默认                 → 按创建时间降序（最新在前）
+         ============================================================ -->
     <sql id="commentOrderBy">
         <choose>
             <when test="query.orderBy == 'score'">
@@ -165,7 +202,11 @@
         </choose>
     </sql>
 
-    <!-- 分页查询评价列表（带关联信息） -->
+    <!-- ============================================================
+         管理员/用户端分页查询评价列表
+         5表LEFT JOIN + 动态条件 + 动态排序
+         用于：管理员评价列表、酒店详情评论区
+         ============================================================ -->
     <select id="selectCommentVoPage" resultMap="CommentVoResultMap">
         SELECT
         <include refid="commentVoColumns"/>
@@ -175,7 +216,10 @@
         <include refid="commentOrderBy"/>
     </select>
 
-    <!-- 查询评价详情 -->
+    <!-- ============================================================
+         查询单条评价详情（5表LEFT JOIN）
+         用于：管理员/商家点开评价详情弹窗
+         ============================================================ -->
     <select id="selectCommentVoById" resultMap="CommentVoResultMap">
         SELECT
         <include refid="commentVoColumns"/>
@@ -184,7 +228,11 @@
         WHERE c.id = #{id}
     </select>
 
-    <!-- 查询我的评价 -->
+    <!-- ============================================================
+         用户端查询我的评价列表
+         5表LEFT JOIN，按用户ID过滤（查询所有状态，包括已下架）
+         用于：用户端"我的评价"页面
+         ============================================================ -->
     <select id="selectMyComments" resultMap="CommentVoResultMap">
         SELECT
         <include refid="commentVoColumns"/>
@@ -194,7 +242,11 @@
         ORDER BY c.create_time DESC
     </select>
 
-    <!-- 查询我的评价统计 -->
+    <!-- ============================================================
+         用户端评价统计：总条数、平均分、总获赞数
+         只统计已发布(status='1')的评价
+         用于：用户端"我的评价"页面顶部统计卡片
+         ============================================================ -->
     <select id="selectMyCommentStatistics" resultMap="CommentVoResultMap">
         SELECT
             #{userId} AS id,
@@ -205,12 +257,20 @@
         WHERE c.user_id = #{userId} AND c.status = '1'
     </select>
 
-    <!-- 根据订单ID查询评价 -->
+    <!-- ============================================================
+         根据订单ID查询评价（只查一条）
+         用于：校验订单是否已被评价（重复评价检查）
+         ============================================================ -->
     <select id="selectByOrderId" resultType="com.zsc.module.domain.entity.Comment">
         SELECT * FROM `comment` WHERE order_id = #{orderId} LIMIT 1
     </select>
 
-    <!-- 获取评分统计 -->
+    <!-- ============================================================
+         评分统计（按酒店+房型分组）
+         只统计已发布(status='1')的评价
+         计算：平均分、总条数、各星级数量（1-5星）
+         用于：管理端评分统计图表
+         ============================================================ -->
     <select id="selectScoreStatistics" resultMap="ScoreStatisticsResultMap">
         SELECT
             c.hotel_id,
@@ -239,7 +299,11 @@
         GROUP BY c.hotel_id, c.room_id
     </select>
 
-    <!-- 获取酒店评分分布统计 -->
+    <!-- ============================================================
+         指定酒店的评分分布：各星级数量 + 平均分
+         只统计已发布(status='1')的评价
+         用于：酒店详情页"用户评价"板块的星级分布柱状图
+         ============================================================ -->
     <select id="selectHotelScoreDistribution" resultMap="ScoreStatisticsResultMap">
         SELECT
             c.hotel_id,
@@ -255,7 +319,12 @@
         GROUP BY c.hotel_id
     </select>
 
-    <!-- 批量查询酒店的平均评分（含各星级数量统计） -->
+    <!-- ============================================================
+         批量查询多家酒店的平均评分（按酒店ID列表）
+         LEFT JOIN hotel 表获取酒店名称
+         只统计已发布(status='1')的评价
+         用于：商户端评价统计概览、首页推荐酒店排序
+         ============================================================ -->
     <select id="selectHotelsAverageScore" resultMap="ScoreStatisticsResultMap">
         SELECT
             c.hotel_id,
@@ -278,33 +347,52 @@
         ORDER BY average_score DESC
     </select>
 
-    <!-- 点赞数+1 -->
+    <!-- ============================================================
+         点赞数+1（同步冗余字段）
+         当用户点赞时调用，保持 comment.like_count 与 comment_like 表一致
+         ============================================================ -->
     <update id="incrementLikeCount">
         UPDATE `comment` SET like_count = like_count + 1 WHERE id = #{id}
     </update>
 
-    <!-- 点赞数-1 -->
+    <!-- ============================================================
+         点赞数-1（同步冗余字段，防负数）
+         当用户取消点赞时调用，保持 comment.like_count 与 comment_like 表一致
+         ============================================================ -->
     <update id="decrementLikeCount">
         UPDATE `comment` SET like_count = like_count - 1 WHERE id = #{id} AND like_count > 0
     </update>
 
-    <!-- 插入点赞记录 -->
+    <!-- ============================================================
+         插入点赞记录（INSERT IGNORE 防止重复点赞）
+         唯一约束 uk_user_comment(user_id, comment_id) 确保一人一赞
+         ============================================================ -->
     <insert id="insertCommentLike">
         INSERT IGNORE INTO comment_like (`user_id`, `comment_id`, `create_time`)
         VALUES (#{userId}, #{commentId}, NOW())
     </insert>
 
-    <!-- 删除点赞记录 -->
+    <!-- ============================================================
+         删除点赞记录（取消点赞）
+         通过唯一索引定位 user_id + comment_id
+         ============================================================ -->
     <delete id="deleteCommentLike">
         DELETE FROM comment_like WHERE user_id = #{userId} AND comment_id = #{commentId}
     </delete>
 
-    <!-- 查询用户是否已点赞 -->
+    <!-- ============================================================
+         查询用户是否已点赞某条评价
+         返回 > 0 表示已点赞，= 0 表示未点赞
+         ============================================================ -->
     <select id="selectCommentLikeExists" resultType="java.lang.Long">
         SELECT COUNT(*) FROM comment_like WHERE user_id = #{userId} AND comment_id = #{commentId}
     </select>
 
-    <!-- 查询评价的点赞用户列表 -->
+    <!-- ============================================================
+         查询某条评价的点赞用户列表
+         关联 sys_user 表获取用户名和头像
+         用于：点击"谁赞过"弹窗
+         ============================================================ -->
     <select id="selectCommentLikes" resultType="com.zsc.module.domain.vo.CommentVo">
         SELECT
             cl.user_id AS id,
@@ -324,8 +412,15 @@
         <include refid="commentQueryWhere"/>
     </select>
 
-    <!-- 商户评价列表查询（通过 merchant.user_id 关联，merchantId 实际是 userId） -->
-    <!-- 默认只查询已发布的评价（status='1'），已下架/已拒绝的评论对商家不可见 -->
+    <!-- ============================================================
+         商户评价列表查询：5表LEFT JOIN + merchant权限过滤
+         关联关系：
+           comment → hotel → merchant (INNER JOIN)
+           merchant.user_id = #{merchantId} 实现数据隔离
+         说明：merchantId 实际是 sys_user.user_id（当前登录用户ID）
+         默认只查已发布(status='1')，已下架/已拒绝的评论对商家不可见
+         用于：商户端"评价管理"页面
+         ============================================================ -->
     <select id="selectMerchantComments" resultMap="CommentVoResultMap">
         SELECT
         <include refid="commentVoColumns"/>
@@ -349,7 +444,13 @@
         ORDER BY c.create_time DESC
     </select>
 
-    <!-- 按酒店分组查询（用于管理端左侧酒店列表） -->
+    <!-- ============================================================
+         按酒店分组查询（管理端左侧酒店列表）
+         LEFT JOIN hotel 表获取酒店名称
+         只统计已发布(status='1')的评价
+         计算每家酒店的平均分和评论总数
+         支持酒店名称模糊搜索
+         ============================================================ -->
     <select id="selectCommentGroupByHotel" resultMap="CommentVoResultMap">
         SELECT
             c.hotel_id AS id,

@@ -56,6 +56,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     @Autowired
     private CommentMapper commentMapper;
 
+    /**
+     * 提交评价：校验订单完成状态和重复评价，构建评价实体，默认直接发布
+     */
     @Override
     public void addComment(CommentDto commentDto) {
         // 1. 校验订单是否已完成入住
@@ -97,6 +100,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         }
     }
 
+    /**
+     * 回复评价（商家/管理员）：在原回复内容后追加，用【时间戳】保留历史记录
+     */
     @Override
     public void replyComment(Long commentId, String replyContent) {
         if (!StringUtils.hasText(replyContent)) {
@@ -123,6 +129,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         }
     }
 
+    /**
+     * 删除评价（本人或管理员可操作）：物理删除数据库记录
+     */
     @Override
     public void deleteComment(Long commentId) {
         Comment comment = this.getById(commentId);
@@ -141,6 +150,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         }
     }
 
+    /**
+     * 批量删除评价（仅管理员）：根据ID列表物理删除
+     */
     @Override
     public void batchDeleteComments(List<Long> commentIds) {
         if (commentIds == null || commentIds.isEmpty()) {
@@ -157,6 +169,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         }
     }
 
+    /**
+     * 基础分页查询评价列表（使用MyBatis-Plus Lambda查询，不含关联信息）
+     */
     @Override
     public PageResult queryComments(CommentQueryDto queryDto) {
         if (queryDto.getPageNum() == null) queryDto.setPageNum(1);
@@ -169,6 +184,10 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         return PageResult.fromPage(result);
     }
 
+    /**
+     * 分页查询评价列表（带用户、酒店、房型关联信息，用于管理员/商家端展示）
+     * 使用自定义Mapper XML查询，默认只查已发布(status='1')的评价
+     */
     @Override
     public PageResult<CommentVo> queryCommentsWithUserInfo(CommentQueryDto queryDto) {
         if (queryDto.getPageNum() == null) queryDto.setPageNum(1);
@@ -190,6 +209,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         return result;
     }
 
+    /**
+     * 查询我的评价（用户端）：根据登录用户ID查询该用户所有评价，包含关联信息
+     */
     @Override
     public PageResult<CommentVo> queryMyComments(Integer pageNum, Integer pageSize) {
         Long userId = SecurityUtils.getUserId();
@@ -209,6 +231,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         return result;
     }
 
+    /**
+     * 获取评价详情：根据ID查询单条评价（含用户、酒店、房型、回复等关联信息）
+     */
     @Override
     public CommentVo getCommentDetail(Long id) {
         CommentVo vo = commentMapper.selectCommentVoById(id);
@@ -218,6 +243,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         return processCommentVo(vo);
     }
 
+    /**
+     * 获取评分统计：按酒店/房型维度统计各星级数量、平均分、总评论数
+     */
     @Override
     public ScoreStatisticsVo getScoreStatistics(ScoreStatisticsDto statisticsDto) {
         ScoreStatisticsVo statistics = commentMapper.selectScoreStatistics(
@@ -243,6 +271,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         return statistics;
     }
 
+    /**
+     * 获取指定酒店的评分分布（各星级数量统计）
+     */
     @Override
     public ScoreStatisticsVo getHotelScoreDistribution(Long hotelId) {
         if (hotelId == null) {
@@ -264,6 +295,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         return list.get(0);
     }
 
+    /**
+     * 批量查询多个酒店的平均评分和总评论数
+     */
     @Override
     public List<ScoreStatisticsVo> getHotelsAverageScore(List<Long> hotelIds) {
         if (hotelIds == null || hotelIds.isEmpty()) {
@@ -272,6 +306,11 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         return commentMapper.selectHotelsAverageScore(hotelIds);
     }
 
+    /**
+     * 点赞/取消点赞（切换式）：已点赞则取消，未点赞则点赞
+     * 同时更新 comment_like 表和 comment 表的 like_count 冗余字段
+     * 返回 true=已点赞，false=已取消
+     */
     @Override
     public boolean toggleLikeComment(Long commentId) {
         Comment comment = this.getById(commentId);
@@ -279,6 +318,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
             throw new ServiceException("评价不存在！");
         }
         Long userId = SecurityUtils.getUserId();
+        //是否已点赞
         Long exists = commentMapper.selectCommentLikeExists(userId, commentId);
         if (exists != null && exists > 0) {
             // 已点赞 → 取消点赞
@@ -293,11 +333,17 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         }
     }
 
+    /**
+     * 查询某条评价的点赞用户列表（含用户名、头像、点赞时间）
+     */
     @Override
     public List<CommentVo> getCommentLikes(Long commentId) {
         return commentMapper.selectCommentLikes(commentId);
     }
 
+    /**
+     * 审核评价（管理员）：设置评价状态为通过('1')或拒绝('2')
+     */
     @Override
     public void auditComment(Long commentId, String status) {
         if (!SecurityUtils.isAdmin()) {
@@ -322,19 +368,22 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         }
     }
 
+    /**
+     * 检查是否可评价：查询该订单是否已经有过评价记录
+     * （注：订单完成状态由调用方在Controller层校验）
+     */
     @Override
     public boolean canComment(Long userId, Long orderId) {
-        // 查询订单状态为"已完成"（status='3'）
-        // 这里通过关联查询orders表来验证
-        // 由于orders表在另一个模块，此处通过commentMapper验证
         Comment existing = commentMapper.selectByOrderId(orderId);
         if (existing != null) {
             return false; // 已评价过
         }
-        // 订单完成状态的校验由调用方负责（Controller层可能会调用Order服务）
         return true;
     }
 
+    /**
+     * 修改自己的评价：校验权限后更新评分、内容、图片，状态重置为已发布
+     */
     @Override
     public void updateMyComment(CommentDto commentDto) {
         Long currentUserId = SecurityUtils.getUserId();
@@ -361,6 +410,10 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         }
     }
 
+    /**
+     * 追加评价：在原评价内容后追加新内容，保留历史记录
+     * 格式：原内容 + 【追加评价】yyyy年MM月dd日HH时mm分ss秒 + 新内容
+     */
     @Override
     public void appendComment(Long commentId, String content) {
         Long currentUserId = SecurityUtils.getUserId();
@@ -386,6 +439,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         }
     }
 
+    /**
+     * 删除自己的评价：校验评价归属权后物理删除
+     */
     @Override
     public void deleteMyComment(Long commentId) {
         Long currentUserId = SecurityUtils.getUserId();
@@ -400,7 +456,10 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
             throw new ServiceException("系统错误，评价删除失败！");
         }
     }
-
+    /**
+     * 查询商户旗下酒店的评价：通过 merchant 表关联筛选，只能看到自己酒店的评价
+     * 默认只查已发布(status='1')的评价
+     */
     @Override
     public PageResult<CommentVo> queryMerchantComments(CommentQueryDto queryDto) {
         Long merchantId = SecurityUtils.getUserId();
@@ -419,6 +478,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         return result;
     }
 
+    /**
+     * 商家申诉评价：提交申诉理由，设置申诉状态为'申诉中'，每个评价只能申诉一次
+     */
     @Override
     public void appealComment(Long commentId, String reason) {
         if (!StringUtils.hasText(reason)) {
@@ -442,18 +504,29 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         }
     }
 
+    /**
+     * 按酒店分组查询评价统计（管理端左侧酒店列表用）：计算每家酒店的平均分和评论总数
+     */
     @Override
     public List<CommentVo> queryCommentGroupByHotel(CommentQueryDto queryDto) {
         List<CommentVo> list = commentMapper.selectCommentGroupByHotel(queryDto);
         return list != null ? list : new ArrayList<>();
     }
 
+    /**
+     * 获取当前用户的评价统计：总评价数、平均评分、总获赞数
+     */
     @Override
     public CommentVo getMyCommentStatistics() {
         Long userId = SecurityUtils.getUserId();
         return commentMapper.selectMyCommentStatistics(userId);
     }
 
+    /**
+     * 审核商家申诉（管理员）：
+     * - 申诉通过(appealStatus='2')：评价下架(status='2')
+     * - 申诉驳回(appealStatus='3')：评价保留(status='1')
+     */
     @Override
     public void auditAppeal(Long commentId, String appealStatus, String remark) {
         if (!SecurityUtils.isAdmin()) {
@@ -544,7 +617,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     }
 
     /**
-     * 处理CommentVo：解析图片列表
+     * 处理CommentVo：查询当前用户是否已点赞该评价，并解析图片JSON数组为列表
      */
     private CommentVo processCommentVo(CommentVo vo) {
         // 检查当前用户是否已点赞

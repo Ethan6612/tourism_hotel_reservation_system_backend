@@ -1,17 +1,17 @@
 /*
  Navicat Premium Dump SQL
 
- Source Server         : test
+ Source Server         : book_library
  Source Server Type    : MySQL
- Source Server Version : 80404 (8.4.4)
+ Source Server Version : 90100 (9.1.0)
  Source Host           : localhost:3306
  Source Schema         : zsc
 
  Target Server Type    : MySQL
- Target Server Version : 80404 (8.4.4)
+ Target Server Version : 90100 (9.1.0)
  File Encoding         : 65001
 
- Date: 28/06/2026 22:39:46
+ Date: 10/07/2026 08:48:59
 */
 
 SET NAMES utf8mb4;
@@ -87,15 +87,15 @@ INSERT INTO `comment` VALUES (1, 305, 1, 1, 101, 5, '旅游达人小王：麦新
 INSERT INTO `comment` VALUES (2, 305, 2, 4, 102, 4, '金普顿前滩酒店很时尚，设计感强。房间不大但布局合理。就是周边还在开发中，吃饭选择不多。', '[]', NULL, '0', '1', 0, '2026-06-26 16:31:06', NULL, NULL, NULL, NULL, NULL, '0', '前滩正在快速发展，周边配套会越来越好！', '2026-06-26 16:31:06', NULL, NULL);
 INSERT INTO `comment` VALUES (3, 306, 1, 2, 103, 3, '出差老李：老酒店了设施有点旧，空调声音大。不过位置确实方便，离地铁站近，周边吃饭也方便。价格还算合理。', '[]', NULL, '0', '2', 2, '2026-06-26 16:31:06', 'admin', '2026-06-26 16:35:30', NULL, '后面给他们升级房型了', '2026-06-26 16:35:00', '2', '感谢您的反馈！空调问题已安排排查。', '2026-06-26 16:31:06', NULL, NULL);
 INSERT INTO `comment` VALUES (4, 306, 3, 8, 104, 5, 'CitiGO欢阁酒店性价比超高！静安寺旁边，出门就是商圈。装修风格年轻时尚，房间虽小但一应俱全。前台小哥哥服务热情，推荐了很多美食。', '[\"https://images.unsplash.com/photo-1551882547-be7b2a60087d?w=400&h=300&fit=crop\"]', NULL, '0', '1', 4, '2026-06-26 16:31:06', NULL, NULL, NULL, NULL, NULL, '0', '很高兴您喜欢我们的风格！CitiGO致力于为年轻人打造高性价比的住宿体验。', '2026-06-26 16:31:06', NULL, NULL);
-INSERT INTO `comment` VALUES (5, 307, 2, 5, 105, 2, '度假小红：金普顿真的让人失望。双床房的床垫太软了，睡了一晚腰疼。隔音也不好，走廊说话听得一清二楚。一千多一晚不值。', '[]', NULL, '0', '1', 3, '2026-06-26 16:31:06', NULL, NULL, NULL, '客人未提前沟通床垫问题，客房服务可提供硬床垫选择。', '2026-06-26 16:31:06', '1', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (5, 307, 2, 5, 105, 2, '度假小红：金普顿真的让人失望。双床房的床垫太软了，睡了一晚腰疼。隔音也不好，走廊说话听得一清二楚。一千多一晚不值。', '[]', NULL, '0', '1', 3, '2026-06-26 16:31:06', 'admin', '2026-06-29 16:32:45', NULL, '客人未提前沟通床垫问题，客房服务可提供硬床垫选择。', '2026-06-26 16:31:06', '3', NULL, NULL, NULL, NULL);
 INSERT INTO `comment` VALUES (6, 308, 1, 1, 106, 4, '商务张总：麦新格整体不错，简约实用。WiFi速度很快，商务需求都能满足。卫生间稍微小了点，早餐种类可以再丰富些。', '[]', NULL, '0', '1', 0, '2026-06-26 16:31:06', NULL, NULL, NULL, NULL, NULL, '0', '感谢建议！早餐品类我们正在丰富中。', '2026-06-26 16:31:06', NULL, NULL);
 INSERT INTO `comment` VALUES (7, 309, 2, 7, 107, 5, '蜜月小周：金普顿太适合情侣了！景观房看出去夜景很美，房间设计浪漫有情调。前台还帮忙准备了蜜月布置，非常贴心。下次还来！', '[\"https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop\"]', NULL, '0', '1', 4, '2026-06-26 16:31:06', NULL, NULL, NULL, NULL, NULL, '0', '恭喜新婚！很高兴为您制造了浪漫回忆！', '2026-06-26 16:31:06', NULL, NULL);
 INSERT INTO `comment` VALUES (8, 310, 5, 19, 108, 4, '船长五号青年酒店很有特色，航海主题装修很酷。适合年轻人，公共区域社交氛围好。床位干净，价格实惠。就是淋浴间少了点。', '[]', NULL, '0', '1', 1, '2026-06-26 16:31:06', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的喜欢！淋浴间问题已在扩建中。', '2026-06-26 16:31:06', NULL, NULL);
 INSERT INTO `comment` VALUES (9, 310, 3, 9, 109, 2, 'CitiGO的隔音真的差，隔壁讲话我都能听到。房间也很小，行李箱都摊不开。除了位置好真没别的优点了。', '[]', NULL, '0', '1', 3, '2026-06-26 16:31:06', NULL, NULL, NULL, '客人预订的是经济房型，面积已如实标注。', '2026-06-26 16:31:06', '1', NULL, NULL, NULL, NULL);
 INSERT INTO `comment` VALUES (10, 311, 4, 12, 110, 5, 'lyx：香格里拉老牌五星果然靠谱！豪华大床房空间很大，床品舒适。服务专业周到，早餐种类丰富到吃不过来。配套设施齐全，游泳池健身房都很棒。', '[\"https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop\"]', NULL, '0', '1', 6, '2026-06-26 16:31:06', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的认可！香格里拉品质一直在线，欢迎再次光临！', '2026-06-26 16:31:06', NULL, NULL);
 INSERT INTO `comment` VALUES (11, 305, 5, 18, 111, 1, '感觉很一般', '[\"https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/06/26/6b84b04293a04b85aab29141247249db.png?Expires=1783067595&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=0oq3Wuu%2F0sqs34DOv1YqAAdbLY0%3D\"]', NULL, '0', '2', 2, '2026-06-26 16:33:17', 'admin', '2026-06-28 16:08:05', NULL, '要求我们送小孩门口的展品，真的没办法送', '2026-06-28 16:07:24', '2', '【2026-06-28 16:07:01】很抱歉呢亲亲，您要求我们送小孩门口的展品真的没办法送', '2026-06-28 16:07:02', NULL, 'test_user1');
-INSERT INTO `comment` VALUES (12, 305, 71, 484, 112, 5, '旅游达人小王：赶早班机选了希尔顿惠庭，太方便了！有免费接送机服务，房间干净整洁，早餐4点半就开始供应，赶机完全无压力。五星推荐！\n\n【追加评价】Sun Jun 28 15:31:55 CST 2026\n商家还送了小礼物，很开心\n\n【追加评价】2026年06月28日15时37分28秒\n1', '[]', NULL, '0', '1', 0, '2026-06-26 16:45:04', 'test_user1', '2026-06-28 15:37:28', NULL, NULL, NULL, '0', '感谢您的推荐！机场店主打便捷，我们一直在优化早班机旅客的体验。', '2026-06-26 16:45:04', NULL, NULL);
-INSERT INTO `comment` VALUES (13, 306, 71, 485, 113, 4, '出差老李：转机住了一晚，整体满意。房间隔音不错，机场接送准时。就是周边没啥吃的，只能在酒店解决。价格合理。', '[]', NULL, '0', '1', 0, '2026-06-26 16:45:04', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的反馈！酒店餐厅提供全天候餐饮服务。', '2026-06-26 16:45:04', NULL, NULL);
+INSERT INTO `comment` VALUES (12, 305, 71, 484, 112, 5, '旅游达人小王：赶早班机选了希尔顿惠庭，太方便了！有免费接送机服务，房间干净整洁，早餐4点半就开始供应，赶机完全无压力。五星推荐！\n\n【追加评价】Sun Jun 28 15:31:55 CST 2026\n商家还送了小礼物，很开心\n\n【追加评价】2026年06月28日15时37分28秒\n1', '[]', NULL, '0', '1', 1, '2026-06-26 16:45:04', 'test_user1', '2026-06-28 15:37:28', NULL, NULL, NULL, '0', '感谢您的推荐！机场店主打便捷，我们一直在优化早班机旅客的体验。', '2026-06-26 16:45:04', NULL, NULL);
+INSERT INTO `comment` VALUES (13, 306, 71, 485, 113, 4, '出差老李：转机住了一晚，整体满意。房间隔音不错，机场接送准时。就是周边没啥吃的，只能在酒店解决。价格合理。', '[]', NULL, '0', '1', 1, '2026-06-26 16:45:04', NULL, NULL, NULL, NULL, NULL, '0', '感谢您的反馈！酒店餐厅提供全天候餐饮服务。', '2026-06-26 16:45:04', NULL, NULL);
 INSERT INTO `comment` VALUES (14, 307, 71, 486, 114, 5, '度假小红：带娃出行选了家庭套房，空间很大孩子很开心。酒店有儿童游乐区，早餐还有儿童专属区域。接送机司机很热情，帮忙提行李。', '[\"https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop\"]', NULL, '0', '1', 0, '2026-06-26 16:45:04', NULL, NULL, NULL, NULL, NULL, '0', '很高兴小朋友喜欢！我们致力于为家庭旅客提供温馨的住宿体验。', '2026-06-26 16:45:04', NULL, NULL);
 INSERT INTO `comment` VALUES (15, 305, 1, 1, 115, 5, '旅游达人小王：第二次入住麦新格了，还是一如既往的好。浦东机场接送非常准时，司机师傅态度特别好。房间宽敞明亮，早餐种类丰富。推荐给所有赶早班机的朋友！', NULL, NULL, '0', '1', 0, '2026-06-21 10:00:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
 INSERT INTO `comment` VALUES (16, 306, 1, 1, 116, 4, '出差老李：位置确实方便，离机场近。但周边没什么商业配套，晚上想吃个饭得打车出去。房间隔音一般，能听到飞机起降的声音。不过这个价位还算可以接受。', NULL, NULL, '0', '1', 0, '2026-06-26 08:30:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
@@ -108,7 +108,7 @@ INSERT INTO `comment` VALUES (22, 2, 51, 192, 122, 4, '普通用户：整体不�
 INSERT INTO `comment` VALUES (23, 305, 101, 488, 123, 4, '旅游达人小王：设计很有格调的一家酒店，大堂的艺术装置很有品味。房间大小适中，床品品质不错。龙岗这边相对安静，适合不喜欢闹市的朋友。早餐能再丰富一些就更好了。', NULL, NULL, '0', '1', 0, '2026-06-15 16:00:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
 INSERT INTO `comment` VALUES (24, 306, 101, 488, 124, 5, '出差老李：龙岗这边性价比最高的一家！房间干净整洁，前台效率高。健身房24小时开放，出差也能保持运动习惯。周边有大运中心，晚上散步很舒服。', NULL, NULL, '0', '1', 0, '2026-06-23 10:00:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
 INSERT INTO `comment` VALUES (25, 308, 101, 488, 125, 4, '商务张总：来深圳见客户住这里，整体体验不错。会议室设施齐全，投影仪和音响效果都很好。中餐厅的粤菜正宗，客户很满意。就是大堂略显冷清。', NULL, NULL, '0', '1', 0, '2026-06-10 17:00:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
-INSERT INTO `comment` VALUES (26, 305, 151, 633, 126, 4, '旅游达人小王：很有成都味道的一家酒店，装修融入了很多川蜀文化元素。房间里的熊猫玩偶很可爱。就是离市中心有点远，不过地铁直达还是很方便。', NULL, NULL, '0', '1', 0, '2026-06-18 14:00:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (26, 305, 151, 633, 126, 4, '旅游达人小王：很有成都味道的一家酒店，装修融入了很多川蜀文化元素。房间里的熊猫玩偶很可爱。就是离市中心有点远，不过地铁直达还是很方便。', NULL, NULL, '0', '1', 0, '2026-06-18 14:00:00', 'admin', '2026-06-29 14:54:43', NULL, '1', '2026-06-29 14:50:24', '3', NULL, NULL, NULL, NULL);
 INSERT INTO `comment` VALUES (27, 306, 151, 633, 127, 5, '出差老李：在成都出差经常住这里，前台都认识我了哈哈。服务一如既往地好，房间安静舒适。早餐有担担面和钟水饺，正宗成都味。强烈推荐！', NULL, NULL, '0', '1', 0, '2026-06-25 08:00:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
 INSERT INTO `comment` VALUES (28, 307, 151, 633, 128, 4, '度假小红：带孩子来成都玩，酒店很贴心地准备了亲子房。熊猫主题的床单孩子超级喜欢。周边有万达广场，吃饭购物都方便。就是游泳池有点小。', NULL, NULL, '0', '1', 0, '2026-06-28 11:00:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
 INSERT INTO `comment` VALUES (29, 305, 251, 1074, 129, 5, '旅游达人小王：全季的品质没得说！西部大道这家是新开的，设施很新。全屋智能控制，窗帘灯光语音操控很灵敏。床垫软硬适中，一觉睡到天亮。出门就是宜家荟聚，逛街超方便。', NULL, NULL, '0', '1', 0, '2026-06-13 17:00:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
@@ -123,7 +123,7 @@ INSERT INTO `comment` VALUES (37, 307, 451, 1929, 137, 4, '度假小红：这家
 INSERT INTO `comment` VALUES (38, 308, 551, 2355, 138, 5, '商务张总：出差顺便来敦煌旅游，这家客栈太有特色了。沙漠风格的装修，晚上在院子里看星星太浪漫了。老板很热情，推荐的莫高窟游览路线很实用。房间虽不是豪华型但很有温度。', NULL, NULL, '0', '1', 0, '2026-05-28 20:00:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
 INSERT INTO `comment` VALUES (39, 309, 551, 2355, 139, 4, '蜜月小周：丝绸之路主题的客栈，很有文化底蕴。房间干净整洁，热水充足。老板帮忙订了沙漠露营，体验感超棒。就是隔音不太好，隔壁说话能听到。', NULL, NULL, '0', '1', 0, '2026-06-15 14:00:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
 INSERT INTO `comment` VALUES (40, 305, 801, 3440, 140, 5, '旅游达人小王：武夷山最美的客栈没有之一！百年老宅改造，保留了古建筑的韵味又加入现代舒适设施。坐在院子里喝茶看云起云落，人生一大享受。主人泡的大红袍正宗极了。', NULL, NULL, '0', '1', 0, '2026-06-01 10:00:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
-INSERT INTO `comment` VALUES (41, 307, 801, 3440, 141, 5, '度假小红：住在云起时就像住在一幅山水画里。清晨推开窗就是云雾缭绕的武夷山，美得像仙境。客栈的私房菜用的是当地食材，健康美味。孩子们在院子里跑得满头大汗。', NULL, NULL, '0', '1', 0, '2026-05-20 08:00:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
+INSERT INTO `comment` VALUES (41, 307, 801, 3440, 141, 5, '度假小红：住在云起时就像住在一幅山水画里。清晨推开窗就是云雾缭绕的武夷山，美得像仙境。客栈的私房菜用的是当地食材，健康美味。孩子们在院子里跑得满头大汗。', NULL, NULL, '0', '1', 0, '2026-05-20 08:00:00', NULL, NULL, NULL, NULL, NULL, '0', '【2026-06-29 14:47:12】1\n【2026-06-29 14:48:30】1', '2026-06-29 14:48:31', NULL, NULL);
 INSERT INTO `comment` VALUES (42, 305, 1001, 4326, 142, 5, '旅游达人小王：大理最美的全智能酒店！房间全语音控制，科技感十足又不会觉得冰冷。洱海景观无敌，在阳台上喝着咖啡看苍山洱海，感觉时间都慢下来了。', NULL, NULL, '0', '1', 0, '2026-06-08 16:00:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
 INSERT INTO `comment` VALUES (43, 306, 1001, 4326, 143, 4, '出差老李：来大理出差顺便度假。智能入住很方便，刷脸就能开门。房间的智能窗帘和灯光系统很好用。就是语音助手有时候反应不太灵敏。总体很不错的体验。', NULL, NULL, '0', '1', 0, '2026-06-22 11:00:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
 INSERT INTO `comment` VALUES (44, 309, 1001, 4326, 144, 5, '蜜月小周：大理之行的惊喜！酒店位置超好，去古城打车十分钟。房间的智能系统很好玩，躺着就能控制一切。最赞的是浴室的大落地窗，泡着澡看洱海，人生享受！', NULL, NULL, '0', '1', 0, '2026-06-19 18:00:00', NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL);
@@ -154,7 +154,7 @@ CREATE TABLE `comment_like`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_user_comment`(`user_id` ASC, `comment_id` ASC) USING BTREE,
   INDEX `idx_comment_id`(`comment_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 130 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '评价点赞表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 132 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '评价点赞表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of comment_like
@@ -189,6 +189,8 @@ INSERT INTO `comment_like` VALUES (126, 313, 11, '2026-06-28 16:04:02');
 INSERT INTO `comment_like` VALUES (127, 313, 57, '2026-06-28 16:04:04');
 INSERT INTO `comment_like` VALUES (128, 313, 8, '2026-06-28 16:04:05');
 INSERT INTO `comment_like` VALUES (129, 313, 58, '2026-06-28 16:05:03');
+INSERT INTO `comment_like` VALUES (130, 305, 12, '2026-06-29 16:29:56');
+INSERT INTO `comment_like` VALUES (131, 306, 13, '2026-07-05 00:10:37');
 
 -- ----------------------------
 -- Table structure for gen_table
@@ -3720,7 +3722,7 @@ CREATE TABLE `orders`  (
   INDEX `idx_hotel_id`(`hotel_id` ASC) USING BTREE,
   INDEX `idx_room_id`(`room_id` ASC) USING BTREE,
   INDEX `idx_status`(`status` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 159 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '订单表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 160 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '订单表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of orders
@@ -3783,6 +3785,7 @@ INSERT INTO `orders` VALUES (155, 'ORD20260415155', 306, 1054, 4575, '2026-06-21
 INSERT INTO `orders` VALUES (156, 'ORD20260115156', 2, 1055, 4579, '2026-06-18', '2026-06-19', 798.00, '3', NULL, '2026-06-18 14:00:00', '2026-06-18 14:00:00', '2026-06-18 14:00:00');
 INSERT INTO `orders` VALUES (157, 'ORD2026062878963', 312, 5, 16, '2026-06-29', '2026-06-30', 849.00, '3', NULL, '2026-06-28 15:56:37', '2026-06-28 15:56:31', '2026-06-28 15:58:49');
 INSERT INTO `orders` VALUES (158, 'ORD2026062841137', 313, 5, 18, '2026-06-29', '2026-06-30', 1399.00, '3', NULL, '2026-06-28 16:02:21', '2026-06-28 16:02:18', '2026-06-28 16:03:28');
+INSERT INTO `orders` VALUES (159, 'ORD2026070550711', 305, 977, 4221, '2026-07-05', '2026-07-06', 1053.00, '0', NULL, NULL, '2026-07-05 00:34:06', '2026-07-05 00:34:06');
 
 -- ----------------------------
 -- Table structure for payment
@@ -3801,7 +3804,7 @@ CREATE TABLE `payment`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_order_id`(`order_id` ASC) USING BTREE,
   INDEX `idx_pay_status`(`pay_status` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 161 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '支付表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 162 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '支付表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of payment
@@ -3966,6 +3969,7 @@ INSERT INTO `payment` VALUES (157, 85, 749.00, '1', '1', '2026-06-28 13:24:17', 
 INSERT INTO `payment` VALUES (158, 86, 1079.00, '1', '1', '2026-06-28 13:27:29', 'WX202606281327284398', '2026-06-28 13:27:26', '2026-06-28 13:27:29');
 INSERT INTO `payment` VALUES (159, 157, 849.00, '1', '1', '2026-06-28 15:56:37', 'WX202606281556366324', '2026-06-28 15:56:33', '2026-06-28 15:56:37');
 INSERT INTO `payment` VALUES (160, 158, 1399.00, '1', '1', '2026-06-28 16:02:21', 'WX202606281602218394', '2026-06-28 16:02:20', '2026-06-28 16:02:21');
+INSERT INTO `payment` VALUES (161, 159, 1053.00, '1', '0', NULL, NULL, '2026-07-05 00:34:15', '2026-07-05 00:34:15');
 
 -- ----------------------------
 -- Table structure for qrtz_blob_triggers
@@ -8427,7 +8431,7 @@ INSERT INTO `room` VALUES (4217, 976, '家庭套房', '55-68㎡', '大床1.8m+�
 INSERT INTO `room` VALUES (4218, 976, '景观房', '40-50㎡', '大床1.8m', 2, 1259.00, 18, '0', NULL, '2026-06-26 21:20:01', '2026-06-26 21:20:01');
 INSERT INTO `room` VALUES (4219, 976, '总统套房', '80-120㎡', '大床2.0m', 4, 4757.00, 5, '0', NULL, '2026-06-26 21:20:01', '2026-06-28 20:04:10');
 INSERT INTO `room` VALUES (4220, 977, '豪华大床房', '42-48㎡', '大床1.8m', 2, 1198.00, 21, '0', NULL, '2026-06-26 21:20:01', '2026-06-26 21:20:01');
-INSERT INTO `room` VALUES (4221, 977, '行政双床房', '45-52㎡', '双床1.5m', 4, 1053.00, 15, '0', NULL, '2026-06-26 21:20:01', '2026-06-28 20:04:10');
+INSERT INTO `room` VALUES (4221, 977, '行政双床房', '45-52㎡', '双床1.5m', 4, 1053.00, 14, '0', NULL, '2026-06-26 21:20:01', '2026-07-05 00:34:06');
 INSERT INTO `room` VALUES (4222, 977, '家庭套房', '55-68㎡', '大床1.8m+单人床', 4, 1786.00, 14, '0', NULL, '2026-06-26 21:20:01', '2026-06-28 20:04:10');
 INSERT INTO `room` VALUES (4223, 977, '景观房', '40-50㎡', '大床1.8m', 2, 1550.00, 17, '0', NULL, '2026-06-26 21:20:01', '2026-06-26 21:20:01');
 INSERT INTO `room` VALUES (4224, 977, '总统套房', '80-120㎡', '大床2.0m', 4, 3386.00, 4, '0', NULL, '2026-06-26 21:20:01', '2026-06-28 20:04:10');
@@ -9027,7 +9031,7 @@ CREATE TABLE `sys_logininfor`  (
   PRIMARY KEY (`info_id`) USING BTREE,
   INDEX `idx_sys_logininfor_s`(`status` ASC) USING BTREE,
   INDEX `idx_sys_logininfor_lt`(`login_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 570 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 626 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -9502,6 +9506,62 @@ INSERT INTO `sys_logininfor` VALUES (566, 'admin', '127.0.0.1', '内网IP', 'Chr
 INSERT INTO `sys_logininfor` VALUES (567, 'admin', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '登录成功', '2026-06-28 20:38:43');
 INSERT INTO `sys_logininfor` VALUES (568, 'admin', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '退出成功', '2026-06-28 20:40:04');
 INSERT INTO `sys_logininfor` VALUES (569, 'admin', '127.0.0.1', '内网IP', 'Chrome131', 'Windows10', '0', '登录成功', '2026-06-28 20:51:09');
+INSERT INTO `sys_logininfor` VALUES (570, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-29 14:53:59');
+INSERT INTO `sys_logininfor` VALUES (571, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-29 14:54:09');
+INSERT INTO `sys_logininfor` VALUES (572, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-29 15:06:47');
+INSERT INTO `sys_logininfor` VALUES (573, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-29 15:06:54');
+INSERT INTO `sys_logininfor` VALUES (574, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-29 15:07:17');
+INSERT INTO `sys_logininfor` VALUES (575, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-29 15:07:26');
+INSERT INTO `sys_logininfor` VALUES (576, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-29 15:13:20');
+INSERT INTO `sys_logininfor` VALUES (577, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-29 15:13:27');
+INSERT INTO `sys_logininfor` VALUES (578, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-29 15:13:34');
+INSERT INTO `sys_logininfor` VALUES (579, 'merchant_gz', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-29 15:14:00');
+INSERT INTO `sys_logininfor` VALUES (580, 'merchant_gz', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-29 15:14:23');
+INSERT INTO `sys_logininfor` VALUES (581, 'merchant_hz', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-29 15:14:34');
+INSERT INTO `sys_logininfor` VALUES (582, 'merchant_hz', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-29 15:32:49');
+INSERT INTO `sys_logininfor` VALUES (583, 'merchant_hz', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-29 15:40:44');
+INSERT INTO `sys_logininfor` VALUES (584, 'merchant_hz', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-29 15:43:53');
+INSERT INTO `sys_logininfor` VALUES (585, 'merchant_hz', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '1', '验证码已失效', '2026-06-29 15:59:15');
+INSERT INTO `sys_logininfor` VALUES (586, 'merchant_hz', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '1', '用户不存在/密码错误', '2026-06-29 15:59:18');
+INSERT INTO `sys_logininfor` VALUES (587, 'merchant_hz', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '1', '用户不存在/密码错误', '2026-06-29 15:59:23');
+INSERT INTO `sys_logininfor` VALUES (588, 'merchant_hz', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-29 15:59:30');
+INSERT INTO `sys_logininfor` VALUES (589, 'merchant_hz', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-29 15:59:59');
+INSERT INTO `sys_logininfor` VALUES (590, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-29 16:00:11');
+INSERT INTO `sys_logininfor` VALUES (591, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-29 16:12:27');
+INSERT INTO `sys_logininfor` VALUES (592, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-29 16:13:01');
+INSERT INTO `sys_logininfor` VALUES (593, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-29 16:26:37');
+INSERT INTO `sys_logininfor` VALUES (594, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-29 16:26:54');
+INSERT INTO `sys_logininfor` VALUES (595, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-29 16:27:17');
+INSERT INTO `sys_logininfor` VALUES (596, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-29 16:27:26');
+INSERT INTO `sys_logininfor` VALUES (597, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-29 16:27:34');
+INSERT INTO `sys_logininfor` VALUES (598, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-29 16:27:49');
+INSERT INTO `sys_logininfor` VALUES (599, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-29 16:30:03');
+INSERT INTO `sys_logininfor` VALUES (600, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-29 16:30:17');
+INSERT INTO `sys_logininfor` VALUES (601, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-29 16:32:06');
+INSERT INTO `sys_logininfor` VALUES (602, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-29 16:32:20');
+INSERT INTO `sys_logininfor` VALUES (603, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-06-29 16:34:11');
+INSERT INTO `sys_logininfor` VALUES (604, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-06-29 16:34:29');
+INSERT INTO `sys_logininfor` VALUES (605, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '1', '验证码已失效', '2026-07-05 00:08:13');
+INSERT INTO `sys_logininfor` VALUES (606, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-07-05 00:08:16');
+INSERT INTO `sys_logininfor` VALUES (607, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-07-05 00:08:39');
+INSERT INTO `sys_logininfor` VALUES (608, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-07-05 00:09:57');
+INSERT INTO `sys_logininfor` VALUES (609, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-07-05 00:10:20');
+INSERT INTO `sys_logininfor` VALUES (610, 'test_user2', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-07-05 00:10:30');
+INSERT INTO `sys_logininfor` VALUES (611, 'test_user2', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-07-05 00:13:17');
+INSERT INTO `sys_logininfor` VALUES (612, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-07-05 00:13:30');
+INSERT INTO `sys_logininfor` VALUES (613, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-07-05 00:14:31');
+INSERT INTO `sys_logininfor` VALUES (614, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-07-05 00:14:45');
+INSERT INTO `sys_logininfor` VALUES (615, 'admin', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-07-05 00:33:35');
+INSERT INTO `sys_logininfor` VALUES (616, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-07-05 00:33:50');
+INSERT INTO `sys_logininfor` VALUES (617, 'test_user1', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-07-05 00:36:41');
+INSERT INTO `sys_logininfor` VALUES (618, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-07-05 00:37:00');
+INSERT INTO `sys_logininfor` VALUES (619, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '登录成功', '2026-07-05 23:59:29');
+INSERT INTO `sys_logininfor` VALUES (620, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome149', 'Windows10', '0', '退出成功', '2026-07-05 23:59:35');
+INSERT INTO `sys_logininfor` VALUES (621, 'test_user1', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '登录成功', '2026-07-09 15:28:57');
+INSERT INTO `sys_logininfor` VALUES (622, 'test_user1', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '退出成功', '2026-07-09 15:29:27');
+INSERT INTO `sys_logininfor` VALUES (623, 'test_user1', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '登录成功', '2026-07-10 08:44:59');
+INSERT INTO `sys_logininfor` VALUES (624, 'test_user1', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '退出成功', '2026-07-10 08:46:09');
+INSERT INTO `sys_logininfor` VALUES (625, 'test_user1', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '登录成功', '2026-07-10 08:47:50');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -9711,7 +9771,7 @@ CREATE TABLE `sys_oper_log`  (
   INDEX `idx_sys_oper_log_bt`(`business_type` ASC) USING BTREE,
   INDEX `idx_sys_oper_log_s`(`status` ASC) USING BTREE,
   INDEX `idx_sys_oper_log_ot`(`oper_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 240 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '操作日志记录' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 246 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '操作日志记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -9856,6 +9916,12 @@ INSERT INTO `sys_oper_log` VALUES (236, '房型管理', 2, 'com.zsc.module.contr
 INSERT INTO `sys_oper_log` VALUES (237, '房型管理', 2, 'com.zsc.module.controller.RoomController.updateStock()', 'PUT', 1, 'admin', '研发部门', '/api/room/2724/stock', '127.0.0.1', '内网IP', '{\"stock\":\"7\"}', '{\"code\":200,\"data\":\"库存修改成功\",\"message\":\"success\"}', 0, NULL, '2026-06-28 18:26:46', 39);
 INSERT INTO `sys_oper_log` VALUES (238, '商户管理', 2, 'com.zsc.module.controller.MerchantController.freeze()', 'PUT', 1, 'admin', '研发部门', '/api/merchant/1074/freeze', '127.0.0.1', '内网IP', '1074 ', '{\"code\":200,\"data\":\"冻结成功\",\"message\":\"success\"}', 0, NULL, '2026-06-28 20:13:23', 36);
 INSERT INTO `sys_oper_log` VALUES (239, '酒店管理', 2, 'com.zsc.module.controller.HotelController.update()', 'PUT', 1, 'admin', '研发部门', '/api/hotel', '127.0.0.1', '内网IP', '{\"address\":\"zxt\",\"businessId\":1073,\"facility\":\"WIFI\",\"id\":1058,\"imgUrl\":\"https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/06/28/a32ce53d176d4c5aa61fc94663402ad1.png?Expires=1783254036&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=bCfxDUrEhrlrO1Y1D0Z78UDqgVQ%3D\",\"name\":\"zxt\",\"star\":1,\"status\":\"0\"} ', '{\"code\":200,\"data\":\"修改成功\",\"message\":\"success\"}', 0, NULL, '2026-06-28 20:20:44', 42);
+INSERT INTO `sys_oper_log` VALUES (240, '商户评价管理', 2, 'com.zsc.module.controller.MerchantCommentController.reply()', 'PUT', 1, 'merchant_bj', '若依科技', '/api/merchant/comment/41/reply', '127.0.0.1', '内网IP', '{\"replyContent\":\"1\"}', '{\"msg\":\"回复成功！\",\"code\":200}', 0, NULL, '2026-06-29 14:47:12', 121);
+INSERT INTO `sys_oper_log` VALUES (241, '商户评价管理', 2, 'com.zsc.module.controller.MerchantCommentController.reply()', 'PUT', 1, 'merchant_bj', '若依科技', '/api/merchant/comment/41/reply', '127.0.0.1', '内网IP', '{\"replyContent\":\"1\"}', '{\"msg\":\"回复成功！\",\"code\":200}', 0, NULL, '2026-06-29 14:48:30', 35);
+INSERT INTO `sys_oper_log` VALUES (242, '商户评价管理', 2, 'com.zsc.module.controller.MerchantCommentController.appeal()', 'PUT', 1, 'merchant_bj', '若依科技', '/api/merchant/comment/26/appeal', '127.0.0.1', '内网IP', '{\"reason\":\"1\"}', '{\"msg\":\"申诉已提交，等待管理员审核！\",\"code\":200}', 0, NULL, '2026-06-29 14:50:24', 32);
+INSERT INTO `sys_oper_log` VALUES (243, '申诉审核', 2, 'com.zsc.module.controller.CommentController.auditAppeal()', 'PUT', 1, 'admin', '研发部门', '/api/comment/26/auditAppeal', '127.0.0.1', '内网IP', '{\"appealStatus\":\"3\"}', '{\"msg\":\"申诉驳回，评价已撤销！\",\"code\":200}', 0, NULL, '2026-06-29 14:54:43', 61);
+INSERT INTO `sys_oper_log` VALUES (244, '个人信息', 2, 'com.zsc.web.controller.system.SysProfileController.updatePwd()', 'PUT', 1, 'merchant_hz', '若依科技', '/system/user/profile/updatePwd', '127.0.0.1', '内网IP', '{} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-06-29 15:41:07', 448);
+INSERT INTO `sys_oper_log` VALUES (245, '申诉审核', 2, 'com.zsc.module.controller.CommentController.auditAppeal()', 'PUT', 1, 'admin', '研发部门', '/api/comment/5/auditAppeal', '127.0.0.1', '内网IP', '{\"appealStatus\":\"3\"}', '{\"msg\":\"申诉驳回，评价已撤销！\",\"code\":200}', 0, NULL, '2026-06-29 16:32:45', 96);
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -10049,15 +10115,15 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 103, 'admin', '系统管理员', '00', 'admin@hotel.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-28 20:51:09', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '超级管理员账号', 0);
+INSERT INTO `sys_user` VALUES (1, 103, 'admin', '系统管理员', '00', 'admin@hotel.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-07-05 00:14:46', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '超级管理员账号', 0);
 INSERT INTO `sys_user` VALUES (2, 105, 'customer01', '普通用户', '00', 'customer@test.com', '15666666666', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-28 18:03:24', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '前台普通用户账号', 5139);
 INSERT INTO `sys_user` VALUES (100, 104, 'merchant01', '酒店商户', '01', 'merchant@test.com', '13800000001', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-28 20:02:56', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '酒店商家账号', 0);
-INSERT INTO `sys_user` VALUES (301, 100, 'merchant_bj', '张经理(北京希尔顿)', '00', 'merchant_bj@hotel.com', '13800138001', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-28 13:27:45', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-北京希尔顿', 0);
+INSERT INTO `sys_user` VALUES (301, 100, 'merchant_bj', '张经理(北京希尔顿)', '00', 'merchant_bj@hotel.com', '13800138001', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-07-05 23:59:29', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-北京希尔顿', 0);
 INSERT INTO `sys_user` VALUES (302, 100, 'merchant_sh', '李总(上海华尔道夫)', '00', 'merchant_sh@hotel.com', '13800138002', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-上海华尔道夫', 0);
-INSERT INTO `sys_user` VALUES (303, 100, 'merchant_gz', '王总(广州丽思卡尔顿)', '00', 'merchant_gz@hotel.com', '13800138003', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-广州丽思卡尔顿', 0);
-INSERT INTO `sys_user` VALUES (304, 100, 'merchant_hz', '孙总(杭州西湖国宾馆)', '00', 'merchant_hz@hotel.com', '13800138005', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-28 16:05:41', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-杭州西湖国宾馆', 0);
-INSERT INTO `sys_user` VALUES (305, 100, 'test_user1', '旅游达人小王', '00', 'test_user1@test.com', '13900000101', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-28 16:09:29', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '普通用户', 18233);
-INSERT INTO `sys_user` VALUES (306, 100, 'test_user2', '出差老李', '00', 'test_user2@test.com', '13900000102', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '普通用户', 10779);
+INSERT INTO `sys_user` VALUES (303, 100, 'merchant_gz', '王总(广州丽思卡尔顿)', '00', 'merchant_gz@hotel.com', '13800138003', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-29 15:14:01', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-广州丽思卡尔顿', 0);
+INSERT INTO `sys_user` VALUES (304, 100, 'merchant_hz', '孙总(杭州西湖国宾馆)', '00', 'merchant_hz@hotel.com', '13800138005', '0', '', '$2a$10$nNj8ITPUm6QX.8HnRcwfsOYrrbP9HzjdKK9uQpqDmCBKMPBbIyNxq', '0', '0', '127.0.0.1', '2026-06-29 15:59:31', '2026-06-29 15:41:06', 'admin', '2026-06-23 08:57:53', '', '2026-06-29 15:41:06', '商家-杭州西湖国宾馆', 0);
+INSERT INTO `sys_user` VALUES (305, 100, 'test_user1', '旅游达人小王', '00', 'test_user1@test.com', '13900000101', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-07-10 08:47:50', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '普通用户', 18233);
+INSERT INTO `sys_user` VALUES (306, 100, 'test_user2', '出差老李', '00', 'test_user2@test.com', '13900000102', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-07-05 00:10:31', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '普通用户', 10779);
 INSERT INTO `sys_user` VALUES (307, 100, 'test_user3', '度假小红', '00', 'test_user3@test.com', '13900000103', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '普通用户', 11616);
 INSERT INTO `sys_user` VALUES (308, 100, 'test_user4', '商务张总', '00', 'test_user4@test.com', '13900000104', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '普通用户', 16717);
 INSERT INTO `sys_user` VALUES (309, 100, 'test_user5', '蜜月小周', '00', 'test_user5@test.com', '13900000105', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '普通用户', 11015);
