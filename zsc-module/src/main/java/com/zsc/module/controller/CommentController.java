@@ -248,7 +248,7 @@ public class CommentController extends BaseController {
     // ==================== 审核接口 ====================
 
     /**
-     * 审核评价（管理员：通过/拒绝）
+     * 审核评价（管理员：通过/拒绝），拒绝时可填写下架原因
      */
     @Operation(summary = "审核评价")
     @PreAuthorize("@ss.hasPermi('comment:audit')")
@@ -256,8 +256,9 @@ public class CommentController extends BaseController {
     @PutMapping("/{id}/audit")
     public AjaxResult audit(
             @PathVariable Long id,
-            @RequestParam @jakarta.validation.constraints.Pattern(regexp = "[12]", message = "审核状态只能为1(通过)或2(拒绝)") String status) {
-        commentService.auditComment(id, status);
+            @RequestParam @jakarta.validation.constraints.Pattern(regexp = "[12]", message = "审核状态只能为1(通过)或2(拒绝)") String status,
+            @RequestParam(required = false) String remark) {
+        commentService.auditComment(id, status, remark);
         return success(status.equals("1") ? "审核通过！" : "已拒绝该评价！");
     }
 

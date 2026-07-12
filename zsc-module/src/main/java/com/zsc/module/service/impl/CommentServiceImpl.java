@@ -342,10 +342,10 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     }
 
     /**
-     * 审核评价（管理员）：设置评价状态为通过('1')或拒绝('2')
+     * 审核评价（管理员）：设置评价状态为通过('1')或拒绝('2')，拒绝时可填写下架原因
      */
     @Override
-    public void auditComment(Long commentId, String status) {
+    public void auditComment(Long commentId, String status, String remark) {
         if (!SecurityUtils.isAdmin()) {
             throw new ServiceException("只有管理员可以审核评价！");
         }
@@ -360,6 +360,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         }
 
         comment.setStatus(status);
+        if (COMMENT_STATUS_REJECTED.equals(status) && StringUtils.hasText(remark)) {
+            comment.setRemark(remark);
+        }
         comment.setUpdateTime(new Date());
         comment.setUpdateBy(SecurityUtils.getUsername());
 

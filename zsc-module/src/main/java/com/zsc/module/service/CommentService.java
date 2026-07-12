@@ -85,9 +85,9 @@ public interface CommentService extends IService<Comment> {
     List<CommentVo> getCommentLikes(Long commentId);
 
     /**
-     * 审核评价（管理员：通过/拒绝）
+     * 审核评价（管理员：通过/拒绝），拒绝时可填写下架原因
      */
-    void auditComment(Long commentId, String status);
+    void auditComment(Long commentId, String status, String remark);
 
     /**
      * 检查用户是否可以对订单进行评价
