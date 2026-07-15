@@ -64,7 +64,6 @@ public class HotelAuditController {
         hotelAuditService.approve(hotelId, opinion);
         return ResultVo.ok("审核通过");
     }
-
     /**
      * 审核驳回
      */

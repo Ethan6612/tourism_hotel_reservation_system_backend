@@ -111,18 +111,15 @@ public class HotelAuditServiceImpl extends ServiceImpl<HotelAuditMapper, HotelAu
         if (hotelId == null) {
             throw new ServiceException("酒店ID不能为空！");
         }
-
         // 校验酒店是否存在
         Hotel hotel = hotelService.getById(hotelId);
         if (hotel == null) {
             throw new ServiceException("酒店不存在！");
         }
-
         // 校验酒店必须处于待审核状态
         if (!HotelStatusEnum.PENDING_AUDIT.getValue().equals(hotel.getStatus())) {
             throw new ServiceException("该酒店当前不是待审核状态，无法进行审核操作！");
         }
-
         // 查找该酒店最新的待审核记录
         HotelAudit audit = this.lambdaQuery()
                 .eq(HotelAudit::getHotelId, hotelId)
@@ -134,7 +131,6 @@ public class HotelAuditServiceImpl extends ServiceImpl<HotelAuditMapper, HotelAu
         if (audit == null) {
             throw new ServiceException("未找到该酒店的待审核记录，请先提交审核申请！");
         }
-
         // 更新审核记录
         audit.setAuditStatus(auditStatus);
         audit.setAuditOpinion(auditOpinion);
@@ -142,11 +138,9 @@ public class HotelAuditServiceImpl extends ServiceImpl<HotelAuditMapper, HotelAu
         audit.setAuditorName(SecurityUtils.getUsername());
         audit.setAuditTime(new Date());
         audit.setUpdateTime(new Date());
-
         if (!this.updateById(audit)) {
             throw new ServiceException("系统错误，审核操作失败！");
         }
-
         // 更新酒店状态
         String targetHotelStatus;
         if (HotelAuditStatusEnum.APPROVED.getValue().equals(auditStatus)) {
@@ -154,7 +148,6 @@ public class HotelAuditServiceImpl extends ServiceImpl<HotelAuditMapper, HotelAu
         } else {
             targetHotelStatus = HotelStatusEnum.DRAFT.getValue(); // 审核驳回 → 草稿
         }
-
         hotel.setStatus(targetHotelStatus);
         hotel.setUpdateTime(new Date());
         if (!hotelService.updateById(hotel)) {

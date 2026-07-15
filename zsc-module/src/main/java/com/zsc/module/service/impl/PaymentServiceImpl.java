@@ -82,7 +82,6 @@ public class PaymentServiceImpl extends ServiceImpl<PaymentMapper, Payment> impl
         if (!Order.STATUS_PENDING.equals(order.getStatus())) {
             throw new ServiceException("当前订单状态不支持支付");
         }
-
         // 查找或创建支付记录
         LambdaQueryWrapper<Payment> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Payment::getOrderId, orderId);
@@ -98,11 +97,9 @@ public class PaymentServiceImpl extends ServiceImpl<PaymentMapper, Payment> impl
                     .build();
             save(payment);
         }
-
         // 生成交易号
         String transactionId = "WX" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())
                 + String.format("%04d", new Random().nextInt(10000));
-
         // 构建微信支付参数（模拟）
         Map<String, Object> result = new HashMap<>();
         result.put("paymentId", payment.getId());

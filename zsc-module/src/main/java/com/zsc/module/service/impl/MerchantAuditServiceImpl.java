@@ -219,13 +219,11 @@ public class MerchantAuditServiceImpl extends ServiceImpl<MerchantAuditMapper, M
             if (targetUsername == null) {
                 return;
             }
-
             SysNotice notice = new SysNotice();
             notice.setNoticeType("1"); // 1=通知（定向推送）
             notice.setStatus("0");     // 0=正常
             notice.setCreateBy(targetUsername);
             notice.setCreateTime(new Date());
-
             if ("1".equals(auditStatus)) {
                 notice.setNoticeTitle("入驻申请审核通过");
                 notice.setNoticeContent("恭喜！您的入驻申请已审核通过，您现在可以正常使用商户功能，包括添加酒店、管理房型等。");
@@ -234,7 +232,6 @@ public class MerchantAuditServiceImpl extends ServiceImpl<MerchantAuditMapper, M
                 String reason = (opinion != null && !opinion.isEmpty()) ? "，原因：" + opinion : "";
                 notice.setNoticeContent("您的入驻申请已被驳回" + reason + "。请根据驳回原因修改后重新提交申请。");
             }
-
             sysNoticeService.insertNotice(notice);
         } catch (Exception e) {
             // 通知发送失败不阻断审核流程

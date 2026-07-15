@@ -38,6 +38,7 @@ public class Order {
     public static final String STATUS_REFUNDED = "5";
     /** 订单状态：退款驳回 */
     public static final String STATUS_REFUND_REJECTED = "6";
+    /** 订单状态：已入住 */
     public static final String STATUS_CHECKED_IN = "7";
 
     /** 订单ID */

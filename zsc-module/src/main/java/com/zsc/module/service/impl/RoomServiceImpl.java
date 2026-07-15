@@ -203,7 +203,6 @@ public class RoomServiceImpl extends ServiceImpl<RoomMapper, Room> implements Ro
         if (hotelId == null) {
             return List.of();
         }
-
         Page<RoomVo> page = new Page<>(1, Integer.MAX_VALUE);
         Page<RoomVo> result = baseMapper.selectRoomVoByHotelId(page, hotelId);
         List<RoomVo> list = result.getRecords();
@@ -326,18 +325,14 @@ public class RoomServiceImpl extends ServiceImpl<RoomMapper, Room> implements Ro
         if (threshold == null || threshold <= 0) {
             threshold = DEFAULT_LOW_STOCK_THRESHOLD;
         }
-
         LambdaQueryWrapper<Room> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Room::getStatus, RoomStatusEnum.ONLINE.getValue())
                 .le(Room::getStock, threshold)
                 .orderByAsc(Room::getStock);
-
         if (hotelId != null) {
             wrapper.eq(Room::getHotelId, hotelId);
         }
-
         List<Room> roomList = this.list(wrapper);
-
         return roomList.stream().map(room -> {
             RoomVo vo = RoomVo.builder()
                     .id(room.getId())

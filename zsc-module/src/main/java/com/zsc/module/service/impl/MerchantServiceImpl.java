@@ -60,32 +60,24 @@ public class MerchantServiceImpl extends ServiceImpl<MerchantMapper, Merchant> i
         if (existsByLicenseNo(merchantDto.getLicenseNo())) {
             throw new ServiceException("该营业执照号已存在，请勿重复注册！");
         }
-
         Merchant merchant = new Merchant();
         BeanUtils.copyProperties(merchantDto, merchant);
-
         // 获取当前登录用户ID并绑定到商户（强制要求）
         Long currentUserId = com.zsc.common.utils.SecurityUtils.getUserId();
-        
         // ✅ 添加校验：确保userId不为null
         if (currentUserId == null) {
             throw new ServiceException("系统错误，无法获取当前登录用户信息，请重新登录！");
         }
-        
         merchant.setUserId(currentUserId);
-
         // 设置默认字段
         merchant.setStatus("0"); // 默认正常状态
         merchant.setCreateTime(new Date());
         merchant.setUpdateTime(new Date());
-
         if (!this.save(merchant)) {
             throw new ServiceException("系统错误，商户注册失败！");
         }
-
         // 自动创建审核记录（待审核状态）
         createInitialAuditRecord(merchant.getId(), merchant.getUserId());
-
         // 更新merchant表的审核字段
         merchant.setAuditStatus("0");
         merchant.setSubmitTime(new Date());

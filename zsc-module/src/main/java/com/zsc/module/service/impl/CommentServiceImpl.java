@@ -36,14 +36,12 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
     /** 订单状态：已完成 */
     private static final String ORDER_STATUS_COMPLETED = "3";
-
     /** 评价状态：待审核 */
     private static final String COMMENT_STATUS_PENDING = "0";
     /** 评价状态：已发布 */
     private static final String COMMENT_STATUS_PUBLISHED = "1";
     /** 评价状态：已拒绝 */
     private static final String COMMENT_STATUS_REJECTED = "2";
-
     /** 申诉状态：无申诉 */
     private static final String APPEAL_STATUS_NONE = "0";
     /** 申诉状态：申诉中 */
@@ -65,24 +63,20 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         if (!canComment(commentDto.getUserId(), commentDto.getOrderId())) {
             throw new ServiceException("只有入住完成的订单才能进行评价！");
         }
-
         // 2. 校验是否已评价过该订单
         Comment existing = commentMapper.selectByOrderId(commentDto.getOrderId());
         if (existing != null) {
             throw new ServiceException("该订单已经评价过了，请勿重复评价！");
         }
-
         // 3. 构建评价实体
         Comment comment = new Comment();
         BeanUtils.copyProperties(commentDto, comment);
-
         // 处理图片：兼容imgUrl单图和images多图
         if (StringUtils.hasText(commentDto.getImages())) {
             comment.setImages(commentDto.getImages());
         } else if (StringUtils.hasText(commentDto.getImgUrl())) {
             comment.setImgUrl(commentDto.getImgUrl());
         }
-
         // 设置默认值
         comment.setCreateTime(new Date());
         comment.setUpdateTime(new Date());

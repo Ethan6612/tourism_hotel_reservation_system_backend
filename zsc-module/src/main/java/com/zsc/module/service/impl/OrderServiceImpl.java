@@ -261,7 +261,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         }
         // 计算总价
         BigDecimal totalPrice = room.getPrice().multiply(BigDecimal.valueOf(nights));
-
         // 创建订单
         Order order = Order.builder()
                 .orderNo(generateOrderNo())
@@ -276,10 +275,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
                 .updateTime(new Date())
                 .build();
         save(order);
-
         // 锁定库存（下单时扣减）
         roomService.lockStock(dto.getRoomId(), 1);
-
         return orderMapper.selectOrderVoById(order.getId());
     }
 
