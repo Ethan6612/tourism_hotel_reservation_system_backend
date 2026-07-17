@@ -11,7 +11,7 @@
  Target Server Version : 90100 (9.1.0)
  File Encoding         : 65001
 
- Date: 15/07/2026 15:55:46
+ Date: 17/07/2026 09:15:39
 */
 
 SET NAMES utf8mb4;
@@ -3722,7 +3722,7 @@ CREATE TABLE `orders`  (
   INDEX `idx_hotel_id`(`hotel_id` ASC) USING BTREE,
   INDEX `idx_room_id`(`room_id` ASC) USING BTREE,
   INDEX `idx_status`(`status` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 160 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '订单表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 161 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '订单表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of orders
@@ -3786,6 +3786,7 @@ INSERT INTO `orders` VALUES (156, 'ORD20260115156', 2, 1055, 4579, '2026-06-18',
 INSERT INTO `orders` VALUES (157, 'ORD2026062878963', 312, 5, 16, '2026-06-29', '2026-06-30', 849.00, '3', NULL, '2026-06-28 15:56:37', '2026-06-28 15:56:31', '2026-06-28 15:58:49');
 INSERT INTO `orders` VALUES (158, 'ORD2026062841137', 313, 5, 18, '2026-06-29', '2026-06-30', 1399.00, '3', NULL, '2026-06-28 16:02:21', '2026-06-28 16:02:18', '2026-06-28 16:03:28');
 INSERT INTO `orders` VALUES (159, 'ORD2026070550711', 305, 977, 4221, '2026-07-05', '2026-07-06', 1053.00, '0', NULL, NULL, '2026-07-05 00:34:06', '2026-07-05 00:34:06');
+INSERT INTO `orders` VALUES (160, 'ORD2026071661154', 305, 801, 3443, '2026-07-17', '2026-07-18', 1472.00, '0', NULL, NULL, '2026-07-16 15:46:55', '2026-07-16 15:46:55');
 
 -- ----------------------------
 -- Table structure for payment
@@ -7652,7 +7653,7 @@ INSERT INTO `room` VALUES (3439, 800, '总统套房', '80-120㎡', '大床2.0m',
 INSERT INTO `room` VALUES (3440, 801, '豪华大床房', '42-48㎡', '大床1.8m', 2, 981.00, 23, '0', 'https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/07/15/c1c9dbd335a14735937f6cb27e0a8b97.png?Expires=1784702855&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=gG%2Bh50tVTC8jPkKRKqCbis8D%2BFo%3D', '2026-06-26 21:20:00', '2026-07-15 14:54:47');
 INSERT INTO `room` VALUES (3441, 801, '行政双床房', '45-52㎡', '双床1.5m', 4, 1495.00, 24, '0', 'https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/07/15/b55609b3f8b14a5eadf1dc72b8224523.png?Expires=1784702873&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=0cLk9%2FvDIORjCbNo7roQbwyPIaU%3D', '2026-06-26 21:20:00', '2026-07-15 14:54:47');
 INSERT INTO `room` VALUES (3442, 801, '家庭套房', '55-68㎡', '大床1.8m+单人床', 4, 1731.00, 17, '0', 'https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/07/15/2779541c72c44a929d06af8c99ef341f.png?Expires=1784703004&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=Zvd3buDQjf0%2Fpm8ZO5A9nvtVZME%3D', '2026-06-26 21:20:00', '2026-07-15 14:54:47');
-INSERT INTO `room` VALUES (3443, 801, '景观房', '40-50㎡', '大床1.8m', 2, 1472.00, 9, '0', 'https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/07/15/7a098716555d4e368e07ed1b58701d7b.png?Expires=1784703560&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=n%2B4LKkKGUnrVEPqUO67781UQnek%3D', '2026-06-26 21:20:00', '2026-07-15 15:00:27');
+INSERT INTO `room` VALUES (3443, 801, '景观房', '40-50㎡', '大床1.8m', 2, 1472.00, 8, '0', 'https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/07/15/7a098716555d4e368e07ed1b58701d7b.png?Expires=1784703560&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=n%2B4LKkKGUnrVEPqUO67781UQnek%3D', '2026-06-26 21:20:00', '2026-07-16 15:46:55');
 INSERT INTO `room` VALUES (3444, 801, '总统套房', '80-120㎡', '大床2.0m', 4, 3878.00, 4, '0', 'https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/07/15/a0904b74152a4db2b250d1fc0e67dedb.png?Expires=1784703098&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=g1KqcWUPmzZrtIYHZ0HjsdzxRPU%3D', '2026-06-26 21:20:00', '2026-07-15 14:54:47');
 INSERT INTO `room` VALUES (3445, 802, '豪华大床房', '42-48㎡', '大床1.8m', 2, 922.00, 16, '0', 'https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/07/15/c1c9dbd335a14735937f6cb27e0a8b97.png?Expires=1784702855&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=gG%2Bh50tVTC8jPkKRKqCbis8D%2BFo%3D', '2026-06-26 21:20:00', '2026-07-15 14:54:47');
 INSERT INTO `room` VALUES (3446, 802, '行政双床房', '45-52㎡', '双床1.5m', 4, 1332.00, 16, '0', 'https://hotel-booking-system.oss-cn-shenzhen.aliyuncs.com/merchant/logo/2026/07/15/b55609b3f8b14a5eadf1dc72b8224523.png?Expires=1784702873&OSSAccessKeyId=LTAI5t5pA6ArLKrxvHRha9Mt&Signature=0cLk9%2FvDIORjCbNo7roQbwyPIaU%3D', '2026-06-26 21:20:00', '2026-07-15 14:54:47');
@@ -9036,7 +9037,7 @@ CREATE TABLE `sys_logininfor`  (
   PRIMARY KEY (`info_id`) USING BTREE,
   INDEX `idx_sys_logininfor_s`(`status` ASC) USING BTREE,
   INDEX `idx_sys_logininfor_lt`(`login_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 633 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 657 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -9574,6 +9575,30 @@ INSERT INTO `sys_logininfor` VALUES (629, 'test_user1', '127.0.0.1', '内网IP',
 INSERT INTO `sys_logininfor` VALUES (630, 'test_user1', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '登录成功', '2026-07-15 15:07:03');
 INSERT INTO `sys_logininfor` VALUES (631, 'test_user1', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '退出成功', '2026-07-15 15:07:08');
 INSERT INTO `sys_logininfor` VALUES (632, 'admin', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '登录成功', '2026-07-15 15:07:20');
+INSERT INTO `sys_logininfor` VALUES (633, 'test_user1', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '登录成功', '2026-07-16 15:46:02');
+INSERT INTO `sys_logininfor` VALUES (634, 'test_user1', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '退出成功', '2026-07-16 15:51:00');
+INSERT INTO `sys_logininfor` VALUES (635, 'merchant_hz', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '1', '用户不存在/密码错误', '2026-07-16 15:51:22');
+INSERT INTO `sys_logininfor` VALUES (636, 'merchant_hz', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '1', '验证码错误', '2026-07-16 15:51:27');
+INSERT INTO `sys_logininfor` VALUES (637, 'merchant_hz', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '登录成功', '2026-07-16 15:51:31');
+INSERT INTO `sys_logininfor` VALUES (638, 'merchant_hz', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '退出成功', '2026-07-16 16:01:30');
+INSERT INTO `sys_logininfor` VALUES (639, 'test_user2', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '登录成功', '2026-07-16 16:01:44');
+INSERT INTO `sys_logininfor` VALUES (640, 'test_user2', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '退出成功', '2026-07-16 16:01:49');
+INSERT INTO `sys_logininfor` VALUES (641, 'merchant_sh', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '登录成功', '2026-07-16 16:01:57');
+INSERT INTO `sys_logininfor` VALUES (642, 'merchant_sh', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '退出成功', '2026-07-16 16:02:17');
+INSERT INTO `sys_logininfor` VALUES (643, 'merchant_gz', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '登录成功', '2026-07-16 16:02:29');
+INSERT INTO `sys_logininfor` VALUES (644, 'merchant_gz', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '退出成功', '2026-07-16 16:02:40');
+INSERT INTO `sys_logininfor` VALUES (645, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '登录成功', '2026-07-16 16:02:54');
+INSERT INTO `sys_logininfor` VALUES (646, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '退出成功', '2026-07-16 16:10:45');
+INSERT INTO `sys_logininfor` VALUES (647, 'test_user1', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '登录成功', '2026-07-16 16:10:56');
+INSERT INTO `sys_logininfor` VALUES (648, 'test_user1', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '退出成功', '2026-07-16 16:14:55');
+INSERT INTO `sys_logininfor` VALUES (649, 'admin', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '登录成功', '2026-07-16 16:15:10');
+INSERT INTO `sys_logininfor` VALUES (650, 'admin', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '退出成功', '2026-07-16 16:16:00');
+INSERT INTO `sys_logininfor` VALUES (651, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '登录成功', '2026-07-16 16:16:16');
+INSERT INTO `sys_logininfor` VALUES (652, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '退出成功', '2026-07-16 16:16:50');
+INSERT INTO `sys_logininfor` VALUES (653, 'admin', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '登录成功', '2026-07-16 16:16:59');
+INSERT INTO `sys_logininfor` VALUES (654, 'merchant_hz', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '登录成功', '2026-07-17 09:01:59');
+INSERT INTO `sys_logininfor` VALUES (655, 'merchant_hz', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '退出成功', '2026-07-17 09:02:07');
+INSERT INTO `sys_logininfor` VALUES (656, 'merchant_bj', '127.0.0.1', '内网IP', 'Chrome150', 'Windows10', '0', '登录成功', '2026-07-17 09:02:59');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -10141,15 +10166,15 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 103, 'admin', '系统管理员', '00', 'admin@hotel.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-07-15 15:07:20', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '超级管理员账号', 0);
+INSERT INTO `sys_user` VALUES (1, 103, 'admin', '系统管理员', '00', 'admin@hotel.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-07-16 16:17:00', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '超级管理员账号', 0);
 INSERT INTO `sys_user` VALUES (2, 105, 'customer01', '普通用户', '00', 'customer@test.com', '15666666666', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-28 18:03:24', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '前台普通用户账号', 5139);
 INSERT INTO `sys_user` VALUES (100, 104, 'merchant01', '酒店商户', '01', 'merchant@test.com', '13800000001', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-28 20:02:56', '2026-03-06 01:54:37', 'admin', '2026-03-06 01:54:37', '', NULL, '酒店商家账号', 0);
-INSERT INTO `sys_user` VALUES (301, 100, 'merchant_bj', '张经理(北京希尔顿)', '00', 'merchant_bj@hotel.com', '13800138001', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-07-15 14:30:37', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-北京希尔顿', 0);
-INSERT INTO `sys_user` VALUES (302, 100, 'merchant_sh', '李总(上海华尔道夫)', '00', 'merchant_sh@hotel.com', '13800138002', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-上海华尔道夫', 0);
-INSERT INTO `sys_user` VALUES (303, 100, 'merchant_gz', '王总(广州丽思卡尔顿)', '00', 'merchant_gz@hotel.com', '13800138003', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-06-29 15:14:01', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-广州丽思卡尔顿', 0);
-INSERT INTO `sys_user` VALUES (304, 100, 'merchant_hz', '孙总(杭州西湖国宾馆)', '00', 'merchant_hz@hotel.com', '13800138005', '0', '', '$2a$10$nNj8ITPUm6QX.8HnRcwfsOYrrbP9HzjdKK9uQpqDmCBKMPBbIyNxq', '0', '0', '127.0.0.1', '2026-06-29 15:59:31', '2026-06-29 15:41:06', 'admin', '2026-06-23 08:57:53', '', '2026-06-29 15:41:06', '商家-杭州西湖国宾馆', 0);
-INSERT INTO `sys_user` VALUES (305, 100, 'test_user1', '旅游达人小王', '00', 'test_user1@test.com', '13900000101', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-07-15 15:07:03', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '普通用户', 18233);
-INSERT INTO `sys_user` VALUES (306, 100, 'test_user2', '出差老李', '00', 'test_user2@test.com', '13900000102', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-07-05 00:10:31', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '普通用户', 10779);
+INSERT INTO `sys_user` VALUES (301, 100, 'merchant_bj', '张经理(北京希尔顿)', '00', 'merchant_bj@hotel.com', '13800138001', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-07-17 09:03:00', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-北京希尔顿', 0);
+INSERT INTO `sys_user` VALUES (302, 100, 'merchant_sh', '李总(上海华尔道夫)', '00', 'merchant_sh@hotel.com', '13800138002', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-07-16 16:01:58', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-上海华尔道夫', 0);
+INSERT INTO `sys_user` VALUES (303, 100, 'merchant_gz', '王总(广州丽思卡尔顿)', '00', 'merchant_gz@hotel.com', '13800138003', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-07-16 16:02:29', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '商家-广州丽思卡尔顿', 0);
+INSERT INTO `sys_user` VALUES (304, 100, 'merchant_hz', '孙总(杭州西湖国宾馆)', '00', 'merchant_hz@hotel.com', '13800138005', '0', '', '$2a$10$nNj8ITPUm6QX.8HnRcwfsOYrrbP9HzjdKK9uQpqDmCBKMPBbIyNxq', '0', '0', '127.0.0.1', '2026-07-17 09:01:59', '2026-06-29 15:41:06', 'admin', '2026-06-23 08:57:53', '', '2026-06-29 15:41:06', '商家-杭州西湖国宾馆', 0);
+INSERT INTO `sys_user` VALUES (305, 100, 'test_user1', '旅游达人小王', '00', 'test_user1@test.com', '13900000101', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-07-16 16:10:57', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '普通用户', 18233);
+INSERT INTO `sys_user` VALUES (306, 100, 'test_user2', '出差老李', '00', 'test_user2@test.com', '13900000102', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-07-16 16:01:45', NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '普通用户', 10779);
 INSERT INTO `sys_user` VALUES (307, 100, 'test_user3', '度假小红', '00', 'test_user3@test.com', '13900000103', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '普通用户', 11616);
 INSERT INTO `sys_user` VALUES (308, 100, 'test_user4', '商务张总', '00', 'test_user4@test.com', '13900000104', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '普通用户', 16717);
 INSERT INTO `sys_user` VALUES (309, 100, 'test_user5', '蜜月小周', '00', 'test_user5@test.com', '13900000105', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, NULL, 'admin', '2026-06-23 08:57:53', '', NULL, '普通用户', 11015);
